@@ -1,17 +1,22 @@
 "use client";
-import { SocialButtonType } from "@/types";
+import { SocialButtonType, SocialLoginType } from "@/types";
 import { Button } from "..";
 import styles from "./index.module.css";
 
-export default function SocialLogins() {
+export default function SocialLogins({
+  googleText,
+  appleText,
+}: SocialLoginType) {
   const socialButtons: SocialButtonType[] = [
     {
-      text: "Log in with Google",
+      // text: "Log in with Google",
+      text: googleText,
       icon: "/assets/google.svg",
       clickHandler: () => {},
     },
     {
-      text: "Log in with Apple",
+      // text: "Log in with Apple",
+      text: appleText,
       icon: "/assets/apple.svg",
       clickHandler: () => {},
     },

@@ -69,6 +69,7 @@ export type FormButtonTextType = {
   actionText: string;
   onActionTextClick: () => any;
   actionType: "link" | "button";
+  mainform: boolean;
 };
 
 export type SearchType = {
@@ -153,4 +154,9 @@ export type SignupFormType = {
   passwordError: string;
   save: string;
   cancel: string;
+};
+
+export type SocialLoginType = {
+  googleText: string;
+  appleText: string;
 };

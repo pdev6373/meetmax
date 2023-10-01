@@ -134,14 +134,15 @@ button {
 .react-calendar__navigation__label {
   flex-grow: 0 !important;
   pointer-events: none;
+
 }
 
 .react-calendar__navigation__label__labelText,
 .react-calendar__navigation__label__labelText--from {
   color: #edeff1;
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
 }
 
 .react-calendar__viewContainer {
@@ -153,7 +154,7 @@ button {
   display: grid;
   place-content: center;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 22px;
   width: 35px !important;
   aspect-ratio: 1 / 1;

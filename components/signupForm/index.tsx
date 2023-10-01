@@ -246,6 +246,7 @@ export default function SignupForm({
       </Button>
 
       <FormBottomText
+        mainform
         text={hasAccountText}
         onActionTextClick={signinHandler}
         actionType="link"

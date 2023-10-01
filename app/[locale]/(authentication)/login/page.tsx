@@ -20,7 +20,10 @@ export default function Login() {
 
       <Wrapper>
         <div className={styles.main}>
-          <SocialLogins />
+          <SocialLogins
+            googleText={t("googleLogin")}
+            appleText={t("appleLogin")}
+          />
           <Divider />
           <LoginForm
             emailPlaceholder={t("email")}

@@ -6,11 +6,22 @@
   gap: 8px;
 }
 
+.mainform {
+  gap: 6px;
+}
+
 .wrapperText,
 .wrapperActionText {
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
+}
+
+.mainform .wrapperText,
+.mainform .wrapperActionText {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
 }
 
 .wrapperText {
@@ -27,9 +38,32 @@
     gap: 15px;
   }
 
+  .mainform {
+    gap: 6px;
+  }
+
   .wrapperText,
   .wrapperActionText {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .mainform .wrapperText,
+  .mainform .wrapperActionText {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+  }
+}
+
+@media (min-width: 400px) {
+  .mainform .wrapperText,
+  .mainform .wrapperActionText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .mainform {
+    gap: 15px;
   }
 }

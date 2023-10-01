@@ -120,6 +120,7 @@ export default function LoginForm({
       <Button type="submit">{signinText}</Button>
 
       <FormBottomText
+        mainform
         actionType="link"
         text={noAccountText}
         actionText={signupText}

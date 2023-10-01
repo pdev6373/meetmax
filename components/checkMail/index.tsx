@@ -33,6 +33,7 @@ export default function CheckMail({
           </div>
 
           <FormBottomText
+            mainform={false}
             actionType="button"
             text={noEmailText}
             actionText={resendText}

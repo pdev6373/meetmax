@@ -15,7 +15,10 @@ export default function Signup() {
       </div>
 
       <div className={styles.formWrapper}>
-        <SocialLogins />
+        <SocialLogins
+          googleText={t("googleLogin")}
+          appleText={t("appleLogin")}
+        />
         <Divider />
 
         <SignupForm
