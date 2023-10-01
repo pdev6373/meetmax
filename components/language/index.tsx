@@ -22,7 +22,12 @@ export default function Language({ locale }: LocaleType) {
   );
 
   useEffect(() => {
-    setLanguage(languageChangeHandler());
+    setLanguage(
+      LANGUAGES.find((language) => language.value == locale) || {
+        value: "en-GB",
+        text: "English (UK)",
+      }
+    );
   }, [locale]);
 
   return (

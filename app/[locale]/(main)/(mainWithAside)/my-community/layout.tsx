@@ -17,6 +17,7 @@ export default function CommunityLayout({ children }: LayoutType) {
       <nav className={styles.communityCategories}>
         {COMMUNITY_CATEGORIES.map((community) => (
           <Link
+            key={community.title}
             href={
               community.title.toLowerCase() === "followers"
                 ? "/my-community"

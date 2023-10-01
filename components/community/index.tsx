@@ -34,6 +34,7 @@ export default function Community() {
                 />
                 {user.social.map((social) => (
                   <Image
+                    key={social}
                     src={`/assets/${social}.svg`}
                     alt="social"
                     width={14}
