@@ -1,0 +1,11 @@
+.error {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #ff5630;
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}

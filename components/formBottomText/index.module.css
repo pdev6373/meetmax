@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wrapperText,
+.wrapperActionText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.wrapperText {
+  color: #edeff1; /** 10% **/
+}
+
+.wrapperActionText {
+  cursor: pointer;
+  color: #377dff;
+}
+
+@media (min-width: 350px) {
+  .wrapper {
+    gap: 15px;
+  }
+
+  .wrapperText,
+  .wrapperActionText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

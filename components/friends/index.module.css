@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15px;
+}
+
+.heading {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.friends::-webkit-scrollbar {
+  width: 7px;
+}
+
+.friends::-webkit-scrollbar-thumb {
+  background: #212833;
+  border-radius: 20px;
+  border: 1px solid #4e5d78;
+  box-shadow: 0px 4px 10px 0px #00000005;
+}
+
+.friends::-webkit-scrollbar-track {
+  margin-block: 5px;
+}
+
+.friends {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  height: calc(100vh - 310px);
+  padding-right: 15px;
+  padding-bottom: 20px;
+}
+
+.friend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.friendDetails {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.friendName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.friendLastSeen {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.active {
+  width: 8px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: #38cb89;
+}
+
+.more {
+  cursor: pointer;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.moreMargin {
+  margin-right: 8px;
+}

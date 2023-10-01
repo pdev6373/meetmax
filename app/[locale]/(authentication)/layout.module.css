@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url("../../../public/assets/background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.main {
+  padding: 30px 10px;
+  flex: 1;
+}
+
+@media (min-width: 350px) {
+  .main {
+    padding: 30px 24px;
+  }
+}
+
+@media (min-width: 500px) {
+  .main {
+    padding-inline: 30px;
+  }
+}

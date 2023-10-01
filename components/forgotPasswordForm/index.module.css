@@ -1,0 +1,42 @@
+.formWrapper,
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form {
+  gap: 14px;
+}
+
+.goBack {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.backText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #377dff;
+}
+
+@media (min-width: 300px) {
+  .goBack {
+    gap: 14px;
+  }
+
+  .backText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 500px) {
+  .form {
+    gap: 20px;
+  }
+}

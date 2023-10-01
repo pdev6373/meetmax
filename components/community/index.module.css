@@ -1,0 +1,89 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
+  gap: 18px;
+}
+
+.user {
+  background: #191c21;
+  box-shadow: 0px 4px 10px 0px #00000005;
+  padding: 18px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.actions > * {
+  flex: 1;
+}
+
+.ignoreButton {
+  padding: 6px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #959eae;
+  border: 1px solid #212833;
+  transition: border-radius, color, border, background-color 0.1s ease-in;
+  background-color: transparent;
+}
+
+.followButton {
+  padding: 6px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  border: 1px solid #377dff;
+  background-color: #377dff;
+  color: #edeff1;
+  transition: border-radius, color, border, background-color 0.1s ease-in;
+}
+
+.followButton:hover {
+  color: #959eae;
+  border: 1px solid #212833;
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+.userDetails {
+  display: flex;
+  gap: 18px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.userProfession {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #959eae;
+  margin-top: -2px;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

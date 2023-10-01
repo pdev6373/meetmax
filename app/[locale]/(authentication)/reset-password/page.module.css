@@ -1,0 +1,14 @@
+.wrapper {
+  width: min(100%, 580px);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

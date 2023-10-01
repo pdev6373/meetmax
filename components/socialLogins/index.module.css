@@ -1,0 +1,18 @@
+.socialButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 300px) {
+  .socialButtons {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 500px) {
+  .socialButtons {
+    gap: 20px;
+  }
+}

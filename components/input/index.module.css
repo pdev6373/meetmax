@@ -1,0 +1,73 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputWrapper {
+  border: 1px solid #4e5d78;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 10px;
+}
+
+.input {
+  width: 100%;
+  padding-block: 9px;
+  padding-inline: 4px 10px;
+}
+
+.input,
+.input::placeholder {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1; /** 10% **/
+}
+
+.input::placeholder {
+  color: #959eae; /** 60% **/
+}
+
+.action {
+  cursor: pointer;
+  padding: 10px 5px;
+  padding-right: 10px;
+  flex-shrink: 0;
+}
+
+.errorWrapper {
+  display: flex;
+}
+
+.errorWrapper {
+  display: flex;
+}
+
+.noSelect {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 500px) {
+  .inputWrapper {
+    border-radius: 10px;
+    padding-left: 20px;
+    gap: 5px;
+  }
+
+  .input {
+    padding-block: 15px;
+    padding-inline: 5px 20px;
+  }
+
+  .action {
+    padding-right: 20px;
+  }
+}

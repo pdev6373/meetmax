@@ -1,0 +1,54 @@
+.wrapper {
+  width: min(100%, 580px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.main,
+.mainTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.mainTop {
+  gap: 30px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subHeading {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  padding-inline: 5px;
+  color: #edeff1; /** 10% **/
+}
+
+.subHeadingAccent {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #377dff;
+}
+
+.skipButton {
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  .header {
+    gap: 20px;
+  }
+
+  .subHeadingAccent {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

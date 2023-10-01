@@ -1,0 +1,11 @@
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  overflow-x: hidden;
+  max-width: 310px;
+}
+
+.paddingRight {
+  padding-right: 15px;
+}

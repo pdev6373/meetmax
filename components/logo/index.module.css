@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.logoWeb {
+  display: none;
+}
+
+.logoText {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  color: #edeff1;
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    gap: 10px;
+  }
+
+  .logoWeb {
+    display: block;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .logoText {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

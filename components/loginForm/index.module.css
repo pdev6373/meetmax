@@ -1,0 +1,62 @@
+.formActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.form {
+  gap: 20px;
+}
+
+.formMain,
+.formInput {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rememberText,
+.forgotPassword {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1; /** 10% **/
+  flex-shrink: 0;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 370px) {
+  .formActions {
+    padding-inline: 10px;
+  }
+}
+
+@media (min-width: 500px) {
+  .form {
+    gap: 30px;
+  }
+
+  .formMain,
+  .formInput {
+    gap: 20px;
+  }
+}

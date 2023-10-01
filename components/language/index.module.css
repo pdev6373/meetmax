@@ -1,0 +1,90 @@
+.wrapper {
+  position: relative;
+}
+
+.selectedLanguage {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: #212833;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  cursor: pointer;
+}
+
+.selectedLanguageText {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #edeff1; /** 10% **/
+}
+
+.dropdownWeb {
+  display: none;
+}
+
+.languages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.languages::-webkit-scrollbar-track {
+  border: 1px solid #4e5d78;
+}
+
+.languages::-webkit-scrollbar-thumb {
+  background: #4e5d78;
+  border-radius: 16px;
+}
+
+.languagesWrapper {
+  position: absolute;
+  right: 0;
+  background: #212833;
+  margin-top: -3px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.languages {
+  padding-block: 15px;
+  min-width: 185px;
+  overflow-y: auto;
+  box-shadow: 0px 4px 10px 0px #00000005;
+  height: min(70vh, 510px);
+}
+
+.language {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #edeff1;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+.currentLanguage {
+  background: #d7e5ff;
+  font-weight: 500;
+  color: #377dff;
+}
+
+@media (min-width: 500px) {
+  .selectedLanguage {
+    gap: 20px;
+    padding: 8px 20px;
+  }
+
+  .selectedLanguageText {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .dropdownWeb {
+    display: block;
+  }
+
+  .dropdown {
+    display: none;
+  }
+}

@@ -1,0 +1,79 @@
+.wrapper {
+  position: relative;
+}
+
+.onlineFriends {
+  overflow-x: hidden;
+}
+
+.onlineFriendsRightMargin {
+  margin-right: 8px;
+}
+
+.onlineFriendsLeftMargin {
+  margin-left: 8px;
+}
+
+.onlineFriendsInner {
+  transition: transform 0.15s ease;
+  display: flex;
+}
+
+.onlineFriend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.friendName {
+  max-width: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.friendImage {
+  border: 2px solid #38cb89;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.scrollLeftWrapper,
+.scrollRightWrapper {
+  padding: 5px;
+  position: absolute;
+  top: 25px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.scrollLeftWrapper {
+  right: -2px;
+}
+
+.scrollRightWrapper {
+  left: -2px;
+}
+
+.scrollLeft,
+.scrollRight {
+  padding: 3px;
+  box-shadow: 0px 2px 5px 0px #0000000a;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.friendImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.rotateArrow {
+  transform: rotate(180deg);
+}

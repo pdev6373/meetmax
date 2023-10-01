@@ -1,0 +1,92 @@
+.socialButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #4e5d78;
+  border-radius: 6px;
+  padding: 10px 6px;
+  flex: 1;
+  transition: outline, background-color 0.1s ease-in;
+  /* flex-wrap: wrap; */
+}
+
+.socialButton:hover {
+  background-color: transparent;
+  outline: 1px solid #4e5d78;
+}
+
+.socialButtonText {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #edeff1; /** 10% **/
+  flex-shrink: 0;
+}
+
+.submitButton {
+  padding: 9px;
+  border-radius: 5.64px;
+  background: #377dff;
+  width: 100%;
+}
+
+.submitButtonText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1; /** 10% **/
+}
+
+@media (min-width: 190px) {
+  .socialButton {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 300px) {
+  .socialButton {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 375px) {
+  .socialButton {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 500px) {
+  .submitButton {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .socialButtonText {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .submitButtonText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 570px) {
+  .socialButton {
+    gap: 25px;
+  }
+
+  .socialButton,
+  .submitButton {
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .socialButtonText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

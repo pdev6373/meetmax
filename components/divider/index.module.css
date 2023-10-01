@@ -1,0 +1,33 @@
+.divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: #4e5d78;
+}
+
+.dividerText {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  color: #edeff1; /** 10% **/
+  text-transform: uppercase;
+}
+
+@media (min-width: 500px) {
+  .divider {
+    gap: 21px;
+  }
+
+  .dividerText {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

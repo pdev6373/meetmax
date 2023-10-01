@@ -1,0 +1,140 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 100%;
+}
+
+/* .bottomInputs {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.bottomInputs > * {
+  width: 0;
+  flex-shrink: 0;
+  flex-grow: 1;
+} */
+
+.genderWrapper {
+  border: 1px solid #4e5d78;
+  border-radius: 6px;
+  border-image-source: linear-gradient(0deg, #4e5d78, #4e5d78),
+    linear-gradient(0deg, #ffffff, #ffffff);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 9px 10px;
+}
+
+.genders {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.gender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.genderLabel {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  cursor: pointer;
+}
+
+.genderLabelUnselected {
+  color: #959eae;
+}
+
+.calendarWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calendarError {
+  display: flex;
+}
+
+.calendar {
+  position: absolute;
+  bottom: calc(100% - 10px);
+  right: 27.5%;
+  z-index: 3;
+  display: none;
+}
+
+.showCalendar {
+  display: block;
+}
+
+.calendarInput {
+  border: 1px solid #4e5d78;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 10px;
+  cursor: pointer;
+}
+
+.calendarBox {
+  flex: 1;
+  text-align: left;
+  padding-block: 9px;
+}
+
+.calendarBox,
+.noDate {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1; /** 10% **/
+}
+
+.noDate {
+  color: #959eae; /** 60% **/
+}
+
+@media (min-width: 500px) {
+  .calendarInput {
+    border-radius: 10px;
+    padding-inline: 20px;
+    gap: 10px;
+  }
+
+  .calendarBox {
+    padding-block: 15px;
+  }
+
+  .form,
+  .bottomInputs {
+    gap: 20px;
+  }
+
+  .genderWrapper {
+    border-radius: 10px;
+    padding: 15px 20px;
+    gap: 18px;
+  }
+
+  .gender {
+    gap: 14px;
+  }
+
+  .genderLabel {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

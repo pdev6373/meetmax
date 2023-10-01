@@ -1,0 +1,57 @@
+.wrapper {
+  background: #212833;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  width: 285px;
+  overflow: hidden;
+}
+
+.calendar {
+  background: #212833;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 20px;
+}
+
+.button {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  padding: 9px 20px;
+}
+
+.cancelButton {
+  color: #959eae;
+}
+
+.saveButton {
+  color: #ffffff;
+  background: #377dff;
+  border-radius: 8px;
+}
+
+.calendarTile {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  min-width: 35px;
+  aspect-ratio: 1 / 1;
+}
+
+.monthNav,
+.monthNavLeft {
+  display: flex;
+}
+
+.monthNavIcon,
+.monthNavLeftIcon {
+  margin-left: -10px;
+}
+
+.monthNavLeft,
+.prevLabelIcon {
+  transform: rotate(-180deg);
+}

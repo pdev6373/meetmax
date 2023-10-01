@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  background: #191c21;
+}
+
+.main {
+  flex: 1;
+  padding: 30px;
+  background: #212833;
+  border-radius: 20px;
+}
+
+.aside {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+}
