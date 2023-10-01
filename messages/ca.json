@@ -33,9 +33,12 @@
     "signupPassword": "Crea una contrasenya",
     "signupSubHeading": "Creeu un compte per continuar i connectar amb la gent.",
     "confirmPassword": "Confirma la contrassenya",
-    "confirmPasswordHeading": "Confirma la contrassenya",
-    "confirmPasswordSubHeading": "Restableix la teva contrasenya introduint una nova contrasenya",
     "newPasswordPlaceholder": "Introduïu una nova contrasenya",
-    "reset": "Restableix"
+    "reset": "Restableix",
+    "confirmPasswordError": "La contrasenya no coincideix",
+    "resetPasswordHeading": "Restablir la contrasenya",
+    "resetPasswordSubHeading": "Restableix la teva contrasenya introduint una nova contrasenya a continuació",
+    "cancel": "cancel · lar",
+    "save": "guardar"
   }
 }

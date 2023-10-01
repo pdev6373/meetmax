@@ -21,6 +21,8 @@ export default function SignupForm({
   emailError,
   namesError,
   passwordError,
+  save,
+  cancel,
 }: SignupFormType) {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -114,122 +116,129 @@ export default function SignupForm({
 
   return (
     <form className={styles.form} onSubmit={signupHandler}>
-      <Input
-        type="email"
-        icon="/assets/@.svg"
-        onChange={setEmail}
-        placeholder={emailPlaceholder}
-        value={email}
-        errorComponent={
-          errorComponentToShow === "email" ? (
-            <Text type="error">{errorMessage}</Text>
-          ) : null
-        }
-      />
-      <Input
-        type="text"
-        icon="/assets/person.svg"
-        onChange={setName}
-        placeholder={namePlaceholder}
-        value={name}
-        errorComponent={
-          errorComponentToShow === "name" ? (
-            <Text type="error">{errorMessage}</Text>
-          ) : null
-        }
-      />
-      <Input
-        type={hidePassword ? "password" : "text"}
-        icon="/assets/lock.svg"
-        actionIcon={hidePassword ? "/assets/eyeoff.svg" : "/assets/eye.svg"}
-        onChange={setPassword}
-        placeholder={passwordPlaceholder}
-        value={password}
-        onActionIconClick={togglePasswordHandler}
-        errorComponent={
-          errorComponentToShow === "password" ? (
-            <Text type="error">{errorMessage}</Text>
-          ) : null
-        }
-      />
+      <div className={styles.formMain}>
+        <Input
+          type="email"
+          icon="/assets/@.svg"
+          onChange={setEmail}
+          placeholder={emailPlaceholder}
+          value={email}
+          errorComponent={
+            errorComponentToShow === "email" ? (
+              <Text type="error">{errorMessage}</Text>
+            ) : null
+          }
+        />
+        <Input
+          type="text"
+          icon="/assets/person.svg"
+          onChange={setName}
+          placeholder={namePlaceholder}
+          value={name}
+          errorComponent={
+            errorComponentToShow === "name" ? (
+              <Text type="error">{errorMessage}</Text>
+            ) : null
+          }
+        />
+        <Input
+          type={hidePassword ? "password" : "text"}
+          icon="/assets/lock.svg"
+          actionIcon={hidePassword ? "/assets/eyeoff.svg" : "/assets/eye.svg"}
+          onChange={setPassword}
+          placeholder={passwordPlaceholder}
+          value={password}
+          onActionIconClick={togglePasswordHandler}
+          errorComponent={
+            errorComponentToShow === "password" ? (
+              <Text type="error">{errorMessage}</Text>
+            ) : null
+          }
+        />
 
-      {/* <div className={styles.bottomInputs}> */}
-      <div className={styles.calendarWrapper}>
-        <div
-          onClick={calendarInputClickHandler}
-          className={styles.calendarInput}
-        >
+        {/* <div className={styles.bottomInputs}> */}
+        <div className={styles.calendarWrapper}>
+          <div
+            onClick={calendarInputClickHandler}
+            className={styles.calendarInput}
+          >
+            <Image
+              src="/assets/calendar.svg"
+              alt="calendar"
+              width={16}
+              height={16}
+            />
+            <p
+              className={[
+                styles.calendarBox,
+                !dateOfBirth && styles.noDate,
+              ].join(" ")}
+            >
+              {dateOfBirth ? formattedDate() : dateOfBirthPlaceholder}
+            </p>
+          </div>
+          <div
+            className={[
+              styles.calendar,
+              showCalendar && styles.showCalendar,
+            ].join(" ")}
+          >
+            <Calendar
+              onClose={calendarClosehandler}
+              onSave={calendarSavehandler}
+              setValue={setDateOfBirth}
+              save={save}
+              cancel={cancel}
+            />
+          </div>
+          {errorComponentToShow === "date" ? (
+            <div className={styles.calendarError}>
+              <Text type="error">{errorMessage}</Text>
+            </div>
+          ) : null}
+        </div>
+
+        <div className={styles.genderWrapper}>
           <Image
-            src="/assets/calendar.svg"
-            alt="calendar"
+            src={
+              gender.id === "male" ? "/assets/male.svg" : "/assets/female.svg"
+            }
+            alt="gender"
             width={16}
             height={16}
           />
-          <p
-            className={[styles.calendarBox, !dateOfBirth && styles.noDate].join(
-              " "
-            )}
-          >
-            {dateOfBirth ? formattedDate() : dateOfBirthPlaceholder}
-          </p>
-        </div>
-        <div
-          className={[
-            styles.calendar,
-            showCalendar && styles.showCalendar,
-          ].join(" ")}
-        >
-          <Calendar
-            onClose={calendarClosehandler}
-            onSave={calendarSavehandler}
-            setValue={setDateOfBirth}
-          />
-        </div>
-        {errorComponentToShow === "date" ? (
-          <div className={styles.calendarError}>
-            <Text type="error">{errorMessage}</Text>
+
+          <div className={styles.genders}>
+            {genders.map((genderInfo) => (
+              <div
+                key={genderInfo.label}
+                className={styles.gender}
+                onClick={() => setGenderHandler(genderInfo)}
+              >
+                <Image
+                  src={
+                    isSelectedGender(genderInfo)
+                      ? "/assets/select.svg"
+                      : "/assets/deselect.svg"
+                  }
+                  alt="radio icon"
+                  width={16}
+                  height={16}
+                />
+                <input
+                  type="radio"
+                  value={gender.label}
+                  id={genderInfo.id}
+                  className="hidden"
+                />
+                <label htmlFor={genderInfo.id} className={styles.genderLabel}>
+                  {genderInfo.label}
+                </label>
+              </div>
+            ))}
           </div>
-        ) : null}
-      </div>
-
-      <div className={styles.genderWrapper}>
-        <Image
-          src={gender.id === "male" ? "/assets/male.svg" : "/assets/female.svg"}
-          alt="gender"
-          width={16}
-          height={16}
-        />
-
-        <div className={styles.genders}>
-          {genders.map((genderInfo) => (
-            <div
-              key={genderInfo.label}
-              className={styles.gender}
-              onClick={() => setGenderHandler(genderInfo)}
-            >
-              <Image
-                src={
-                  isSelectedGender(genderInfo)
-                    ? "/assets/select.svg"
-                    : "/assets/deselect.svg"
-                }
-                alt="radio icon"
-                width={16}
-                height={16}
-              />
-              <input
-                type="radio"
-                value={gender.label}
-                id={genderInfo.id}
-                className="hidden"
-              />
-              <label htmlFor={genderInfo.id} className={styles.genderLabel}>
-                {genderInfo.label}
-              </label>
-            </div>
-          ))}
+          {/* </div> */}
         </div>
-        {/* </div> */}
       </div>
 
       <Button type="submit" onClick={signupHandler}>

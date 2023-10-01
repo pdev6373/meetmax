@@ -33,9 +33,12 @@
     "signupPassword": "Créer un mot de passe",
     "signupSubHeading": "Créez un compte pour continuer et vous connecter avec les gens.",
     "confirmPassword": "Confirmez le mot de passe",
-    "confirmPasswordHeading": "Confirmez le mot de passe",
-    "confirmPasswordSubHeading": "Réinitialisez votre mot de passe en saisissant un nouveau mot de passe",
     "newPasswordPlaceholder": "Entrez un nouveau mot de passe",
-    "reset": "Réinitialiser"
+    "reset": "Réinitialiser",
+    "confirmPasswordError": "Le mot de passe ne correspond pas",
+    "resetPasswordHeading": "réinitialiser le mot de passe",
+    "resetPasswordSubHeading": "Réinitialisez votre mot de passe en entrant un nouveau mot de passe ci-dessous",
+    "cancel": "Annuler",
+    "save": "sauvegarder"
   }
 }

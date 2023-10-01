@@ -33,9 +33,12 @@
     "signupPassword": "Maak een wachtwoord",
     "signupSubHeading": "Maak een account aan om door te gaan en contact te maken met de mensen.",
     "confirmPassword": "bevestig wachtwoord",
-    "confirmPasswordHeading": "bevestig wachtwoord",
-    "confirmPasswordSubHeading": "Reset uw wachtwoord door een nieuw wachtwoord in te voeren",
     "newPasswordPlaceholder": "Voer een nieuw wachtwoord in",
-    "reset": "Opnieuw instellen"
+    "reset": "Opnieuw instellen",
+    "confirmPasswordError": "Wachtwoord komt niet overeen",
+    "resetPasswordHeading": "Wachtwoord opnieuw instellen",
+    "resetPasswordSubHeading": "Reset uw wachtwoord door hieronder een nieuw wachtwoord in te voeren",
+    "cancel": "annuleren",
+    "save": "redden"
   }
 }

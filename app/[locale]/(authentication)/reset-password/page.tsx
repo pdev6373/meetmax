@@ -8,17 +8,17 @@ export default function ResetPassword() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <Heading type="heading">{t("confirmPasswordHeading")}</Heading>
-        <Heading type="sub-heading">{t("resetText")}</Heading>
+        <Heading type="heading">{t("resetPasswordHeading")}</Heading>
+        <Heading type="sub-heading">{t("resetPasswordSubHeading")}</Heading>
       </div>
 
       <ResetPasswordForm
-        confirmNewPasswordPlaceholder={t("confirmPasswordHeading")}
-        confirmPasswordError="Password does not match"
-        backText={t("back")}
-        newPasswordPlaceholder="Enter new password"
-        passwordError={t("passwordError")}
+        newPasswordPlaceholder={t("newPasswordPlaceholder")}
+        confirmNewPasswordPlaceholder={t("confirmPassword")}
         buttonText={t("reset")}
+        backText={t("back")}
+        confirmPasswordError={t("confirmPasswordError")}
+        passwordError={t("passwordError")}
         defaultError={t("required")}
       />
     </div>

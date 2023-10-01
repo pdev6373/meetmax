@@ -33,9 +33,12 @@
     "signupPassword": "Buat Kata Sandi",
     "signupSubHeading": "Buat akun untuk melanjutkan dan terhubung dengan orang-orang.",
     "confirmPassword": "konfirmasi sandi",
-    "confirmPasswordHeading": "konfirmasi sandi",
-    "confirmPasswordSubHeading": "Reset kata sandi Anda dengan memasukkan kata sandi baru",
     "newPasswordPlaceholder": "Masukan kata sandi baru",
-    "reset": "Mengatur ulang"
+    "reset": "Mengatur ulang",
+    "confirmPasswordError": "Kata sandi tidak cocok",
+    "resetPasswordHeading": "Atur Ulang Kata Sandi",
+    "resetPasswordSubHeading": "Reset kata sandi Anda dengan memasukkan kata sandi baru di bawah ini",
+    "cancel": "membatalkan",
+    "save": "menyimpan"
   }
 }

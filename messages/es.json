@@ -33,9 +33,12 @@
     "signupPassword": "Crear contraseña",
     "signupSubHeading": "Crea una cuenta para continuar y conectarte con la gente.",
     "confirmPassword": "confirmar Contraseña",
-    "confirmPasswordHeading": "confirmar Contraseña",
-    "confirmPasswordSubHeading": "Restablezca su contraseña ingresando una nueva contraseña",
     "newPasswordPlaceholder": "Ingrese nueva clave",
-    "reset": "Reiniciar"
+    "reset": "Reiniciar",
+    "confirmPasswordError": "Las contraseñas no coinciden",
+    "resetPasswordHeading": "Restablecer la contraseña",
+    "resetPasswordSubHeading": "Restablezca su contraseña ingresando una nueva contraseña a continuación",
+    "cancel": "Cancelar",
+    "save": "ahorrar"
   }
 }

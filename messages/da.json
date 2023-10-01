@@ -33,9 +33,12 @@
     "signupPassword": "Opret adgangskode",
     "signupSubHeading": "Opret en konto for at fortsætte og oprette forbindelse til folket.",
     "confirmPassword": "Bekræft kodeord",
-    "confirmPasswordHeading": "Bekræft kodeord",
-    "confirmPasswordSubHeading": "Nulstil din adgangskode ved at indtaste en ny adgangskode",
     "newPasswordPlaceholder": "Indtast ny adgangskode",
-    "reset": "Nulstil"
+    "reset": "Nulstil",
+    "confirmPasswordError": "Adgangskoden passer ikke",
+    "resetPasswordHeading": "Nulstille kodeord",
+    "resetPasswordSubHeading": "Nulstil din adgangskode ved at indtaste en ny adgangskode nedenfor",
+    "cancel": "afbestille",
+    "save": "Gemme"
   }
 }

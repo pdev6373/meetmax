@@ -33,9 +33,12 @@
     "signupPassword": "Gumawa ng password",
     "signupSubHeading": "Gumawa ng account para magpatuloy at kumonekta sa mga tao.",
     "confirmPassword": "Kumpirmahin ang Password",
-    "confirmPasswordHeading": "Kumpirmahin ang Password",
-    "confirmPasswordSubHeading": "I-reset ang iyong password sa pamamagitan ng pagpasok ng bagong password",
     "newPasswordPlaceholder": "Maglagay ng bagong password",
-    "reset": "I-reset"
+    "reset": "I-reset",
+    "confirmPasswordError": "Hindi tugma ang password",
+    "resetPasswordHeading": "I-reset ang Password",
+    "resetPasswordSubHeading": "I-reset ang iyong password sa pamamagitan ng paglalagay ng bagong password sa ibaba",
+    "cancel": "kanselahin",
+    "save": "iligtas"
   }
 }

@@ -33,9 +33,12 @@
     "signupPassword": "Samee erayga sirta ah",
     "signupSubHeading": "Abuur akoon si aad u sii wado oo aad dadka ula xidhiidho.",
     "confirmPassword": "Xaqiiji erayga sirta ah",
-    "confirmPasswordHeading": "Xaqiiji erayga sirta ah",
-    "confirmPasswordSubHeading": "Dib u deji eraygaaga sirta ah adiga oo gelaya furaha sirta ah ee cusub",
     "newPasswordPlaceholder": "Geli erayga sirta ah ee cusub",
-    "reset": "Dib u dajin"
+    "reset": "Dib u dajin",
+    "confirmPasswordError": "Erayga sirdoonku kuma eka",
+    "resetPasswordHeading": "Dib u deji erayga sirta ah",
+    "resetPasswordSubHeading": "Dib u deji eraygaaga sirta ah adiga oo geliya furaha sirta ah ee cusub xagga hoose",
+    "cancel": "burin",
+    "save": "badbaadi"
   }
 }

@@ -83,6 +83,8 @@ export type CalendarType = {
   onClose: any;
   onSave: any;
   setValue: Dispatch<SetStateAction<CalendarValueType>>;
+  save: string;
+  cancel: string;
 };
 
 export type LoginFormType = {
@@ -149,4 +151,6 @@ export type SignupFormType = {
   emailError: string;
   namesError: string;
   passwordError: string;
+  save: string;
+  cancel: string;
 };

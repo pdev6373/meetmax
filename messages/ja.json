@@ -33,9 +33,12 @@
     "signupPassword": "パスワードの作成",
     "signupSubHeading": "アカウントを作成して続行し、人々とつながりましょう。",
     "confirmPassword": "パスワードを認証する",
-    "confirmPasswordHeading": "パスワードを認証する",
-    "confirmPasswordSubHeading": "新しいパスワードを入力してパスワードをリセットします",
     "newPasswordPlaceholder": "新しいパスワードを入力してください",
-    "reset": "リセット"
+    "reset": "リセット",
+    "confirmPasswordError": "パスワードが一致しません",
+    "resetPasswordHeading": "パスワードを再設定する",
+    "resetPasswordSubHeading": "以下に新しいパスワードを入力してパスワードをリセットしてください",
+    "cancel": "キャンセル",
+    "save": "保存"
   }
 }

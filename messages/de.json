@@ -33,9 +33,12 @@
     "signupPassword": "Passwort erstellen",
     "signupSubHeading": "Erstellen Sie ein Konto, um fortzufahren und mit den Menschen in Kontakt zu treten.",
     "confirmPassword": "Bestätige das Passwort",
-    "confirmPasswordHeading": "Bestätige das Passwort",
-    "confirmPasswordSubHeading": "Setzen Sie Ihr Passwort zurück, indem Sie ein neues Passwort eingeben",
     "newPasswordPlaceholder": "Neues Passwort eingeben",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "confirmPasswordError": "Passwort stimmt nicht überein",
+    "resetPasswordHeading": "Passwort zurücksetzen",
+    "resetPasswordSubHeading": "Setzen Sie Ihr Passwort zurück, indem Sie unten ein neues Passwort eingeben",
+    "cancel": "stornieren",
+    "save": "speichern"
   }
 }

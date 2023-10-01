@@ -1,8 +1,15 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
   min-width: 100%;
+}
+
+.formMain,
+.bottomInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 /* .bottomInputs {
@@ -26,14 +33,16 @@
     linear-gradient(0deg, #ffffff, #ffffff);
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   padding: 9px 10px;
+  flex-wrap: wrap;
 }
 
 .genders {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .gender {
@@ -69,8 +78,9 @@
 
 .calendar {
   position: absolute;
-  bottom: calc(100% - 10px);
-  right: 27.5%;
+  bottom: calc(100% - 70px);
+  left: -20px;
+  right: -20px;
   z-index: 3;
   display: none;
 }
@@ -107,6 +117,20 @@
   color: #959eae; /** 60% **/
 }
 
+@media (min-width: 340px) {
+  .genderWrapper,
+  .genders {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 360px) {
+  .calendar {
+    left: -20px;
+    right: unset;
+  }
+}
+
 @media (min-width: 500px) {
   .calendarInput {
     border-radius: 10px;
@@ -118,9 +142,13 @@
     padding-block: 15px;
   }
 
-  .form,
-  .bottomInputs {
-    gap: 20px;
+  .calendar {
+    left: -40px;
+    bottom: calc(100% - 10px);
+  }
+
+  .form {
+    gap: 30px;
   }
 
   .genderWrapper {
@@ -136,5 +164,16 @@
   .genderLabel {
     font-size: 16px;
     line-height: 24px;
+  }
+
+  .formMain,
+  .bottomInputs {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 850px) {
+  .calendar {
+    left: -27.5%;
   }
 }

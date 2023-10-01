@@ -33,9 +33,12 @@
     "signupPassword": "Skep wagwoord",
     "signupSubHeading": "Skep 'n rekening om voort te gaan en met die mense in aanraking te kom.",
     "confirmPassword": "Bevestig Wagwoord",
-    "confirmPasswordHeading": "Bevestig Wagwoord",
-    "confirmPasswordSubHeading": "Stel jou wagwoord terug deur 'n nuwe wagwoord in te voer",
     "newPasswordPlaceholder": "Voer nuwe wagwoord in",
-    "reset": "Stel terug"
+    "reset": "Stel terug",
+    "confirmPasswordError": "Wagwoord stem nie ooreen nie",
+    "resetPasswordHeading": "Herstel wagwoord",
+    "resetPasswordSubHeading": "Stel jou wagwoord terug deur 'n nuwe wagwoord hieronder in te voer",
+    "cancel": "kanselleer",
+    "save": "red"
   }
 }

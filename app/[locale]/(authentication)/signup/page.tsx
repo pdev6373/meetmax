@@ -32,6 +32,8 @@ export default function Signup() {
           emailError={t("emailError")}
           namesError={t("namesError")}
           passwordError={t("passwordError")}
+          save={t("save")}
+          cancel={t("cancel")}
         />
       </div>
     </div>

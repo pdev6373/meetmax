@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 
 export default function Heading({ children, type, capitalize }: TextType) {
   return type == "heading" ? (
-    <h2 className={[styles.heading, capitalize && styles.capitalize].join("")}>
+    <h2 className={[styles.heading, capitalize && styles.capitalize].join(" ")}>
       {children}
     </h2>
   ) : (

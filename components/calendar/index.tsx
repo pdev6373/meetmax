@@ -4,11 +4,14 @@ import Calendar from "react-calendar";
 import styles from "./index.module.css";
 import Image from "next/image";
 import { CalendarType, CalendarValueType } from "@/types";
+import format from "date-fns/format";
 
 export default function CalendarComponent({
   onClose,
   onSave,
   setValue,
+  save,
+  cancel,
 }: CalendarType) {
   const [calendarValue, onChange] = useState<CalendarValueType>(new Date());
 
@@ -20,6 +23,7 @@ export default function CalendarComponent({
   return (
     <div className={styles.wrapper}>
       <Calendar
+        formatShortWeekday={(locale, date) => format(date, "EEEEE")}
         onChange={onChange}
         value={calendarValue}
         className={styles.calendar}
@@ -84,14 +88,14 @@ export default function CalendarComponent({
           onClick={onClose}
           className={[styles.button, styles.cancelButton].join(" ")}
         >
-          Cancel
+          {cancel}
         </button>
         <button
           type="button"
           onClick={calendarSaveHandler}
           className={[styles.button, styles.saveButton].join(" ")}
         >
-          Save
+          {save}
         </button>
       </div>
     </div>

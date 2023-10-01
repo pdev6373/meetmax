@@ -33,9 +33,12 @@
     "signupPassword": "Придумайте пароль",
     "signupSubHeading": "Создайте учетную запись, чтобы продолжить и общаться с людьми.",
     "confirmPassword": "Подтвердите пароль",
-    "confirmPasswordHeading": "Подтвердите пароль",
-    "confirmPasswordSubHeading": "Сбросьте пароль, введя новый пароль",
     "newPasswordPlaceholder": "Введите новый пароль",
-    "reset": "Перезагрузить"
+    "reset": "Перезагрузить",
+    "confirmPasswordError": "Пароль не подходит",
+    "resetPasswordHeading": "Сброс пароля",
+    "resetPasswordSubHeading": "Сбросьте свой пароль, введя новый пароль ниже",
+    "cancel": "отмена",
+    "save": "сохранять"
   }
 }

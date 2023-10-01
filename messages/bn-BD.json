@@ -33,9 +33,12 @@
     "signupPassword": "গুপ্ত সংকেত সৃষ্টি করুন",
     "signupSubHeading": "চালিয়ে যেতে এবং মানুষের সাথে সংযোগ করতে একটি অ্যাকাউন্ট তৈরি করুন।",
     "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
-    "confirmPasswordHeading": "পাসওয়ার্ড নিশ্চিত করুন",
-    "confirmPasswordSubHeading": "একটি নতুন পাসওয়ার্ড লিখে আপনার পাসওয়ার্ড রিসেট করুন",
     "newPasswordPlaceholder": "নতুন পাসওয়ার্ড লিখুন",
-    "reset": "রিসেট"
+    "reset": "রিসেট",
+    "confirmPasswordError": "পাসওয়ার্ড মেলে না",
+    "resetPasswordHeading": "পাসওয়ার্ড রিসেট করুন",
+    "resetPasswordSubHeading": "নিচে একটি নতুন পাসওয়ার্ড দিয়ে আপনার পাসওয়ার্ড রিসেট করুন",
+    "cancel": "বাতিল",
+    "save": "সংরক্ষণ"
   }
 }

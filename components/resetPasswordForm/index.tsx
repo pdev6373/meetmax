@@ -51,7 +51,7 @@ export default function ResetPasswordForm({
       return;
     }
 
-    router.push("/check-mail");
+    router.push("/login");
   };
 
   const togglePasswordHandler = () => setHidePassword((prev) => !prev);

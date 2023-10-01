@@ -33,9 +33,12 @@
     "signupPassword": "Create Password",
     "signupSubHeading": "Create an account to continue and connect with the people.",
     "confirmPassword": "Confirm Password",
-    "confirmPasswordHeading": "Confirm Password",
-    "confirmPasswordSubHeading": "Reset your password by entering a new password",
     "newPasswordPlaceholder": "Enter new password",
-    "reset": "Reset"
+    "reset": "Reset",
+    "confirmPasswordError": "Password does not match",
+    "resetPasswordHeading": "Reset Password",
+    "resetPasswordSubHeading": "Reset your password by entering a new password below",
+    "cancel": "cancel",
+    "save": "save"
   }
 }
