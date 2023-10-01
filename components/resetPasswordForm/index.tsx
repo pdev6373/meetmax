@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button, Input, Text, Wrapper } from "..";
-import styles from "./index.module.css";
 import { ResetPasswordFormType } from "@/types";
+import styles from "./index.module.css";
 
 export default function ResetPasswordForm({
   newPasswordPlaceholder,
