@@ -96,6 +96,7 @@ export default function ResetPasswordForm({
               }
             />
           </div>
+
           <Button onClick={forgotPasswordHandler} type="submit">
             {buttonText}
           </Button>
