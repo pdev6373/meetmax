@@ -36,7 +36,21 @@ export default function Sidebar() {
                   isCurrentRoute(nav.route) && styles.navLinkActive,
                 ].join(" ")}
               >
-                <Image src={nav.icon} alt="nav icon" width={16} height={16} />
+                <Image
+                  src={nav.icon}
+                  alt="nav icon"
+                  width={14}
+                  height={14}
+                  className={styles.navIconSmall}
+                />
+                <Image
+                  src={nav.icon}
+                  alt="nav icon"
+                  width={16}
+                  height={16}
+                  className={styles.navIcon}
+                />
+
                 <p
                   className={[
                     styles.navText,

@@ -36,6 +36,13 @@ export default function MainLayout({ children }: LayoutType) {
               value={search}
             />
           </div>
+          <div className={styles.searchMobile}>
+            <Search
+              onChange={setSearch}
+              placeholder="Search here..."
+              value={search}
+            />
+          </div>
 
           <Image
             src="/assets/message.svg"

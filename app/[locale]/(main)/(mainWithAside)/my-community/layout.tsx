@@ -32,10 +32,10 @@ export default function CommunityLayout({ children }: LayoutType) {
             ].join(" ")}
           >
             {community.amount ? (
-              <>
-                <span className={styles.amount}>{`${community.amount} `}</span>
+              <div className={styles.titleWrapper}>
+                <span className={styles.amount}>{community.amount}</span>
                 <span>{community.title}</span>
-              </>
+              </div>
             ) : (
               community.title
             )}
@@ -43,7 +43,7 @@ export default function CommunityLayout({ children }: LayoutType) {
         ))}
       </nav>
 
-      {/* {children} */}
+      {children}
     </div>
   );
 }

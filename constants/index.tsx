@@ -201,7 +201,7 @@ export const COMMUNITY_CATEGORIES = [
     amount: "2,564",
   },
   {
-    title: "People You Might Like",
+    title: "Recommended",
     amount: null,
   },
 ];
