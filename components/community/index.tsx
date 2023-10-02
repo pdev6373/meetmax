@@ -49,9 +49,8 @@ export default function Community() {
                   />
                 </Link>
                 {user.social.map((social) => (
-                  <Link href="" className={styles.socialLink}>
+                  <Link href="" className={styles.socialLink} key={social}>
                     <Image
-                      key={social}
                       src={`/assets/${social}.svg`}
                       alt="social"
                       width={14}
