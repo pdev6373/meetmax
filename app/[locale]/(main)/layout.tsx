@@ -13,6 +13,22 @@ export default function MainLayout({ children }: LayoutType) {
 
       <div className={styles.body}>
         <header className={styles.header}>
+          <Image
+            src="/assets/profile-photo.png"
+            alt="profile picture"
+            width={32}
+            height={32}
+            className={styles.profileMobile}
+          />
+
+          <Image
+            src="/assets/profile-photo.png"
+            alt="profile picture"
+            width={42}
+            height={42}
+            className={styles.profileDesktop}
+          />
+
           <div className={styles.search}>
             <Search
               onChange={setSearch}
@@ -20,6 +36,22 @@ export default function MainLayout({ children }: LayoutType) {
               value={search}
             />
           </div>
+
+          <Image
+            src="/assets/message.svg"
+            alt="profile picture"
+            width={16}
+            height={16}
+            className={styles.message}
+          />
+
+          <Image
+            src="/assets/message.svg"
+            alt="profile picture"
+            width={24}
+            height={24}
+            className={styles.messageDesktop}
+          />
 
           <div className={styles.profile}>
             <p className={styles.profileName}>Saleh Ahmed</p>

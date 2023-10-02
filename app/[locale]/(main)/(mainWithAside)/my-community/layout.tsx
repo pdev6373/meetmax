@@ -31,14 +31,19 @@ export default function CommunityLayout({ children }: LayoutType) {
               isCurrentRoute(community.title) && styles.communityCategoryActive,
             ].join(" ")}
           >
-            {community.amount
-              ? `${community.amount} ${community.title}`
-              : community.title}
+            {community.amount ? (
+              <>
+                <span className={styles.amount}>{`${community.amount} `}</span>
+                <span>{community.title}</span>
+              </>
+            ) : (
+              community.title
+            )}
           </Link>
         ))}
       </nav>
 
-      {children}
+      {/* {children} */}
     </div>
   );
 }

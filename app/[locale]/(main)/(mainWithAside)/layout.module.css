@@ -9,10 +9,22 @@
   padding: 30px;
   background: #212833;
   border-radius: 20px;
+  margin-right: 25px;
+}
+
+.main {
+  padding: 20px;
 }
 
 .aside {
   position: sticky;
   top: 80px;
   height: calc(100vh - 80px);
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .aside {
+    display: block;
+  }
 }

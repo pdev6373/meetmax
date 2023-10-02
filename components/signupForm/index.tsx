@@ -6,6 +6,7 @@ import { CalendarValueType, GenderType, SignupFormType } from "@/types";
 import { useRouter } from "next/navigation";
 import format from "date-fns/format";
 import styles from "./index.module.css";
+import { useFetch } from "@/hooks";
 
 export default function SignupForm({
   emailPlaceholder,
@@ -25,6 +26,7 @@ export default function SignupForm({
   cancel,
 }: SignupFormType) {
   const router = useRouter();
+  const { fetchData, loading } = useFetch();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -101,7 +103,22 @@ export default function SignupForm({
       return;
     }
 
-    router.push("/check-mail");
+    const response = await fetchData({
+      url: "/auth/register",
+      method: "POST",
+      payload: {
+        email,
+        firstname: name.split(" ")[0],
+        lastname: name.split(" ").slice(1).join(" "),
+        password,
+        dateOfBirth,
+        gender,
+      },
+    });
+
+    console.log(response);
+
+    // router.push("/check-mail");
   };
 
   const signinHandler = () => "/login";

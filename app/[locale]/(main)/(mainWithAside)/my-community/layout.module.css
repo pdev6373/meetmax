@@ -1,29 +1,27 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  background: #212833;
+  padding-block: 8px;
 }
 
 .communityCategories {
   display: flex;
-  justify-content: space-between;
-  gap: 19px;
-  padding: 18px;
+  gap: 13px;
+  padding: 11px 20px;
   background-color: #191c21;
-  border-radius: 16px;
 }
 
 .communityCategory {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 3px 12px;
+  border-radius: 6px;
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-content: center;
   text-align: center;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 16px;
   color: #edeff1;
   border: 1px solid #212833;
   transition: border, background-color 0.1s ease-in;
@@ -33,4 +31,28 @@
 .communityCategoryActive {
   border: 1px solid #377dff;
   background-color: #377dff;
+}
+
+.amount {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    gap: 18px;
+    padding-block: 0;
+  }
+
+  .communityCategories {
+    gap: 19px;
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .communityCategory {
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 24px;
+  }
 }

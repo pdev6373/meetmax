@@ -160,3 +160,9 @@ export type SocialLoginType = {
   googleText: string;
   appleText: string;
 };
+
+export type FetchType = {
+  url: string;
+  method: "POST" | "GET" | "PATCH" | "DELETE";
+  payload: any;
+};

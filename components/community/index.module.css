@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* check */
   gap: 18px;
 }
 
@@ -17,6 +17,7 @@
 .actions {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .actions > * {
@@ -59,6 +60,7 @@
 .userDetails {
   display: flex;
   gap: 18px;
+  flex-wrap: wrap;
 }
 
 .userInfo {
