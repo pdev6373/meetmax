@@ -261,6 +261,11 @@
     padding: 11px 30px 11px 20px;
   }
 
+  .sideNavList:first-child > .navLink,
+  .sideNavList:nth-child(7) > .navLink {
+    border-radius: 10px;
+  }
+
   .navLinkActive::after {
     display: none;
   }
