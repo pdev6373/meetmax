@@ -117,7 +117,7 @@
 
   .notificationNumber {
     top: 2.5px;
-    right: 2px;
+    right: 2.5px;
     transform: translateX(-85%);
   }
 }
