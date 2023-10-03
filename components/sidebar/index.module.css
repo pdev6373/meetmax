@@ -54,8 +54,8 @@
 
 .notificationNumber {
   position: absolute;
-  top: 12px;
-  right: -6px;
+  top: 11px;
+  right: -7.5px;
   transform: translateX(-85%);
   background: #ff5630;
   border-radius: 50%;
@@ -116,8 +116,8 @@
   }
 
   .notificationNumber {
-    top: 2px;
-    right: 0;
+    top: 2.5px;
+    right: 2px;
     transform: translateX(-85%);
   }
 }
