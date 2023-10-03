@@ -73,8 +73,8 @@
     padding-right: 5px;
   }
 
-  .header {
-    padding-left: 0;
+  .main {
+    margin-left: 20px;
   }
 
   .profileMobile,
@@ -117,6 +117,16 @@
     font-weight: 500;
     line-height: 24px;
     color: #ffffff;
+  }
+}
+
+@media (min-width: 950px) {
+  .header {
+    padding-left: 0;
+  }
+
+  .main {
+    margin-left: 0;
   }
 }
 

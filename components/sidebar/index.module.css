@@ -32,7 +32,7 @@
   padding: 20px 6px;
 }
 
-.navLinkActive::after {
+.navLink::after {
   content: "";
   position: absolute;
   bottom: 2px;
@@ -40,6 +40,12 @@
   width: 100%;
   border-radius: 6px;
   background: #edeff1;
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+}
+
+.navLinkActive::after {
+  opacity: 1;
 }
 
 .navText {
@@ -118,6 +124,84 @@
 
 @media (min-width: 500px) {
   .wrapper {
+    padding-inline: 0;
+  }
+
+  .navLink {
+    padding: 9px 20px;
+    background-color: transparent;
+    transition: background-color 0.15s ease-in;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+
+  .sideNavList {
+    flex-grow: 1;
+  }
+
+  .sideNavList:first-child > .navLink {
+    border-top-left-radius: 0;
+  }
+
+  .sideNavList:nth-child(7) > .navLink {
+    border-top-right-radius: 0;
+  }
+
+  .navLinkActive::after {
+    bottom: 0;
+  }
+
+  .navText {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    transition: font-weight 0.15s ease-in;
+  }
+
+  .navTextActive {
+    font-weight: 700;
+  }
+
+  .navLink:hover {
+    background-color: transparent;
+  }
+
+  .navLinkActive,
+  .navLinkActive:hover {
+    background-color: #4e5d78;
+  }
+
+  .notificationNumber {
+    right: 50%;
+    transform: translateX(100%);
+  }
+}
+
+@media (min-width: 690px) {
+  .navLink {
+    flex-direction: row;
+    padding: 17px 20px;
+    gap: 0;
+  }
+
+  .navText {
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 15px;
+  }
+
+  .notificationNumber {
+    position: static;
+    transform: unset;
+    min-width: 18px;
+    display: grid;
+    place-content: center;
+    margin-left: 13px;
+  }
+}
+
+@media (min-width: 950px) {
+  .wrapper {
     position: sticky;
     top: 0;
     bottom: unset;
@@ -153,6 +237,7 @@
     position: sticky;
     top: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 10px 15px 20px 0;
     width: 100%;
   }
@@ -160,11 +245,7 @@
   .navList {
     justify-content: flex-start;
     flex-direction: column;
-  }
-
-  .sideNavList {
-    border-bottom: 1px solid #edeff188;
-    padding-block: 4px;
+    gap: 10px;
   }
 
   .sideNavList:nth-child(3),
@@ -174,57 +255,14 @@
   }
 
   .navLink {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    border-radius: 4px;
+    border-radius: 10px;
     padding: 10px 15px;
-    background-color: transparent;
-    transition: background-color 0.15s ease-in;
-  }
-
-  .navLink:hover,
-  .navLinkActive {
-    background-color: #4e5d78;
+    justify-content: flex-start;
+    padding: 11px 30px 11px 20px;
   }
 
   .navLinkActive::after {
     display: none;
-  }
-
-  .navText {
-    display: none;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 22px;
-    transition: font-weight 0.15s ease-in;
-  }
-
-  .notificationNumber {
-    left: 50%;
-    right: unset;
-    transform: translate(0);
-  }
-}
-
-@media (min-width: 755px) {
-  .navText {
-    display: block;
-  }
-}
-
-@media (min-width: 950px) {
-  .navList {
-    gap: 10px;
-  }
-
-  .sideNavList {
-    border-bottom: none;
-    padding-block: 0;
-  }
-
-  .navLinkActive {
-    background-color: #4e5d78;
   }
 
   .navText {
@@ -233,35 +271,9 @@
     margin-left: 20px;
   }
 
-  .navLink {
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 11px 30px 11px 20px;
-    border-radius: 10px;
-    background-color: transparent;
-    transition: background-color 0.15s ease-in;
-    gap: 0;
-  }
-
-  .navLink:hover {
-    background-color: transparent;
-  }
-
-  .navLinkActive,
-  .navLinkActive:hover {
-    background-color: #4e5d78;
-  }
-
-  .navTextActive {
-    font-weight: 700;
-  }
-
   .notificationNumber {
-    position: static;
-    transform: unset;
-    min-width: 18px;
-    display: grid;
-    place-content: center;
-    margin-left: 13px;
+    left: 50%;
+    right: unset;
+    transform: translate(0);
   }
 }

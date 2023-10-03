@@ -444,7 +444,7 @@ export const COMMUNITIES = [
   },
 
   {
-    title: "People You Might Like",
+    title: "Recommended",
     data: [
       {
         image: "/assets/user.png",

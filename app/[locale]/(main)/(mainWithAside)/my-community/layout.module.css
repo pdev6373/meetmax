@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   background: #212833;
-  margin-bottom: 56px;
   padding-bottom: 8px;
   gap: 8px;
 }
@@ -56,6 +55,10 @@
 }
 
 @media (min-width: 500px) {
+  .wrapper {
+    gap: 18px;
+  }
+
   .communityCategories {
     border-radius: 16px;
     padding: 15px;
@@ -67,12 +70,6 @@
     border-radius: 8px;
     font-size: 12px;
     line-height: 18px;
-  }
-
-  .wrapper {
-    gap: 18px;
-    padding-bottom: 0;
-    margin-bottom: 0;
   }
 }
 
@@ -105,5 +102,12 @@
     border-radius: 10px;
     font-size: 16px;
     line-height: 24px;
+  }
+}
+
+@media (min-width: 950px) {
+  .wrapper {
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 }

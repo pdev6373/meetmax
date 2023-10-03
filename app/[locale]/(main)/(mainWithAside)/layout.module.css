@@ -7,6 +7,7 @@
 
 .main {
   flex: 1;
+  margin-bottom: 76px;
 }
 
 .aside {
@@ -25,6 +26,12 @@
 @media (min-width: 900px) {
   .main {
     padding: 20px;
+  }
+}
+
+@media (min-width: 950px) {
+  .main {
+    margin-bottom: 20px;
   }
 }
 
