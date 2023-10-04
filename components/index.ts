@@ -21,3 +21,5 @@ export { default as ForgotPasswordForm } from "@/components/forgotPasswordForm";
 export { default as CheckMail } from "@/components/checkMail";
 export { default as SignupForm } from "@/components/signupForm";
 export { default as ResetPasswordForm } from "@/components/resetPasswordForm";
+export { default as MakePost } from "@/components/makePost";
+export { default as Post } from "@/components/post";
