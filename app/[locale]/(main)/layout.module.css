@@ -25,6 +25,7 @@
   padding: 15px 20px;
   gap: 15px;
   background: #191c21;
+  z-index: 10;
 }
 
 .search,

@@ -23,3 +23,6 @@ export { default as SignupForm } from "@/components/signupForm";
 export { default as ResetPasswordForm } from "@/components/resetPasswordForm";
 export { default as MakePost } from "@/components/makePost";
 export { default as Post } from "@/components/post";
+export { default as RecentEvent } from "@/components/recentEvent";
+export { default as Reactors } from "@/components/reactors";
+export { default as Birthdays } from "@/components/birthdays";

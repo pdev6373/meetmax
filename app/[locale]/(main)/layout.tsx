@@ -1,9 +1,9 @@
 "use client";
+import { useState } from "react";
 import { LayoutType } from "@/types";
 import { Search, Sidebar } from "@/components";
-import styles from "./layout.module.css";
-import { useState } from "react";
 import Image from "next/image";
+import styles from "./layout.module.css";
 
 export default function MainLayout({ children }: LayoutType) {
   const [search, setSearch] = useState("");

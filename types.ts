@@ -166,3 +166,8 @@ export type FetchType = {
   method: "POST" | "GET" | "PATCH" | "DELETE";
   payload: any;
 };
+
+export type ReactorsType = {
+  images: string[];
+  noOfReactions: string;
+};
