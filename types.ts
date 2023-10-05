@@ -171,3 +171,24 @@ export type ReactorsType = {
   images: string[];
   noOfReactions: string;
 };
+
+export type PostLikesType = {
+  email: string;
+  firstname: string;
+  lastname: string;
+  image: string;
+};
+
+export type PostType = {
+  lastname: string;
+  firstname: string;
+  date: string;
+  type: "Public" | "Friends" | "Only me";
+  posterImage: string;
+  noOfReactions: string;
+  noOfComments: string;
+  noOfShare: string;
+  postImages?: string[];
+  postText?: string;
+  likes: PostLikesType[];
+};

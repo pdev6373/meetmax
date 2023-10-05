@@ -21,3 +21,21 @@
   display: grid;
   place-content: center;
 }
+
+.imageWeb {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .imageWeb {
+    display: block;
+  }
+
+  .imageMobile {
+    display: none;
+  }
+
+  .reactorsNumber {
+    min-width: 22px;
+  }
+}

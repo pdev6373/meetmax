@@ -16,13 +16,6 @@ export default function Sidebar() {
     <div className={styles.wrapper}>
       <Link href="/" className={styles.logo}>
         <Logo />
-        {/* <Image
-          src="/assets/logo.svg"
-          alt="logo"
-          width={26}
-          height={26}
-          // className={styles.logo}
-        /> */}
       </Link>
 
       <nav className={styles.nav}>
@@ -50,7 +43,6 @@ export default function Sidebar() {
                   height={16}
                   className={styles.navIcon}
                 />
-
                 <p
                   className={[
                     styles.navText,

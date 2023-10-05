@@ -61,3 +61,149 @@
   line-height: 18px;
   color: #959eae;
 }
+
+.birthdayUser {
+  border-radius: 4px;
+}
+
+.birthdayContent {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.birthdayheading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.birthdayBody {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.birthdayMain {
+  display: flex;
+  gap: 14px;
+}
+
+.birthday {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.birthdayInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.birthdayInput {
+  background: #212833;
+  border-radius: 6px;
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #edeff1;
+}
+
+.birthdayInput::placeholder {
+  color: #959eae;
+}
+
+.send {
+  background: #212833;
+  border-radius: 4px;
+  padding: 9px;
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    padding-inline: 18px;
+    border-radius: 16px;
+  }
+
+  .headerName {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .seeAll {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
+  .birthdays {
+    padding-block: 20px 18px;
+    gap: 18px;
+  }
+
+  .upcoming {
+    padding: 10px;
+    border-radius: 10px;
+    gap: 20px;
+  }
+
+  .upcomingMain {
+    gap: 0;
+  }
+
+  .upcomingHeader {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .upcomingBody {
+    font-weight: 500;
+  }
+
+  .birthdayUser {
+    border-radius: 6px;
+  }
+
+  .birthdayContent {
+    gap: 0;
+  }
+
+  .birthdayheading {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .birthdayBody {
+    font-weight: 500;
+  }
+
+  .birthdayMain {
+    gap: 20px;
+  }
+
+  .birthday {
+    /* gap: 10px; */
+    gap: 20px;
+  }
+
+  .send {
+    border-radius: 5px;
+    /* padding: 7px; */
+    padding: 12px;
+  }
+  /*  */
+
+  .birthdayInput {
+    border-radius: 10px;
+    /* padding: 4px 10px; */
+    padding: 10px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}

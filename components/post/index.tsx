@@ -1,12 +1,27 @@
+"use client";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { Reactors } from "..";
+import { PostType } from "@/types";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
-export default function Post() {
+export default function Post({
+  firstname,
+  lastname,
+  date,
+  type,
+  posterImage,
+  noOfReactions,
+  noOfComments,
+  noOfShare,
+  postImages,
+  postText,
+  likes,
+}: PostType) {
   const reactions = [
     {
       name: "Like",
-      icon: "/assets/liked.svg",
+      icon: "/assets/like.svg",
     },
     {
       name: "Comments",
@@ -23,10 +38,23 @@ export default function Post() {
       <div className={styles.main}>
         <div className={styles.mainHeader}>
           <div className={styles.mainHeaderDetails}>
-            <Image src="/assets/user.png" alt="user" width={32} height={32} />
+            <Image
+              src={posterImage}
+              alt="user"
+              width={32}
+              height={32}
+              className={styles.posterImageMobile}
+            />
+            <Image
+              src={posterImage}
+              alt="user"
+              width={50}
+              height={50}
+              className={styles.posterImageWeb}
+            />
             <div>
-              <h3 className={styles.name}>Sepural Gallery</h3>
-              <p className={styles.time}>15h. Public</p>
+              <h3 className={styles.name}>{`${lastname} ${firstname}`}</h3>
+              <p className={styles.time}>{`${date}. ${type}`}</p>
             </div>
           </div>
 
@@ -35,9 +63,40 @@ export default function Post() {
           </div>
         </div>
 
-        <div className={styles.postImageWrapper}>
-          <Image src="/assets/post-image.png" alt="post image" fill />
-        </div>
+        {postText?.length && <p className={styles.postText}>{postText}</p>}
+
+        {postImages?.length &&
+          (postImages.length === 1 ? (
+            <div className={styles.postImageWrapper}>
+              {postImages?.map((image) => (
+                <Image src={image} alt="post image" fill />
+              ))}
+            </div>
+          ) : postImages.length === 2 ? (
+            <div className={styles.postImageContainerPlus}>
+              {postImages?.map((image) => (
+                <div className={styles.postImageWrapper}>
+                  <Image src={image} alt="post image" fill />
+                </div>
+              ))}
+            </div>
+          ) : postImages.length === 3 ? (
+            <div className={styles.postImageContainerPlus}>
+              <div className={styles.postImageWrapper}>
+                <Image src={postImages[2]} alt="post image" fill />
+              </div>
+
+              <div className={styles.postTwo}>
+                {postImages.slice(0, 2)?.map((image) => (
+                  <div className={styles.postImageWrapper}>
+                    <Image src={image} alt="post image" fill />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <></>
+          ))}
 
         <div className={styles.mainBottom}>
           <Reactors
@@ -51,8 +110,8 @@ export default function Post() {
           />
 
           <div className={styles.bottomTexts}>
-            <p className={styles.bottomText}>3 Comments</p>
-            <p className={styles.bottomText}>17 Share</p>
+            <p className={styles.bottomText}>{`${noOfComments} Comments`}</p>
+            <p className={styles.bottomText}>{`${noOfShare} Share`}</p>
           </div>
         </div>
       </div>
@@ -60,14 +119,69 @@ export default function Post() {
       <div className={styles.reactions}>
         {reactions.map((reaction, index) => (
           <div className={styles.reaction} key={index}>
-            <Image src={reaction.icon} alt="reaction" width={16} height={16} />
-            <p className={styles.reactionName}>{reaction.name}</p>
+            {reaction.name === "Like" ? (
+              <>
+                {likes.some(
+                  (like) => like.email === "adebayoluborode@gmail.com"
+                ) ? (
+                  <>
+                    <Image
+                      src="/assets/liked.svg"
+                      alt="reaction"
+                      width={16}
+                      height={16}
+                    />
+                    <p
+                      className={[
+                        styles.reactionName,
+                        styles.reactionNameReacted,
+                      ].join(" ")}
+                    >
+                      {reaction.name}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <Image
+                      src={reaction.icon}
+                      alt="reaction"
+                      width={16}
+                      height={16}
+                    />
+                    <p className={styles.reactionName}>{reaction.name}</p>
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <Image
+                  src={reaction.icon}
+                  alt="reaction"
+                  width={16}
+                  height={16}
+                />
+                <p className={styles.reactionName}>{reaction.name}</p>
+              </>
+            )}
           </div>
         ))}
       </div>
 
       <div className={styles.bottom}>
-        <Image src="/assets/user.png" alt="user" width={32} height={32} />
+        <Image
+          src="/assets/user.png"
+          alt="user"
+          width={32}
+          height={32}
+          className={styles.bottomUserImage}
+        />
+        <Image
+          src="/assets/user.png"
+          alt="user"
+          width={38}
+          height={38}
+          className={styles.bottomUserImageWeb}
+        />
         <div className={styles.inputWrapper}>
           <input
             placeholder="Write a comment..."

@@ -64,6 +64,8 @@
   position: relative;
   width: 100%;
   aspect-ratio: 1.776 / 1;
+  overflow: hidden;
+  display: flex;
 }
 
 .reactions {
@@ -133,10 +135,137 @@
   color: #959eae;
 }
 
+.reactionNameReacted {
+  color: #377dff;
+}
+
+.posterImageWeb {
+  display: none;
+}
+
+.bottomUserImageWeb {
+  display: none;
+}
+
+.postText {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.postImageContainerPlus {
+  display: flex;
+  gap: 8.72px;
+}
+
+.postImageContainerPlus > * {
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.postTwo {
+  display: flex;
+  flex-direction: column;
+  gap: 8.72px;
+}
+
+.postImageWrapper > img {
+  border-radius: 6px;
+  flex-shrink: 0;
+  object-fit: cover;
+  object-position: top center;
+}
+
 @media (min-width: 500px) {
   .wrapper {
     padding: 18px;
     border-radius: 16px;
     gap: 14px;
+  }
+
+  .posterImageMobile {
+    display: none;
+  }
+
+  .posterImageWeb {
+    display: block;
+  }
+
+  .main {
+    gap: 18px;
+  }
+
+  .mainHeaderDetails {
+    gap: 20px;
+  }
+
+  .name {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .time {
+    font-weight: 500;
+  }
+
+  .bottomTexts {
+    gap: 17px;
+  }
+
+  .bottomText {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+
+  .reactions {
+    padding-block: 10px;
+  }
+
+  .reaction {
+    gap: 10px;
+  }
+
+  .reactionName {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .bottomUserImage {
+    display: none;
+  }
+
+  .bottomUserImageWeb {
+    display: block;
+    margin-right: 4px;
+  }
+
+  .send {
+    border-radius: 5px;
+    padding: 11px;
+  }
+
+  .inputWrapper {
+    padding-inline: 10px 14px;
+    border-radius: 10px;
+  }
+
+  .inputIcons {
+    gap: 14px;
+  }
+
+  .commentInput,
+  .commentInput::placeholder {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .postImageContainerPlus,
+  .postTwo {
+    gap: 12px;
+  }
+
+  .postImageWrapper > img {
+    border-radius: 16px;
   }
 }

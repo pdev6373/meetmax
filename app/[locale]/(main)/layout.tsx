@@ -54,7 +54,7 @@ export default function MainLayout({ children }: LayoutType) {
 
           <Image
             src="/assets/message.svg"
-            alt="profile picture"
+            alt="messsage"
             width={24}
             height={24}
             className={styles.messageDesktop}

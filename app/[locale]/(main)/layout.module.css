@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   min-height: 100vh;
+  background: #212833;
 }
 
 .body {
@@ -13,6 +14,7 @@
   background: #212833;
   border-radius: 20px;
   flex: 1;
+  margin-block: 8px;
 }
 
 .header {
@@ -70,12 +72,17 @@
 }
 
 @media (min-width: 500px) {
+  .wrapper {
+    background: transparent;
+  }
+
   .body {
     padding-right: 5px;
   }
 
   .main {
     margin-left: 20px;
+    margin-block: 10px 20px;
   }
 
   .profileMobile,
@@ -128,6 +135,7 @@
 
   .main {
     margin-left: 0;
+    margin-block: 0;
   }
 }
 

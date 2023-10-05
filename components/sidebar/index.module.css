@@ -4,6 +4,7 @@
   width: 100vw;
   background: #191c21;
   padding-inline: 10px;
+  z-index: 10;
 }
 
 .logo {
@@ -16,7 +17,6 @@
 }
 
 .sideNavList:nth-child(3),
-.sideNavList:nth-child(6),
 .sideNavList:last-child {
   display: none;
 }
@@ -124,7 +124,7 @@
 
 @media (min-width: 500px) {
   .wrapper {
-    padding-inline: 0;
+    padding-inline: 20px;
   }
 
   .navLink {
@@ -249,7 +249,6 @@
   }
 
   .sideNavList:nth-child(3),
-  .sideNavList:nth-child(6),
   .sideNavList:last-child {
     display: block;
   }

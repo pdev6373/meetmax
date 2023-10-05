@@ -19,11 +19,11 @@ export const SIDEBAR = [
     route: "/notification",
     icon: "/assets/notification.svg",
   },
-  {
-    name: "Explore",
-    route: "/explore",
-    icon: "/assets/explore.svg",
-  },
+  // {
+  //   name: "Explore",
+  //   route: "/explore",
+  //   icon: "/assets/explore.svg",
+  // },
   {
     name: "Profile",
     route: "/profile",

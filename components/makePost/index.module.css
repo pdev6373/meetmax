@@ -18,6 +18,17 @@
 
 .input {
   padding: 7px 10px;
+  overflow: hidden;
+}
+
+.input[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
 }
 
 .input,
@@ -54,6 +65,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .actionText {
@@ -72,6 +84,12 @@
   border-radius: 6px;
 }
 
+.fileInput {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
 @media (min-width: 500px) {
   .wrapper {
     padding: 18px;
@@ -86,6 +104,11 @@
   .input {
     border-radius: 10px;
     padding: 10px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .input[contenteditable="true"]:empty:before {
     font-size: 14px;
     line-height: 22px;
   }

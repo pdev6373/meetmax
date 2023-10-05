@@ -2,13 +2,11 @@
   height: 100%;
   display: flex;
   gap: 20px;
-  /* background: #191c21; */
-  background: #212833;
 }
 
 .main {
   flex: 1;
-  margin-bottom: 76px;
+  margin-bottom: 56px;
 }
 
 .aside {
@@ -21,6 +19,10 @@
     background: #212833;
     border-radius: 20px;
     margin-right: 25px;
+  }
+
+  .wrapper {
+    background: #191c21;
   }
 }
 

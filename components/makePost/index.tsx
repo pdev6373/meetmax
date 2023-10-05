@@ -5,23 +5,24 @@ import styles from "./index.module.css";
 
 export default function MakePost() {
   const [search, setSearch] = useState("");
+  const [images, setImages] = useState<string[]>([]);
 
   const actions = [
-    {
-      icon: "/assets/video.svg",
-      text: "Live",
-      action: () => {},
-    },
+    // {
+    //   icon: "/assets/video.svg",
+    //   text: "Live",
+    //   action: () => {},
+    // },
     {
       icon: "/assets/picture.svg",
       text: "Photo",
       action: () => {},
     },
-    {
-      icon: "/assets/smile.svg",
-      text: "Feeling",
-      action: () => {},
-    },
+    // {
+    //   icon: "/assets/smile.svg",
+    //   text: "Feeling",
+    //   action: () => {},
+    // },
   ];
 
   const searchHandler = (e: any) => setSearch(e.target.value);
@@ -40,25 +41,49 @@ export default function MakePost() {
           src="/assets/user.png"
           alt="user"
           width={42}
-          height={43}
+          height={42}
           className={styles.userDesktop}
         />
-        <input
+        <div
+          contentEditable
           placeholder="What’s happening?"
-          type="text"
-          value={search}
           onChange={(e) => searchHandler(e)}
           className={styles.input}
-        />
+        >
+          {search}
+        </div>
       </div>
 
       <div className={styles.actionsWrapper}>
         <div className={styles.actions}>
           {actions.map((action) => (
-            <div key={action.text} className={styles.action}>
-              <Image src={action.icon} alt="post icon" width={16} height={16} />
-              <p className={styles.actionText}>{action.text}</p>
-            </div>
+            <>
+              <label
+                htmlFor="image-input"
+                key={action.text}
+                className={styles.action}
+              >
+                <Image
+                  src={action.icon}
+                  alt="post icon"
+                  width={16}
+                  height={16}
+                />
+                <p className={styles.actionText}>{action.text}</p>
+              </label>
+
+              <input
+                id="image-input"
+                type="file"
+                value={images}
+                placeholder="Select an image"
+                accept="image/*"
+                onChange={(e: any) =>
+                  setImages((prev) => [...prev, e.target.value])
+                }
+                className={styles.fileInput}
+              />
+            </>
           ))}
         </div>
 
