@@ -68,14 +68,14 @@ export default function Post({
         {postImages?.length &&
           (postImages.length === 1 ? (
             <div className={styles.postImageWrapper}>
-              {postImages?.map((image) => (
-                <Image src={image} alt="post image" fill />
+              {postImages?.map((image, index) => (
+                <Image src={image} alt="post image" fill key={index} />
               ))}
             </div>
           ) : postImages.length === 2 ? (
             <div className={styles.postImageContainerPlus}>
-              {postImages?.map((image) => (
-                <div className={styles.postImageWrapper}>
+              {postImages?.map((image, index) => (
+                <div className={styles.postImageWrapper} key={index}>
                   <Image src={image} alt="post image" fill />
                 </div>
               ))}
@@ -87,8 +87,8 @@ export default function Post({
               </div>
 
               <div className={styles.postTwo}>
-                {postImages.slice(0, 2)?.map((image) => (
-                  <div className={styles.postImageWrapper}>
+                {postImages.slice(0, 2)?.map((image, index) => (
+                  <div className={styles.postImageWrapper} key={index}>
                     <Image src={image} alt="post image" fill />
                   </div>
                 ))}
