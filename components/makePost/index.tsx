@@ -2,10 +2,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
+import { CreatePost } from "..";
 
 export default function MakePost() {
   const [search, setSearch] = useState("");
   const [images, setImages] = useState<string[]>([]);
+  const [showPostOptions, setShowPostOptions] = useState(false);
 
   const actions = [
     // {
@@ -29,6 +31,7 @@ export default function MakePost() {
 
   return (
     <div className={styles.wrapper}>
+      {true && <CreatePost />}
       <div className={styles.header}>
         <Image
           src="/assets/user.png"
@@ -58,10 +61,11 @@ export default function MakePost() {
         <div className={styles.actions}>
           {actions.map((action) => (
             <>
-              <label
-                htmlFor="image-input"
+              <div
+                // htmlFor="image-input"
                 key={action.text}
                 className={styles.action}
+                onClick={() => setShowPostOptions(true)}
               >
                 <Image
                   src={action.icon}
@@ -70,9 +74,9 @@ export default function MakePost() {
                   height={16}
                 />
                 <p className={styles.actionText}>{action.text}</p>
-              </label>
+              </div>
 
-              <input
+              {/* <input
                 id="image-input"
                 type="file"
                 value={images}
@@ -82,7 +86,7 @@ export default function MakePost() {
                   setImages((prev) => [...prev, e.target.value])
                 }
                 className={styles.fileInput}
-              />
+              /> */}
             </>
           ))}
         </div>

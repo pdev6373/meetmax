@@ -3,7 +3,6 @@ import Image from "next/image";
 import styles from "./index.module.css";
 import { Reactors } from "..";
 import { PostType } from "@/types";
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 export default function Post({
   firstname,
@@ -11,7 +10,6 @@ export default function Post({
   date,
   type,
   posterImage,
-  noOfReactions,
   noOfComments,
   noOfShare,
   postImages,
@@ -100,12 +98,7 @@ export default function Post({
 
         <div className={styles.mainBottom}>
           <Reactors
-            images={[
-              "/assets/user.png",
-              "/assets/user.png",
-              "/assets/user.png",
-              "/assets/user.png",
-            ]}
+            images={likes.map((like) => like.image)}
             noOfReactions="9"
           />
 

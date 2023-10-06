@@ -50,7 +50,6 @@ export default function Home() {
           },
         ]}
         noOfComments="10"
-        noOfReactions="17"
         noOfShare="29"
         postImages={["/assets/post-image.png"]}
         posterImage="/assets/user.png"
@@ -102,7 +101,6 @@ export default function Home() {
           },
         ]}
         noOfComments="10"
-        noOfReactions="17"
         noOfShare="29"
         postImages={[
           "/assets/post-image.png",
@@ -156,7 +154,6 @@ export default function Home() {
           },
         ]}
         noOfComments="10"
-        noOfReactions="17"
         noOfShare="29"
         postImages={["/assets/post-image.png", "/assets/post-image.png"]}
         posterImage="/assets/user.png"
@@ -207,7 +204,6 @@ export default function Home() {
           },
         ]}
         noOfComments="10"
-        noOfReactions="17"
         noOfShare="29"
         postImages={["/assets/post-image.png"]}
         posterImage="/assets/user.png"

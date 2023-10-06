@@ -185,7 +185,6 @@ export type PostType = {
   date: string;
   type: "Public" | "Friends" | "Only me";
   posterImage: string;
-  noOfReactions: string;
   noOfComments: string;
   noOfShare: string;
   postImages?: string[];
