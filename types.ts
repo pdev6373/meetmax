@@ -3,6 +3,7 @@ import {
   Dispatch,
   HTMLInputTypeAttribute,
   SetStateAction,
+  MutableRefObject,
 } from "react";
 
 export type PageProps = {
@@ -191,12 +192,15 @@ export type PostType = {
   type: "Public" | "Friends" | "Only me";
   posterImage: string;
   noOfComments: string;
-  noOfShare: string;
+  // noOfShare: string;
   postImages?: string[];
   postText?: string;
+  isFollowing: boolean;
   likes: PostLikesType[];
 };
 
 export type CreatePostType = {
   onClose: any;
+  setPostText: any;
+  postText: MutableRefObject<string>;
 };

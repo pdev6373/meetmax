@@ -7,11 +7,11 @@
 
 .wrapper {
   position: absolute;
-  top: 0;
+  top: -115px;
   left: 0;
   right: 0;
   z-index: 13;
-  height: calc(100vh - 66px - 56px - 16px);
+  height: calc(100vh - 66px - 56px - 8px);
   background: #212832;
 }
 
@@ -106,7 +106,6 @@
   display: flex;
   gap: 14px;
   padding-inline: 20px;
-  flex-direction: column;
 }
 
 .mainContainer {
@@ -171,6 +170,7 @@
   margin-inline: 20px;
 }
 
+.postUser,
 .postUserWeb {
   display: none;
 }
@@ -224,7 +224,7 @@
 .selectedImageWrapper > img {
   border-radius: 6px;
   object-fit: cover;
-  object-position: center;
+  object-position: top center;
 }
 
 .removeImage {
@@ -240,13 +240,30 @@
   background: #212833;
 }
 
+.selectedImagesPlus,
 .selectedImages {
   padding-inline: 20px;
 }
 
+.selectedImagesPlus {
+  display: flex;
+  gap: 8.72px;
+}
+
+.selectedImagesPlus > * {
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.postTwo {
+  display: flex;
+  flex-direction: column;
+  gap: 8.72px;
+}
+
 @media (min-width: 250px) {
-  .mainContent {
-    flex-direction: row;
+  .postUser {
+    display: block;
   }
 }
 
@@ -258,6 +275,7 @@
   .wrapper {
     height: unset;
     border-radius: 16px;
+    top: 0;
   }
 
   .main {
@@ -378,6 +396,7 @@
     transform: translateX(-50%);
   }
 
+  .selectedImagesPlus,
   .selectedImages {
     padding-inline: 18px;
   }
@@ -385,6 +404,11 @@
   .selectedImageWrapper,
   .selectedImageWrapper > img {
     border-radius: 10px;
+  }
+
+  .postImageContainerPlus,
+  .postTwo {
+    gap: 12px;
   }
 
   .removeImage {

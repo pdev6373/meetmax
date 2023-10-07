@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
+import ContentEditable from "react-contenteditable";
 import styles from "./index.module.css";
 import { CreatePost } from "..";
 
 export default function MakePost() {
-  const [search, setSearch] = useState("");
+  const text = useRef("");
   const [showPostOptions, setShowPostOptions] = useState(false);
 
   const actions = [
@@ -26,11 +27,17 @@ export default function MakePost() {
     // },
   ];
 
-  const searchHandler = (e: any) => setSearch(e.target.value);
+  const postTextHandler = (e: any) => (text.current = e.target.value);
 
   return (
     <div className={styles.wrapper}>
-      {showPostOptions && <CreatePost onClose={setShowPostOptions} />}
+      {showPostOptions && (
+        <CreatePost
+          onClose={setShowPostOptions}
+          postText={text}
+          setPostText={postTextHandler}
+        />
+      )}
       <div className={styles.header}>
         <Image
           src="/assets/user.png"
@@ -46,35 +53,26 @@ export default function MakePost() {
           height={42}
           className={styles.userDesktop}
         />
-        <div
-          contentEditable
+
+        <ContentEditable
+          html={text.current}
+          onChange={postTextHandler}
           placeholder="What’s happening?"
-          onChange={(e) => searchHandler(e)}
           className={styles.input}
-        >
-          {search}
-        </div>
+        />
       </div>
 
       <div className={styles.actionsWrapper}>
         <div className={styles.actions}>
           {actions.map((action) => (
-            <>
-              <div
-                // htmlFor="image-input"
-                key={action.text}
-                className={styles.action}
-                onClick={() => setShowPostOptions(true)}
-              >
-                <Image
-                  src={action.icon}
-                  alt="post icon"
-                  width={16}
-                  height={16}
-                />
-                <p className={styles.actionText}>{action.text}</p>
-              </div>
-            </>
+            <div
+              key={action.text}
+              className={styles.action}
+              onClick={() => setShowPostOptions(true)}
+            >
+              <Image src={action.icon} alt="post icon" width={16} height={16} />
+              <p className={styles.actionText}>{action.text}</p>
+            </div>
           ))}
         </div>
 

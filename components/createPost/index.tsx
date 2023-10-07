@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CreatePostType, PostViewType } from "@/types";
 import styles from "./index.module.css";
 import Image from "next/image";
+import ContentEditable from "react-contenteditable";
 
 const postView: PostViewType[] = [
   {
@@ -19,12 +20,19 @@ const postView: PostViewType[] = [
   },
 ];
 
-export default function CreatePost({ onClose }: CreatePostType) {
+export default function CreatePost({
+  onClose,
+  postText,
+  setPostText,
+}: CreatePostType) {
   const [currentView, setCurrentView] = useState(postView[0]);
   const [showOptions, setShowOptions] = useState(false);
   const [images, setImages] = useState<string[]>([]);
 
-  const handleClose = () => onClose(false);
+  const handleClose = () => {
+    postText.current = "";
+    onClose(false);
+  };
   const handleShowOptions = () => setShowOptions((prev) => !prev);
   const handleImageRemove = (removeImage: string) =>
     setImages((prev) => prev.filter((image) => image !== removeImage));
@@ -41,7 +49,7 @@ export default function CreatePost({ onClose }: CreatePostType) {
     };
   };
   const handlePost = async () => {
-    onClose(false);
+    handleClose();
   };
 
   return (
@@ -142,32 +150,99 @@ export default function CreatePost({ onClose }: CreatePostType) {
                 height={42}
                 className={styles.postUserWeb}
               />
-              <div
-                contentEditable
-                className={styles.mainInput}
+              <ContentEditable
+                html={postText.current}
+                onChange={setPostText}
                 placeholder="What’s happening?"
-              ></div>
+                className={styles.mainInput}
+              />
             </div>
 
             {images.length ? (
-              <div className={styles.selectedImages}>
-                {images.map((image, index) => (
-                  <div className={styles.selectedImageWrapper} key={index}>
-                    <div
-                      className={styles.removeImage}
-                      onClick={() => handleImageRemove(image)}
-                    >
-                      <Image
-                        src="/assets/close.svg"
-                        alt="remove image"
-                        width={16}
-                        height={16}
-                      />
+              images.length === 1 ? (
+                <div className={styles.selectedImages}>
+                  {images.map((image, index) => (
+                    <div className={styles.selectedImageWrapper} key={index}>
+                      <div
+                        className={styles.removeImage}
+                        onClick={() => handleImageRemove(image)}
+                      >
+                        <Image
+                          src="/assets/close.svg"
+                          alt="remove image"
+                          width={16}
+                          height={16}
+                        />
+                      </div>
+
+                      <Image src={image} alt="post image" fill />
                     </div>
-                    <Image src={image} alt="post image" fill />
+                  ))}
+                </div>
+              ) : images.length === 2 ? (
+                <div className={styles.selectedImagesPlus}>
+                  {images.map((image, index) => (
+                    <div className={styles.selectedImageWrapper} key={index}>
+                      <div
+                        className={styles.removeImage}
+                        onClick={() => handleImageRemove(image)}
+                      >
+                        <Image
+                          src="/assets/close.svg"
+                          alt="remove image"
+                          width={16}
+                          height={16}
+                        />
+                      </div>
+
+                      <Image src={image} alt="post image" fill />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                images.length === 3 && (
+                  <div className={styles.selectedImagesPlus}>
+                    <div className={styles.selectedImageWrapper}>
+                      <div
+                        className={styles.removeImage}
+                        onClick={() => handleImageRemove(images[2])}
+                      >
+                        <Image
+                          src="/assets/close.svg"
+                          alt="remove image"
+                          width={16}
+                          height={16}
+                        />
+                      </div>
+
+                      <Image src={images[2]} alt="post image" fill />
+                    </div>
+
+                    <div className={styles.postTwo}>
+                      {images.slice(0, 2).map((image, index) => (
+                        <div
+                          className={styles.selectedImageWrapper}
+                          key={index}
+                        >
+                          <div
+                            className={styles.removeImage}
+                            onClick={() => handleImageRemove(image)}
+                          >
+                            <Image
+                              src="/assets/close.svg"
+                              alt="remove image"
+                              width={16}
+                              height={16}
+                            />
+                          </div>
+
+                          <Image src={image} alt="post image" fill />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
+                )
+              )
             ) : (
               <></>
             )}
@@ -181,7 +256,7 @@ export default function CreatePost({ onClose }: CreatePostType) {
                     width={16}
                     height={16}
                   />
-                  <p className={styles.imageUploadText}>Photo</p>
+                  <p className={styles.imageUploadText}>Add Photo</p>
                 </label>
               ) : (
                 <div></div>

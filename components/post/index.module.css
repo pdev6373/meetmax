@@ -187,6 +187,147 @@
   flex: 1;
 }
 
+.moreWrapper {
+  cursor: pointer;
+  position: relative;
+}
+
+.moreOptionsWrapper {
+  position: absolute;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+  background: #212833;
+  padding: 18px 20px;
+  right: -20px;
+  top: 30px;
+  width: 100vw;
+  border-radius: 4px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px; */
+  gap: 16px;
+}
+
+.moreOption {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  cursor: pointer;
+}
+
+.moreOptionText {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.hiddenPostWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 20px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.02);
+  background: rgba(25, 28, 33, 1);
+}
+
+.hiddenPostMain {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hiddenPostHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.hiddenPostText {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.hiddenPostRemove {
+  cursor: pointer;
+  padding-block: 5px;
+  padding-left: 5px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  max-height: 100vh;
+  left: 0;
+  right: 0;
+  background: rgba(33, 40, 51, 0.5);
+  z-index: 12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unfollowWrapper {
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+  background: rgba(25, 28, 33, 1);
+  border-radius: 6px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  width: min(100%, 256px);
+  margin-top: -150px;
+}
+
+.unfollowHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  padding-bottom: 2px;
+}
+
+.unfollowText {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #959eae;
+}
+
+.unfollowActions {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 198px;
+}
+
+.unfollowActions > * {
+  padding: 7px;
+  flex: 1;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.unfollowCancel {
+  background: transparent;
+  outline: 1px solid #4e5d78;
+  color: #959eae;
+}
+
+.unfollowProceed {
+  background: rgba(55, 125, 255, 1);
+  color: #ffffff;
+}
+
 @media (min-width: 330px) {
   .bottomUserImage {
     display: block;
@@ -284,5 +425,64 @@
 
   .postImageWrapper > img {
     border-radius: 16px;
+  }
+
+  .moreWrapper {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .moreOptionsWrapper {
+    padding: 18px;
+    right: -28px;
+    width: 325px;
+    border-radius: 6px;
+    gap: 16px;
+  }
+
+  .hiddenPostWrapper {
+    border-radius: 16px;
+    padding: 18px;
+  }
+
+  .hiddenPostMain {
+    gap: 18px;
+  }
+
+  .hiddenPostHeading {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .hiddenPostText {
+    font-weight: 500;
+  }
+
+  .unfollowWrapper {
+    border-radius: 10px;
+    margin-top: 0;
+  }
+
+  .unfollowHeading {
+    font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 0;
+  }
+
+  .unfollowText {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    padding-bottom: 8px;
+  }
+
+  .unfollowCancel {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .unfollowProceed {
+    border-radius: 8px;
   }
 }

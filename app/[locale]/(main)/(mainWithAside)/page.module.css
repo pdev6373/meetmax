@@ -6,8 +6,45 @@
   background: #212833;
 }
 
+.onlineFriends {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  width: 100vw;
+  box-shadow: 0px 2.5546875px 6.38671875px 0px rgba(0, 0, 0, 0.02);
+  background: rgba(25, 28, 33, 1);
+  padding: 14px 20px;
+}
+
+.onlineFriend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.friendName {
+  max-width: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.friendImage {
+  border: 2px solid #38cb89;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 @media (min-width: 500px) {
   .wrapper {
     gap: 30px;
+  }
+
+  .onlineFriends {
+    display: none;
   }
 }
