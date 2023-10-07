@@ -130,6 +130,10 @@
     border-radius: 16px;
   }
 
+  .header {
+    padding-block: 18px;
+  }
+
   .headerName {
     font-size: 16px;
     font-weight: 700;

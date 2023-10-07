@@ -6,7 +6,6 @@ import { CreatePost } from "..";
 
 export default function MakePost() {
   const [search, setSearch] = useState("");
-  const [images, setImages] = useState<string[]>([]);
   const [showPostOptions, setShowPostOptions] = useState(false);
 
   const actions = [
@@ -31,7 +30,7 @@ export default function MakePost() {
 
   return (
     <div className={styles.wrapper}>
-      {true && <CreatePost />}
+      {showPostOptions && <CreatePost onClose={setShowPostOptions} />}
       <div className={styles.header}>
         <Image
           src="/assets/user.png"
@@ -75,18 +74,6 @@ export default function MakePost() {
                 />
                 <p className={styles.actionText}>{action.text}</p>
               </div>
-
-              {/* <input
-                id="image-input"
-                type="file"
-                value={images}
-                placeholder="Select an image"
-                accept="image/*"
-                onChange={(e: any) =>
-                  setImages((prev) => [...prev, e.target.value])
-                }
-                className={styles.fileInput}
-              /> */}
             </>
           ))}
         </div>

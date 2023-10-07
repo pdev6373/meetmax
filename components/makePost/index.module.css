@@ -20,6 +20,7 @@
 .input {
   padding: 7px 10px;
   overflow: hidden;
+  max-height: 110px;
 }
 
 .input[contenteditable="true"]:empty:before {
@@ -83,12 +84,6 @@
   line-height: 22px;
   background: #377dff;
   border-radius: 6px;
-}
-
-.fileInput {
-  position: absolute;
-  left: -9999px;
-  opacity: 0;
 }
 
 @media (min-width: 500px) {

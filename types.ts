@@ -179,6 +179,11 @@ export type PostLikesType = {
   image: string;
 };
 
+export type PostViewType = {
+  type: "Public" | "Friends" | "Only me";
+  value: "public" | "friends" | "only-me";
+};
+
 export type PostType = {
   lastname: string;
   firstname: string;
@@ -190,4 +195,8 @@ export type PostType = {
   postImages?: string[];
   postText?: string;
   likes: PostLikesType[];
+};
+
+export type CreatePostType = {
+  onClose: any;
 };

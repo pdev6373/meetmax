@@ -25,10 +25,10 @@ export default function Post({
       name: "Comments",
       icon: "/assets/comment.svg",
     },
-    {
-      name: "Share",
-      icon: "/assets/share.svg",
-    },
+    // {
+    //   name: "Share",
+    //   icon: "/assets/share.svg",
+    // },
   ];
 
   return (
@@ -175,21 +175,39 @@ export default function Post({
           height={38}
           className={styles.bottomUserImageWeb}
         />
-        <div className={styles.inputWrapper}>
-          <input
-            placeholder="Write a comment..."
-            className={styles.commentInput}
-          />
 
-          <div className={styles.inputIcons}>
-            <Image src="/assets/gif.svg" alt="user" width={16} height={16} />
-            <Image src="/assets/image.svg" alt="user" width={16} height={16} />
-            <Image src="/assets/emoji.svg" alt="user" width={16} height={16} />
+        <div className={styles.inputWrapperOuter}>
+          <div className={styles.inputWrapper}>
+            <input
+              placeholder="Write a comment..."
+              className={styles.commentInput}
+            />
+
+            <div className={styles.inputIcons}>
+              <Image src="/assets/gif.svg" alt="user" width={16} height={16} />
+              <Image
+                src="/assets/image.svg"
+                alt="user"
+                width={16}
+                height={16}
+              />
+              <Image
+                src="/assets/emoji.svg"
+                alt="user"
+                width={16}
+                height={16}
+              />
+            </div>
           </div>
-        </div>
 
-        <div className={styles.send}>
-          <Image src="/assets/send.svg" alt="reaction" width={16} height={16} />
+          <div className={styles.send}>
+            <Image
+              src="/assets/send.svg"
+              alt="reaction"
+              width={16}
+              height={16}
+            />
+          </div>
         </div>
       </div>
     </div>
