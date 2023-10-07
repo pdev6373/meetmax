@@ -92,8 +92,9 @@ export default function CreatePost({ onClose }: CreatePostType) {
 
                 {showOptions && (
                   <div className={styles.showOptions}>
-                    {postView.map((view) => (
+                    {postView.map((view, index) => (
                       <div
+                        key={index}
                         className={styles.showOption}
                         onClick={(e) => handleSetCurrentView(view)}
                       >
@@ -150,8 +151,8 @@ export default function CreatePost({ onClose }: CreatePostType) {
 
             {images.length ? (
               <div className={styles.selectedImages}>
-                {images.map((image) => (
-                  <div className={styles.selectedImageWrapper}>
+                {images.map((image, index) => (
+                  <div className={styles.selectedImageWrapper} key={index}>
                     <div
                       className={styles.removeImage}
                       onClick={() => handleImageRemove(image)}
