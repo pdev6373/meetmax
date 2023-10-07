@@ -36,7 +36,7 @@ export const SIDEBAR = [
   },
   {
     name: "Logout",
-    route: "/logout",
+    route: null,
     icon: "/assets/logout.svg",
   },
 ];
