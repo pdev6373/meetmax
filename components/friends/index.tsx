@@ -62,7 +62,7 @@ export default function Friends() {
             {showOptions ? (
               <div className={styles.optionsWrapper}>
                 {options.map((option) => (
-                  <div className={styles.option}>
+                  <div className={styles.option} key={option.text}>
                     <div className={styles.optionMain}>
                       <Image
                         src={option.icon}
