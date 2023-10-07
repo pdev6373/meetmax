@@ -4,18 +4,40 @@ import { ALL_FRIENDS } from "@/constants";
 import Image from "next/image";
 import styles from "./index.module.css";
 import Link from "next/link";
+import { Switch } from "..";
+import { FriendsOptionsType } from "@/types";
 
 export default function Friends() {
   const friendsRef = useRef<any>(null);
+  const [showOptions, setShowOptions] = useState(false);
   const [hasScrollbar, setHasScrollbar] = useState<boolean | undefined>(
     undefined
   );
+  const [options, setOptions] = useState<FriendsOptionsType[]>([
+    {
+      icon: "/assets/mute.svg",
+      text: "Message sounds",
+      state: "off",
+    },
+    {
+      icon: "/assets/incoming-call.svg",
+      text: "Call sounds",
+      state: "off",
+    },
+    {
+      icon: "/assets/active.svg",
+      text: "Turn of active status",
+      state: "off",
+    },
+  ]);
 
   useEffect(() => {
     setHasScrollbar(
       friendsRef.current?.scrollHeight > friendsRef.current?.clientHeight
     );
   }, [friendsRef]);
+
+  const handleShowOptions = () => setShowOptions((prev) => !prev);
 
   return (
     <div className={styles.wrapper}>
@@ -33,7 +55,45 @@ export default function Friends() {
               alt="friend"
               width={16}
               height={16}
+              onClick={handleShowOptions}
+              className={styles.moreIcon}
             />
+
+            {showOptions ? (
+              <div className={styles.optionsWrapper}>
+                {options.map((option) => (
+                  <div className={styles.option}>
+                    <div className={styles.optionMain}>
+                      <Image
+                        src={option.icon}
+                        alt="icon"
+                        width={16}
+                        height={16}
+                      />
+                      <p className={styles.optionText}>{option.text}</p>
+                    </div>
+
+                    <Switch
+                      state={option.state}
+                      onClick={() =>
+                        setOptions((prev) =>
+                          prev.map((item) =>
+                            item.text !== option.text
+                              ? item
+                              : {
+                                  ...item,
+                                  state: option.state === "off" ? "on" : "off",
+                                }
+                          )
+                        )
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         )}
       </div>

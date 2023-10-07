@@ -204,3 +204,14 @@ export type CreatePostType = {
   setPostText: any;
   postText: MutableRefObject<string>;
 };
+
+export type SwtichType = {
+  onClick: any;
+  state: "on" | "off";
+};
+
+export type FriendsOptionsType = {
+  icon: string;
+  text: string;
+  state: "on" | "off";
+};

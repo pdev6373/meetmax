@@ -177,7 +177,7 @@
   }
 }
 
-@media (min-width: 690px) {
+@media (min-width: 720px) {
   .navLink {
     flex-direction: row;
     padding: 17px 20px;

@@ -80,12 +80,50 @@
 }
 
 .more {
-  cursor: pointer;
   padding-left: 10px;
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.moreIcon {
+  cursor: pointer;
 }
 
 .moreMargin {
   margin-right: 8px;
+}
+
+.optionsWrapper {
+  position: absolute;
+  right: -10px;
+  top: calc(100% + 5px);
+  background: #212833;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 270px;
+  z-index: 2;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.optionMain {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.optionText {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
 }
