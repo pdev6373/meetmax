@@ -18,8 +18,8 @@ export default function Notification() {
       </header>
 
       <div className={styles.notifications}>
-        {NOTIFICATIONS.map((notification) => (
-          <div className={styles.notification}>
+        {NOTIFICATIONS.map((notification, index) => (
+          <div className={styles.notification} key={index}>
             <div className={styles.notificationMain}>
               <Image
                 src={`/assets/${
