@@ -583,3 +583,204 @@ export const LANGUAGES = [
 ];
 
 export const locales = LANGUAGES.map((language) => language.value);
+
+export const NOTIFICATIONS: {
+  image: string;
+  title: string;
+  time: string;
+  type: "comment" | "like" | "follow";
+  action: null | {
+    isFollowing: boolean;
+    details: {
+      firstName: string;
+      lastName: string;
+      email: string;
+    };
+  };
+  isRead: boolean;
+}[] = [
+  {
+    image: "/assets/user.png",
+    title: "Yazdan Khan Commented on your photo.",
+    time: "4 minutes ago",
+    type: "comment",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Pratap Vania Like your post “Need a logo..”",
+    time: "3 minutes ago",
+    type: "like",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: false,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: true,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Yazdan Khan Commented on your photo.",
+    time: "4 minutes ago",
+    type: "comment",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Pratap Vania Like your post “Need a logo..”",
+    time: "3 minutes ago",
+    type: "like",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: false,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: true,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Yazdan Khan Commented on your photo.",
+    time: "4 minutes ago",
+    type: "comment",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Pratap Vania Like your post “Need a logo..”",
+    time: "3 minutes ago",
+    type: "like",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: false,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: true,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Yazdan Khan Commented on your photo.",
+    time: "4 minutes ago",
+    type: "comment",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Pratap Vania Like your post “Need a logo..”",
+    time: "3 minutes ago",
+    type: "like",
+    action: null,
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: false,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+  {
+    image: "/assets/user.png",
+    title: "Hammadou Ibrahima Followed you",
+    time: "3 hours ago",
+    type: "follow",
+    action: {
+      isFollowing: true,
+      details: {
+        firstName: "",
+        lastName: "",
+        email: "",
+      },
+    },
+    isRead: false,
+  },
+];

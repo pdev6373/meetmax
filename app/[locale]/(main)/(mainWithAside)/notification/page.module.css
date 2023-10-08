@@ -1,0 +1,150 @@
+.wrapper {
+  background: rgba(25, 28, 33, 1);
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1px;
+  padding: 14px 20px;
+  border-top: 1px solid #959eae;
+  flex-wrap: wrap;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.notificationMain,
+.notificationContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.notificationTitle {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.notificationTime {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.followed,
+.followBack {
+  border-radius: 6px;
+  padding-block: 10px;
+  width: 90px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.followed {
+  outline: 1px solid #959eae;
+  color: #959eae;
+}
+
+.followBack {
+  color: #ffffff;
+  background: rgba(55, 125, 255, 1);
+}
+
+.markAsRead {
+  border-radius: 6px;
+  padding-block: 6px;
+  width: 100px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  outline: 1px solid #959eae;
+  color: #959eae;
+}
+
+.heading {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.notificationImageWeb {
+  display: none;
+}
+
+.dot {
+  width: 10px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: rgba(255, 86, 48, 1);
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 650px) {
+  .notificationImageWeb {
+    display: block;
+  }
+
+  .notificationImage {
+    display: none;
+  }
+
+  .notification {
+    padding: 12px 20px;
+  }
+
+  .notificationMain {
+    gap: 20px;
+  }
+
+  .notificationTitle {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .notificationTime {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .followed,
+  .followBack {
+    border-radius: 10px;
+    padding-block: 9px;
+    width: 120px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .markAsRead {
+    border-radius: 10px;
+    padding-block: 6px;
+    width: 110px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
