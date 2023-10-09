@@ -41,6 +41,21 @@
 }
 
 @media (min-width: 500px) {
+  .nav {
+    padding-right: 20px;
+  }
+
+  .navList {
+    padding-right: 0;
+    padding-block: 10px;
+  }
+}
+
+@media (min-width: 700px) {
+  .navList {
+    padding-block: 20px;
+  }
+
   .navText {
     font-weight: 400;
   }
@@ -49,17 +64,6 @@
     font-weight: 700;
   }
 
-  .nav {
-    padding-right: 20px;
-  }
-
-  .navList {
-    padding-right: 0;
-    padding-block: 20px;
-  }
-}
-
-@media (min-width: 700px) {
   .nav {
     border-right: 1px solid rgba(33, 40, 51, 1);
     width: auto;
@@ -72,5 +76,11 @@
 
   .arrowVisible {
     opacity: 1;
+  }
+}
+
+@media (min-width: 950px) {
+  .logout {
+    display: none;
   }
 }

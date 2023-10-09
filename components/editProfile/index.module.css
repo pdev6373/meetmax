@@ -291,7 +291,7 @@
   .generalInputs,
   .socialInputs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
     row-gap: 18px;
     column-gap: 30px;
   }
@@ -313,5 +313,11 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
+  }
+}
+
+@media (min-width: 700px) {
+  .route {
+    display: none;
   }
 }
