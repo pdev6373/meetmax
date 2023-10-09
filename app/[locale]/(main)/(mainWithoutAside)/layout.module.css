@@ -1,0 +1,28 @@
+.wrapper {
+  height: 100%;
+}
+
+.main {
+  height: calc(100% - 56px);
+}
+
+.mainInner {
+  background: rgba(25, 28, 33, 1);
+  height: 100%;
+}
+
+@media (min-width: 500px) {
+  .main {
+    padding: 30px;
+  }
+
+  .mainInner {
+    border-radius: 16px;
+  }
+}
+
+@media (min-width: 950px) {
+  .main {
+    height: 100%;
+  }
+}

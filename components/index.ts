@@ -28,3 +28,4 @@ export { default as Reactors } from "@/components/reactors";
 export { default as Birthdays } from "@/components/birthdays";
 export { default as CreatePost } from "@/components/createPost";
 export { default as Switch } from "@/components/switch";
+export { default as EditProfile } from "@/components/editProfile";
