@@ -1,0 +1,50 @@
+.heading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #959eae;
+  padding-bottom: 6px;
+}
+
+.notifications {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.notificationMain {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.notificationText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+@media (min-width: 500px) {
+  .heading {
+    font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 0;
+  }
+
+  .notifications {
+    gap: 10px;
+    max-width: 210px;
+  }
+
+  .notificationMain {
+    gap: 10px;
+  }
+}
