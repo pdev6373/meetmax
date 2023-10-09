@@ -48,7 +48,7 @@ export default function Settings() {
         <nav>
           <ul>
             {navs.map((nav) => (
-              <li>
+              <li key={nav.name}>
                 <Link href={nav.route} className={styles.navItem}>
                   <Image src={nav.icon} alt="nav icon" width={16} height={16} />
                   <p className={styles.navText}>{nav.name}</p>
