@@ -30,6 +30,7 @@
   font-weight: 500;
   line-height: 22px;
   color: #edeff1;
+  flex: 1;
 }
 
 @media (min-width: 500px) {
