@@ -40,7 +40,7 @@ export default function Notification() {
       <p className={styles.heading}>What Notifications You Receive</p>
       <div className={styles.notifications}>
         {notifications.map((notification) => (
-          <div className={styles.notification}>
+          <div className={styles.notification} key={notification.name}>
             <div className={styles.notificationMain}>
               <Image
                 src={notification.icon}
