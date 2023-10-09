@@ -77,6 +77,7 @@ export default function MainLayout({ children }: LayoutType) {
                   className={styles.navItem}
                 >
                   <Image src={nav.icon} alt="nav icon" width={16} height={16} />
+
                   <p
                     className={[
                       styles.navText,
@@ -88,6 +89,7 @@ export default function MainLayout({ children }: LayoutType) {
                   >
                     {nav.name}
                   </p>
+
                   <Image
                     src="/assets/arrow-right.svg"
                     alt="nav arrow"
