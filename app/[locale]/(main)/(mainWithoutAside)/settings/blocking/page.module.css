@@ -1,0 +1,75 @@
+.blockingText {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #959eae;
+}
+
+.userImageWeb {
+  display: none;
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.userMain {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  /* display: none; */
+}
+
+.userTexts {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.time {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #959eae;
+}
+
+.unblockButton {
+  background: #377dff;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #ffffff;
+}
+
+@media (min-width: 500px) {
+  .userImageWeb {
+    display: block;
+  }
+
+  .userImage {
+    display: none;
+  }
+}

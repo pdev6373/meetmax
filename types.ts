@@ -77,6 +77,7 @@ export type SearchType = {
   placeholder: string;
   value: string;
   onChange: any;
+  reverse?: boolean;
 };
 
 type ValuePiece = Date | null;
