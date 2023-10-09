@@ -77,10 +77,6 @@
     background: transparent;
   }
 
-  .body {
-    padding-right: 5px;
-  }
-
   .main {
     margin-left: 20px;
     margin-block: 10px 20px;
@@ -116,7 +112,6 @@
 @media (min-width: 700px) {
   .header {
     padding-block: 18px;
-    padding-right: 25px;
     z-index: 5;
     gap: 40px;
   }
@@ -136,11 +131,16 @@
 @media (min-width: 950px) {
   .header {
     padding-left: 0;
+    padding-right: 25px;
   }
 
   .main {
     margin-left: 0;
     margin-block: 0;
+  }
+
+  .body {
+    padding-right: 5px;
   }
 }
 

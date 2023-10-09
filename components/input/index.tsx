@@ -16,7 +16,11 @@ export default function Input({
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
-        <Image src={icon} alt="input icon" width={16} height={16} />
+        {icon.length ? (
+          <Image src={icon} alt="input icon" width={16} height={16} />
+        ) : (
+          <></>
+        )}
         <input
           type={type}
           placeholder={placeholder}

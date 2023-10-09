@@ -215,3 +215,8 @@ export type FriendsOptionsType = {
   text: string;
   state: "on" | "off";
 };
+
+export type LogoutType = {
+  onLogout: any;
+  onCancelLogout: any;
+};

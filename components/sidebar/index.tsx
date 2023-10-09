@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
 import { usePathname, useRouter } from "next/navigation";
-import { Logo } from "..";
+import { Logo, Logout } from "..";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -24,26 +24,7 @@ export default function Sidebar() {
   return (
     <>
       {showLogout && (
-        <div className={styles.overlay}>
-          <div className={styles.logoutWrapper}>
-            <h3 className={styles.logoutHeading}>Logout</h3>
-            <p className={styles.logoutText}>
-              Are you sure you want to logout?
-            </p>
-
-            <div className={styles.logoutActions}>
-              <button
-                className={styles.logoutCancel}
-                onClick={cancelLogoutHandler}
-              >
-                Cancel
-              </button>
-              <button className={styles.logoutProceed} onClick={logoutHandler}>
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
+        <Logout onLogout={logoutHandler} onCancelLogout={cancelLogoutHandler} />
       )}
       <div className={styles.wrapper}>
         <Link href="/" className={styles.logo}>

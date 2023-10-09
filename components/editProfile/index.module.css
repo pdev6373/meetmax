@@ -1,0 +1,317 @@
+.wrapper {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.route {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #edeff1;
+  display: flex;
+  align-items: center;
+}
+
+.routeDim {
+  color: #959eae;
+}
+
+.heading {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.imageWrapper {
+  position: relative;
+  width: max-content;
+}
+
+.userImageWeb,
+.uploadImageWeb {
+  display: none;
+}
+
+.uploadImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.inputHeader {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  margin-bottom: 4px;
+}
+
+.calendar {
+  position: absolute;
+  top: calc(100% + 8px);
+  width: 100%;
+  left: 0;
+  z-index: 3;
+  display: none;
+}
+
+.showCalendar {
+  display: block;
+}
+
+.calendarWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calendarError {
+  display: flex;
+}
+
+.calendarInput {
+  border: 1px solid #4e5d78;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 10px;
+  cursor: pointer;
+}
+
+.calendarBox {
+  flex: 1;
+  text-align: left;
+  padding-block: 9px;
+}
+
+.calendarBox,
+.noDate {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1; /** 10% **/
+}
+
+.noDate {
+  color: #959eae; /** 60% **/
+}
+
+.genderWrapper {
+  border: 1px solid #4e5d78;
+  border-radius: 6px;
+  border-image-source: linear-gradient(0deg, #4e5d78, #4e5d78),
+    linear-gradient(0deg, #ffffff, #ffffff);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 9px 10px;
+  flex-wrap: wrap;
+}
+
+.genders {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.gender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.genderLabel {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  cursor: pointer;
+}
+
+.genderLabelUnselected {
+  color: #959eae;
+}
+
+.socialHeading {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.generalInputs,
+.socialInputs {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.socialInputsWrapper {
+  display: flex;
+  gap: 14px;
+  flex-direction: column;
+}
+
+.generalInputs > *,
+.socialInputs > * {
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  align-self: flex-end;
+}
+
+.actions > * {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.cancel {
+  color: #959eae;
+}
+
+.save {
+  color: #ffffff;
+  padding: 8px 28px;
+  border-radius: 6px;
+  background: #377dff;
+}
+
+@media (min-width: 340px) {
+  .genderWrapper,
+  .genders {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 500px) {
+  .calendarInput {
+    border-radius: 10px;
+    padding-inline: 20px;
+    gap: 10px;
+  }
+
+  .calendarBox {
+    padding-block: 15px;
+  }
+
+  .genderWrapper {
+    border-radius: 10px;
+    padding: 15px 20px;
+    gap: 18px;
+  }
+
+  .gender {
+    gap: 14px;
+  }
+
+  .genderLabel {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /*  */
+
+  .wrapper {
+    padding: 30px;
+    gap: 18px;
+  }
+
+  .userImageWeb,
+  .uploadImageWeb {
+    display: block;
+  }
+
+  .uploadImageWeb {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  .imageWrapper {
+    margin-bottom: 12px;
+  }
+
+  .uploadImage,
+  .userImage {
+    display: none;
+  }
+
+  .route {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .heading {
+    font-weight: 700;
+  }
+
+  .inputHeader {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+
+  .socialHeading {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  .form {
+    gap: 30px;
+  }
+
+  .generalInputs,
+  .socialInputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+    row-gap: 18px;
+    column-gap: 30px;
+  }
+
+  .generalInputs > *,
+  .socialInputs > * {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .actions > * {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  .save {
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+}

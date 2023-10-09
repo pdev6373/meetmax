@@ -7,7 +7,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding-right: 15px;
+  padding-right: 25px;
 }
 
 .heading {
@@ -40,7 +40,7 @@
   top: 0;
   overflow-y: auto;
   height: calc(100vh - 310px);
-  padding-right: 15px;
+  padding-right: 25px;
   padding-bottom: 20px;
 }
 
