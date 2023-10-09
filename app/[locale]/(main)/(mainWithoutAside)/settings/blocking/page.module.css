@@ -95,4 +95,34 @@
   .userTexts {
     width: auto;
   }
+
+  .blockingText {
+    margin-top: -8px;
+  }
+
+  .users {
+    gap: 18px;
+  }
+
+  .name {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .time {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .unblockButton {
+    border-radius: 8px;
+    padding: 9px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+
+  .maxWidth {
+    max-width: 410px;
+  }
 }

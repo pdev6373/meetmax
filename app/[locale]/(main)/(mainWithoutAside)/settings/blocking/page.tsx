@@ -47,10 +47,17 @@ export default function Blocking() {
         conversation with you, or add you as a friend. Note: Does not include
         apps, games or groups you both participate in
       </p>
-      <Search placeholder="Type a name" onChange={() => {}} value="" reverse />
+      <div className={styles.maxWidth}>
+        <Search
+          placeholder="Type a name"
+          onChange={() => {}}
+          value=""
+          reverse
+        />
+      </div>
       <SettingsHeading>Block users list</SettingsHeading>
 
-      <div className={styles.users}>
+      <div className={[styles.users, styles.maxWidth].join(" ")}>
         {blockedUsers.map((user, index) => (
           <div key={index} className={styles.user}>
             <div className={styles.userMain}>
@@ -68,6 +75,7 @@ export default function Blocking() {
                 height={36}
                 className={styles.userImage}
               />
+
               <div className={styles.userTexts}>
                 <p
                   className={styles.name}
