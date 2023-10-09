@@ -1,0 +1,53 @@
+.options,
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.radios {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.optionText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+@media (min-width: 500px) {
+  .options,
+  .option {
+    gap: 18px;
+  }
+
+  .radios {
+    gap: 8px;
+  }
+
+  .title {
+    font-weight: 700;
+  }
+
+  .optionText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}

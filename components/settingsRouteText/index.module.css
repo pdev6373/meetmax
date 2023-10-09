@@ -4,6 +4,7 @@
   line-height: 22px;
   color: #edeff1;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
