@@ -1,0 +1,53 @@
+.languageHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.languages {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.actions {
+  display: flex;
+  gap: 17px;
+}
+
+.actions > * {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.cancel {
+  color: #959eae;
+}
+
+.save {
+  padding: 8px 26px;
+  border-radius: 6px;
+  background: #377dff;
+  color: #ffffff;
+}
+
+@media (min-width: 500px) {
+  .actions {
+    gap: 20px;
+  }
+
+  .actions > * {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  .save {
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+}

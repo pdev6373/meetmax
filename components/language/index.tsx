@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next-intl/link";
 import styles from "./index.module.css";
 
-export default function Language({ locale }: LocaleType) {
+export default function Language({ locale, short = false }: LocaleType) {
   const pathname = usePathname();
   const showLanguagesHandler = () => setShowLanguages((prev) => !prev);
   const languageChangeHandler = () =>
@@ -51,8 +51,17 @@ export default function Language({ locale }: LocaleType) {
       </div>
 
       {showLanguages && (
-        <div className={styles.languagesWrapper}>
-          <div className={styles.languages}>
+        <div
+          className={[
+            styles.languagesWrapper,
+            short && styles.languagesShortWrapper,
+          ].join(" ")}
+        >
+          <div
+            className={[styles.languages, short && styles.languagesShort].join(
+              " "
+            )}
+          >
             {LANGUAGES.map((avaliableLanguage) => (
               <Link
                 onClick={() => setShowLanguages(false)}

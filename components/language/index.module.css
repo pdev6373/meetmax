@@ -46,12 +46,22 @@
   overflow: hidden;
 }
 
+.languagesShortWrapper {
+  right: unset;
+  left: 0;
+  margin-top: 3px;
+}
+
 .languages {
   padding-block: 15px;
   min-width: 185px;
   overflow-y: auto;
   box-shadow: 0px 4px 10px 0px #00000005;
   height: min(70vh, 510px);
+}
+
+.languagesShort {
+  height: min(70vh, 300px);
 }
 
 .language {

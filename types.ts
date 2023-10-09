@@ -104,6 +104,11 @@ export type LoginFormType = {
 
 export type LocaleType = {
   locale: string;
+  short?: boolean;
+};
+
+export type SettingsLanguageType = {
+  params: LocaleType;
 };
 
 export type ForgotPasswordFormType = {
@@ -219,4 +224,8 @@ export type FriendsOptionsType = {
 export type LogoutType = {
   onLogout: any;
   onCancelLogout: any;
+};
+
+export type SettingsTextType = {
+  children: string;
 };

@@ -30,3 +30,5 @@ export { default as CreatePost } from "@/components/createPost";
 export { default as Switch } from "@/components/switch";
 export { default as EditProfile } from "@/components/editProfile";
 export { default as Logout } from "@/components/logout";
+export { default as SettingsRouteText } from "@/components/settingsRouteText";
+export { default as SettingsHeading } from "@/components/settingsHeading";

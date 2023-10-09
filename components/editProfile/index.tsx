@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
-import { Input, Calendar, Text } from "..";
+import { Input, Calendar, Text, SettingsRouteText, SettingsHeading } from "..";
 import { CalendarValueType, GenderType } from "@/types";
 import format from "date-fns/format";
 
@@ -38,13 +38,9 @@ export default function EditProfile() {
   ];
 
   return (
-    <div className={styles.wrapper}>
-      <p className={styles.route}>
-        <span className={styles.routeDim}>Settings</span>
-        /Edit Profile
-      </p>
-
-      <h2 className={styles.heading}>Edit Profile</h2>
+    <>
+      <SettingsRouteText>Edit Profile</SettingsRouteText>
+      <SettingsHeading>Edit Profile</SettingsHeading>
 
       <div className={styles.imageWrapper}>
         <Image
@@ -298,6 +294,6 @@ export default function EditProfile() {
           <button className={styles.save}>Save</button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
