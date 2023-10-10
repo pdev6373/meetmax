@@ -21,6 +21,7 @@
 
 .device {
   display: flex;
+  flex-direction: column;
   gap: 18px;
   flex-wrap: wrap;
   padding: 13px 14px;
@@ -98,6 +99,12 @@
   font-weight: 500;
   line-height: 22px;
   color: #ffffff;
+}
+
+@media (min-width: 358px) {
+  .device {
+    flex-direction: row;
+  }
 }
 
 @media (min-width: 500px) {
