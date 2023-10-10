@@ -44,7 +44,7 @@ export default function PasswordAndSecurity() {
   return (
     <>
       <SettingsRouteText>Password & Security</SettingsRouteText>
-      <SettingsHeading>Where You're Logged In</SettingsHeading>
+      <SettingsHeading>{`Where You're Logged In`}</SettingsHeading>
 
       <div className={styles.main}>
         <section className={styles.top}>
