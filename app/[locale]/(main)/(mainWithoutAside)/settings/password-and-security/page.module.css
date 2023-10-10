@@ -1,0 +1,179 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.top,
+.bottom,
+.formInputs,
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.devices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 14px;
+}
+
+.device {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 13px 14px;
+}
+
+.deviceIconWrapper {
+  width: 34px;
+  display: grid;
+  place-content: center;
+}
+
+.deviceIcon {
+  position: unset !important;
+  width: unset !important;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.textTop {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.textBottom {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.seeAll {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #377dff;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.forgotPassword {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #377dff;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  border-radius: 6px;
+  background: #377dff;
+  padding: 9px 25px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #ffffff;
+}
+
+@media (min-width: 500px) {
+  .main {
+    gap: 30px;
+  }
+
+  .top,
+  .bottom,
+  .formInputs,
+  .form {
+    gap: 18px;
+  }
+
+  .bottom {
+    max-width: 480px;
+  }
+
+  .forgotPassword {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #377dff;
+    margin-top: -8px;
+  }
+
+  .devices {
+    gap: 18px;
+  }
+
+  .device {
+    flex-direction: column;
+    gap: 20px;
+    padding: 18px;
+  }
+
+  .deviceIconWrapper {
+    width: 40px;
+  }
+
+  .textTop {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .textBottom {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  .seeAll {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .inputWrapper {
+    gap: 10px;
+  }
+
+  .inputHeading {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .button {
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .devices {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  }
+
+  .device {
+    flex-direction: row;
+  }
+}
