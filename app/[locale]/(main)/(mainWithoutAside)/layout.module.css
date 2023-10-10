@@ -17,6 +17,7 @@
 .mainInner {
   background: rgba(25, 28, 33, 1);
   height: 100%;
+  overflow: hidden;
 }
 
 @media (min-width: 500px) {
