@@ -71,8 +71,8 @@ export default function ActivityLog() {
       </div>
 
       <div className={styles.activities}>
-        {activities.map((activity) => (
-          <div className={styles.activity}>
+        {activities.map((activity, index) => (
+          <div className={styles.activity} key={index}>
             <Image
               src={activity.image}
               alt="activity image"
