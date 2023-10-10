@@ -49,8 +49,8 @@ export default function PasswordAndSecurity() {
       <div className={styles.main}>
         <section className={styles.top}>
           <div className={styles.devices}>
-            {devices.map((device) => (
-              <div className={styles.device}>
+            {devices.map((device, index) => (
+              <div className={styles.device} key={index}>
                 <div className={styles.deviceIconWrapper}>
                   <Image
                     src={device.icon}
