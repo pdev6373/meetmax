@@ -3,9 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import AvatarEditor from "react-avatar-editor";
 import Link from "next/link";
-import styles from "./page.module.css";
 import Avatar from "react-avatar-edit";
 import { MakePost, Post } from "@/components";
+import styles from "./page.module.css";
 
 const userDetails = [
   {
