@@ -128,7 +128,14 @@ export default function MainLayout({ children }: LayoutType) {
           </ul>
         </nav>
 
-        <div className={styles.main}>{children}</div>
+        <div
+          className={[
+            styles.main,
+            pathname === "/settings" && styles.mainNoDisplay,
+          ].join(" ")}
+        >
+          {children}
+        </div>
       </div>
     </>
   );

@@ -13,6 +13,7 @@
     "next": "^13.5.1",
     "next-intl": "^2.15.0-beta.3",
     "react": "latest",
+    "react-avatar-edit": "^1.2.0",
     "react-avatar-editor": "^13.0.0",
     "react-calendar": "^4.6.0",
     "react-contenteditable": "^3.3.7",

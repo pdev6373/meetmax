@@ -40,6 +40,10 @@
   gap: 14px;
 }
 
+.mainNoDisplay {
+  display: none;
+}
+
 .arrowHidden {
   opacity: 0;
   transition: opacity 0.1s ease-in;
@@ -62,6 +66,10 @@
 }
 
 @media (min-width: 700px) {
+  .mainNoDisplay {
+    display: flex;
+  }
+
   .navList {
     padding-block: 20px;
   }

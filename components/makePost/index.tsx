@@ -17,7 +17,7 @@ export default function MakePost() {
     // },
     {
       icon: "/assets/picture.svg",
-      text: "Photo",
+      text: "Add Photo",
       action: () => {},
     },
     // {

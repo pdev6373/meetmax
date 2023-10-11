@@ -230,3 +230,18 @@ export type LogoutType = {
 export type SettingsTextType = {
   children: string;
 };
+
+export type CommunityDataType = {
+  image: string;
+  firstname: string;
+  lastname: string;
+  job: string;
+  social: string[];
+  isFollowing: boolean;
+  id: number;
+};
+
+export type CommunityType = {
+  title: string;
+  data: CommunityDataType[];
+};

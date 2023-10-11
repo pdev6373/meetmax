@@ -1,0 +1,446 @@
+.coverPhotoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2.8 / 1;
+}
+
+.coverPhotoWrapper > img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.uploadButton,
+.uploadButtonMobile {
+  position: absolute;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.uploadButton {
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  align-items: center;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  background: #212833;
+  padding: 9px 15px 9px 10px;
+  gap: 14px;
+  border-radius: 10px;
+}
+
+.uploadButtonMobile {
+  bottom: 10px;
+  right: 20px;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  background: #57657f;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.uploadCoverPhotoText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.userImageWeb {
+  display: none;
+}
+
+.coverImageInput {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+.userInfo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-inline: 20px;
+  padding-bottom: 20px;
+  margin-top: -63px;
+}
+
+.editInfo {
+  background: #212833;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  text-align: center;
+}
+
+.userImageWrapper {
+  border: 3px solid #4e5d78;
+  width: 90px;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.userImageWrapper > img {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profileImageUploadIcon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  background: #57657f;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.userInfoMain {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.userInfoName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.userInfoJob {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.profileBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #212833;
+  padding-top: 8px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #191c21;
+  padding: 14px 20px;
+}
+
+.profilePost {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+.introHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.introMain {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.introItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.introText {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #edeff1;
+}
+
+/*  */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(33, 40, 51, 0.5);
+  z-index: 12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reset {
+  cursor: pointer;
+}
+
+.avatarEditor {
+  box-shadow: 0px 2.4814815521240234px 4.962963104248047px 0px #0000000a;
+  border-radius: 6px;
+  background: #191c21;
+  width: min(100%, 540px);
+}
+
+.editorHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid #212833;
+}
+
+.editorMain {
+  margin: 8px 14px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.editorStyle {
+  border: 10px solid #b8bec9;
+  outline: 2px solid #ffffff;
+  outline-offset: -12px;
+  border-radius: 6px;
+}
+
+.saveButton {
+  background: #377dff;
+  border-radius: 6px;
+  padding: 8px 20px;
+  margin-bottom: 8px;
+}
+
+.editorMainBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.close {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.rangeWrapper,
+.rangeInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.imageSize {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  border-radius: 2px;
+  height: 4px;
+  background: #959eae;
+}
+
+/* Thumb: webkit */
+.imageSize::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  width: 10px;
+  background: #edeff1;
+  border-radius: 50%;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+.imageSize::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  width: 10px;
+  background: #edeff1;
+  border-radius: 50%;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+.imageSize::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 5px rgba(237, 239, 241, 0.11);
+}
+.imageSize:active::-webkit-slider-thumb {
+  box-shadow: 0 0 0 6px rgba(237, 239, 241, 0.11);
+}
+.imageSize:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 6px rgba(237, 239, 241, 0.11);
+}
+
+/* Hover, active & focus Thumb: Firefox */
+.imageSize::-moz-range-thumb:hover {
+  box-shadow: 0 0 0 5px rgba(237, 239, 241, 0.11);
+}
+.imageSize:active::-moz-range-thumb {
+  box-shadow: 0 0 0 6px rgba(237, 239, 241, 0.11);
+}
+.imageSize:focus::-moz-range-thumb {
+  box-shadow: 0 0 0 6px rgba(237, 239, 241, 0.11);
+}
+
+@media (min-width: 330px) {
+  .coverPhotoWrapper {
+    aspect-ratio: 3.342857 / 1;
+  }
+}
+
+@media (min-width: 500px) {
+  .profileBody {
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 16px;
+    gap: 16px;
+  }
+
+  .intro {
+    border-radius: 16px;
+    padding: 18px;
+    gap: 18px;
+    min-width: 250px;
+  }
+
+  .profilePost {
+    gap: 16px;
+    padding-bottom: 0;
+  }
+
+  .userInfo {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .editInfo {
+    border-radius: 10px;
+    padding: 9px 20px;
+  }
+
+  .uploadButtonMobile {
+    padding: 7px;
+  }
+
+  .coverPhotoWrapper > img {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .introHeading {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .introMain {
+    gap: 10px;
+  }
+
+  .introItem {
+    gap: 20px;
+  }
+
+  .introText {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+@media (min-width: 900px) {
+  .userInfo {
+    padding-inline: 30px;
+    padding-bottom: 30px;
+    margin-top: -128px;
+  }
+
+  .uploadButton {
+    display: flex;
+  }
+
+  .uploadButtonMobile {
+    display: none;
+  }
+
+  .userImageWrapper {
+    border: 4px solid #4e5d78;
+    width: 158px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .userImageWeb {
+    display: block;
+  }
+
+  .userImageMobile {
+    display: none;
+  }
+
+  .profileImageUploadIcon {
+    padding: 7px;
+    transform: translateX(-50%);
+  }
+
+  .userInfoMain {
+    gap: 10px;
+  }
+
+  .userInfoName {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  .userInfoJob {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .profileBody {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 30px;
+    padding: 30px;
+    gap: 30px;
+  }
+
+  .profilePost {
+    gap: 30px;
+    flex: 1;
+  }
+}
+
+@media (min-width: 950px) {
+  .profileBody {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (min-width: 1150px) {
+  .profileBody {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

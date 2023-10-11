@@ -4,6 +4,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./index.module.css";
+import { CommunityDataType } from "@/types";
 
 export default function Community() {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ export default function Community() {
           (pathname === "/my-community" && community.title === "Followers") ||
           pathname.includes(community.title.split(" ").join("-").toLowerCase())
       )?.data?.map((user, index) => (
-        <div className={styles.user} key={index}>
+        <Link href={`profile/${user.id}`} className={styles.user} key={index}>
           <div className={styles.userDetails}>
             <Image
               src={user.image}
@@ -72,7 +73,7 @@ export default function Community() {
               {user.isFollowing ? "Unfollow" : "Follow"}
             </button>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

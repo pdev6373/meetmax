@@ -1,3 +1,5 @@
+import { CommunityType } from "@/types";
+
 export const SIDEBAR = [
   {
     name: "Feed",
@@ -206,7 +208,7 @@ export const COMMUNITY_CATEGORIES = [
   },
 ];
 
-export const COMMUNITIES = [
+export const COMMUNITIES: CommunityType[] = [
   {
     title: "Followers",
     data: [
@@ -217,6 +219,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -225,6 +228,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -233,6 +237,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -241,6 +246,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -249,6 +255,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -257,6 +264,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -265,6 +273,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -273,6 +282,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -281,6 +291,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -289,6 +300,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -297,6 +309,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -305,6 +318,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -313,6 +327,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -321,6 +336,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
     ],
   },
@@ -335,6 +351,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -343,6 +360,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -351,6 +369,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -359,6 +378,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -367,6 +387,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -375,6 +396,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -383,6 +405,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -391,6 +414,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -399,6 +423,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -407,6 +432,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -415,6 +441,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -423,6 +450,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -431,6 +459,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -439,6 +468,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
     ],
   },
@@ -453,6 +483,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -461,6 +492,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -469,6 +501,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -477,6 +510,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -485,6 +519,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -493,6 +528,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -501,6 +537,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -509,6 +546,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -517,6 +555,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: true,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -525,6 +564,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -533,6 +573,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -541,6 +582,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -549,6 +591,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
       {
         image: "/assets/user.png",
@@ -557,6 +600,7 @@ export const COMMUNITIES = [
         job: "Founder & CEO at Trophy",
         social: ["facebook", "twitter", "instagram"],
         isFollowing: false,
+        id: 123532,
       },
     ],
   },
