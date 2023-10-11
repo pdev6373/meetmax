@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { MakePost, Post } from "@/components";
 import Image from "next/image";
 import AvatarEditor from "react-avatar-editor";
 import Link from "next/link";
 import Avatar from "react-avatar-edit";
-import { MakePost, Post } from "@/components";
 import styles from "./page.module.css";
 
 const userDetails = [
