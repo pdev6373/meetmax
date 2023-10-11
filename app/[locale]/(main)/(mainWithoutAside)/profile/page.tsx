@@ -47,6 +47,7 @@ const userDetails = [
 ];
 
 export default function Profile() {
+  const [croppedProfileImage, setCroppedProfileImage] = useState("");
   const [profileImage, setProfileImage] = useState("/assets/user.png");
   const [newProfileImage, setNewProfileImage] = useState(undefined);
   const [coverImage, setCoverImage] = useState("/assets/cover-photo.png");
@@ -87,9 +88,14 @@ export default function Profile() {
   };
 
   const showProfileImageEditorHandler = () => setShowProfileImageEditor(true);
+  const cropProfileImageHandler = (preview: any) => {
+    setCroppedProfileImage(preview);
+    console.log("Hello");
+  };
 
-  const saveProfileImageHandler = (preview: any) => {
-    setProfileImage(preview);
+  const saveProfileImageHandler = () => {
+    setProfileImage(croppedProfileImage);
+    setCroppedProfileImage("");
     setNewProfileImage(undefined);
     closeImageEditor("profile-image");
   };
@@ -142,7 +148,7 @@ export default function Profile() {
                     display: "block",
                   }}
                   closeIconColor="transparent"
-                  // onCrop={onCropProfileImageEditor}
+                  onCrop={cropProfileImageHandler}
                   src={newProfileImage}
                 />
               ) : (
