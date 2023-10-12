@@ -1,0 +1,136 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #212833;
+  padding-bottom: 8px;
+}
+
+.messages,
+.message {
+  overflow-y: auto;
+  background: #191c21;
+}
+
+.message {
+  display: none;
+}
+
+.onlineFriends {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  width: 100vw;
+  box-shadow: 0px 2.5546875px 6.38671875px 0px rgba(0, 0, 0, 0.02);
+  background: rgba(25, 28, 33, 1);
+  padding: 14px 20px;
+}
+
+.onlineFriend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.friendName {
+  max-width: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #edeff1;
+}
+
+.friendImageWrapper {
+  position: relative;
+}
+
+.friendImage {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.friendImageWrapper::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38cb89;
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    padding-bottom: 0;
+  }
+
+  .onlineFriends {
+    display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .messages::-webkit-scrollbar,
+  .message::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .messages::-webkit-scrollbar-thumb,
+  .message::-webkit-scrollbar-thumb {
+    background: #212833;
+    border-radius: 20px;
+    border: 1px solid #4e5d78;
+    box-shadow: 0px 4px 10px 0px #00000005;
+  }
+
+  .messages::-webkit-scrollbar-track,
+  .message::-webkit-scrollbar-track {
+    margin-block: 5px;
+  }
+
+  .message,
+  .messages {
+    flex-basis: 0;
+    border-radius: 16px;
+    height: calc(100vh - 80px - 40px - 20px - 10px - 56px);
+  }
+
+  .messages {
+    flex-grow: 33.7;
+    min-width: 325px;
+  }
+
+  .message {
+    display: block;
+    flex-grow: 66.3;
+  }
+}
+
+@media (min-width: 950px) {
+  .message,
+  .messages {
+    height: calc(100vh - 80px - 40px - 20px);
+  }
+}
+
+@media (min-width: 1100px) {
+  .wrapper {
+    gap: 30px;
+  }
+
+  .message,
+  .messages {
+    height: calc(100vh - 80px - 60px - 20px);
+  }
+}

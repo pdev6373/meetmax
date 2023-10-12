@@ -20,23 +20,39 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-align: center;
   flex-shrink: 0;
 }
 
 .friendName {
   max-width: 50px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  line-height: 22px;
+  line-height: 18px;
   color: #edeff1;
 }
 
+.friendImageWrapper {
+  position: relative;
+}
+
 .friendImage {
-  border: 2px solid #38cb89;
+  /* border: 2px solid #38cb89; */
   border-radius: 50%;
   overflow: hidden;
+}
+
+.friendImageWrapper::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38cb89;
+  transform: translate(-50%, -50%);
 }
 
 @media (min-width: 500px) {

@@ -41,13 +41,21 @@
 }
 
 .profile,
-.profileDesktop,
 .messageDesktop {
   display: none;
 }
 
 .profileName {
   display: none;
+}
+
+.messageIconWrapper {
+  align-self: stretch;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 @media (min-width: 300px) {
@@ -91,9 +99,8 @@
     display: block;
   }
 
-  .messageDesktop,
-  .profileDesktop {
-    display: none;
+  .messageIconWrapper {
+    margin-left: auto;
   }
 
   .profile {
@@ -106,6 +113,10 @@
 
   .header {
     height: unset;
+  }
+
+  .search {
+    margin-right: 20px;
   }
 }
 
@@ -141,6 +152,14 @@
 
   .body {
     padding-right: 5px;
+  }
+
+  .messageIconWrapper {
+    display: none;
+  }
+
+  .search {
+    margin-right: 0;
   }
 }
 

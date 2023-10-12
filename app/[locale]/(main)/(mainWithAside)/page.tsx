@@ -11,13 +11,15 @@ export default function Home() {
       <div className={styles.onlineFriends}>
         {ONLINE_FRIENDS.map((friend, index) => (
           <Link href="" className={styles.onlineFriend} key={index}>
-            <Image
-              src={friend.image}
-              alt="user image"
-              className={styles.friendImage}
-              width={50}
-              height={50}
-            />
+            <div className={styles.friendImageWrapper}>
+              <Image
+                src={friend.image}
+                alt="user image"
+                className={styles.friendImage}
+                width={50}
+                height={50}
+              />
+            </div>
 
             <p className={styles.friendName}>
               {friend.firstname.split(" ")[0].length > 7

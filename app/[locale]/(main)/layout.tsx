@@ -4,6 +4,7 @@ import { LayoutType } from "@/types";
 import { Search, Sidebar } from "@/components";
 import Image from "next/image";
 import styles from "./layout.module.css";
+import Link from "next/link";
 
 export default function MainLayout({ children }: LayoutType) {
   const [search, setSearch] = useState("");
@@ -21,14 +22,6 @@ export default function MainLayout({ children }: LayoutType) {
             className={styles.profileMobile}
           />
 
-          <Image
-            src="/assets/profile-photo.png"
-            alt="profile picture"
-            width={42}
-            height={42}
-            className={styles.profileDesktop}
-          />
-
           <div className={styles.search}>
             <Search
               onChange={setSearch}
@@ -44,21 +37,23 @@ export default function MainLayout({ children }: LayoutType) {
             />
           </div>
 
-          <Image
-            src="/assets/message.svg"
-            alt="profile picture"
-            width={16}
-            height={16}
-            className={styles.message}
-          />
+          <Link href="/messages" className={styles.messageIconWrapper}>
+            <Image
+              src="/assets/message.svg"
+              alt="profile picture"
+              width={18}
+              height={18}
+              className={styles.message}
+            />
 
-          <Image
-            src="/assets/message.svg"
-            alt="messsage"
-            width={24}
-            height={24}
-            className={styles.messageDesktop}
-          />
+            <Image
+              src="/assets/message.svg"
+              alt="messsage"
+              width={24}
+              height={24}
+              className={styles.messageDesktop}
+            />
+          </Link>
 
           <div className={styles.profile}>
             <p className={styles.profileName}>Saleh Ahmed</p>

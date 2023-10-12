@@ -33,3 +33,5 @@ export { default as Logout } from "@/components/logout";
 export { default as SettingsRouteText } from "@/components/settingsRouteText";
 export { default as SettingsHeading } from "@/components/settingsHeading";
 export { default as Profile } from "@/components/profile";
+export { default as Messages } from "@/components/messages";
+export { default as Message } from "@/components/message";
