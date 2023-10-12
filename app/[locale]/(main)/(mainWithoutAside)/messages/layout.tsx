@@ -33,6 +33,7 @@ export default function MessagesLayout({ children }: LayoutType) {
       <div className={styles.messages}>
         <Messages />
       </div>
+
       <div className={styles.message}>{children}</div>
     </div>
   );
