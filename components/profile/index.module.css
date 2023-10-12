@@ -47,6 +47,11 @@
   color: #edeff1;
 }
 
+.userImage,
+.userImageWeb {
+  cursor: pointer;
+}
+
 .userImageWeb {
   display: none;
 }
@@ -77,6 +82,34 @@
   line-height: 22px;
   color: #edeff1;
   text-align: center;
+  min-width: 100px;
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.buttonWrapper > * {
+  flex: 1;
+}
+
+.messageButton {
+  background: rgba(56, 203, 137, 1);
+  color: #ffffff;
+}
+
+.followButton {
+  background: rgba(55, 125, 255, 1);
+  color: #ffffff;
+}
+
+.unfollowButton {
+  outline: 1px solid #dcdfe4;
+  background: transparent;
+  color: #959eae;
 }
 
 .userImageWrapper {
@@ -176,8 +209,6 @@
   color: #edeff1;
 }
 
-/*  */
-
 .overlay {
   position: fixed;
   inset: 0;
@@ -188,15 +219,26 @@
   align-items: center;
 }
 
-.reset {
-  cursor: pointer;
-}
-
 .avatarEditor {
   box-shadow: 0px 2.4814815521240234px 4.962963104248047px 0px #0000000a;
   border-radius: 6px;
+  overflow: hidden;
   background: #191c21;
   width: min(100%, 540px);
+  align-self: start;
+  margin-top: min(110px, 10vh);
+  margin-inline: 20px;
+}
+
+.coverEditor {
+  width: min(100%, 700px);
+}
+
+.avatarHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
 }
 
 .editorHeader {
@@ -206,11 +248,35 @@
   border-bottom: 1px solid #212833;
 }
 
+.profileImageDisplay {
+  display: grid;
+  place-content: center;
+  padding-block: 16px;
+  background: #212833;
+}
+
+.close {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.profileDisplayWeb {
+  display: none;
+}
+
 .editorMain {
-  margin: 8px 14px 6px;
+  margin: 8px 14px 14px;
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.rangePercentage {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #edeff1;
 }
 
 .editorStyle {
@@ -224,23 +290,20 @@
   background: #377dff;
   border-radius: 6px;
   padding: 8px 20px;
-  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #ffffff;
 }
 
 .editorMainBottom {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  gap: 20px;
 }
 
-.close {
-  display: grid;
-  place-content: center;
-  cursor: pointer;
-}
-
-.rangeWrapper,
-.rangeInputWrapper {
+.rangeWrapper {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -365,6 +428,22 @@
     font-size: 14px;
     line-height: 22px;
   }
+
+  .profileDisplayMobile {
+    display: none;
+  }
+
+  .profileDisplayWeb {
+    display: block;
+  }
+
+  .profileImageDisplay {
+    padding-block: 20px;
+  }
+
+  .avatarEditor {
+    border-radius: 10px;
+  }
 }
 
 @media (min-width: 900px) {
@@ -428,6 +507,50 @@
   .profilePost {
     gap: 30px;
     flex: 1;
+  }
+
+  .avatarEditor {
+    border-radius: 16px;
+  }
+
+  .coverEditor {
+    width: min(72.778%, 1048px);
+  }
+
+  .editorMain {
+    margin: 20px;
+    gap: 20px;
+  }
+
+  .editorStyle {
+    border: 30px solid #b8bec9;
+    outline: 4px solid #ffffff;
+    outline-offset: -34px;
+    border-radius: 16px;
+  }
+
+  .avatarHeading {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .editorHeader {
+    padding: 18px 20px;
+  }
+
+  .rangePercentage {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .saveButton {
+    border-radius: 8px;
+    padding: 9px 34px;
+  }
+
+  .rangeWrapper {
+    gap: 10px;
   }
 }
 

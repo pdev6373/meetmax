@@ -15,7 +15,6 @@
 
 .mainHeader {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
@@ -190,6 +189,12 @@
 .moreWrapper {
   cursor: pointer;
   position: relative;
+}
+
+.moreOptionsIcon {
+  height: 100%;
+  display: grid;
+  place-content: center;
 }
 
 .moreOptionsWrapper {
@@ -425,11 +430,6 @@
 
   .postImageWrapper > img {
     border-radius: 16px;
-  }
-
-  .moreWrapper {
-    cursor: pointer;
-    position: relative;
   }
 
   .moreOptionsWrapper {

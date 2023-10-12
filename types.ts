@@ -203,6 +203,7 @@ export type PostType = {
   postText?: string;
   isFollowing: boolean;
   likes: PostLikesType[];
+  isMine?: boolean;
 };
 
 export type CreatePostType = {
@@ -244,4 +245,8 @@ export type CommunityDataType = {
 export type CommunityType = {
   title: string;
   data: CommunityDataType[];
+};
+
+export type ProfileType = {
+  isMine?: boolean;
 };

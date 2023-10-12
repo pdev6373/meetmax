@@ -17,6 +17,7 @@ export default function Post({
   postText,
   likes,
   isFollowing,
+  isMine = false,
 }: PostType) {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
   const [isPostHidden, setIsPostHidden] = useState(false);
@@ -50,7 +51,7 @@ export default function Post({
 
   const moreOptions = [
     {
-      icon: "assets/eyeoff.svg",
+      icon: "/assets/eyeoff.svg",
       text: "Hide Post",
       action: () => {
         setShowMoreOptions(false);
@@ -58,7 +59,7 @@ export default function Post({
       },
     },
     {
-      icon: "assets/unfollow.svg",
+      icon: "/assets/unfollow.svg",
       text: "Unfollow",
       action: () => {
         setShowMoreOptions(false);
@@ -66,6 +67,35 @@ export default function Post({
       },
     },
   ];
+
+  const moreOptionsMe = [
+    {
+      icon: "assets/delete.svg",
+      text: "Delete post",
+      action: () => {
+        // setShowMoreOptions(false);
+        handleHidePost();
+      },
+    },
+    {
+      icon: "assets/edit.svg",
+      text: "Edit post",
+      action: () => {
+        // setShowMoreOptions(false);
+        setShowUnfolowPopup(true);
+      },
+    },
+    {
+      icon: "assets/copy.svg",
+      text: "Copy link",
+      action: () => {
+        // setShowMoreOptions(false);
+        setShowUnfolowPopup(true);
+      },
+    },
+  ];
+
+  const toBeMapped = isMine ? moreOptionsMe : moreOptions;
 
   if (isPostRemoved) return <></>;
 
@@ -142,17 +172,21 @@ export default function Post({
             </div>
 
             <div className={styles.moreWrapper}>
-              <Image
-                src="/assets/more.svg"
-                alt="more"
-                width={16}
-                height={16}
+              <div
+                className={styles.moreOptionsIcon}
                 onClick={toggleShowMoreOptions}
-              />
+              >
+                <Image
+                  src="/assets/more.svg"
+                  alt="more"
+                  width={16}
+                  height={16}
+                />
+              </div>
 
               {showMoreOptions ? (
                 <div className={styles.moreOptionsWrapper}>
-                  {moreOptions.map((option, index) => (
+                  {toBeMapped.map((option, index) => (
                     <div
                       className={styles.moreOption}
                       onClick={option.action}

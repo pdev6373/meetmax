@@ -32,3 +32,4 @@ export { default as EditProfile } from "@/components/editProfile";
 export { default as Logout } from "@/components/logout";
 export { default as SettingsRouteText } from "@/components/settingsRouteText";
 export { default as SettingsHeading } from "@/components/settingsHeading";
+export { default as Profile } from "@/components/profile";

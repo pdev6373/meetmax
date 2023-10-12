@@ -57,20 +57,9 @@ export default function EditProfile() {
           height={104}
           className={styles.userImageWeb}
         />
-        <Image
-          src="/assets/upload.svg"
-          alt="user"
-          width={26}
-          height={26}
-          className={styles.uploadImage}
-        />
-        <Image
-          src="/assets/upload.svg"
-          alt="user"
-          width={30}
-          height={30}
-          className={styles.uploadImageWeb}
-        />
+        <div className={styles.uploadImage}>
+          <Image src="/assets/upload.svg" alt="user" width={16} height={16} />
+        </div>
       </div>
 
       <form className={styles.form}>

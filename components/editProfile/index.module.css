@@ -3,8 +3,7 @@
   width: max-content;
 }
 
-.userImageWeb,
-.uploadImageWeb {
+.userImageWeb {
   display: none;
 }
 
@@ -12,6 +11,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
+  background: #4e5d78;
+  padding: 5px;
+  border-radius: 50%;
 }
 
 .inputHeader {
@@ -209,22 +211,14 @@
     line-height: 24px;
   }
 
-  .userImageWeb,
-  .uploadImageWeb {
+  .userImageWeb {
     display: block;
-  }
-
-  .uploadImageWeb {
-    position: absolute;
-    bottom: 0;
-    right: 0;
   }
 
   .imageWrapper {
     margin-bottom: 12px;
   }
 
-  .uploadImage,
   .userImage {
     display: none;
   }
@@ -270,5 +264,10 @@
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
+  }
+
+  .uploadImage {
+    padding: 7px;
+    transform: translate(-2px, -2px);
   }
 }

@@ -12,7 +12,7 @@ export default function MainLayout({ children }: LayoutType) {
         <div
           className={[
             styles.main,
-            pathname === "/profile" && styles.mainNoPadding,
+            pathname.startsWith("/profile") && styles.mainNoPadding,
           ].join(" ")}
         >
           <div className={styles.mainInner}>{children}</div>

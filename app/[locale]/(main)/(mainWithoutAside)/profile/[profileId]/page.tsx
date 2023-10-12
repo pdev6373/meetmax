@@ -1,3 +1,4 @@
-export default function page() {
-  return <div>page</div>;
+import { Profile as ProfileComponent } from "@/components";
+export default function Profile() {
+  return <ProfileComponent />;
 }
