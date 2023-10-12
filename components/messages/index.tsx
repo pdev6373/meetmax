@@ -13,8 +13,8 @@ export default function Messages() {
       </div>
 
       <div>
-        {MESSAGES.map((message) => (
-          <Link href="/messages/id" className={styles.message}>
+        {MESSAGES.map((message, index) => (
+          <Link href="/messages/id" className={styles.message} key={index}>
             <div className={styles.messageMain}>
               <Image src={message.image} alt="friend" width={40} height={40} />
               <div>
