@@ -1,9 +1,9 @@
 "use client";
 import { useState, useRef } from "react";
 import { ONLINE_FRIENDS } from "@/constants";
-import styles from "./index.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import styles from "./index.module.css";
 
 export default function OnlineFriends() {
   const friendsRef = useRef<any>(null);
