@@ -28,12 +28,12 @@ export default function EditProfile() {
     {
       id: "male",
       //  label: male as "Male",
-      label: "male" as "Male", // intl, remove this
+      label: "Male" as "Male", // intl, remove this
     },
     {
       id: "female",
       //  label: female as "Female",
-      label: "female" as "Female", // same
+      label: "Female" as "Female", // same
     },
   ];
 

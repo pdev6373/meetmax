@@ -1,0 +1,409 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 14px 20px;
+}
+
+.backArrow,
+.headerAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerMain {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-grow: 9999;
+}
+
+.headerActions {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+  justify-content: space-evenly;
+}
+
+.headerName {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.headerStatusWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerStatus {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.statusIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #38cb89;
+  border: 1px solid #edeff1;
+}
+
+.main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: #212833;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: 1px solid #4e5d78;
+  box-shadow: 0px 4px 10px 0px #00000005;
+}
+
+.main::-webkit-scrollbar-track {
+  margin-block: 2px;
+}
+
+.main {
+  border-block: 1px solid #4e5d78;
+  padding: 14px 20px 10px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messageDayWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.messageDayWrapperDate {
+  align-self: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #edeff1;
+  text-transform: capitalize;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.messageMain {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.messageMainReverse {
+  flex-direction: row-reverse;
+}
+
+.messager {
+  align-self: flex-end;
+  display: none;
+}
+
+.messager,
+.moreOptions {
+  flex-shrink: 0;
+}
+
+.messageText {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #edeff1;
+  background: #212833;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border-bottom-right-radius: 0;
+}
+
+.messageTextFriend {
+  color: #ffffff;
+  background: #377dff;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 0;
+}
+
+.messageTime {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.messageTimeMe {
+  margin-left: auto;
+}
+
+.inputWrapper {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inputWrapperMain {
+  flex-grow: 1;
+  width: 100%;
+  background: #212833;
+  border-radius: 6px;
+  outline: 1px solid #4e5d78;
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  padding-right: 14px;
+}
+
+.input::-webkit-scrollbar {
+  width: 6px;
+}
+
+.input::-webkit-scrollbar-thumb {
+  background: #212833;
+  border-radius: 6px;
+  border: 1px solid #4e5d78;
+  box-shadow: 0px 4px 10px 0px #00000005;
+}
+
+.input:focus,
+.input:active {
+  border: none;
+  outline: none;
+}
+
+.input {
+  background: #212833;
+  width: 100%;
+  padding: 9px 9px 9px 14px;
+  max-height: 90px;
+  overflow-y: auto;
+  box-sizing: content-box;
+  text-overflow: clip;
+  word-break: break-all;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.input[contenteditable="true"]:empty:before {
+  content: "Message...";
+  pointer-events: none;
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #959eae;
+}
+
+.inputLinksWrapper {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.inputLinkWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 5px;
+}
+
+.sendButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #212833;
+  border-radius: 6px;
+  padding: 12px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.messengerWeb {
+  display: none;
+}
+
+.sendButtonIconWeb {
+  display: none;
+}
+
+.noChat {
+  margin-top: auto;
+  margin-inline: auto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1b3;
+  text-align: center;
+}
+
+@media (min-width: 275px) {
+  .inputWrapper {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 330px) {
+  .messager {
+    display: block;
+  }
+
+  .messageTime {
+    margin-left: 54px;
+  }
+
+  .messageTimeMe {
+    margin-left: auto;
+    margin-right: 54px;
+  }
+}
+
+@media (min-width: 350px) {
+  .input[contenteditable="true"]:empty:before {
+    content: "Type something here...";
+  }
+}
+
+@media (min-width: 500px) {
+  .noChat {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .header {
+    padding: 18px;
+  }
+
+  .backArrow {
+    display: none;
+  }
+
+  .messengerMobile {
+    display: none;
+  }
+
+  .messengerWeb {
+    display: block;
+  }
+
+  .headerContent {
+    gap: 18px;
+  }
+
+  .headerName {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .headerTexts {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .headerStatusWrapper {
+    gap: 12px;
+  }
+
+  .headerStatus {
+    font-weight: 500;
+  }
+
+  .main {
+    padding: 20px 18px 24px;
+    gap: 14px;
+  }
+
+  .messageDayWrapper {
+    gap: 20px;
+  }
+
+  .messages {
+    gap: 20px;
+  }
+
+  .message {
+    gap: 10px;
+  }
+
+  .messageText {
+    padding: 10px 18px;
+  }
+
+  .inputWrapper {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .inputWrapperMain {
+    border-radius: 10px;
+    gap: 10px;
+    padding-right: 18px;
+  }
+
+  .input {
+    padding: 17px 17px 17px 20px;
+  }
+
+  .inputLinksWrapper {
+    gap: 6px;
+  }
+
+  .inputLinkWrapper {
+    align-items: center;
+    padding: 20px 4px;
+  }
+
+  .sendButton {
+    padding: 15px;
+  }
+
+  .sendButtonIconWeb {
+    display: block;
+  }
+
+  .sendButtonIconMobile {
+    display: none;
+  }
+}

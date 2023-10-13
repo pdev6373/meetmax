@@ -4,16 +4,40 @@
   gap: 8px;
   background: #212833;
   padding-bottom: 8px;
+  height: 100%;
+}
+
+.messages::-webkit-scrollbar {
+  width: 7px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: #212833;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 1px solid #4e5d78;
+  box-shadow: 0px 4px 10px 0px #00000005;
+}
+
+.messages::-webkit-scrollbar-track {
+  margin-block: 4px;
 }
 
 .messages,
 .message {
-  overflow-y: auto;
   background: #191c21;
+  flex-basis: 0;
+  height: calc(100vh - 80px - 40px - 20px - 10px - 56px - 104px);
+}
+
+.messages {
+  flex-grow: 33.7;
+  min-width: 325px;
+  overflow-y: auto;
 }
 
 .message {
-  display: none;
+  flex-grow: 66.3;
 }
 
 .onlineFriends {
@@ -64,56 +88,47 @@
   transform: translate(-50%, -50%);
 }
 
+.messageNoDisplay,
+.messagesHidden {
+  display: none;
+}
+
 @media (min-width: 500px) {
   .wrapper {
     padding-bottom: 0;
   }
 
+  .message,
+  .messages {
+    border-radius: 16px;
+  }
+
   .onlineFriends {
     display: none;
+  }
+
+  .messages,
+  .message {
+    height: calc(100vh - 80px - 40px - 20px - 56px);
+  }
+}
+
+@media (min-width: 850px) {
+  .wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .messageNoDisplay,
+  .messagesHidden {
+    display: block;
   }
 }
 
 @media (min-width: 900px) {
   .wrapper {
-    flex-direction: row;
-    align-items: flex-start;
     gap: 20px;
-  }
-
-  .messages::-webkit-scrollbar,
-  .message::-webkit-scrollbar {
-    width: 7px;
-  }
-
-  .messages::-webkit-scrollbar-thumb,
-  .message::-webkit-scrollbar-thumb {
-    background: #212833;
-    border-radius: 20px;
-    border: 1px solid #4e5d78;
-    box-shadow: 0px 4px 10px 0px #00000005;
-  }
-
-  .messages::-webkit-scrollbar-track,
-  .message::-webkit-scrollbar-track {
-    margin-block: 5px;
-  }
-
-  .message,
-  .messages {
-    flex-basis: 0;
-    border-radius: 16px;
-    height: calc(100vh - 80px - 40px - 20px - 10px - 56px);
-  }
-
-  .messages {
-    flex-grow: 33.7;
-    min-width: 325px;
-  }
-
-  .message {
-    display: block;
-    flex-grow: 66.3;
   }
 }
 
@@ -126,7 +141,14 @@
 
 @media (min-width: 1100px) {
   .wrapper {
+    flex-direction: row;
+    align-items: flex-start;
     gap: 30px;
+  }
+
+  .messageNoDisplay,
+  .messagesHidden {
+    display: block;
   }
 
   .message,
