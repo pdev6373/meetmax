@@ -6,10 +6,9 @@ export default function Message() {
     <div className={styles.wrapper}>
       <Image
         src="/assets/start-chat.svg"
-        // src="/assets/ssss.png"
         alt="start chat"
         width={300}
-        height={300}
+        height={339}
       />
     </div>
   );

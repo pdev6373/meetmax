@@ -178,8 +178,12 @@ export default function Message() {
           </div>
 
           <div className={styles.headerActions}>
-            {headerActions.map((action) => (
-              <div onClick={action.action} className={styles.headerAction}>
+            {headerActions.map((action, index) => (
+              <div
+                onClick={action.action}
+                className={styles.headerAction}
+                key={index}
+              >
                 <Image src={action.icon} alt="actions" width={16} height={16} />
               </div>
             ))}
