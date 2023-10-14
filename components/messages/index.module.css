@@ -42,7 +42,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 120px;
+  width: 115px;
 }
 
 .lastMessage {
@@ -53,7 +53,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 120px;
+  width: 115px;
 }
 
 .time {
@@ -85,7 +85,7 @@
 @media (min-width: 320px) {
   .lastMessage,
   .name {
-    width: 145px;
+    width: 125px;
   }
 
   .message {
@@ -121,13 +121,36 @@
     gap: 1px;
   }
 
-  .name,
-  .lastMessage {
-    width: 160px;
-  }
-
   .searchWrapper {
     padding-top: 20px;
     padding-bottom: 10px;
+  }
+}
+
+@media (min-width: 850px) {
+  .name,
+  .lastMessage {
+    width: 110px;
+  }
+}
+
+@media (min-width: 950px) {
+  .lastMessage,
+  .name {
+    width: 125px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .name,
+  .lastMessage {
+    width: 110px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .name,
+  .lastMessage {
+    width: 125px;
   }
 }

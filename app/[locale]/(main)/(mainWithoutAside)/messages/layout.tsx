@@ -1,11 +1,8 @@
 "use client";
 import { LayoutType } from "@/types";
-import styles from "./layout.module.css";
 import { Messages } from "@/components";
-import { ONLINE_FRIENDS } from "@/constants";
-import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import styles from "./layout.module.css";
 
 export default function MessagesLayout({ children }: LayoutType) {
   const pathname = usePathname();
