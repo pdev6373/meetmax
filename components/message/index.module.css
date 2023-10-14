@@ -17,6 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .headerMain {
@@ -260,6 +261,11 @@
   margin-left: auto;
 }
 
+.messengerMobile,
+.messengerWeb {
+  cursor: pointer;
+}
+
 .messengerWeb {
   display: none;
 }
@@ -276,6 +282,187 @@
   line-height: 22px;
   color: #edeff1b3;
   text-align: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  top: 74px;
+  bottom: 64px;
+  background: #212833;
+  z-index: 12;
+  cursor: pointer;
+  display: none;
+}
+
+.overlayVisible {
+  display: block;
+}
+
+.followerDetails {
+  position: fixed;
+  top: 74px;
+  bottom: 72px;
+  left: 100%;
+  overflow-y: auto;
+  z-index: 15;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #191c21;
+  transition: transform 0.28s ease-in;
+  width: 100%;
+}
+
+.followerDetailsShow {
+  transform: translateX(-100%);
+}
+
+.followerDetails > * {
+  background: #212833;
+  border-radius: 6px;
+}
+
+.followerWrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.followerBackArrow {
+  cursor: pointer;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.followerDetailsInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.followerDetailsInfoMain,
+.followerDetailsAbout {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.followerDetailsName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #edeff1;
+}
+
+.followerDetailsProfession {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #edeff1;
+}
+
+.followersStatus {
+  justify-content: center;
+}
+
+.followerHeader {
+  padding: 14px;
+  border-bottom: 1px solid #191c21;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.followeBody {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.followerAction {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.followerActionText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.followerFile {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+  flex-wrap: wrap;
+}
+
+.followerFileMain {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.followerFileIcon {
+  display: grid;
+  place-content: center;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px 0px #00000005;
+  background: #191c21;
+}
+
+.followerFileTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.followerFileNumber {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #edeff1;
+}
+
+.followerFileName {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.followerFilesOpen {
+  display: none;
+}
+
+.followerImage {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #191c21;
+}
+
+.followerImageWeb {
+  display: none;
+}
+
+@media (min-width: 255px) {
+  .followerFilesOpen {
+    display: grid;
+    place-content: center;
+  }
 }
 
 @media (min-width: 275px) {
@@ -405,5 +592,114 @@
 
   .sendButtonIconMobile {
     display: none;
+  }
+
+  .overlay,
+  .followerDetails {
+    top: 0;
+    bottom: 0;
+  }
+
+  .overlay {
+    background: rgba(33, 40, 51, 0.5);
+  }
+
+  .followerDetails {
+    gap: 20px;
+    width: min(100%, 360px);
+  }
+
+  .followerDetails > * {
+    border-radius: 16px;
+  }
+
+  .followerBackArrow {
+    display: none;
+  }
+
+  .followerDetailsInfo {
+    gap: 20px;
+  }
+
+  .followerDetailsInfoMain {
+    gap: 10px;
+  }
+
+  .followerDetailsAbout {
+    gap: 0;
+  }
+
+  .followerDetailsName {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  .followerDetailsProfession {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .followerHeader {
+    padding: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .followeBody {
+    padding: 18px;
+    gap: 10px;
+  }
+
+  .followerAction {
+    gap: 18px;
+  }
+
+  .followerActionText {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .followerFileMain {
+    gap: 18px;
+  }
+
+  .followerFileTexts {
+    gap: 0;
+  }
+
+  .followerFileNumber {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .followerFileName {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 900px) {
+  .followerDetails {
+    padding: 30px;
+    gap: 30px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+
+  .followerImage {
+    display: none;
+  }
+
+  .followerImageWeb {
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #191c21;
+  }
+
+  .followerWrapper {
+    padding: 30px;
   }
 }
