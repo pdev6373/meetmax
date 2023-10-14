@@ -1,10 +1,11 @@
 .wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
   background: #212833;
   padding-bottom: 8px;
-  height: 100%;
+  height: calc(100vh - 66px - 8px - 8px - 56px);
 }
 
 .messages::-webkit-scrollbar {
@@ -27,7 +28,7 @@
 .message {
   background: #191c21;
   flex-basis: 0;
-  height: calc(100vh - 80px - 40px - 20px - 10px - 56px - 104px);
+  height: 100%;
 }
 
 .messages {
@@ -40,54 +41,6 @@
   flex-grow: 66.3;
 }
 
-.onlineFriends {
-  display: flex;
-  gap: 18px;
-  overflow-x: auto;
-  width: 100vw;
-  box-shadow: 0px 2.5546875px 6.38671875px 0px rgba(0, 0, 0, 0.02);
-  background: rgba(25, 28, 33, 1);
-  padding: 14px 20px;
-}
-
-.onlineFriend {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.friendName {
-  max-width: 50px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 18px;
-  color: #edeff1;
-}
-
-.friendImageWrapper {
-  position: relative;
-}
-
-.friendImage {
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.friendImageWrapper::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #38cb89;
-  transform: translate(-50%, -50%);
-}
-
 .messageNoDisplay,
 .messagesHidden {
   display: none;
@@ -96,6 +49,7 @@
 @media (min-width: 500px) {
   .wrapper {
     padding-bottom: 0;
+    height: calc(100vh - 74px - 30px - 32px - 56px);
   }
 
   .message,
@@ -106,20 +60,15 @@
   .onlineFriends {
     display: none;
   }
+}
 
-  .messages,
-  .message {
-    height: calc(100vh - 80px - 40px - 20px - 56px);
+@media (min-width: 700px) {
+  .wrapper {
+    height: calc(100vh - 80px - 30px - 32px - 56px);
   }
 }
 
 @media (min-width: 850px) {
-  .wrapper {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
   .messageNoDisplay,
   .messagesHidden {
     display: block;
@@ -129,12 +78,12 @@
 @media (min-width: 900px) {
   .wrapper {
     gap: 20px;
+    height: calc(100vh - 80px - 38px - 32px - 56px);
   }
 }
 
 @media (min-width: 950px) {
-  .message,
-  .messages {
+  .wrapper {
     height: calc(100vh - 80px - 40px - 20px);
   }
 }
@@ -144,15 +93,11 @@
     flex-direction: row;
     align-items: flex-start;
     gap: 30px;
+    height: calc(100vh - 80px - 60px - 20px);
   }
 
   .messageNoDisplay,
   .messagesHidden {
     display: block;
-  }
-
-  .message,
-  .messages {
-    height: calc(100vh - 80px - 60px - 20px);
   }
 }

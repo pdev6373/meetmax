@@ -7,8 +7,8 @@ export default function Message() {
       <Image
         src="/assets/start-chat.svg"
         alt="start chat"
-        width={300}
-        height={339}
+        width={240}
+        height={271}
       />
     </div>
   );
