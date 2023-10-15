@@ -41,7 +41,7 @@ export type LanguageType = {
 };
 
 export type ButtonType = {
-  children: string;
+  children: string | JSX.Element;
   icon?: string;
   type: "social" | "submit";
   onClick?: any;

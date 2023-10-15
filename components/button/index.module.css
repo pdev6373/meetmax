@@ -26,6 +26,10 @@
   font-weight: 500;
   line-height: 18px;
   color: #edeff1; /** 10% **/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .submitButton {

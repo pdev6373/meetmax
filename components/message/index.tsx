@@ -136,6 +136,44 @@ const files = [
     name: "Photo",
     amount: "78 files",
     size: "43MB",
+    files: [
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+      {
+        image: "/assets/sent-image.png",
+        date: "August 15, 2021",
+      },
+    ],
   },
   {
     icon: "/assets/more.svg",

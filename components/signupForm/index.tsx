@@ -103,22 +103,25 @@ export default function SignupForm({
       return;
     }
 
-    const response = await fetchData({
-      url: "/auth/register",
-      method: "POST",
-      payload: {
-        email,
-        firstname: name.split(" ")[0],
-        lastname: name.split(" ").slice(1).join(" "),
-        password,
-        dateOfBirth,
-        gender,
-      },
-    });
+    try {
+      const response = await fetchData({
+        url: "/auth/register",
+        method: "POST",
+        payload: {
+          email,
+          firstname: name.split(" ")[0],
+          lastname: name.split(" ").slice(1).join(" "),
+          password,
+          dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
+          gender: gender.label,
+        },
+      });
 
-    console.log(response);
-
-    // router.push("/check-mail");
+      if (!response.success) throw new TypeError("oops");
+      router.push("/check-mail");
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
 
   const signinHandler = () => "/login";
@@ -259,7 +262,13 @@ export default function SignupForm({
       </div>
 
       <Button type="submit" onClick={signupHandler}>
-        {signupText}
+        {/* {signupText} */}
+        <Image
+          src="/assets/spinner.svg"
+          alt="calendar"
+          width={16}
+          height={16}
+        />
       </Button>
 
       <FormBottomText
