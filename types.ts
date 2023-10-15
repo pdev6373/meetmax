@@ -45,6 +45,7 @@ export type ButtonType = {
   icon?: string;
   type: "social" | "submit";
   onClick?: any;
+  isLoading?: boolean;
 };
 
 export type InputType = {
@@ -68,9 +69,12 @@ export type SocialButtonType = {
 export type FormButtonTextType = {
   text: string;
   actionText: string;
+  actionTextTwo?: string;
   onActionTextClick: () => any;
   actionType: "link" | "button";
   mainform: boolean;
+  loading?: boolean;
+  showActionTextTwo?: boolean;
 };
 
 export type SearchType = {
@@ -128,6 +132,7 @@ export type ResetPasswordFormType = {
   defaultError: string;
   passwordError: string;
   confirmPasswordError: string;
+  token: string;
 };
 
 export type CheckMailType = {
@@ -136,6 +141,7 @@ export type CheckMailType = {
   skipNowText: string;
   noEmailText: string;
   resendText: string;
+  resendAgainText: string;
 };
 
 export type GenderLabelType = "Male" | "Female";

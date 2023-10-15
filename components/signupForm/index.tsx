@@ -1,12 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, Calendar, FormBottomText, Input, Text } from "@/components";
 import Image from "next/image";
-import { CalendarValueType, GenderType, SignupFormType } from "@/types";
+import { GenderType, SignupFormType } from "@/types";
 import { useRouter } from "next/navigation";
 import format from "date-fns/format";
 import styles from "./index.module.css";
-import { useFetch } from "@/hooks";
+import { AuthContext } from "@/context/authContext";
 
 export default function SignupForm({
   emailPlaceholder,
@@ -25,16 +25,13 @@ export default function SignupForm({
   save,
   cancel,
 }: SignupFormType) {
+  const {
+    fields: { name, password, dateOfBirth, email, gender },
+    setFields: { setEmail, setGender, setName, setDateOfBirth, setPassword },
+    sendVerificationLink: { loading, makeRequest },
+  } = useContext(AuthContext);
+
   const router = useRouter();
-  const { fetchData, loading } = useFetch();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState<CalendarValueType>(null);
-  const [gender, setGender] = useState<GenderType>({
-    id: "male",
-    label: "Male",
-  });
   const [hidePassword, setHidePassword] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
@@ -103,25 +100,13 @@ export default function SignupForm({
       return;
     }
 
-    try {
-      const response = await fetchData({
-        url: "/auth/register",
-        method: "POST",
-        payload: {
-          email,
-          firstname: name.split(" ")[0],
-          lastname: name.split(" ").slice(1).join(" "),
-          password,
-          dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
-          gender: gender.label,
-        },
-      });
+    const response = await makeRequest();
 
-      if (!response.success) throw new TypeError("oops");
-      router.push("/check-mail");
-    } catch (error: any) {
-      console.error(error.message);
-    }
+    console.log(response);
+
+    if (!response.succeeded) return "An error occurred";
+    if (!response.response.success) return response.response.message;
+    router.push("/check-mail");
   };
 
   const signinHandler = () => "/login";
@@ -261,14 +246,8 @@ export default function SignupForm({
         </div>
       </div>
 
-      <Button type="submit" onClick={signupHandler}>
-        {/* {signupText} */}
-        <Image
-          src="/assets/spinner.svg"
-          alt="calendar"
-          width={16}
-          height={16}
-        />
+      <Button type="submit" isLoading={loading}>
+        {signupText}
       </Button>
 
       <FormBottomText

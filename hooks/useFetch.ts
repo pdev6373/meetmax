@@ -7,6 +7,8 @@ export default function useFetch() {
 
   const fetchData = async ({ url, method, payload }: FetchType) => {
     try {
+      setLoading(true);
+
       const response = await (
         await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}${url}`, {
           method,

@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Input, Button, FormBottomText, Text } from "@/components";
 import styles from "./index.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LoginFormType } from "@/types";
+import { AuthContext } from "@/context/authContext";
 
 export default function LoginForm({
   emailPlaceholder,
@@ -19,8 +20,12 @@ export default function LoginForm({
   emailError,
   passwordError,
 }: LoginFormType) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    fields: { email, password },
+    setFields: { setEmail, setPassword },
+    login: { loading, makeRequest },
+    accessToken: { accessToken, setAccessToken },
+  } = useContext(AuthContext);
   const [hidePassword, setHidePassword] = useState(true);
   const [remember, setRemember] = useState(false);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
@@ -34,7 +39,12 @@ export default function LoginForm({
     setErrorMessage("");
   }, [email, password]);
 
+  useEffect(() => {
+    accessToken && router.push("/");
+  }, [accessToken]);
+
   const togglePasswordHandler = () => setHidePassword((prev) => !prev);
+
   const loginHandler = async (e: any) => {
     e?.preventDefault();
 
@@ -62,8 +72,16 @@ export default function LoginForm({
       return;
     }
 
-    router.push("/");
+    const response = await makeRequest();
+
+    console.log(response);
+
+    if (!response.succeeded) return "An error occurred";
+    if (!response.response.success) return response.response.message;
+
+    setAccessToken(response.response.data.accessToken);
   };
+
   const signupHandler = () => "/signup";
   const rememberHandler = () => setRemember((prev) => !prev);
 
@@ -117,7 +135,9 @@ export default function LoginForm({
         </div>
       </div>
 
-      <Button type="submit">{signinText}</Button>
+      <Button type="submit" isLoading={loading}>
+        {signinText}
+      </Button>
 
       <FormBottomText
         mainform

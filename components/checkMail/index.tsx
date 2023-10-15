@@ -1,8 +1,11 @@
 "use client";
+import { useState, useEffect, useContext } from "react";
 import { Heading, Wrapper, FormBottomText, Button } from "@/components";
 import styles from "./index.module.css";
 import Link from "next/link";
 import { CheckMailType } from "@/types";
+import { AuthContext } from "@/context/authContext";
+import { useRouter } from "next/navigation";
 
 export default function CheckMail({
   checkMailText,
@@ -10,8 +13,34 @@ export default function CheckMail({
   skipNowText,
   noEmailText,
   resendText,
+  resendAgainText,
 }: CheckMailType) {
-  const resendEmailHandler = () => {};
+  const router = useRouter();
+  const [emailResent, setEmailResent] = useState(false);
+
+  const {
+    fields: { email },
+    sendVerificationLink: { loading, makeRequest },
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    !email && router.replace("/signup");
+  }, []);
+
+  const resendEmailHandler = async () => {
+    const response = await makeRequest();
+
+    if (!response.succeeded) {
+      setEmailResent(false);
+      return "An error occurred";
+    }
+    if (!response.response.success) {
+      setEmailResent(false);
+      return response.response.message;
+    }
+
+    setEmailResent(true);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -21,10 +50,14 @@ export default function CheckMail({
             <div className={styles.header}>
               <Heading type="heading">{checkMailText}</Heading>
 
-              <h3 className={styles.subHeading}>
-                {sendMailText}:{" "}
-                <span className={styles.subHeadingAccent}>ahmed@gmail.com</span>
-              </h3>
+              {email ? (
+                <h3 className={styles.subHeading}>
+                  {sendMailText}:{" "}
+                  <span className={styles.subHeadingAccent}>{email}</span>
+                </h3>
+              ) : (
+                <h3 className={styles.subHeading}>{sendMailText}</h3>
+              )}
             </div>
 
             <Link href="/login" className={styles.skipButton}>
@@ -37,7 +70,10 @@ export default function CheckMail({
             actionType="button"
             text={noEmailText}
             actionText={resendText}
+            actionTextTwo={resendAgainText}
             onActionTextClick={resendEmailHandler}
+            loading={loading}
+            showActionTextTwo={emailResent}
           />
         </div>
       </Wrapper>

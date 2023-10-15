@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button, Input, Text, Wrapper } from "..";
 import styles from "./index.module.css";
 import { ForgotPasswordFormType } from "@/types";
+import { AuthContext } from "@/context/authContext";
 
 export default function ForgotPasswordForm({
   emailPlaceholder,
@@ -15,7 +16,11 @@ export default function ForgotPasswordForm({
   emailError,
 }: ForgotPasswordFormType) {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const {
+    fields: { email },
+    setFields: { setEmail },
+    forgotPassword: { loading, makeRequest },
+  } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -35,6 +40,12 @@ export default function ForgotPasswordForm({
       return;
     }
 
+    const response = await makeRequest();
+
+    console.log(response);
+
+    if (!response.succeeded) return "An error occurred";
+    if (!response.response.success) return response.response.message;
     router.push("/check-mail");
   };
 
@@ -52,7 +63,11 @@ export default function ForgotPasswordForm({
               errorMessage ? <Text type="error">{errorMessage}</Text> : null
             }
           />
-          <Button onClick={forgotPasswordHandler} type="submit">
+          <Button
+            onClick={forgotPasswordHandler}
+            type="submit"
+            isLoading={loading}
+          >
             {buttonText}
           </Button>
         </form>

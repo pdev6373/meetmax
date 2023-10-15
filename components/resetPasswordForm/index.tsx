@@ -1,11 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button, Input, Text, Wrapper } from "..";
 import { ResetPasswordFormType } from "@/types";
 import styles from "./index.module.css";
+import { AuthContext } from "@/context/authContext";
 
 export default function ResetPasswordForm({
   newPasswordPlaceholder,
@@ -15,22 +16,36 @@ export default function ResetPasswordForm({
   defaultError,
   passwordError,
   confirmPasswordError,
+  token,
 }: ResetPasswordFormType) {
   const router = useRouter();
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const {
+    fields: { password, confirmPassword },
+    setFields: { setPassword, setConfirmPassword },
+    resetPassword: { loading, makeRequest },
+  } = useContext(AuthContext);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
     "password" | "confirm-password" | null
   >(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
+  const [isPasswordChanged, setIsPasswordChanged] = useState(false);
 
   useEffect(() => {
     setErrorMessage("");
   }, [password, confirmPassword]);
 
-  const forgotPasswordHandler = async (e: any) => {
+  useEffect(() => {
+    console.log(isPasswordChanged);
+
+    if (isPasswordChanged) {
+      setIsPasswordChanged(false);
+      router.replace("/login");
+    }
+  }, [isPasswordChanged]);
+
+  const resetPasswordHandler = async (e: any) => {
     e?.preventDefault();
 
     if (!password) {
@@ -51,7 +66,14 @@ export default function ResetPasswordForm({
       return;
     }
 
-    router.push("/login");
+    const response = await makeRequest(token);
+
+    console.log(response);
+
+    if (!response.succeeded) return "An error occurred";
+    if (!response.response.success) return response.response.message;
+
+    setIsPasswordChanged(true);
   };
 
   const togglePasswordHandler = () => setHidePassword((prev) => !prev);
@@ -61,7 +83,7 @@ export default function ResetPasswordForm({
   return (
     <Wrapper>
       <div className={styles.formWrapper}>
-        <form className={styles.form} onSubmit={forgotPasswordHandler}>
+        <form className={styles.form} onSubmit={resetPasswordHandler}>
           <div className={styles.inputs}>
             <Input
               type={hidePassword ? "password" : "text"}
@@ -97,7 +119,7 @@ export default function ResetPasswordForm({
             />
           </div>
 
-          <Button onClick={forgotPasswordHandler} type="submit">
+          <Button type="submit" isLoading={loading}>
             {buttonText}
           </Button>
         </form>

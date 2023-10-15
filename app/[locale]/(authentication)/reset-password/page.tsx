@@ -2,7 +2,7 @@ import { Heading, ResetPasswordForm } from "@/components";
 import { useTranslations } from "next-intl";
 import styles from "./page.module.css";
 
-export default function ResetPassword() {
+export default function ResetPassword({ searchParams }: any) {
   const t = useTranslations("Index");
 
   return (
@@ -20,6 +20,7 @@ export default function ResetPassword() {
         confirmPasswordError={t("confirmPasswordError")}
         passwordError={t("passwordError")}
         defaultError={t("required")}
+        token={searchParams.token}
       />
     </div>
   );

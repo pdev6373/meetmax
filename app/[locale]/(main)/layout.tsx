@@ -1,13 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { LayoutType } from "@/types";
 import { Search, Sidebar } from "@/components";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import styles from "./layout.module.css";
 import Link from "next/link";
+import { AuthContext } from "@/context/authContext";
 
 export default function MainLayout({ children }: LayoutType) {
+  const [showComponent, setShowComponent] = useState(false);
   const [search, setSearch] = useState("");
+  const {
+    accessToken: { accessToken },
+  } = useContext(AuthContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(accessToken);
+
+    // if (!accessToken) {
+    //   router.replace("/login");
+    //   return;
+    // }
+
+    // setShowComponent(true);
+  }, [accessToken]);
+
+  if (!showComponent) return <></>;
+
   return (
     <div className={styles.wrapper}>
       <Sidebar />

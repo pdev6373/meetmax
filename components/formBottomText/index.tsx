@@ -1,6 +1,7 @@
 import { FormButtonTextType } from "@/types";
 import styles from "./index.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function FormBottomText({
   text,
@@ -8,6 +9,9 @@ export default function FormBottomText({
   onActionTextClick,
   actionType,
   mainform,
+  loading = false,
+  actionTextTwo = "",
+  showActionTextTwo = false,
 }: FormButtonTextType) {
   return (
     <div className={[styles.wrapper, mainform && styles.mainform].join(" ")}>
@@ -18,7 +22,18 @@ export default function FormBottomText({
         </Link>
       ) : (
         <p className={styles.wrapperActionText} onClick={onActionTextClick}>
-          {actionText}
+          {loading ? (
+            <Image
+              src="/assets/spinner.svg"
+              alt="loading"
+              width={20}
+              height={20}
+            />
+          ) : showActionTextTwo ? (
+            actionTextTwo
+          ) : (
+            actionText
+          )}
         </p>
       )}
     </div>
