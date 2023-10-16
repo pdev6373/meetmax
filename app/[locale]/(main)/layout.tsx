@@ -9,22 +9,21 @@ import Link from "next/link";
 import { AuthContext } from "@/context/authContext";
 
 export default function MainLayout({ children }: LayoutType) {
+  const router = useRouter();
   const [showComponent, setShowComponent] = useState(false);
   const [search, setSearch] = useState("");
   const {
     accessToken: { accessToken },
+    userDetails: { userDetails },
   } = useContext(AuthContext);
-  const router = useRouter();
 
   useEffect(() => {
-    console.log(accessToken);
+    if (!accessToken) {
+      router.replace("/login");
+      return;
+    }
 
-    // if (!accessToken) {
-    //   router.replace("/login");
-    //   return;
-    // }
-
-    // setShowComponent(true);
+    setShowComponent(true);
   }, [accessToken]);
 
   if (!showComponent) return <></>;
@@ -36,7 +35,7 @@ export default function MainLayout({ children }: LayoutType) {
       <div className={styles.body}>
         <header className={styles.header}>
           <Image
-            src="/assets/profile-photo.png"
+            src="/assets/profile-male.png"
             alt="profile picture"
             width={32}
             height={32}
@@ -61,7 +60,7 @@ export default function MainLayout({ children }: LayoutType) {
           <Link href="/messages" className={styles.messageIconWrapper}>
             <Image
               src="/assets/message.svg"
-              alt="profile picture"
+              alt="message"
               width={18}
               height={18}
               className={styles.message}
@@ -77,9 +76,12 @@ export default function MainLayout({ children }: LayoutType) {
           </Link>
 
           <div className={styles.profile}>
-            <p className={styles.profileName}>Saleh Ahmed</p>
+            <p
+              className={styles.profileName}
+            >{`${userDetails.lastname} ${userDetails.firstname}`}</p>
             <Image
-              src="/assets/profile-photo.png"
+              src="/assets/profile-male.png"
+              className={styles.profilePics}
               alt="profile picture"
               width={42}
               height={42}

@@ -45,7 +45,7 @@ export default function ForgotPasswordForm({
     console.log(response);
 
     if (!response.succeeded) return "An error occurred";
-    if (!response.response.success) return response.response.message;
+    if (!response.response?.success) return response.response?.message;
     router.push("/check-mail");
   };
 

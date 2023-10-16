@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import format from "date-fns/format";
 import styles from "./index.module.css";
 import { AuthContext } from "@/context/authContext";
+import { useAxios } from "@/hooks";
 
 export default function SignupForm({
   emailPlaceholder,
@@ -25,24 +26,18 @@ export default function SignupForm({
   save,
   cancel,
 }: SignupFormType) {
+  const router = useRouter();
+  const { data, fetchData, loading, success } = useAxios();
   const {
     fields: { name, password, dateOfBirth, email, gender },
     setFields: { setEmail, setGender, setName, setDateOfBirth, setPassword },
-    sendVerificationLink: { loading, makeRequest },
   } = useContext(AuthContext);
-
-  const router = useRouter();
   const [hidePassword, setHidePassword] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
     "email" | "name" | "password" | "date" | null
   >(null);
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    setErrorComponentToShow(null);
-    setErrorMessage("");
-  }, [email, name, password, dateOfBirth]);
 
   const genders: GenderType[] = [
     {
@@ -54,6 +49,15 @@ export default function SignupForm({
       label: female as "Female",
     },
   ];
+
+  useEffect(() => {
+    setErrorComponentToShow(null);
+    setErrorMessage("");
+  }, [email, name, password, dateOfBirth]);
+
+  useEffect(() => {
+    if (success && data.success) router.push("/check-mail");
+  }, [success, data]);
 
   const signupHandler = async (e: any) => {
     e?.preventDefault();
@@ -100,13 +104,18 @@ export default function SignupForm({
       return;
     }
 
-    const response = await makeRequest();
-
-    console.log(response);
-
-    if (!response.succeeded) return "An error occurred";
-    if (!response.response.success) return response.response.message;
-    router.push("/check-mail");
+    fetchData({
+      url: "/auth/register",
+      method: "POST",
+      payload: {
+        email,
+        firstname: name.split(" ")[0],
+        lastname: name.split(" ").slice(1).join(" "),
+        password,
+        dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
+        gender: gender.label,
+      },
+    });
   };
 
   const signinHandler = () => "/login";

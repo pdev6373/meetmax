@@ -2,8 +2,9 @@ import { RootLayoutType } from "@/types";
 import { notFound } from "next/navigation";
 import { Roboto } from "next/font/google";
 import type { Metadata } from "next";
-import "./globals.css";
 import { locales } from "@/constants";
+import { AuthProvider } from "@/context/authContext";
+import "./globals.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -25,7 +26,9 @@ export default function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

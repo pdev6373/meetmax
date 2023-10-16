@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LoginFormType } from "@/types";
 import { AuthContext } from "@/context/authContext";
+import { useAxios } from "@/hooks";
 
 export default function LoginForm({
   emailPlaceholder,
@@ -23,9 +24,10 @@ export default function LoginForm({
   const {
     fields: { email, password },
     setFields: { setEmail, setPassword },
-    login: { loading, makeRequest },
     accessToken: { accessToken, setAccessToken },
+    userDetails: { setUserDetails },
   } = useContext(AuthContext);
+  const { fetchData, loading } = useAxios();
   const [hidePassword, setHidePassword] = useState(true);
   const [remember, setRemember] = useState(false);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
@@ -42,8 +44,6 @@ export default function LoginForm({
   useEffect(() => {
     accessToken && router.push("/");
   }, [accessToken]);
-
-  const togglePasswordHandler = () => setHidePassword((prev) => !prev);
 
   const loginHandler = async (e: any) => {
     e?.preventDefault();
@@ -72,18 +72,25 @@ export default function LoginForm({
       return;
     }
 
-    const response = await makeRequest();
+    const response = await fetchData({
+      url: "/auth/login",
+      method: "POST",
+      payload: {
+        email,
+        password,
+      },
+    });
 
-    console.log(response);
+    if (!response?.success) return "Error";
+    if (!response?.data?.success) return "Error";
 
-    if (!response.succeeded) return "An error occurred";
-    if (!response.response.success) return response.response.message;
-
-    setAccessToken(response.response.data.accessToken);
+    setUserDetails(response?.data?.userDetails);
+    setAccessToken(response?.data?.accessToken);
   };
 
   const signupHandler = () => "/signup";
   const rememberHandler = () => setRemember((prev) => !prev);
+  const togglePasswordHandler = () => setHidePassword((prev) => !prev);
 
   return (
     <form className={styles.form} onSubmit={loginHandler} noValidate>

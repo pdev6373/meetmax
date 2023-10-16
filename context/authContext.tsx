@@ -1,9 +1,19 @@
 "use client";
-import { useFetch } from "@/hooks";
+import { useAxios } from "@/hooks";
+import useRefreshToken from "@/hooks/useRefreshToken";
 import { CalendarValueType, GenderType, LayoutType } from "@/types";
 import format from "date-fns/format";
 import { useState } from "react";
 import { createContext, Dispatch, SetStateAction } from "react";
+
+type UserType = {
+  firstname: string;
+  lastname: string;
+  gender: "Male" | "Female" | null;
+  dateOfBirth: string | null;
+  email: string;
+  isVerified: boolean;
+};
 
 type FieldsType = {
   email: string;
@@ -38,20 +48,33 @@ type AccessTokenType = {
   setAccessToken: Dispatch<SetStateAction<string | null>>;
 };
 
+type UserDetailsType = {
+  userDetails: UserType;
+  setUserDetails: Dispatch<SetStateAction<UserType>>;
+};
+
 type AuthContextType = {
   fields: FieldsType;
   setFields: SetFieldsType;
   resetFields: () => void;
-  sendVerificationLink: RequestType;
-  login: RequestType;
   forgotPassword: RequestType;
   resetPassword: ResetPasswordType;
   accessToken: AccessTokenType;
+  userDetails: UserDetailsType;
 };
 
 const genderInitialValue: GenderType = {
   id: "male",
   label: "Male",
+};
+
+const userInitialValues = {
+  firstname: "",
+  lastname: "",
+  gender: null,
+  dateOfBirth: null,
+  email: "",
+  isVerified: false,
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -72,14 +95,6 @@ export const AuthContext = createContext<AuthContextType>({
     setDateOfBirth: () => {},
   },
   resetFields: () => {},
-  sendVerificationLink: {
-    loading: false,
-    makeRequest: () => {},
-  },
-  login: {
-    loading: false,
-    makeRequest: () => {},
-  },
   forgotPassword: {
     loading: false,
     makeRequest: () => {},
@@ -92,6 +107,10 @@ export const AuthContext = createContext<AuthContextType>({
     accessToken: null,
     setAccessToken: () => {},
   },
+  userDetails: {
+    userDetails: userInitialValues,
+    setUserDetails: () => {},
+  },
 });
 
 export const AuthProvider = ({ children }: LayoutType) => {
@@ -103,16 +122,12 @@ export const AuthProvider = ({ children }: LayoutType) => {
   const [gender, setGender] = useState(genderInitialValue);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const {
-    fetchData: sendVerificationEmail,
-    loading: sendingVerificationEmail,
-  } = useFetch();
-  const { fetchData: loginUser, loading: loggingIn } = useFetch();
-  const {
     fetchData: sendPasswordResetLink,
     loading: sendingPasswordResetLink,
-  } = useFetch();
+  } = useAxios();
   const { fetchData: resetUserPassword, loading: resettingUserPassword } =
-    useFetch();
+    useAxios();
+  const [userDetails, setUserDetails] = useState<UserType>(userInitialValues);
 
   const resetFields = () => {
     setEmail("");
@@ -120,44 +135,6 @@ export const AuthProvider = ({ children }: LayoutType) => {
     setPassword("");
     setDateOfBirth(null);
     setGender(genderInitialValue);
-  };
-
-  const sendVerificationLink = async () => {
-    try {
-      const response = await sendVerificationEmail({
-        url: "/auth/register",
-        method: "POST",
-        payload: {
-          email,
-          firstname: name.split(" ")[0],
-          lastname: name.split(" ").slice(1).join(" "),
-          password,
-          dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
-          gender: gender.label,
-        },
-      });
-
-      return { succeeded: true, response };
-    } catch (error: any) {
-      return { succeeded: false };
-    }
-  };
-
-  const login = async () => {
-    try {
-      const response = await loginUser({
-        url: "/auth/login",
-        method: "POST",
-        payload: {
-          email,
-          password,
-        },
-      });
-
-      return { succeeded: true, response };
-    } catch (error: any) {
-      return { succeeded: false };
-    }
   };
 
   const forgotPassword = async () => {
@@ -188,6 +165,32 @@ export const AuthProvider = ({ children }: LayoutType) => {
     }
   };
 
+  const logout = async () => {
+    setAccessToken("");
+    setUserDetails(userInitialValues);
+
+    try {
+      const response = await resetUserPassword({
+        url: "/auth/logout",
+        method: "PATCH",
+        payload: {},
+      });
+
+      return { succeeded: true, response };
+    } catch (error: any) {
+      return { succeeded: false };
+    }
+  };
+
+  const persistLogin = () => {
+    const [isLoading, setIsLoading] = useState(true);
+    const refresh = useRefreshToken();
+
+    useEffect(() => {
+      refresh();
+    }, []);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -208,14 +211,6 @@ export const AuthProvider = ({ children }: LayoutType) => {
           setConfirmPassword,
         },
         resetFields,
-        sendVerificationLink: {
-          loading: sendingVerificationEmail,
-          makeRequest: sendVerificationLink,
-        },
-        login: {
-          loading: loggingIn,
-          makeRequest: login,
-        },
         accessToken: {
           accessToken,
           setAccessToken,
@@ -227,6 +222,10 @@ export const AuthProvider = ({ children }: LayoutType) => {
         resetPassword: {
           loading: resettingUserPassword,
           makeRequest: resetPassword,
+        },
+        userDetails: {
+          userDetails,
+          setUserDetails,
         },
       }}
     >

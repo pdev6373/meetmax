@@ -71,7 +71,7 @@ export default function ResetPasswordForm({
     console.log(response);
 
     if (!response.succeeded) return "An error occurred";
-    if (!response.response.success) return response.response.message;
+    if (!response.response?.success) return response.response?.message;
 
     setIsPasswordChanged(true);
   };

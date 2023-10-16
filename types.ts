@@ -176,8 +176,9 @@ export type SocialLoginType = {
 
 export type FetchType = {
   url: string;
-  method: "POST" | "GET" | "PATCH" | "DELETE";
-  payload: any;
+  method?: "POST" | "GET" | "PATCH" | "DELETE";
+  payload?: any;
+  credentials?: "include" | "same-origin" | "omit";
 };
 
 export type ReactorsType = {

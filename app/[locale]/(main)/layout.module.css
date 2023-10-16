@@ -58,6 +58,21 @@
   flex-shrink: 0;
 }
 
+.profileMobile,
+.profilePics {
+  background: #fff;
+  overflow: hidden;
+}
+
+.profileMobile {
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.profilePics {
+  border-radius: 10px;
+}
+
 @media (min-width: 300px) {
   .searchMobile {
     width: 100%;

@@ -6,6 +6,8 @@ import Link from "next/link";
 import { CheckMailType } from "@/types";
 import { AuthContext } from "@/context/authContext";
 import { useRouter } from "next/navigation";
+import { useAxios } from "@/hooks";
+import format from "date-fns/format";
 
 export default function CheckMail({
   checkMailText,
@@ -17,29 +19,33 @@ export default function CheckMail({
 }: CheckMailType) {
   const router = useRouter();
   const [emailResent, setEmailResent] = useState(false);
-
+  const { data, fetchData, loading, success } = useAxios();
   const {
-    fields: { email },
-    sendVerificationLink: { loading, makeRequest },
+    fields: { email, name, password, dateOfBirth, gender },
   } = useContext(AuthContext);
 
   useEffect(() => {
     !email && router.replace("/signup");
   }, []);
 
+  useEffect(() => {
+    if (success && data.success) setEmailResent(true);
+    else setEmailResent(false); // Error
+  }, [success, data]);
+
   const resendEmailHandler = async () => {
-    const response = await makeRequest();
-
-    if (!response.succeeded) {
-      setEmailResent(false);
-      return "An error occurred";
-    }
-    if (!response.response.success) {
-      setEmailResent(false);
-      return response.response.message;
-    }
-
-    setEmailResent(true);
+    fetchData({
+      url: "/auth/register",
+      method: "POST",
+      payload: {
+        email,
+        firstname: name.split(" ")[0],
+        lastname: name.split(" ").slice(1).join(" "),
+        password,
+        dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
+        gender: gender.label,
+      },
+    });
   };
 
   return (
