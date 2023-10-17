@@ -1,27 +1,26 @@
 "use client";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "@/context/authContext";
 import { useAxios } from ".";
 
 export default function useRefreshToken() {
-  const { fetchData, data, success } = useAxios();
-  const {
-    accessToken: { setAccessToken },
-    userDetails: { setUserDetails },
-  } = useContext(AuthContext);
+  const { fetchData } = useAxios();
 
-  useEffect(() => {
-    if (success && data.success) {
-      setAccessToken(data?.data?.accessToken);
-      setUserDetails(data?.data?.userDetails);
-    }
-  }, [success, data]);
-
-  const refresh = () =>
-    fetchData({
+  const refresh = async () => {
+    const response = await fetchData({
       url: "/auth/refresh",
       method: "GET",
     });
+
+    // if (!response?.success) return "Error";
+    // if (!response?.data?.success) return "Error";
+
+    // setAccessToken(response?.data?.data?.accessToken);
+    // setUserDetails(response?.data?.data?.userDetails);
+
+    return {
+      accessToken: response?.data?.data?.accessToken,
+      userDetails: response?.data?.data?.userDetails,
+    };
+  };
 
   return refresh;
 }

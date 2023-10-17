@@ -3,7 +3,7 @@ import { LayoutType } from "@/types";
 import styles from "./layout.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Logout } from "@/components";
 
@@ -47,21 +47,14 @@ const navs = [
 
 export default function MainLayout({ children }: LayoutType) {
   const pathname = usePathname();
-  const router = useRouter();
   const [showLogout, setShowLogout] = useState(false);
 
   const logoutPopupHandler = () => setShowLogout(true);
   const cancelLogoutHandler = () => setShowLogout(false);
-  const logoutHandler = async () => {
-    router.replace("/login");
-    setShowLogout(false);
-  };
 
   return (
     <>
-      {showLogout && (
-        <Logout onLogout={logoutHandler} onCancelLogout={cancelLogoutHandler} />
-      )}
+      {showLogout && <Logout onCancelLogout={cancelLogoutHandler} />}
       <div className={styles.wrapper}>
         <nav
           className={[

@@ -27,10 +27,11 @@ export default function SignupForm({
   cancel,
 }: SignupFormType) {
   const router = useRouter();
-  const { data, fetchData, loading, success } = useAxios();
+  const { fetchData, loading } = useAxios();
   const {
     fields: { name, password, dateOfBirth, email, gender },
     setFields: { setEmail, setGender, setName, setDateOfBirth, setPassword },
+    resetFields,
   } = useContext(AuthContext);
   const [hidePassword, setHidePassword] = useState(true);
   const [showCalendar, setShowCalendar] = useState(false);
@@ -51,13 +52,13 @@ export default function SignupForm({
   ];
 
   useEffect(() => {
+    resetFields();
+  }, []);
+
+  useEffect(() => {
     setErrorComponentToShow(null);
     setErrorMessage("");
   }, [email, name, password, dateOfBirth]);
-
-  useEffect(() => {
-    if (success && data.success) router.push("/check-mail");
-  }, [success, data]);
 
   const signupHandler = async (e: any) => {
     e?.preventDefault();
@@ -104,7 +105,7 @@ export default function SignupForm({
       return;
     }
 
-    fetchData({
+    const response = await fetchData({
       url: "/auth/register",
       method: "POST",
       payload: {
@@ -116,6 +117,15 @@ export default function SignupForm({
         gender: gender.label,
       },
     });
+
+    if (!response?.success) return "Error";
+    if (!response?.data?.success) return "Error";
+
+    localStorage.setItem(
+      "meetmax_email",
+      JSON.stringify({ email, type: "signup" })
+    );
+    router.push("/check-mail");
   };
 
   const signinHandler = () => "/login";

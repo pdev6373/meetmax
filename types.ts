@@ -23,6 +23,13 @@ export type LayoutType = {
   children: ReactNode;
 };
 
+export type AlertType = {
+  children: string;
+  open: "yes" | "no" | "wait";
+  setOpen: Dispatch<SetStateAction<"yes" | "no" | "wait">>;
+  isDanger?: boolean;
+};
+
 export type TextType = {
   children: string;
   type: "heading" | "sub-heading";
@@ -69,12 +76,10 @@ export type SocialButtonType = {
 export type FormButtonTextType = {
   text: string;
   actionText: string;
-  actionTextTwo?: string;
   onActionTextClick: () => any;
   actionType: "link" | "button";
   mainform: boolean;
   loading?: boolean;
-  showActionTextTwo?: boolean;
 };
 
 export type SearchType = {
@@ -141,7 +146,6 @@ export type CheckMailType = {
   skipNowText: string;
   noEmailText: string;
   resendText: string;
-  resendAgainText: string;
 };
 
 export type GenderLabelType = "Male" | "Female";
@@ -231,7 +235,6 @@ export type FriendsOptionsType = {
 };
 
 export type LogoutType = {
-  onLogout: any;
   onCancelLogout: any;
 };
 

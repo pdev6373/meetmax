@@ -4,28 +4,21 @@ import { SIDEBAR } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Logo, Logout } from "..";
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const router = useRouter();
   const [showLogout, setShowLogout] = useState(false);
 
   const isCurrentRoute = (route: string) =>
     pathname === route || (route.length > 1 && pathname.startsWith(route));
   const logoutPopupHandler = () => setShowLogout(true);
   const cancelLogoutHandler = () => setShowLogout(false);
-  const logoutHandler = async () => {
-    router.replace("/login");
-    setShowLogout(false);
-  };
 
   return (
     <>
-      {showLogout && (
-        <Logout onLogout={logoutHandler} onCancelLogout={cancelLogoutHandler} />
-      )}
+      {showLogout && <Logout onCancelLogout={cancelLogoutHandler} />}
       <div className={styles.wrapper}>
         <Link href="/" className={styles.logo}>
           <Logo />

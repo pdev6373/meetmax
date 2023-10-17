@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
-import { Heading, Wrapper, FormBottomText, Button } from "@/components";
+import { Heading, Wrapper, FormBottomText, Button, Alert } from "@/components";
 import styles from "./index.module.css";
 import Link from "next/link";
 import { CheckMailType } from "@/types";
@@ -15,74 +15,144 @@ export default function CheckMail({
   skipNowText,
   noEmailText,
   resendText,
-  resendAgainText,
 }: CheckMailType) {
   const router = useRouter();
-  const [emailResent, setEmailResent] = useState(false);
-  const { data, fetchData, loading, success } = useAxios();
+  const { fetchData, loading } = useAxios();
   const {
-    fields: { email, name, password, dateOfBirth, gender },
+    fields: { name, password, dateOfBirth, gender },
   } = useContext(AuthContext);
+  const getEmail = () =>
+    JSON.parse(localStorage.getItem("meetmax_email") || "false");
+  const [details, setDetails] = useState({
+    email: getEmail().email,
+    type: getEmail().type,
+  });
+  const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
+  const [alertToggle, setAlertToggle] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [error, setError] = useState(true);
 
   useEffect(() => {
-    !email && router.replace("/signup");
+    const gottenEmail = getEmail();
+    console.log(gottenEmail);
+
+    gottenEmail
+      ? setDetails({
+          email: gottenEmail.email,
+          type: gottenEmail.type,
+        })
+      : router.replace("/login");
   }, []);
 
   useEffect(() => {
-    if (success && data.success) setEmailResent(true);
-    else setEmailResent(false); // Error
-  }, [success, data]);
+    if (!alertMessage) return;
 
+    setShowAlert("yes");
+    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+
+    return () => {
+      clearTimeout(alertTimer);
+    };
+  }, [alertMessage, alertToggle]);
+
+  const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
   const resendEmailHandler = async () => {
-    fetchData({
-      url: "/auth/register",
-      method: "POST",
-      payload: {
-        email,
-        firstname: name.split(" ")[0],
-        lastname: name.split(" ").slice(1).join(" "),
-        password,
-        dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
-        gender: gender.label,
-      },
-    });
+    if (!details.email) {
+      router.replace("/signup");
+      return;
+    }
+
+    if (details.type === "signup" && !name) {
+      router.replace("/signup");
+      return;
+    }
+
+    const response = await fetchData(
+      details.type === "signup"
+        ? {
+            url: "/auth/register",
+            method: "POST",
+            payload: {
+              email: details.email,
+              firstname: name.split(" ")[0],
+              lastname: name.split(" ").slice(1).join(" "),
+              password,
+              dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
+              gender: gender.label,
+            },
+          }
+        : {
+            url: "/auth/forgot-password",
+            method: "POST",
+            payload: { email: details.email },
+          }
+    );
+
+    if (!response?.success) {
+      setError(true);
+      setAlertMessage("An error occurred");
+      toggleAlertHandler();
+      return;
+    }
+
+    if (response?.success && !response?.data) {
+      setError(true);
+      toggleAlertHandler();
+      return;
+    }
+
+    if (response?.success && !response?.data?.success) {
+      setError(true);
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setError(false);
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
   };
 
   return (
-    <div className={styles.wrapper}>
-      <Wrapper>
-        <div className={styles.main}>
-          <div className={styles.mainTop}>
-            <div className={styles.header}>
-              <Heading type="heading">{checkMailText}</Heading>
+    <>
+      <Alert open={showAlert} setOpen={setShowAlert} isDanger={error}>
+        {alertMessage}
+      </Alert>
+      <div className={styles.wrapper}>
+        <Wrapper>
+          <div className={styles.main}>
+            <div className={styles.mainTop}>
+              <div className={styles.header}>
+                <Heading type="heading">{checkMailText}</Heading>
 
-              {email ? (
-                <h3 className={styles.subHeading}>
-                  {sendMailText}:{" "}
-                  <span className={styles.subHeadingAccent}>{email}</span>
-                </h3>
-              ) : (
-                <h3 className={styles.subHeading}>{sendMailText}</h3>
-              )}
+                {details.email ? (
+                  <h3 className={styles.subHeading}>
+                    {sendMailText}:{" "}
+                    <span className={styles.subHeadingAccent}>
+                      {details.email}
+                    </span>
+                  </h3>
+                ) : (
+                  <h3 className={styles.subHeading}>{sendMailText}</h3>
+                )}
+              </div>
+
+              <Link href="/login" className={styles.skipButton}>
+                <Button type="submit">{skipNowText}</Button>
+              </Link>
             </div>
 
-            <Link href="/login" className={styles.skipButton}>
-              <Button type="submit">{skipNowText}</Button>
-            </Link>
+            <FormBottomText
+              mainform={false}
+              actionType="button"
+              text={noEmailText}
+              actionText={resendText}
+              onActionTextClick={resendEmailHandler}
+              loading={loading}
+            />
           </div>
-
-          <FormBottomText
-            mainform={false}
-            actionType="button"
-            text={noEmailText}
-            actionText={resendText}
-            actionTextTwo={resendAgainText}
-            onActionTextClick={resendEmailHandler}
-            loading={loading}
-            showActionTextTwo={emailResent}
-          />
-        </div>
-      </Wrapper>
-    </div>
+        </Wrapper>
+      </div>
+    </>
   );
 }

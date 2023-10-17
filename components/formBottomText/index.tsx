@@ -10,8 +10,6 @@ export default function FormBottomText({
   actionType,
   mainform,
   loading = false,
-  actionTextTwo = "",
-  showActionTextTwo = false,
 }: FormButtonTextType) {
   return (
     <div className={[styles.wrapper, mainform && styles.mainform].join(" ")}>
@@ -29,8 +27,6 @@ export default function FormBottomText({
               width={20}
               height={20}
             />
-          ) : showActionTextTwo ? (
-            actionTextTwo
           ) : (
             actionText
           )}

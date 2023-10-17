@@ -17,6 +17,10 @@
   line-height: 22px;
 }
 
+.wrapperActionText:hover {
+  text-decoration: underline;
+}
+
 .mainform .wrapperText,
 .mainform .wrapperActionText {
   font-size: 12px;

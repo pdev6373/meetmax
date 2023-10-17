@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import type { Metadata } from "next";
 import { locales } from "@/constants";
 import { AuthProvider } from "@/context/authContext";
+import { AppWrapper } from "@/components";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -27,7 +28,9 @@ export default function LocaleLayout({
   return (
     <html lang={locale}>
       <body className={roboto.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <AppWrapper>{children}</AppWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

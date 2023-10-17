@@ -11,7 +11,6 @@ export default function CheckMail() {
       skipNowText={t("skipNow")}
       noEmailText={t("didntReceiveEmail")}
       resendText={t("resend")}
-      resendAgainText={t("resendAgain")}
     />
   );
 }

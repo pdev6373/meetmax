@@ -35,3 +35,5 @@ export { default as SettingsHeading } from "@/components/settingsHeading";
 export { default as Profile } from "@/components/profile";
 export { default as Messages } from "@/components/messages";
 export { default as Message } from "@/components/message";
+export { default as AppWrapper } from "@/components/appWrapper";
+export { default as Alert } from "@/components/alert";

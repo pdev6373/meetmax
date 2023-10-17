@@ -24,6 +24,10 @@
   color: #377dff;
 }
 
+.backText:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 300px) {
   .goBack {
     gap: 14px;

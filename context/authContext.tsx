@@ -1,8 +1,6 @@
 "use client";
 import { useAxios } from "@/hooks";
-import useRefreshToken from "@/hooks/useRefreshToken";
 import { CalendarValueType, GenderType, LayoutType } from "@/types";
-import format from "date-fns/format";
 import { useState } from "react";
 import { createContext, Dispatch, SetStateAction } from "react";
 
@@ -33,11 +31,6 @@ type SetFieldsType = {
   setGender: Dispatch<SetStateAction<GenderType>>;
 };
 
-type RequestType = {
-  loading: boolean;
-  makeRequest: () => any;
-};
-
 type ResetPasswordType = {
   loading: boolean;
   makeRequest: (token: string) => any;
@@ -53,14 +46,19 @@ type UserDetailsType = {
   setUserDetails: Dispatch<SetStateAction<UserType>>;
 };
 
+type RememberType = {
+  remember: boolean;
+  setRemember: Dispatch<SetStateAction<boolean>>;
+};
+
 type AuthContextType = {
   fields: FieldsType;
   setFields: SetFieldsType;
   resetFields: () => void;
-  forgotPassword: RequestType;
   resetPassword: ResetPasswordType;
   accessToken: AccessTokenType;
   userDetails: UserDetailsType;
+  remember: RememberType;
 };
 
 const genderInitialValue: GenderType = {
@@ -95,10 +93,6 @@ export const AuthContext = createContext<AuthContextType>({
     setDateOfBirth: () => {},
   },
   resetFields: () => {},
-  forgotPassword: {
-    loading: false,
-    makeRequest: () => {},
-  },
   resetPassword: {
     loading: false,
     makeRequest: () => {},
@@ -111,6 +105,10 @@ export const AuthContext = createContext<AuthContextType>({
     userDetails: userInitialValues,
     setUserDetails: () => {},
   },
+  remember: {
+    remember: false,
+    setRemember: () => {},
+  },
 });
 
 export const AuthProvider = ({ children }: LayoutType) => {
@@ -121,34 +119,22 @@ export const AuthProvider = ({ children }: LayoutType) => {
   const [dateOfBirth, setDateOfBirth] = useState<CalendarValueType>(null);
   const [gender, setGender] = useState(genderInitialValue);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const {
-    fetchData: sendPasswordResetLink,
-    loading: sendingPasswordResetLink,
-  } = useAxios();
+  const [remember, setRemember] = useState(
+    JSON.parse(localStorage.getItem("meetmax_remember") || "true") || true
+  );
+  const [userDetails, setUserDetails] = useState<UserType>(userInitialValues);
   const { fetchData: resetUserPassword, loading: resettingUserPassword } =
     useAxios();
-  const [userDetails, setUserDetails] = useState<UserType>(userInitialValues);
 
   const resetFields = () => {
     setEmail("");
     setName("");
     setPassword("");
+    setConfirmPassword("");
     setDateOfBirth(null);
     setGender(genderInitialValue);
-  };
-
-  const forgotPassword = async () => {
-    try {
-      const response = await sendPasswordResetLink({
-        url: "/auth/forgot-password",
-        method: "POST",
-        payload: { email },
-      });
-
-      return { succeeded: true, response };
-    } catch (error: any) {
-      return { succeeded: false };
-    }
+    setAccessToken("");
+    setUserDetails(userInitialValues);
   };
 
   const resetPassword = async (token: string) => {
@@ -163,32 +149,6 @@ export const AuthProvider = ({ children }: LayoutType) => {
     } catch (error: any) {
       return { succeeded: false };
     }
-  };
-
-  const logout = async () => {
-    setAccessToken("");
-    setUserDetails(userInitialValues);
-
-    try {
-      const response = await resetUserPassword({
-        url: "/auth/logout",
-        method: "PATCH",
-        payload: {},
-      });
-
-      return { succeeded: true, response };
-    } catch (error: any) {
-      return { succeeded: false };
-    }
-  };
-
-  const persistLogin = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const refresh = useRefreshToken();
-
-    useEffect(() => {
-      refresh();
-    }, []);
   };
 
   return (
@@ -215,10 +175,6 @@ export const AuthProvider = ({ children }: LayoutType) => {
           accessToken,
           setAccessToken,
         },
-        forgotPassword: {
-          loading: sendingPasswordResetLink,
-          makeRequest: forgotPassword,
-        },
         resetPassword: {
           loading: resettingUserPassword,
           makeRequest: resetPassword,
@@ -226,6 +182,10 @@ export const AuthProvider = ({ children }: LayoutType) => {
         userDetails: {
           userDetails,
           setUserDetails,
+        },
+        remember: {
+          remember,
+          setRemember,
         },
       }}
     >

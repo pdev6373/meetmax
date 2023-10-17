@@ -9,12 +9,6 @@ type DataType = {
   data: any;
 };
 
-const dataInitialValue: DataType = {
-  success: false,
-  message: "",
-  data: [],
-};
-
 const axiosReq = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
@@ -52,9 +46,16 @@ export default function useAxios() {
         signal: controller.signal,
       });
 
-      if (isMounted) return { success: true, data: response.data };
-    } catch (err) {
-      return { success: false, data: [] };
+      const data: DataType = response.data;
+      return { success: true, data };
+    } catch (error: any) {
+      console.log(error);
+
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status == 500)
+          return { success: false, data: error.response?.data };
+        return { success: true, data: error.response?.data };
+      }
     } finally {
       setLoading(false);
       setIsMounted(false);

@@ -1,0 +1,113 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 14;
+  bottom: 74px;
+  width: calc(100% - 40px);
+  background: #212833;
+  box-shadow: 0px 4px 8px 0px #0000000a;
+  border-left: 5px solid #377dff;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 15px 18px;
+  left: -2000px;
+}
+
+.borderDanger {
+  border-left: 5px solid #ff5630;
+}
+
+.wrapperShow,
+.wrapperHide {
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.6s;
+}
+
+.wrapperShow {
+  left: -2000px;
+  animation-name: showWrapperAnimation;
+}
+
+.wrapperHide {
+  left: 20px;
+  animation-name: hideWrapperAnimation;
+}
+
+@keyframes showWrapperAnimation {
+  from {
+    left: -2000px;
+  }
+  to {
+    left: 20px;
+  }
+}
+
+@keyframes hideWrapperAnimation {
+  from {
+    left: 20px;
+  }
+  to {
+    left: -2000px;
+  }
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.message {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.dangerMessage {
+  color: #fff;
+}
+
+.close {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.errorTypeIcon,
+.close {
+  flex-shrink: 0;
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    bottom: 90px;
+    width: max-content;
+    min-width: 358px;
+  }
+
+  .wrapperHide {
+    left: 90px;
+  }
+
+  @keyframes showWrapperAnimation {
+    from {
+      left: -2000px;
+    }
+    to {
+      left: 90px;
+    }
+  }
+
+  @keyframes hideWrapperAnimation {
+    from {
+      left: 90px;
+    }
+    to {
+      left: -2000px;
+    }
+  }
+}
