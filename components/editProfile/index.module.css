@@ -160,22 +160,12 @@
   align-self: flex-end;
 }
 
-.actions > * {
+.cancel {
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
   cursor: pointer;
-}
-
-.cancel {
   color: #959eae;
-}
-
-.save {
-  color: #ffffff;
-  padding: 8px 28px;
-  border-radius: 6px;
-  background: #377dff;
 }
 
 @media (min-width: 340px) {
@@ -253,17 +243,10 @@
     min-width: 100%;
   }
 
-  .actions > * {
+  .cancel {
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
-  }
-
-  .save {
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
   }
 
   .uploadImage {

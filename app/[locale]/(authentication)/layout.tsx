@@ -17,8 +17,6 @@ export default function AuthenticationLayout({
   } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(accessToken);
-
     if (accessToken) {
       router.replace("/");
       return;

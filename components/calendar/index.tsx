@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Calendar from "react-calendar";
 import styles from "./index.module.css";
 import Image from "next/image";
 import { CalendarType, CalendarValueType } from "@/types";
 import format from "date-fns/format";
+import { AuthContext } from "@/context/authContext";
 
 export default function CalendarComponent({
   onClose,
@@ -13,7 +14,14 @@ export default function CalendarComponent({
   save,
   cancel,
 }: CalendarType) {
-  const [calendarValue, onChange] = useState<CalendarValueType>(new Date());
+  const {
+    userDetails: {
+      userDetails: { dateOfBirth },
+    },
+  } = useContext(AuthContext);
+  const [calendarValue, onChange] = useState<CalendarValueType>(
+    dateOfBirth ? new Date(dateOfBirth!) : new Date()
+  );
 
   const calendarSaveHandler = () => {
     setValue(calendarValue);

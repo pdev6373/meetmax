@@ -53,6 +53,7 @@ export type ButtonType = {
   type: "social" | "submit";
   onClick?: any;
   isLoading?: boolean;
+  variation?: "normal" | "small";
 };
 
 export type InputType = {
@@ -112,6 +113,16 @@ export type LoginFormType = {
   passwordError: string;
 };
 
+export type EditProfileType = {
+  defaultError: string;
+  emailError: string;
+  namesError: string;
+  save: string;
+  cancel: string;
+  male: string;
+  female: string;
+};
+
 export type LocaleType = {
   locale: string;
   short?: boolean;
@@ -148,12 +159,7 @@ export type CheckMailType = {
   resendText: string;
 };
 
-export type GenderLabelType = "Male" | "Female";
-
-export type GenderType = {
-  id: "male" | "female";
-  label: GenderLabelType;
-};
+export type GenderType = "Male" | "Female";
 
 export type SignupFormType = {
   emailPlaceholder: string;

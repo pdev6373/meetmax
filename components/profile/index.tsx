@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { MakePost, Post } from "@/components";
 import Image from "next/image";
 import AvatarEditor from "react-avatar-editor";
@@ -7,47 +7,12 @@ import Link from "next/link";
 import Avatar from "react-avatar-edit";
 import styles from "./index.module.css";
 import { ProfileType } from "@/types";
-
-const userDetails = [
-  {
-    icon: "/assets/explore.svg",
-    text: "uihut.com",
-  },
-  {
-    icon: "/assets/person.svg",
-    text: "Male",
-  },
-  {
-    icon: "/assets/birthday.svg",
-    text: "Born June 18,2001",
-  },
-  {
-    icon: "/assets/location.svg",
-    text: "Sylhet, Bangladesh",
-  },
-  {
-    icon: "/assets/facebook.svg",
-    text: "Facebook salehahmed",
-  },
-  {
-    icon: "/assets/twitter.svg",
-    text: "Twitter salehahmed",
-  },
-  {
-    icon: "/assets/instagram.svg",
-    text: "Instagram Saleh_ahmed",
-  },
-  {
-    icon: null,
-    text: "52,844 Followers",
-  },
-  {
-    icon: null,
-    text: "2,564 Following",
-  },
-];
+import { AuthContext } from "@/context/authContext";
 
 export default function Profile({ isMine = false }: ProfileType) {
+  const {
+    userDetails: { userDetails },
+  } = useContext(AuthContext);
   const [croppedProfileImage, setCroppedProfileImage] = useState("");
   const [profileImage, setProfileImage] = useState("/assets/user.png");
   const [newProfileImage, setNewProfileImage] = useState(undefined);
@@ -138,6 +103,128 @@ export default function Profile({ isMine = false }: ProfileType) {
     setNewCoverImage("");
     closeImageEditor("cover-image");
   };
+
+  const userData = isMine
+    ? {
+        fullname: `${userDetails.lastname} ${userDetails.firstname}`,
+        bio: userDetails.bio,
+        intro: [
+          {
+            name: "website",
+            icon: "/assets/explore.svg",
+            value: userDetails.website,
+          },
+          {
+            name: "gender",
+            icon: "/assets/person.svg",
+            value: userDetails.gender,
+          },
+          {
+            name: "birthday",
+            icon: "/assets/birthday.svg",
+            value: userDetails.dateOfBirth,
+          },
+          {
+            name: "location",
+            icon: "/assets/location.svg",
+            value: userDetails.location,
+          },
+          {
+            name: "facebook",
+            icon: "/assets/facebook.svg",
+            value: userDetails.socialLinks.facebook.match(
+              /^https:\/\/(?:www\.)?facebook\.com\/(?:profile\.php\?id=)?([a-zA-Z0-9.]+)/
+            )![1],
+          },
+          {
+            name: "twitter",
+            icon: "/assets/twitter.svg",
+            value: userDetails.socialLinks.twitter.match(
+              /^https:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/
+            )![1],
+          },
+          {
+            name: "instagram",
+            icon: "/assets/instagram.svg",
+            value: userDetails.socialLinks.instagram.match(
+              /^https:\/\/(?:www\.)?instagram\.com\/[a-zA-Z0-9_]+\/?/
+            )![1],
+          },
+          {
+            name: "linkedin",
+            icon: "/assets/linkedin.svg",
+            value: userDetails.socialLinks.linkedin.match(
+              /^https:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/
+            )![1],
+          },
+          {
+            name: "followers",
+            icon: null,
+            value: `${0} Followers`,
+          },
+          {
+            name: "following",
+            icon: null,
+            value: `${0} Following`,
+          },
+        ],
+      }
+    : {
+        fullname: "Saleh Ahmed",
+        bio: "UI Designer",
+        intro: [
+          {
+            name: "website",
+            icon: "/assets/explore.svg",
+            value: userDetails.website,
+          },
+          {
+            name: "gender",
+            icon: "/assets/person.svg",
+            value: userDetails.gender,
+          },
+          {
+            name: "birthday",
+            icon: "/assets/birthday.svg",
+            value: userDetails.dateOfBirth,
+          },
+          {
+            name: "location",
+            icon: "/assets/location.svg",
+            value: userDetails.location,
+          },
+          {
+            name: "facebook",
+            icon: "/assets/facebook.svg",
+            value: userDetails.socialLinks.facebook,
+          },
+          {
+            name: "twitter",
+            icon: "/assets/twitter.svg",
+            value: userDetails.socialLinks.twitter,
+          },
+          {
+            name: "instagram",
+            icon: "/assets/instagram.svg",
+            value: userDetails.socialLinks.instagram,
+          },
+          {
+            name: "linkedin",
+            icon: "/assets/linkedin.svg",
+            value: userDetails.socialLinks.linkedin,
+          },
+          {
+            name: "followers",
+            icon: null,
+            value: `${0} Followers`,
+          },
+          {
+            name: "following",
+            icon: null,
+            value: `${0} Following`,
+          },
+        ],
+      };
 
   return (
     <>
@@ -352,8 +439,8 @@ export default function Profile({ isMine = false }: ProfileType) {
             </div>
 
             <div>
-              <p className={styles.userInfoName}>Saleh Ahmed</p>
-              <p className={styles.userInfoJob}>UI Designer</p>
+              <p className={styles.userInfoName}>{userData.fullname}</p>
+              <p className={styles.userInfoJob}>{userData.bio}</p>
             </div>
           </div>
 
@@ -388,21 +475,23 @@ export default function Profile({ isMine = false }: ProfileType) {
           <div className={styles.intro}>
             <h3 className={styles.introHeading}>INTRO</h3>
             <div className={styles.introMain}>
-              {userDetails.map((details) => (
-                <div key={details.text} className={styles.introItem}>
-                  {details.icon ? (
-                    <Image
-                      src={details.icon}
-                      alt="datails icon"
-                      width={16}
-                      height={16}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                  <p className={styles.introText}>{details.text}</p>
-                </div>
-              ))}
+              {userData?.intro
+                ?.filter((data) => data.value)
+                ?.map((details) => (
+                  <div key={details.name} className={styles.introItem}>
+                    {details.icon ? (
+                      <Image
+                        src={details.icon}
+                        alt="datails icon"
+                        width={16}
+                        height={16}
+                      />
+                    ) : (
+                      <></>
+                    )}
+                    <p className={styles.introText}>{details.value}</p>
+                  </div>
+                ))}
             </div>
             {isMine ? (
               <Link href="/settings/edit-profile" className={styles.editInfo}>

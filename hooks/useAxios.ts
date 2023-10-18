@@ -49,13 +49,25 @@ export default function useAxios() {
       const data: DataType = response.data;
       return { success: true, data };
     } catch (error: any) {
-      console.log(error);
-
       if (axios.isAxiosError(error)) {
-        if (error.response?.status == 500)
-          return { success: false, data: error.response?.data };
-        return { success: true, data: error.response?.data };
+        if (error.response) {
+          if (error.response?.data?.message)
+            return { success: true, data: error.response?.data };
+          return {
+            success: false,
+            data: { success: false, message: error.response?.statusText },
+          };
+        }
+        return {
+          success: false,
+          data: { success: false, message: error.message },
+        };
       }
+
+      return {
+        success: false,
+        data: { success: false, message: error.message },
+      };
     } finally {
       setLoading(false);
       setIsMounted(false);

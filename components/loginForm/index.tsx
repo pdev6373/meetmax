@@ -65,12 +65,13 @@ export default function LoginForm({
   }, [alertMessage, alertToggle]);
 
   useEffect(() => {
-    localStorage.setItem("meetmax_remember", JSON.stringify(remember));
+    localStorage.setItem("meetmax_remember", remember);
   }, [remember]);
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
   const signupHandler = () => "/signup";
-  const rememberHandler = () => setRemember((prev) => !prev);
+  const rememberHandler = () =>
+    setRemember((prev) => (prev === "yes" ? "no" : "yes"));
   const togglePasswordHandler = () => setHidePassword((prev) => !prev);
 
   const loginHandler = async (e: any) => {
@@ -126,6 +127,8 @@ export default function LoginForm({
       return;
     }
 
+    console.log(response.data);
+
     setAlertMessage("");
     setUserDetails(response?.data?.data?.userDetails);
     setAccessToken(response?.data?.data?.accessToken);
@@ -173,7 +176,11 @@ export default function LoginForm({
           <div className={styles.formActions}>
             <div className={styles.remember} onClick={rememberHandler}>
               <Image
-                src={remember ? "/assets/check.svg" : "/assets/uncheck.svg"}
+                src={
+                  remember === "yes"
+                    ? "/assets/check.svg"
+                    : "/assets/uncheck.svg"
+                }
                 alt="checkbox"
                 width={16}
                 height={16}

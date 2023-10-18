@@ -16,29 +16,32 @@ export default function Community() {
           (pathname === "/my-community" && community.title === "Followers") ||
           pathname.includes(community.title.split(" ").join("-").toLowerCase())
       )?.data?.map((user, index) => (
-        <Link href={`profile/${user.id}`} className={styles.user} key={index}>
+        <div className={styles.user} key={index}>
           <div className={styles.userDetails}>
-            <Image
-              src={user.image}
-              alt="user"
-              width={70}
-              height={70}
-              className={styles.userImageWeb}
-            />
-            <Image
-              src={user.image}
-              alt="user"
-              width={50}
-              height={50}
-              className={styles.userImageMobile}
-            />
+            <Link href={`profile/${user.id}`}>
+              <Image
+                src={user.image}
+                alt="user"
+                width={70}
+                height={70}
+                className={styles.userImageWeb}
+              />
+              <Image
+                src={user.image}
+                alt="user"
+                width={50}
+                height={50}
+                className={styles.userImageMobile}
+              />
+            </Link>
+
             <div className={styles.userInfo}>
-              <div className={styles.infoTop}>
+              <Link href={`profile/${user.id}`} className={styles.infoTop}>
                 <p
                   className={styles.userName}
                 >{`${user.lastname} ${user.firstname}`}</p>
                 <p className={styles.userProfession}>{user.job}</p>
-              </div>
+              </Link>
 
               <div className={styles.social}>
                 <Link href="" className={styles.socialLink}>
@@ -73,7 +76,7 @@ export default function Community() {
               {user.isFollowing ? "Unfollow" : "Follow"}
             </button>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

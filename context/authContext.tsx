@@ -1,7 +1,6 @@
 "use client";
-import { useAxios } from "@/hooks";
 import { CalendarValueType, GenderType, LayoutType } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createContext, Dispatch, SetStateAction } from "react";
 
 type UserType = {
@@ -11,6 +10,29 @@ type UserType = {
   dateOfBirth: string | null;
   email: string;
   isVerified: boolean;
+  _id: string;
+
+  bio: string;
+  phoneNumber: string;
+  website: string;
+  location: string;
+
+  socialLinks: {
+    facebook: string;
+    twitter: string;
+    instagram: string;
+    linkedin: string;
+  };
+
+  followers: {
+    amount: number;
+    data: UserType[];
+  };
+
+  followings: {
+    amount: number;
+    data: UserType[];
+  };
 };
 
 type FieldsType = {
@@ -28,12 +50,7 @@ type SetFieldsType = {
   setPassword: Dispatch<SetStateAction<string>>;
   setConfirmPassword: Dispatch<SetStateAction<string>>;
   setDateOfBirth: Dispatch<SetStateAction<CalendarValueType>>;
-  setGender: Dispatch<SetStateAction<GenderType>>;
-};
-
-type ResetPasswordType = {
-  loading: boolean;
-  makeRequest: (token: string) => any;
+  setGender: Dispatch<SetStateAction<"Male" | "Female">>;
 };
 
 type AccessTokenType = {
@@ -47,32 +64,50 @@ type UserDetailsType = {
 };
 
 type RememberType = {
-  remember: boolean;
-  setRemember: Dispatch<SetStateAction<boolean>>;
+  remember: "yes" | "no";
+  setRemember: Dispatch<SetStateAction<"yes" | "no">>;
 };
 
 type AuthContextType = {
   fields: FieldsType;
   setFields: SetFieldsType;
   resetFields: () => void;
-  resetPassword: ResetPasswordType;
   accessToken: AccessTokenType;
   userDetails: UserDetailsType;
   remember: RememberType;
 };
 
-const genderInitialValue: GenderType = {
-  id: "male",
-  label: "Male",
-};
+const genderInitialValue: GenderType = "Male";
 
-const userInitialValues = {
+const userInitialValues: UserType = {
   firstname: "",
   lastname: "",
   gender: null,
   dateOfBirth: null,
   email: "",
   isVerified: false,
+  _id: "",
+
+  bio: "",
+  phoneNumber: "",
+  website: "",
+  location: "",
+  socialLinks: {
+    facebook: "",
+    instagram: "",
+    linkedin: "",
+    twitter: "",
+  },
+
+  followers: {
+    amount: 0,
+    data: [],
+  },
+
+  followings: {
+    amount: 0,
+    data: [],
+  },
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -93,10 +128,6 @@ export const AuthContext = createContext<AuthContextType>({
     setDateOfBirth: () => {},
   },
   resetFields: () => {},
-  resetPassword: {
-    loading: false,
-    makeRequest: () => {},
-  },
   accessToken: {
     accessToken: null,
     setAccessToken: () => {},
@@ -106,7 +137,7 @@ export const AuthContext = createContext<AuthContextType>({
     setUserDetails: () => {},
   },
   remember: {
-    remember: false,
+    remember: "yes",
     setRemember: () => {},
   },
 });
@@ -117,14 +148,18 @@ export const AuthProvider = ({ children }: LayoutType) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState<CalendarValueType>(null);
-  const [gender, setGender] = useState(genderInitialValue);
+  const [gender, setGender] = useState<GenderType>(genderInitialValue);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [remember, setRemember] = useState(
-    JSON.parse(localStorage.getItem("meetmax_remember") || "true") || true
-  );
   const [userDetails, setUserDetails] = useState<UserType>(userInitialValues);
-  const { fetchData: resetUserPassword, loading: resettingUserPassword } =
-    useAxios();
+  const [remember, setRemember] = useState<"yes" | "no">("yes");
+
+  useEffect(() => {
+    setRemember(
+      localStorage?.getItem("meetmax_remember")
+        ? (localStorage.getItem("meetmax_remember") as "yes" | "no")
+        : "yes"
+    );
+  }, []);
 
   const resetFields = () => {
     setEmail("");
@@ -135,20 +170,6 @@ export const AuthProvider = ({ children }: LayoutType) => {
     setGender(genderInitialValue);
     setAccessToken("");
     setUserDetails(userInitialValues);
-  };
-
-  const resetPassword = async (token: string) => {
-    try {
-      const response = await resetUserPassword({
-        url: "/auth/new-password",
-        method: "PATCH",
-        payload: { password, token },
-      });
-
-      return { succeeded: true, response };
-    } catch (error: any) {
-      return { succeeded: false };
-    }
   };
 
   return (
@@ -174,10 +195,6 @@ export const AuthProvider = ({ children }: LayoutType) => {
         accessToken: {
           accessToken,
           setAccessToken,
-        },
-        resetPassword: {
-          loading: resettingUserPassword,
-          makeRequest: resetPassword,
         },
         userDetails: {
           userDetails,

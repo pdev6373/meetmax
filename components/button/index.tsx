@@ -8,6 +8,7 @@ export default function Button({
   onClick,
   type,
   isLoading = false,
+  variation = "normal",
 }: ButtonType) {
   return type === "social" ? (
     <button
@@ -39,9 +40,17 @@ export default function Button({
           onClick();
         })
       }
-      className={styles.submitButton}
+      className={
+        variation === "normal" ? styles.submitButton : styles.submitButtonSmall
+      }
     >
-      <p className={styles.submitButtonText}>
+      <p
+        className={
+          variation === "normal"
+            ? styles.submitButtonText
+            : styles.submitButtonSmallText
+        }
+      >
         {isLoading ? (
           <Image
             src="/assets/spinner.svg"

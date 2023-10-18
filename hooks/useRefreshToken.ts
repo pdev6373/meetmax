@@ -10,12 +10,6 @@ export default function useRefreshToken() {
       method: "GET",
     });
 
-    // if (!response?.success) return "Error";
-    // if (!response?.data?.success) return "Error";
-
-    // setAccessToken(response?.data?.data?.accessToken);
-    // setUserDetails(response?.data?.data?.userDetails);
-
     return {
       accessToken: response?.data?.data?.accessToken,
       userDetails: response?.data?.data?.userDetails,

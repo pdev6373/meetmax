@@ -3,18 +3,12 @@ import { useEffect, useState, useContext } from "react";
 import { FetchType } from "@/types";
 import axios from "axios";
 import { AuthContext } from "@/context/authContext";
-import useRefreshToken from "./useRefreshToken";
+import { useRefreshToken } from ".";
 
 type DataType = {
   success: boolean;
   message: string;
   data: any;
-};
-
-const dataInitialValue: DataType = {
-  success: false,
-  message: "",
-  data: [],
 };
 
 const axiosReq = axios.create({
@@ -27,14 +21,8 @@ const axiosReq = axios.create({
 
 export default function useAxiosPrivate() {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [data, setData] = useState(dataInitialValue);
-  const [requestInfo, setRequestInfo] = useState<FetchType>({
-    url: "",
-    payload: null,
-    method: "GET",
-    credentials: "include",
-  });
+  const [isMounted, setIsMounted] = useState(true);
+  const controller = new AbortController();
   const refresh = useRefreshToken();
   const {
     accessToken: { accessToken },
@@ -94,56 +82,59 @@ export default function useAxiosPrivate() {
   }, [previousRequest]);
 
   useEffect(() => {
-    if (!requestInfo.url) return;
-
-    let isMounted = true;
-    const controller = new AbortController();
-
-    const makeRequest = async () => {
-      try {
-        setLoading(true);
-
-        const response = await axiosReq({
-          method: requestInfo.method,
-          url: requestInfo.url,
-          data: requestInfo.payload || null,
-          signal: controller.signal,
-        });
-
-        if (isMounted) {
-          setData(response.data);
-          setSuccess(true);
-        }
-      } catch (err) {
-        console.error(err);
-        setSuccess(false);
-        setData(dataInitialValue);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    makeRequest();
+    if (isMounted) return;
 
     return () => {
-      isMounted = false;
       controller.abort();
     };
-  }, [requestInfo]);
+  }, [isMounted]);
 
-  const fetchData = ({
+  const fetchData = async ({
     url,
     method = "GET",
-    payload,
-    credentials = "include",
+    payload = null,
   }: FetchType) => {
-    setRequestInfo({
-      url,
-      method,
-      credentials,
-      payload,
-    });
+    try {
+      setLoading(true);
+      setIsMounted(true);
+
+      const response = await axiosReq({
+        method: method,
+        url: url,
+        data: payload,
+        signal: controller.signal,
+      });
+
+      const data: DataType = response.data;
+      return { success: true, data };
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          if (error.response?.data?.message)
+            return { success: true, data: error.response?.data };
+          return {
+            success: false,
+            data: { success: false, message: error.response?.statusText },
+          };
+        }
+        return {
+          success: false,
+          data: { success: false, message: error.message },
+        };
+      }
+
+      return {
+        success: false,
+        data: { success: false, message: error.message },
+      };
+    } finally {
+      setLoading(false);
+      setIsMounted(false);
+    }
   };
 
-  return fetchData;
+  return {
+    fetchData,
+    loading,
+  };
 }

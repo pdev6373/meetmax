@@ -2,7 +2,7 @@
 import { useState, useEffect, useContext } from "react";
 import { LayoutType } from "@/types";
 import { AuthContext } from "@/context/authContext";
-import useRefreshToken from "@/hooks/useRefreshToken";
+import { useRefreshToken } from "@/hooks";
 
 export default function Appwrapper({ children }: LayoutType) {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,12 +29,20 @@ export default function Appwrapper({ children }: LayoutType) {
       }
     };
 
-    !accessToken && remember ? verifyRefreshToken() : setIsLoading(false);
+    !accessToken && remember === "yes"
+      ? verifyRefreshToken()
+      : setIsLoading(false);
 
     return () => {
       isMounted = false;
     };
   }, []);
 
-  return !remember ? <>{children}</> : isLoading ? <></> : <>{children}</>;
+  return remember === "no" ? (
+    <>{children}</>
+  ) : isLoading ? (
+    <></>
+  ) : (
+    <>{children}</>
+  );
 }

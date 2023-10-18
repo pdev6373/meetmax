@@ -35,6 +35,12 @@
   width: 100%;
 }
 
+.submitButtonSmall {
+  border-radius: 6px;
+  background: #377dff;
+  padding: 8px 28px;
+}
+
 .submitButtonText {
   font-size: 14px;
   font-weight: 500;
@@ -44,6 +50,14 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+.submitButtonSmallText {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+  color: #ffffff;
 }
 
 @media (min-width: 190px) {
@@ -67,6 +81,10 @@
 @media (min-width: 500px) {
   .submitButton {
     padding: 14px;
+    border-radius: 10px;
+  }
+
+  .submitButtonSmall {
     border-radius: 10px;
   }
 

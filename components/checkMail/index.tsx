@@ -21,11 +21,11 @@ export default function CheckMail({
   const {
     fields: { name, password, dateOfBirth, gender },
   } = useContext(AuthContext);
-  const getEmail = () =>
+  const getDetails = () =>
     JSON.parse(localStorage.getItem("meetmax_email") || "false");
   const [details, setDetails] = useState({
-    email: getEmail().email,
-    type: getEmail().type,
+    email: getDetails().email,
+    type: getDetails().type,
   });
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
@@ -33,15 +33,16 @@ export default function CheckMail({
   const [error, setError] = useState(true);
 
   useEffect(() => {
-    const gottenEmail = getEmail();
-    console.log(gottenEmail);
+    const gottenDetails = getDetails();
 
-    gottenEmail
-      ? setDetails({
-          email: gottenEmail.email,
-          type: gottenEmail.type,
-        })
-      : router.replace("/login");
+    !gottenDetails.email
+      ? router.replace("/login")
+      : gottenDetails.type === "signup" && !name
+      ? router.replace("/signup")
+      : setDetails({
+          email: gottenDetails.email,
+          type: gottenDetails.type,
+        });
   }, []);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function CheckMail({
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
   const resendEmailHandler = async () => {
     if (!details.email) {
-      router.replace("/signup");
+      router.replace("/login");
       return;
     }
 
@@ -78,7 +79,7 @@ export default function CheckMail({
               lastname: name.split(" ").slice(1).join(" "),
               password,
               dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
-              gender: gender.label,
+              gender: gender,
             },
           }
         : {
