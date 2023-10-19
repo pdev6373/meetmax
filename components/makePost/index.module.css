@@ -77,15 +77,6 @@
   color: #edeff1;
 }
 
-.actionButton {
-  padding: 4px 15px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 22px;
-  background: #377dff;
-  border-radius: 6px;
-}
-
 @media (min-width: 500px) {
   .wrapper {
     padding: 18px;
@@ -128,12 +119,5 @@
   .actionText {
     font-size: 14px;
     line-height: 22px;
-  }
-
-  .actionButton {
-    padding: 8px 30px;
-    font-size: 16px;
-    line-height: 24px;
-    border-radius: 10px;
   }
 }

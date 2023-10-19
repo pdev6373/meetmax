@@ -55,6 +55,13 @@
   transform: translate(-50%, -50%);
 }
 
+.spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 500px) {
   .wrapper {
     gap: 30px;

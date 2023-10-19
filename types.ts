@@ -208,27 +208,12 @@ export type PostViewType = {
   value: "public" | "friends" | "only-me";
 };
 
-export type PostsType = {
+export type PostType = {
   createdAt: string;
   id: string;
   images: string[];
   likes: string[];
   message: string;
-};
-
-export type PostType = {
-  // lastname: string;
-  // firstname: string;
-  // date: string;
-  // type: "Public" | "Friends" | "Only me";
-  // posterImage: string;
-  // noOfComments: string;
-  // // noOfShare: string;
-  // postImages?: string[];
-  // postText?: string;
-  // isFollowing: boolean;
-  // likes: PostLikesType[];
-  // isMine?: boolean;
 };
 
 export type CreatePostType = {
@@ -282,4 +267,10 @@ export type UserType = {
   coverPicture: string;
   followers: string[];
   following: string[];
+};
+
+export type DataType = {
+  success: boolean;
+  message: string;
+  data: any;
 };

@@ -1,10 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { Reactors } from "..";
-import { PostsType } from "@/types";
+import { PostType, UserType } from "@/types";
 import { useAxiosPrivate } from "@/hooks";
+import { userInitialValues } from "@/constants";
+import { format } from "timeago.js";
+import { AuthContext } from "@/context/authContext";
 
 export default function Post({
   createdAt,
@@ -12,31 +15,26 @@ export default function Post({
   images,
   likes,
   message,
-}: // firstname,
-// lastname,
-// date,
-// type,
-// posterImage,
-// noOfComments,
-// //   noOfShare,
-// postImages,
-// postText,
-// likes,
-// isFollowing,
-// isMine = false,
-PostsType) {
+}: PostType) {
+  const {
+    userDetails: { userDetails },
+  } = useContext(AuthContext);
   const [showMoreOptions, setShowMoreOptions] = useState(false);
   const [isPostHidden, setIsPostHidden] = useState(false);
   const [isPostRemoved, setIsPostRemoved] = useState(false);
   const [showUnfolowPopup, setShowUnfolowPopup] = useState(false);
   const { fetchData, loading } = useAxiosPrivate();
+  const [user, setUser] = useState<UserType>(userInitialValues);
+  const isFollowing = userDetails?.following?.includes(id);
 
   useEffect(() => {
     (async () => {
       const response = await fetchData({
-        url: `/post/${id}`,
+        url: `/user/${id}`,
         method: "GET",
       });
+
+      setUser(response?.data?.data);
 
       console.log(response);
     })();
@@ -51,10 +49,6 @@ PostsType) {
       name: "Comments",
       icon: "/assets/comment.svg",
     },
-    // {
-    //   name: "Share",
-    //   icon: "/assets/share.svg",
-    // },
   ];
 
   const handleUnfollow = async () => {
@@ -77,8 +71,8 @@ PostsType) {
       },
     },
     {
-      icon: "/assets/unfollow.svg",
-      text: "Unfollow",
+      icon: isFollowing ? "/assets/unfollow.svg" : "/assets/profile.svg",
+      text: isFollowing ? "Unfollow" : "Follow",
       action: () => {
         setShowMoreOptions(false);
         setShowUnfolowPopup(true);
@@ -113,8 +107,7 @@ PostsType) {
     },
   ];
 
-  // const toBeMapped = isMine ? moreOptionsMe : moreOptions;
-  const toBeMapped = true ? moreOptionsMe : moreOptions;
+  const toBeMapped = userDetails?._id === id ? moreOptionsMe : moreOptions;
 
   if (isPostRemoved) return <></>;
 
@@ -139,7 +132,7 @@ PostsType) {
 
   return (
     <>
-      {showUnfolowPopup && (
+      {showUnfolowPopup ? (
         <>
           <div className={styles.overlay}>
             <div className={styles.unfollowWrapper}>
@@ -158,13 +151,14 @@ PostsType) {
                   className={styles.unfollowProceed}
                   onClick={handleUnfollow}
                 >
-                  {/* {isFollowing ? "Unfollow" : "Follow"} */}
-                  {true ? "Unfollow" : "Follow"}
+                  {isFollowing ? "Unfollow" : "Follow"}
                 </button>
               </div>
             </div>
           </div>
         </>
+      ) : (
+        <></>
       )}
 
       <div className={styles.wrapper}>
@@ -172,26 +166,24 @@ PostsType) {
           <div className={styles.mainHeader}>
             <div className={styles.mainHeaderDetails}>
               <Image
-                // src={posterImage}
-                src="/assets/user.png"
+                src={user?.profilePicture || "/assets/profile-male.png"}
                 alt="user"
                 width={32}
                 height={32}
                 className={styles.posterImageMobile}
               />
               <Image
-                // src={posterImage}
-                src="/assets/user.png"
+                src={user?.profilePicture || "/assets/profile-male.png"}
                 alt="user"
                 width={50}
                 height={50}
                 className={styles.posterImageWeb}
               />
               <div>
-                {/* <h3 className={styles.name}>{`${lastname} ${firstname}`}</h3> */}
-                <h3 className={styles.name}>Oluborode Peter</h3>
-                {/* <p className={styles.time}>{`${date}. ${type}`}</p> */}
-                <p className={styles.time}>{createdAt}</p>
+                <h3
+                  className={styles.name}
+                >{`${user.lastname} ${user.firstname}`}</h3>
+                <p className={styles.time}>{`${format(createdAt)}. Public`}</p>
               </div>
             </div>
 
@@ -232,10 +224,14 @@ PostsType) {
             </div>
           </div>
 
-          {message?.length && <p className={styles.postText}>{message}</p>}
+          {message?.length ? (
+            <p className={styles.postText}>{message}</p>
+          ) : (
+            <></>
+          )}
 
-          {images?.length &&
-            (images.length === 1 ? (
+          {images?.length ? (
+            images.length === 1 ? (
               <div className={styles.postImageWrapper}>
                 {images?.map((image, index) => (
                   <Image src={image} alt="post image" fill key={index} />
@@ -265,7 +261,10 @@ PostsType) {
               </div>
             ) : (
               <></>
-            ))}
+            )
+          ) : (
+            <></>
+          )}
 
           <div className={styles.mainBottom}>
             {/* <Reactors

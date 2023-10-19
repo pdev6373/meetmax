@@ -1,13 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FetchType } from "@/types";
+import { DataType, FetchType } from "@/types";
 import axios from "axios";
-
-type DataType = {
-  success: boolean;
-  message: string;
-  data: any;
-};
 
 const axiosReq = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -57,16 +51,16 @@ export default function useAxios() {
               data: {
                 success: false,
                 message: error.response?.data?.message,
-                data: [] as DataType[],
-              },
+                data: [],
+              } as DataType,
             };
           return {
             success: false,
             data: {
               success: false,
               message: "An error occurred",
-              data: [] as DataType[],
-            },
+              data: [],
+            } as DataType,
           };
         }
         return {
@@ -74,8 +68,8 @@ export default function useAxios() {
           data: {
             success: false,
             message: "An error occurred",
-            data: [] as DataType[],
-          },
+            data: [],
+          } as DataType,
         };
       }
 
@@ -84,8 +78,8 @@ export default function useAxios() {
         data: {
           success: false,
           message: "An error occurred",
-          data: [] as DataType[],
-        },
+          data: [],
+        } as DataType,
       };
     } finally {
       setLoading(false);

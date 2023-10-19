@@ -69,9 +69,6 @@ export default function CreatePost({
     };
   };
   const handlePost = async () => {
-    console.log("Hello");
-    console.log(postText);
-
     const response = await fetchData({
       url: `/post`,
       method: "POST",
@@ -80,8 +77,6 @@ export default function CreatePost({
         message: postText.current,
       },
     });
-
-    console.log(response);
 
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);

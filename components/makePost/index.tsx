@@ -1,83 +1,128 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import Image from "next/image";
 import ContentEditable from "react-contenteditable";
 import styles from "./index.module.css";
-import { CreatePost } from "..";
+import { Alert, Button, CreatePost } from "..";
+import { AuthContext } from "@/context/authContext";
+import { useAxiosPrivate } from "@/hooks";
 
 export default function MakePost() {
   const text = useRef("");
+  const { fetchData, loading } = useAxiosPrivate();
   const [showPostOptions, setShowPostOptions] = useState(false);
+  const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
+  const [alertToggle, setAlertToggle] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const {
+    userDetails: { userDetails },
+  } = useContext(AuthContext);
 
   const actions = [
-    // {
-    //   icon: "/assets/video.svg",
-    //   text: "Live",
-    //   action: () => {},
-    // },
     {
       icon: "/assets/picture.svg",
       text: "Add Photo",
       action: () => {},
     },
-    // {
-    //   icon: "/assets/smile.svg",
-    //   text: "Feeling",
-    //   action: () => {},
-    // },
   ];
 
+  useEffect(() => {
+    if (!alertMessage) return;
+    setShowAlert("yes");
+    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+    return () => {
+      clearTimeout(alertTimer);
+    };
+  }, [alertMessage, alertToggle]);
+
+  const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
+
   const postTextHandler = (e: any) => (text.current = e.target.value);
+  const handlePost = async () => {
+    const response = await fetchData({
+      url: `/post`,
+      method: "POST",
+      payload: {
+        id: userDetails._id,
+        message: text.current,
+      },
+    });
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlertMessage("");
+  };
 
   return (
-    <div className={styles.wrapper}>
-      {showPostOptions && (
-        <CreatePost
-          onClose={setShowPostOptions}
-          postText={text}
-          setPostText={postTextHandler}
-        />
-      )}
-      <div className={styles.header}>
-        <Image
-          src="/assets/user.png"
-          alt="user"
-          width={32}
-          height={32}
-          className={styles.userMobile}
-        />
-        <Image
-          src="/assets/user.png"
-          alt="user"
-          width={42}
-          height={42}
-          className={styles.userDesktop}
-        />
+    <>
+      <Alert open={showAlert} setOpen={setShowAlert}>
+        {alertMessage}
+      </Alert>
+      <div className={styles.wrapper}>
+        {showPostOptions && (
+          <CreatePost
+            onClose={setShowPostOptions}
+            postText={text}
+            setPostText={postTextHandler}
+          />
+        )}
+        <div className={styles.header}>
+          <Image
+            src={userDetails?.profilePicture || "/assets/profile-male.png"}
+            alt="user"
+            width={32}
+            height={32}
+            className={styles.userMobile}
+          />
+          <Image
+            src={userDetails?.profilePicture || "/assets/profile-male.png"}
+            alt="user"
+            width={42}
+            height={42}
+            className={styles.userDesktop}
+          />
 
-        <ContentEditable
-          html={text.current}
-          onChange={postTextHandler}
-          placeholder="What’s happening?"
-          className={styles.input}
-        />
-      </div>
-
-      <div className={styles.actionsWrapper}>
-        <div className={styles.actions}>
-          {actions.map((action) => (
-            <div
-              key={action.text}
-              className={styles.action}
-              onClick={() => setShowPostOptions(true)}
-            >
-              <Image src={action.icon} alt="post icon" width={16} height={16} />
-              <p className={styles.actionText}>{action.text}</p>
-            </div>
-          ))}
+          <ContentEditable
+            html={text.current}
+            onChange={postTextHandler}
+            placeholder="What’s happening?"
+            className={styles.input}
+          />
         </div>
 
-        <button className={styles.actionButton}>Post</button>
+        <div className={styles.actionsWrapper}>
+          <div className={styles.actions}>
+            {actions.map((action) => (
+              <div
+                key={action.text}
+                className={styles.action}
+                onClick={() => setShowPostOptions(true)}
+              >
+                <Image
+                  src={action.icon}
+                  alt="post icon"
+                  width={16}
+                  height={16}
+                />
+                <p className={styles.actionText}>{action.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <Button
+            onClick={handlePost}
+            type="submit"
+            isLoading={loading}
+            variation="small"
+          >
+            Post
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
