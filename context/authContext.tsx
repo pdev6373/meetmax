@@ -3,6 +3,7 @@ import { CalendarValueType, GenderType, LayoutType } from "@/types";
 import { useEffect, useState } from "react";
 import { createContext, Dispatch, SetStateAction } from "react";
 import { UserType } from "@/types";
+import { userInitialValues } from "@/constants";
 
 type FieldsType = {
   email: string;
@@ -47,38 +48,6 @@ type AuthContextType = {
 };
 
 const genderInitialValue: GenderType = "Male";
-
-const userInitialValues: UserType = {
-  _id: "",
-  firstname: "",
-  lastname: "",
-  gender: null,
-  dateOfBirth: null,
-  email: "",
-  isVerified: false,
-  bio: "",
-  phoneNumber: "",
-  website: "",
-  location: "",
-  socialLinks: {
-    facebook: "",
-    instagram: "",
-    linkedin: "",
-    twitter: "",
-  },
-  profilePicture: "",
-  coverPicture: "",
-  community: {
-    followers: {
-      amount: 0,
-      data: [],
-    },
-    following: {
-      amount: 0,
-      data: [],
-    },
-  },
-};
 
 export const AuthContext = createContext<AuthContextType>({
   fields: {

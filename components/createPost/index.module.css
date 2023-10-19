@@ -139,16 +139,6 @@
   color: #959eae;
 }
 
-.post {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 22px;
-  color: #ffffff;
-  background: rgba(55, 125, 255, 1);
-  padding: 4px;
-  border-radius: 4px;
-}
-
 .imageUpload {
   display: flex;
   align-items: center;
@@ -357,13 +347,6 @@
   .mainInput[contenteditable="true"]:empty:before {
     font-size: 14px;
     line-height: 22px;
-  }
-
-  .post {
-    padding: 8px 30px;
-    border-radius: 8px;
-    font-size: 16px;
-    line-height: 24px;
   }
 
   .imageUpload {

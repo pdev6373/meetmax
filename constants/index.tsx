@@ -1,3 +1,5 @@
+import { UserType } from "@/types";
+
 export const SIDEBAR = [
   {
     name: "Feed",
@@ -40,6 +42,30 @@ export const SIDEBAR = [
     icon: "/assets/logout.svg",
   },
 ];
+
+export const userInitialValues: UserType = {
+  _id: "",
+  firstname: "",
+  lastname: "",
+  gender: null,
+  dateOfBirth: null,
+  email: "",
+  isVerified: false,
+  bio: "",
+  phoneNumber: "",
+  website: "",
+  location: "",
+  socialLinks: {
+    facebook: "",
+    instagram: "",
+    linkedin: "",
+    twitter: "",
+  },
+  profilePicture: "",
+  coverPicture: "",
+  followers: [],
+  following: [],
+};
 
 export const ALL_FRIENDS = [
   {

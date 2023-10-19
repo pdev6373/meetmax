@@ -1,28 +1,46 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { Reactors } from "..";
-import { PostType } from "@/types";
+import { PostsType } from "@/types";
+import { useAxiosPrivate } from "@/hooks";
 
 export default function Post({
-  firstname,
-  lastname,
-  date,
-  type,
-  posterImage,
-  noOfComments,
-  //   noOfShare,
-  postImages,
-  postText,
+  createdAt,
+  id,
+  images,
   likes,
-  isFollowing,
-  isMine = false,
-}: PostType) {
+  message,
+}: // firstname,
+// lastname,
+// date,
+// type,
+// posterImage,
+// noOfComments,
+// //   noOfShare,
+// postImages,
+// postText,
+// likes,
+// isFollowing,
+// isMine = false,
+PostsType) {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
   const [isPostHidden, setIsPostHidden] = useState(false);
   const [isPostRemoved, setIsPostRemoved] = useState(false);
   const [showUnfolowPopup, setShowUnfolowPopup] = useState(false);
+  const { fetchData, loading } = useAxiosPrivate();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetchData({
+        url: `/post/${id}`,
+        method: "GET",
+      });
+
+      console.log(response);
+    })();
+  }, []);
 
   const reactions = [
     {
@@ -95,7 +113,8 @@ export default function Post({
     },
   ];
 
-  const toBeMapped = isMine ? moreOptionsMe : moreOptions;
+  // const toBeMapped = isMine ? moreOptionsMe : moreOptions;
+  const toBeMapped = true ? moreOptionsMe : moreOptions;
 
   if (isPostRemoved) return <></>;
 
@@ -139,7 +158,8 @@ export default function Post({
                   className={styles.unfollowProceed}
                   onClick={handleUnfollow}
                 >
-                  {isFollowing ? "Unfollow" : "Follow"}
+                  {/* {isFollowing ? "Unfollow" : "Follow"} */}
+                  {true ? "Unfollow" : "Follow"}
                 </button>
               </div>
             </div>
@@ -152,22 +172,26 @@ export default function Post({
           <div className={styles.mainHeader}>
             <div className={styles.mainHeaderDetails}>
               <Image
-                src={posterImage}
+                // src={posterImage}
+                src="/assets/user.png"
                 alt="user"
                 width={32}
                 height={32}
                 className={styles.posterImageMobile}
               />
               <Image
-                src={posterImage}
+                // src={posterImage}
+                src="/assets/user.png"
                 alt="user"
                 width={50}
                 height={50}
                 className={styles.posterImageWeb}
               />
               <div>
-                <h3 className={styles.name}>{`${lastname} ${firstname}`}</h3>
-                <p className={styles.time}>{`${date}. ${type}`}</p>
+                {/* <h3 className={styles.name}>{`${lastname} ${firstname}`}</h3> */}
+                <h3 className={styles.name}>Oluborode Peter</h3>
+                {/* <p className={styles.time}>{`${date}. ${type}`}</p> */}
+                <p className={styles.time}>{createdAt}</p>
               </div>
             </div>
 
@@ -208,31 +232,31 @@ export default function Post({
             </div>
           </div>
 
-          {postText?.length && <p className={styles.postText}>{postText}</p>}
+          {message?.length && <p className={styles.postText}>{message}</p>}
 
-          {postImages?.length &&
-            (postImages.length === 1 ? (
+          {images?.length &&
+            (images.length === 1 ? (
               <div className={styles.postImageWrapper}>
-                {postImages?.map((image, index) => (
+                {images?.map((image, index) => (
                   <Image src={image} alt="post image" fill key={index} />
                 ))}
               </div>
-            ) : postImages.length === 2 ? (
+            ) : images.length === 2 ? (
               <div className={styles.postImageContainerPlus}>
-                {postImages?.map((image, index) => (
+                {images?.map((image, index) => (
                   <div className={styles.postImageWrapper} key={index}>
                     <Image src={image} alt="post image" fill />
                   </div>
                 ))}
               </div>
-            ) : postImages.length === 3 ? (
+            ) : images.length === 3 ? (
               <div className={styles.postImageContainerPlus}>
                 <div className={styles.postImageWrapper}>
-                  <Image src={postImages[2]} alt="post image" fill />
+                  <Image src={images[2]} alt="post image" fill />
                 </div>
 
                 <div className={styles.postTwo}>
-                  {postImages.slice(0, 2)?.map((image, index) => (
+                  {images.slice(0, 2)?.map((image, index) => (
                     <div className={styles.postImageWrapper} key={index}>
                       <Image src={image} alt="post image" fill />
                     </div>
@@ -244,13 +268,14 @@ export default function Post({
             ))}
 
           <div className={styles.mainBottom}>
-            <Reactors
+            {/* <Reactors
               images={likes.map((like) => like.image)}
               noOfReactions="9"
-            />
+            /> */}
 
             <div className={styles.bottomTexts}>
-              <p className={styles.bottomText}>{`${noOfComments} Comments`}</p>
+              {/* <p className={styles.bottomText}>{`${noOfComments} Comments`}</p> */}
+              <p className={styles.bottomText}>10 Comments</p>
               {/* <p className={styles.bottomText}>{`${noOfShare} Share`}</p> */}
             </div>
           </div>
@@ -262,7 +287,8 @@ export default function Post({
               {reaction.name === "Like" ? (
                 <>
                   {likes.some(
-                    (like) => like.email === "adebayoluborode@gmail.com"
+                    // (like) => like.email === "adebayoluborode@gmail.com"
+                    (like) => like
                   ) ? (
                     <>
                       <Image

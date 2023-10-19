@@ -1,11 +1,30 @@
 "use client";
+import { useState, useEffect } from "react";
 import { Birthdays, MakePost, Post } from "@/components";
 import { ONLINE_FRIENDS } from "@/constants";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useAxiosPrivate } from "@/hooks";
+import { PostsType } from "@/types";
 
 export default function Home() {
+  const { fetchData, loading } = useAxiosPrivate();
+  const [posts, setPosts] = useState<PostsType[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetchData({
+        url: "/post",
+        method: "GET",
+      });
+
+      setPosts(response?.data?.data);
+
+      console.log(response);
+    })();
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.onlineFriends}>
@@ -31,212 +50,19 @@ export default function Home() {
       </div>
 
       <MakePost />
-      <Post
-        lastname="Sepural"
-        firstname="Gallery"
-        date="15h"
-        type="Public"
-        likes={[
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-        ]}
-        noOfComments="10"
-        // noOfShare="29"
-        postImages={["/assets/post-image.png"]}
-        posterImage="/assets/user.png"
-        isFollowing={true}
-      />
+
+      {posts?.map((post) => (
+        <Post
+          createdAt={post.createdAt}
+          id={post.id}
+          images={post.images}
+          likes={post.likes}
+          message={post.message}
+        />
+      ))}
+
       {/* <RecentEvent /> */}
-      <Birthdays />
-
-      <Post
-        lastname="Sepural"
-        firstname="Gallery"
-        date="15h"
-        type="Public"
-        likes={[
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-        ]}
-        noOfComments="10"
-        // noOfShare="29"
-        postImages={[
-          "/assets/post-image.png",
-          "/assets/post-image.png",
-          "/assets/post-image.png",
-        ]}
-        posterImage="/assets/user.png"
-        isFollowing={true}
-      />
-
-      <Post
-        lastname="Sepural"
-        firstname="James"
-        date="15h"
-        type="Public"
-        likes={[
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-        ]}
-        noOfComments="10"
-        // noOfShare="29"
-        postImages={["/assets/post-image.png", "/assets/post-image.png"]}
-        posterImage="/assets/user.png"
-        isFollowing={true}
-      />
-
-      <Post
-        lastname="Peter"
-        firstname="Gallery"
-        date="15h"
-        type="Public"
-        postText="If you think adventure is dangerous, try routine, it’s lethal Paulo Coelho! Good morning all friends."
-        likes={[
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-          {
-            email: "adebayoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "Peter",
-            image: "/assets/user.png",
-          },
-          {
-            email: "taiwoluborode@gmail.com",
-            lastname: "Oluborode",
-            firstname: "James",
-            image: "/assets/user.png",
-          },
-        ]}
-        noOfComments="10"
-        // noOfShare="29"
-        postImages={["/assets/post-image.png"]}
-        posterImage="/assets/user.png"
-        isFollowing={true}
-      />
+      {/* <Birthdays /> */}
     </div>
   );
 }

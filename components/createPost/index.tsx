@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { CreatePostType, PostViewType } from "@/types";
 import styles from "./index.module.css";
 import Image from "next/image";
 import ContentEditable from "react-contenteditable";
+import { useAxiosPrivate } from "@/hooks";
+import { AuthContext } from "@/context/authContext";
+import { Alert, Button } from "..";
 
 const postView: PostViewType[] = [
   {
@@ -28,7 +31,24 @@ export default function CreatePost({
   const [currentView, setCurrentView] = useState(postView[0]);
   const [showOptions, setShowOptions] = useState(false);
   const [images, setImages] = useState<string[]>([]);
+  const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
+  const [alertToggle, setAlertToggle] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const {
+    userDetails: { userDetails },
+  } = useContext(AuthContext);
+  const { fetchData, loading } = useAxiosPrivate();
 
+  useEffect(() => {
+    if (!alertMessage) return;
+    setShowAlert("yes");
+    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+    return () => {
+      clearTimeout(alertTimer);
+    };
+  }, [alertMessage, alertToggle]);
+
+  const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
   const handleClose = () => {
     postText.current = "";
     onClose(false);
@@ -49,11 +69,37 @@ export default function CreatePost({
     };
   };
   const handlePost = async () => {
+    console.log("Hello");
+    console.log(postText);
+
+    const response = await fetchData({
+      url: `/post`,
+      method: "POST",
+      payload: {
+        id: userDetails._id,
+        message: postText.current,
+      },
+    });
+
+    console.log(response);
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlertMessage("");
+    // setCommunity(response.data.data);
+
     handleClose();
   };
 
   return (
     <>
+      <Alert open={showAlert} setOpen={setShowAlert}>
+        {alertMessage}
+      </Alert>
       <div className={styles.overlay}></div>
 
       <div className={styles.wrapper}>
@@ -272,9 +318,14 @@ export default function CreatePost({
                 onChange={(e: any) => handleSelectImage(e)}
               />
 
-              <button className={styles.post} onClick={handlePost}>
+              <Button
+                type="submit"
+                isLoading={loading}
+                onClick={handlePost}
+                variation="small"
+              >
                 Post
-              </button>
+              </Button>
             </div>
           </div>
         </div>

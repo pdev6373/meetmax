@@ -22,13 +22,13 @@ export default function useAxios() {
   const [isMounted, setIsMounted] = useState(true);
   const controller = new AbortController();
 
-  useEffect(() => {
-    if (isMounted) return;
+  // useEffect(() => {
+  //   if (isMounted) return;
 
-    return () => {
-      controller.abort();
-    };
-  }, [isMounted]);
+  //   return () => {
+  //     controller.abort();
+  //   };
+  // }, [isMounted]);
 
   const fetchData = async ({
     url,
@@ -52,21 +52,40 @@ export default function useAxios() {
       if (axios.isAxiosError(error)) {
         if (error.response) {
           if (error.response?.data?.message)
-            return { success: true, data: error.response?.data };
+            return {
+              success: true,
+              data: {
+                success: false,
+                message: error.response?.data?.message,
+                data: [] as DataType[],
+              },
+            };
           return {
             success: false,
-            data: { success: false, message: error.response?.statusText },
+            data: {
+              success: false,
+              message: "An error occurred",
+              data: [] as DataType[],
+            },
           };
         }
         return {
           success: false,
-          data: { success: false, message: error.message },
+          data: {
+            success: false,
+            message: "An error occurred",
+            data: [] as DataType[],
+          },
         };
       }
 
       return {
         success: false,
-        data: { success: false, message: error.message },
+        data: {
+          success: false,
+          message: "An error occurred",
+          data: [] as DataType[],
+        },
       };
     } finally {
       setLoading(false);

@@ -18,7 +18,8 @@
     "react-avatar-editor": "^13.0.0",
     "react-calendar": "^4.6.0",
     "react-contenteditable": "^3.3.7",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "latest",

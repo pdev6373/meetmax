@@ -110,24 +110,11 @@ export default function LoginForm({
       },
     });
 
-    if (!response?.success) {
-      setAlertMessage("An error occurred");
-      toggleAlertHandler();
-      return;
-    }
-
-    if (response?.success && !response?.data) {
-      toggleAlertHandler();
-      return;
-    }
-
-    if (response?.success && !response?.data?.success) {
+    if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
       return;
     }
-
-    console.log(response.data);
 
     setAlertMessage("");
     setUserDetails(response?.data?.data?.userDetails);

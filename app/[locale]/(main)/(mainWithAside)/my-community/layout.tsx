@@ -55,7 +55,13 @@ export default function CommunityLayout({ children }: LayoutType) {
                 <span className={styles.amount}>
                   {community.amount > 0 ? community.amount : "No"}
                 </span>
-                <span>{community.title}</span>
+                <span>
+                  {community.amount === 1
+                    ? community.title === "Followers"
+                      ? "Follower"
+                      : community.title
+                    : community.title}
+                </span>
               </div>
             ) : (
               community.title
