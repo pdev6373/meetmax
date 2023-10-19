@@ -153,7 +153,7 @@ export default function EditProfile({
     }
 
     const response = await fetchData({
-      url: "/user/update-user",
+      url: "/user",
       method: "PATCH",
       payload: {
         email,

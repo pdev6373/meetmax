@@ -15,12 +15,10 @@ export default function CalendarComponent({
   cancel,
 }: CalendarType) {
   const {
-    userDetails: {
-      userDetails: { dateOfBirth },
-    },
+    userDetails: { userDetails },
   } = useContext(AuthContext);
   const [calendarValue, onChange] = useState<CalendarValueType>(
-    dateOfBirth ? new Date(dateOfBirth!) : new Date()
+    userDetails?.dateOfBirth ? new Date(userDetails.dateOfBirth) : new Date()
   );
 
   const calendarSaveHandler = () => {

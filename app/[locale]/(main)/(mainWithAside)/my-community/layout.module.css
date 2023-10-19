@@ -3,6 +3,7 @@
   flex-direction: column;
   background: #212833;
   gap: 8px;
+  height: 100%;
 }
 
 .communityCategories {

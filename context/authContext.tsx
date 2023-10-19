@@ -2,38 +2,7 @@
 import { CalendarValueType, GenderType, LayoutType } from "@/types";
 import { useEffect, useState } from "react";
 import { createContext, Dispatch, SetStateAction } from "react";
-
-type UserType = {
-  firstname: string;
-  lastname: string;
-  gender: "Male" | "Female" | null;
-  dateOfBirth: string | null;
-  email: string;
-  isVerified: boolean;
-  _id: string;
-
-  bio: string;
-  phoneNumber: string;
-  website: string;
-  location: string;
-
-  socialLinks: {
-    facebook: string;
-    twitter: string;
-    instagram: string;
-    linkedin: string;
-  };
-
-  followers: {
-    amount: number;
-    data: UserType[];
-  };
-
-  followings: {
-    amount: number;
-    data: UserType[];
-  };
-};
+import { UserType } from "@/types";
 
 type FieldsType = {
   email: string;
@@ -80,14 +49,13 @@ type AuthContextType = {
 const genderInitialValue: GenderType = "Male";
 
 const userInitialValues: UserType = {
+  _id: "",
   firstname: "",
   lastname: "",
   gender: null,
   dateOfBirth: null,
   email: "",
   isVerified: false,
-  _id: "",
-
   bio: "",
   phoneNumber: "",
   website: "",
@@ -98,15 +66,17 @@ const userInitialValues: UserType = {
     linkedin: "",
     twitter: "",
   },
-
-  followers: {
-    amount: 0,
-    data: [],
-  },
-
-  followings: {
-    amount: 0,
-    data: [],
+  profilePicture: "",
+  coverPicture: "",
+  community: {
+    followers: {
+      amount: 0,
+      data: [],
+    },
+    following: {
+      amount: 0,
+      data: [],
+    },
   },
 };
 

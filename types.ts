@@ -248,21 +248,30 @@ export type SettingsTextType = {
   children: string;
 };
 
-export type CommunityDataType = {
-  image: string;
-  firstname: string;
-  lastname: string;
-  job: string;
-  social: string[];
-  isFollowing: boolean;
-  id: number;
-};
-
-export type CommunityType = {
-  title: string;
-  data: CommunityDataType[];
-};
-
 export type ProfileType = {
   isMine?: boolean;
+};
+
+export type UserType = {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  gender: "Male" | "Female" | null;
+  dateOfBirth: string | null;
+  email: string;
+  isVerified: boolean;
+  bio: string;
+  phoneNumber: string;
+  website: string;
+  location: string;
+  socialLinks: {
+    facebook: string;
+    twitter: string;
+    instagram: string;
+    linkedin: string;
+  };
+  profilePicture: string;
+  coverPicture: string;
+  followers: string[];
+  following: string[];
 };

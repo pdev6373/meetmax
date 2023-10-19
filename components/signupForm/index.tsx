@@ -50,21 +50,7 @@ export default function SignupForm({
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  type GendertType = {
-    id: "male" | "female";
-    label: GenderType;
-  };
-
-  const genders: GendertType[] = [
-    {
-      id: "male",
-      label: male as "Male",
-    },
-    {
-      id: "female",
-      label: female as "Female",
-    },
-  ];
+  const genders = [male as "Male", female as "Female"];
 
   useEffect(() => {
     resetFields();
@@ -278,15 +264,15 @@ export default function SignupForm({
             />
 
             <div className={styles.genders}>
-              {genders.map((genderInfo) => (
+              {genders.map((gender) => (
                 <div
-                  key={genderInfo.label}
+                  key={gender}
                   className={styles.gender}
-                  onClick={() => setGenderHandler(genderInfo.label)}
+                  onClick={() => setGenderHandler(gender)}
                 >
                   <Image
                     src={
-                      isSelectedGender(genderInfo.label)
+                      isSelectedGender(gender)
                         ? "/assets/select.svg"
                         : "/assets/deselect.svg"
                     }
@@ -297,11 +283,11 @@ export default function SignupForm({
                   <input
                     type="radio"
                     value={gender}
-                    id={genderInfo.id}
+                    id={gender}
                     className="hidden"
                   />
-                  <label htmlFor={genderInfo.id} className={styles.genderLabel}>
-                    {genderInfo.label}
+                  <label htmlFor={gender} className={styles.genderLabel}>
+                    {gender}
                   </label>
                 </div>
               ))}

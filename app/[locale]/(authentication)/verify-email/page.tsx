@@ -8,7 +8,6 @@ import { Alert } from "@/components";
 
 export default function ResetPassword({ searchParams }: any) {
   const { fetchData } = useAxios();
-  const [emailVerified, setEmailVerified] = useState(false);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -17,6 +16,8 @@ export default function ResetPassword({ searchParams }: any) {
   const router = useRouter();
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
+
+  console.log(searchParams);
 
   useEffect(() => {
     if (!searchParams.token) {
@@ -31,20 +32,15 @@ export default function ResetPassword({ searchParams }: any) {
     if (!alertMessage) return;
 
     setShowAlert("yes");
-    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+    const alertTimer = setTimeout(() => {
+      setShowAlert("no");
+      router.push("/login");
+    }, 2000);
 
     return () => {
       clearTimeout(alertTimer);
     };
   }, [alertMessage, alertToggle]);
-
-  useEffect(() => {
-    if (emailVerified) {
-      setTimeout(() => {
-        router.replace("/login");
-      }, 1000);
-    }
-  }, [emailVerified]);
 
   useEffect(() => {
     if (!makeRequest) return;
@@ -78,9 +74,10 @@ export default function ResetPassword({ searchParams }: any) {
         return;
       }
 
+      console.log(response?.data?.message);
+
       setError(false);
       setAlertMessage(response?.data?.message);
-      setEmailVerified(true);
     };
 
     verifyEmail();
