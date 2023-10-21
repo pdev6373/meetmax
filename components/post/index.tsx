@@ -7,8 +7,8 @@ import { PostType, UserType } from "@/types";
 import { userInitialValues } from "@/constants";
 import { format } from "timeago.js";
 import { AuthContext } from "@/context/authContext";
-import useUserReq from "@/app/helpers/useUserReq";
-import usePostReq from "@/app/helpers/usePostReq";
+import useUserReq from "@/helpers/useUserReq";
+import usePostReq from "@/helpers/usePostReq";
 
 export default function Post({
   createdAt,
@@ -99,11 +99,9 @@ export default function Post({
       return;
     }
 
-    // setPost(response?.data?.data);
-
     console.log(response);
 
-    // setUser(response?.data?.data);
+    setPost(response?.data?.data);
     setAlertMessage("");
   };
 
@@ -321,15 +319,10 @@ export default function Post({
           )}
 
           <div className={styles.mainBottom}>
-            {/* <Reactors
-              post.images={likes.map((like) => like.image)}
-              noOfReactions="9"
-            /> */}
-
+            {post.likes.length ? <Reactors post={post} /> : <></>}
             <div className={styles.bottomTexts}>
               {/* <p className={styles.bottomText}>{`${noOfComments} Comments`}</p> */}
               <p className={styles.bottomText}>10 Comments</p>
-              {/* <p className={styles.bottomText}>{`${noOfShare} Share`}</p> */}
             </div>
           </div>
         </div>
@@ -358,6 +351,16 @@ export default function Post({
                       >
                         Liked
                       </p>
+                      {reactingToPost ? (
+                        <Image
+                          src="/assets/spinner.svg"
+                          alt="spinner"
+                          width={16}
+                          height={16}
+                        />
+                      ) : (
+                        <></>
+                      )}
                     </button>
                   ) : (
                     <button
@@ -371,6 +374,16 @@ export default function Post({
                         height={16}
                       />
                       <p className={styles.reactionName}>{reaction.name}</p>
+                      {reactingToPost ? (
+                        <Image
+                          src="/assets/spinner.svg"
+                          alt="spinner"
+                          width={16}
+                          height={16}
+                        />
+                      ) : (
+                        <></>
+                      )}
                     </button>
                   )}
                 </>

@@ -6,6 +6,8 @@ export default function useUserReq() {
   const { fetchData: fetchUser, loading: fetchingUser } = useAxiosPrivate();
   const { fetchData: updateUserData, loading: updatingUser } =
     useAxiosPrivate();
+  const { fetchData: fetchSomeUsersData, loading: fetchingSomeUsersData } =
+    useAxiosPrivate();
   const {
     userDetails: { userDetails },
   } = useContext(AuthContext);
@@ -13,6 +15,16 @@ export default function useUserReq() {
   const fetchAUser = async (id: string) => {
     const response = await fetchUser({
       url: `/user/${id}`,
+      method: "GET",
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    return response;
+  };
+
+  const fetchSomeUsers = async (ids: string[]) => {
+    const response = await fetchSomeUsersData({
+      url: `/user/some-users/${ids.toString()}`,
       method: "GET",
     });
 
@@ -36,10 +48,15 @@ export default function useUserReq() {
     makeRequest: fetchAUser,
   };
 
+  const getSomeUsers = {
+    loading: fetchingSomeUsersData,
+    makeRequest: fetchSomeUsers,
+  };
+
   const updateUser = {
     loading: updatingUser,
     makeRequest: updateAUser,
   };
 
-  return { getUser, updateUser };
+  return { getUser, updateUser, getSomeUsers };
 }

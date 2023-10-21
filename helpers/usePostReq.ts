@@ -73,7 +73,6 @@ export default function usePostReq() {
     });
 
     if (!response?.success || !response?.data?.success) return response;
-    setPosts(response?.data?.data);
     return response;
   };
 

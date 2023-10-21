@@ -4,7 +4,7 @@ import { CreatePostType, PostViewType } from "@/types";
 import Image from "next/image";
 import ContentEditable from "react-contenteditable";
 import { Alert, Button } from "..";
-import usePostReq from "@/app/helpers/usePostReq";
+import usePostReq from "@/helpers/usePostReq";
 import styles from "./index.module.css";
 import { AuthContext } from "@/context/authContext";
 

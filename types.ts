@@ -195,8 +195,7 @@ export type FetchType = {
 };
 
 export type ReactorsType = {
-  images: string[];
-  noOfReactions: string;
+  post: PostType;
 };
 
 export type PostLikesType = {

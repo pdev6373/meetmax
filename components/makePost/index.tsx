@@ -5,7 +5,7 @@ import ContentEditable from "react-contenteditable";
 import styles from "./index.module.css";
 import { Alert, Button, CreatePost } from "..";
 import { AuthContext } from "@/context/authContext";
-import usePostReq from "@/app/helpers/usePostReq";
+import usePostReq from "@/helpers/usePostReq";
 
 export default function MakePost() {
   const {

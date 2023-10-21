@@ -1,22 +1,41 @@
+"use client";
+import { useState, useEffect } from "react";
 import { Fragment } from "react";
-import { ReactorsType } from "@/types";
+import { ReactorsType, UserType } from "@/types";
 import Image from "next/image";
 import styles from "./index.module.css";
+import useUserReq from "@/helpers/useUserReq";
 
-export default function Reactors({ images, noOfReactions }: ReactorsType) {
+export default function Reactors({ post }: ReactorsType) {
+  const {
+    getSomeUsers: { loading, makeRequest },
+  } = useUserReq();
+
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await makeRequest(post.likes.slice(0, 3));
+      console.log(response);
+      setImages(
+        response?.data?.data.map((data: UserType) => data.profilePicture)
+      );
+    })();
+  }, [post]);
+
   return (
     <div className={styles.reactors}>
-      {images.slice(0, 3).map((image, index) => (
+      {images?.map((image, index) => (
         <Fragment key={index}>
           <Image
-            src={image}
+            src={image || "/assets/profile-male.png"}
             alt="image"
             width={18}
             height={18}
             className={styles.imageMobile}
           />
           <Image
-            src={image}
+            src={image || "/assets/profile-male.png"}
             alt="image"
             width={22}
             height={22}
@@ -26,10 +45,12 @@ export default function Reactors({ images, noOfReactions }: ReactorsType) {
         </Fragment>
       ))}
 
-      {images.length > 3 && (
+      {post.likes.length > 3 ? (
         <p className={styles.reactorsNumber}>{`+${
-          Number(noOfReactions) - 3
+          Number(post.likes.length) - 3
         }`}</p>
+      ) : (
+        <></>
       )}
     </div>
   );

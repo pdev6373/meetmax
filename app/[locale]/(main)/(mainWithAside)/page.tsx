@@ -5,7 +5,7 @@ import { ONLINE_FRIENDS } from "@/constants";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import usePostReq from "@/app/helpers/usePostReq";
+import usePostReq from "@/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
 import { usePathname } from "next/navigation";
 
@@ -36,8 +36,6 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const response = await makeRequest();
-      console.log(response);
-
       setFetching(false);
 
       if (!response?.success || !response?.data?.success) {

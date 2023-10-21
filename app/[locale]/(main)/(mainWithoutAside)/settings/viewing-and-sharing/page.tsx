@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { Alert, SettingsHeading, SettingsRouteText } from "@/components";
 import Image from "next/image";
 import styles from "./page.module.css";
-import useUserReq from "@/app/helpers/useUserReq";
+import useUserReq from "@/helpers/useUserReq";
 import { AuthContext } from "@/context/authContext";
 import format from "date-fns/format";
 import { VisibilityType } from "@/types";
