@@ -5,11 +5,13 @@ import ContentEditable from "react-contenteditable";
 import styles from "./index.module.css";
 import { Alert, Button, CreatePost } from "..";
 import { AuthContext } from "@/context/authContext";
-import { useAxiosPrivate } from "@/hooks";
+import usePostReq from "@/app/helpers/usePostReq";
 
 export default function MakePost() {
+  const {
+    createPost: { loading, makeRequest },
+  } = usePostReq();
   const text = useRef("");
-  const { fetchData, loading } = useAxiosPrivate();
   const [showPostOptions, setShowPostOptions] = useState(false);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
@@ -17,6 +19,8 @@ export default function MakePost() {
   const {
     userDetails: { userDetails },
   } = useContext(AuthContext);
+
+  const editableRef = useRef<any>();
 
   const actions = [
     {
@@ -36,18 +40,13 @@ export default function MakePost() {
   }, [alertMessage, alertToggle]);
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
-
-  const postTextHandler = (e: any) => (text.current = e.target.value);
+  const postTextHandler = (e: any) => {
+    // text.current = e.target.value;
+    text.current = editableRef.current.textContent;
+  };
   const handlePost = async () => {
-    const response = await fetchData({
-      url: `/post`,
-      method: "POST",
-      payload: {
-        id: userDetails._id,
-        message: text.current,
-      },
-    });
-
+    if (!text.current) return;
+    const response = await makeRequest({ message: text });
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
@@ -64,11 +63,7 @@ export default function MakePost() {
       </Alert>
       <div className={styles.wrapper}>
         {showPostOptions && (
-          <CreatePost
-            onClose={setShowPostOptions}
-            postText={text}
-            setPostText={postTextHandler}
-          />
+          <CreatePost onClose={setShowPostOptions} postText={text} />
         )}
         <div className={styles.header}>
           <Image
@@ -87,6 +82,7 @@ export default function MakePost() {
           />
 
           <ContentEditable
+            innerRef={editableRef}
             html={text.current}
             onChange={postTextHandler}
             placeholder="What’s happening?"
@@ -114,6 +110,7 @@ export default function MakePost() {
           </div>
 
           <Button
+            disabled={!text.current}
             onClick={handlePost}
             type="submit"
             isLoading={loading}

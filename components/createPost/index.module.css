@@ -127,6 +127,9 @@
   line-height: 18px;
   color: #edeff1;
   padding: 8px 10px;
+  box-sizing: content-box;
+  text-overflow: clip;
+  word-break: break-all;
 }
 
 .mainInput[contenteditable="true"]:empty:before {

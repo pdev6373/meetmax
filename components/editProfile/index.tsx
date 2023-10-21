@@ -174,8 +174,6 @@ export default function EditProfile({
         },
       },
     });
-
-    console.log(response);
   };
 
   const cancelButtonHandler = () => {

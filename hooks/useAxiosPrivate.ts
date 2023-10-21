@@ -7,9 +7,6 @@ import { useRefreshToken } from ".";
 
 const axiosReq = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
   withCredentials: true,
 });
 
@@ -21,8 +18,7 @@ export default function useAxiosPrivate() {
   const {
     accessToken: { accessToken },
   } = useContext(AuthContext);
-  const [isFirstRequest, setIsFirstRequest] = useState(true);
-  const [previousRequest, setPreviousRequest] = useState<any>({});
+  const [isRequestMade, setIsRequestMade] = useState(false);
 
   useEffect(() => {
     const requestIntercept = axiosReq.interceptors.request.use(
@@ -39,14 +35,26 @@ export default function useAxiosPrivate() {
     const responseIntercept = axiosReq.interceptors.response.use(
       (response) => response,
       async (error) => {
+        if (isRequestMade) return;
         const prevRequest = error?.config;
 
-        if (error?.response?.status === 403 && !prevRequest?.sent) {
+        if (
+          error?.response?.status === 403 &&
+          !prevRequest?.sent &&
+          !isRequestMade
+        ) {
           prevRequest.sent = true;
-          setIsFirstRequest(false);
-          refresh();
-          setPreviousRequest(prevRequest);
-          return;
+          setIsRequestMade(true);
+          const { accessToken } = await refresh();
+          prevRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+          // return await fetchData({
+          //   method: prevRequest.method,
+          //   url: prevRequest.url,
+          //   payload: prevRequest.data,
+          //   contentType: prevRequest.headers["Content-Type"],
+          //   token: accessToken,
+          // });
+          return axiosReq(prevRequest);
         }
 
         return Promise.reject(error);
@@ -58,22 +66,6 @@ export default function useAxiosPrivate() {
       axiosReq.interceptors.response.eject(responseIntercept);
     };
   }, []);
-
-  useEffect(() => {
-    if (!isFirstRequest) {
-      setPreviousRequest((prev: any) => ({
-        ...prev,
-        headers: {
-          ...prev.headers,
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }));
-    }
-  }, [isFirstRequest, accessToken]);
-
-  useEffect(() => {
-    previousRequest && axiosReq(previousRequest);
-  }, [previousRequest]);
 
   // useEffect(() => {
   //   if (isMounted) return;
@@ -87,6 +79,8 @@ export default function useAxiosPrivate() {
     url,
     method = "GET",
     payload = null,
+    contentType = "application/json",
+    token = "",
   }: FetchType) => {
     try {
       setLoading(true);
@@ -96,6 +90,10 @@ export default function useAxiosPrivate() {
         method: method,
         url: url,
         data: payload,
+        headers: {
+          "Content-Type": contentType,
+          Authorization: token ? `Bearer ${token}` : null,
+        },
         signal: controller.signal,
       });
 

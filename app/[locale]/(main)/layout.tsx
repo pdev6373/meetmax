@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import styles from "./layout.module.css";
 import Link from "next/link";
 import { AuthContext } from "@/context/authContext";
-import { PostProvider } from "@/context/postContext";
 
 export default function MainLayout({ children }: LayoutType) {
   const router = useRouter();
@@ -90,9 +89,7 @@ export default function MainLayout({ children }: LayoutType) {
           </div>
         </header>
 
-        <main className={styles.main}>
-          <PostProvider>{children}</PostProvider>
-        </main>
+        <main className={styles.main}>{children}</main>
       </div>
     </div>
   );

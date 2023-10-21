@@ -2,12 +2,13 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
-import { Reactors } from "..";
+import { Alert, Reactors } from "..";
 import { PostType, UserType } from "@/types";
-import { useAxiosPrivate } from "@/hooks";
 import { userInitialValues } from "@/constants";
 import { format } from "timeago.js";
 import { AuthContext } from "@/context/authContext";
+import useUserReq from "@/app/helpers/useUserReq";
+import usePostReq from "@/app/helpers/usePostReq";
 
 export default function Post({
   createdAt,
@@ -15,7 +16,15 @@ export default function Post({
   images,
   likes,
   message,
+  visibility,
+  _id,
 }: PostType) {
+  const {
+    getUser: { loading, makeRequest },
+  } = useUserReq();
+  const {
+    reactToPost: { loading: reactingToPost, makeRequest: reactToPost },
+  } = usePostReq();
   const {
     userDetails: { userDetails },
   } = useContext(AuthContext);
@@ -23,20 +32,41 @@ export default function Post({
   const [isPostHidden, setIsPostHidden] = useState(false);
   const [isPostRemoved, setIsPostRemoved] = useState(false);
   const [showUnfolowPopup, setShowUnfolowPopup] = useState(false);
-  const { fetchData, loading } = useAxiosPrivate();
   const [user, setUser] = useState<UserType>(userInitialValues);
   const isFollowing = userDetails?.following?.includes(id);
+  const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
+  const [alertToggle, setAlertToggle] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [post, setPost] = useState<PostType>({
+    _id,
+    createdAt,
+    id,
+    images,
+    likes,
+    message,
+    visibility,
+  });
+
+  useEffect(() => {
+    if (!alertMessage) return;
+    setShowAlert("yes");
+    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+    return () => {
+      clearTimeout(alertTimer);
+    };
+  }, [alertMessage, alertToggle]);
 
   useEffect(() => {
     (async () => {
-      const response = await fetchData({
-        url: `/user/${id}`,
-        method: "GET",
-      });
+      const response = await makeRequest(post.id);
+      if (!response?.success || !response?.data?.success) {
+        setAlertMessage(response?.data?.message);
+        toggleAlertHandler();
+        return;
+      }
 
       setUser(response?.data?.data);
-
-      console.log(response);
+      setAlertMessage("");
     })();
   }, []);
 
@@ -51,6 +81,7 @@ export default function Post({
     },
   ];
 
+  const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
   const handleUnfollow = async () => {
     setShowUnfolowPopup(false);
   };
@@ -59,6 +90,21 @@ export default function Post({
   const handleRemovePost = () => setIsPostRemoved(true);
   const handleHidePost = async () => {
     setIsPostHidden(true);
+  };
+  const postReactionHandler = async () => {
+    const response = await reactToPost(post._id);
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    // setPost(response?.data?.data);
+
+    console.log(response);
+
+    // setUser(response?.data?.data);
+    setAlertMessage("");
   };
 
   const moreOptions = [
@@ -107,10 +153,9 @@ export default function Post({
     },
   ];
 
-  const toBeMapped = userDetails?._id === id ? moreOptionsMe : moreOptions;
+  const toBeMapped = userDetails?._id === post.id ? moreOptionsMe : moreOptions;
 
   if (isPostRemoved) return <></>;
-
   if (isPostHidden)
     return (
       <div className={styles.hiddenPostWrapper}>
@@ -132,6 +177,9 @@ export default function Post({
 
   return (
     <>
+      <Alert open={showAlert} setOpen={setShowAlert}>
+        {alertMessage}
+      </Alert>
       {showUnfolowPopup ? (
         <>
           <div className={styles.overlay}>
@@ -183,7 +231,13 @@ export default function Post({
                 <h3
                   className={styles.name}
                 >{`${user.lastname} ${user.firstname}`}</h3>
-                <p className={styles.time}>{`${format(createdAt)}. Public`}</p>
+                <p className={styles.time}>{`${format(post.createdAt)}. ${
+                  post.visibility === "everyone"
+                    ? "Public"
+                    : post.visibility === "followers"
+                    ? "Friends"
+                    : "Only me"
+                }`}</p>
               </div>
             </div>
 
@@ -224,35 +278,35 @@ export default function Post({
             </div>
           </div>
 
-          {message?.length ? (
-            <p className={styles.postText}>{message}</p>
+          {post.message?.length ? (
+            <p className={styles.postText}>{post.message}</p>
           ) : (
             <></>
           )}
 
-          {images?.length ? (
-            images.length === 1 ? (
+          {post.images?.length ? (
+            post.images.length === 1 ? (
               <div className={styles.postImageWrapper}>
-                {images?.map((image, index) => (
+                {post.images?.map((image, index) => (
                   <Image src={image} alt="post image" fill key={index} />
                 ))}
               </div>
-            ) : images.length === 2 ? (
+            ) : post.images.length === 2 ? (
               <div className={styles.postImageContainerPlus}>
-                {images?.map((image, index) => (
+                {post.images?.map((image, index) => (
                   <div className={styles.postImageWrapper} key={index}>
                     <Image src={image} alt="post image" fill />
                   </div>
                 ))}
               </div>
-            ) : images.length === 3 ? (
+            ) : post.images.length === 3 ? (
               <div className={styles.postImageContainerPlus}>
                 <div className={styles.postImageWrapper}>
-                  <Image src={images[2]} alt="post image" fill />
+                  <Image src={post.images[2]} alt="post image" fill />
                 </div>
 
                 <div className={styles.postTwo}>
-                  {images.slice(0, 2)?.map((image, index) => (
+                  {post.images.slice(0, 2)?.map((image, index) => (
                     <div className={styles.postImageWrapper} key={index}>
                       <Image src={image} alt="post image" fill />
                     </div>
@@ -268,7 +322,7 @@ export default function Post({
 
           <div className={styles.mainBottom}>
             {/* <Reactors
-              images={likes.map((like) => like.image)}
+              post.images={likes.map((like) => like.image)}
               noOfReactions="9"
             /> */}
 
@@ -285,11 +339,11 @@ export default function Post({
             <div className={styles.reaction} key={index}>
               {reaction.name === "Like" ? (
                 <>
-                  {likes.some(
-                    // (like) => like.email === "adebayoluborode@gmail.com"
-                    (like) => like
-                  ) ? (
-                    <>
+                  {post.likes.includes(userDetails._id) ? (
+                    <button
+                      className={styles.reactionButton}
+                      onClick={postReactionHandler}
+                    >
                       <Image
                         src="/assets/liked.svg"
                         alt="reaction"
@@ -302,11 +356,14 @@ export default function Post({
                           styles.reactionNameReacted,
                         ].join(" ")}
                       >
-                        {reaction.name}
+                        Liked
                       </p>
-                    </>
+                    </button>
                   ) : (
-                    <>
+                    <button
+                      className={styles.reactionButton}
+                      onClick={postReactionHandler}
+                    >
                       <Image
                         src={reaction.icon}
                         alt="reaction"
@@ -314,7 +371,7 @@ export default function Post({
                         height={16}
                       />
                       <p className={styles.reactionName}>{reaction.name}</p>
-                    </>
+                    </button>
                   )}
                 </>
               ) : (
@@ -334,14 +391,14 @@ export default function Post({
 
         <div className={styles.bottom}>
           <Image
-            src="/assets/user.png"
+            src={userDetails?.profilePicture || "/assets/profile-male.png"}
             alt="user"
             width={32}
             height={32}
             className={styles.bottomUserImage}
           />
           <Image
-            src="/assets/user.png"
+            src={userDetails?.profilePicture || "/assets/profile-male.png"}
             alt="user"
             width={38}
             height={38}
@@ -356,18 +413,6 @@ export default function Post({
               />
 
               <div className={styles.inputIcons}>
-                <Image
-                  src="/assets/gif.svg"
-                  alt="user"
-                  width={16}
-                  height={16}
-                />
-                <Image
-                  src="/assets/image.svg"
-                  alt="user"
-                  width={16}
-                  height={16}
-                />
                 <Image
                   src="/assets/emoji.svg"
                   alt="user"

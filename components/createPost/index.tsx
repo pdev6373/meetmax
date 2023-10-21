@@ -1,43 +1,57 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { CreatePostType, PostViewType } from "@/types";
-import styles from "./index.module.css";
 import Image from "next/image";
 import ContentEditable from "react-contenteditable";
-import { useAxiosPrivate } from "@/hooks";
-import { AuthContext } from "@/context/authContext";
 import { Alert, Button } from "..";
+import usePostReq from "@/app/helpers/usePostReq";
+import styles from "./index.module.css";
+import { AuthContext } from "@/context/authContext";
 
 const postView: PostViewType[] = [
   {
     type: "Friends",
-    value: "friends",
+    value: "followers",
   },
   {
     type: "Public",
-    value: "public",
+    value: "everyone",
   },
   {
     type: "Only me",
-    value: "only-me",
+    value: "me",
   },
 ];
 
-export default function CreatePost({
-  onClose,
-  postText,
-  setPostText,
-}: CreatePostType) {
-  const [currentView, setCurrentView] = useState(postView[0]);
+export default function CreatePost({ onClose, postText }: CreatePostType) {
+  const text = useRef<any>();
+  const editableRef = useRef<any>();
+  const {
+    createPost: { loading, makeRequest },
+  } = usePostReq();
+  const {
+    userDetails: {
+      userDetails: { postVisibility },
+    },
+  } = useContext(AuthContext);
+  const [currentView, setCurrentView] = useState<PostViewType>(
+    postView.find((view) => view.value === postVisibility)!
+  );
   const [showOptions, setShowOptions] = useState(false);
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const {
-    userDetails: { userDetails },
-  } = useContext(AuthContext);
-  const { fetchData, loading } = useAxiosPrivate();
+
+  useEffect(() => {
+    editableRef.current.textContent = postText.current;
+    text.current = postText.current;
+  }, []);
+
+  const postTextHandler = (e: any) => {
+    // text.current = e.target.value;
+    text.current = editableRef.current.textContent;
+  };
 
   useEffect(() => {
     if (!alertMessage) return;
@@ -51,33 +65,34 @@ export default function CreatePost({
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
   const handleClose = () => {
     postText.current = "";
+    text.current = "";
     onClose(false);
   };
   const handleShowOptions = () => setShowOptions((prev) => !prev);
-  const handleImageRemove = (removeImage: string) =>
+  const handleImageRemove = (removeImage: File) =>
     setImages((prev) => prev.filter((image) => image !== removeImage));
   const handleSetCurrentView = (val: PostViewType) => {
     setShowOptions(false);
     setCurrentView(val);
   };
   const handleSelectImage = (e: any) => {
-    var input = e.target;
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function (event) {
-      setImages((prev) => [...prev, event?.target?.result as string]);
-    };
-  };
-  const handlePost = async () => {
-    const response = await fetchData({
-      url: `/post`,
-      method: "POST",
-      payload: {
-        id: userDetails._id,
-        message: postText.current,
-      },
-    });
+    var input = e.target.files;
+    const neededImagesAmount = 3 - images.length;
+    const fileLength =
+      input.length > neededImagesAmount ? neededImagesAmount : input.length;
 
+    for (let i = 0; i < fileLength; i++) {
+      setImages((prev) => [...prev, input[i]]);
+    }
+  };
+
+  const handlePost = async () => {
+    if (!text.current && !images.length) return;
+    const response = await makeRequest({
+      message: text,
+      images,
+      visibility: currentView.value,
+    });
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
@@ -85,8 +100,6 @@ export default function CreatePost({
     }
 
     setAlertMessage("");
-    // setCommunity(response.data.data);
-
     handleClose();
   };
 
@@ -121,7 +134,7 @@ export default function CreatePost({
                   onClick={handleShowOptions}
                 >
                   <p className={styles.currenShowOptionValue}>
-                    {currentView.type}
+                    {currentView?.type}
                   </p>
                   <Image
                     src="/assets/dropdown.svg"
@@ -149,7 +162,7 @@ export default function CreatePost({
                       >
                         <Image
                           src={
-                            currentView.type === view.type
+                            currentView?.type === view.type
                               ? "/assets/select.svg"
                               : "/assets/deselect.svg"
                           }
@@ -192,8 +205,9 @@ export default function CreatePost({
                 className={styles.postUserWeb}
               />
               <ContentEditable
-                html={postText.current}
-                onChange={setPostText}
+                innerRef={editableRef}
+                html={text.current}
+                onChange={postTextHandler}
                 placeholder="What’s happening?"
                 className={styles.mainInput}
               />
@@ -216,7 +230,11 @@ export default function CreatePost({
                         />
                       </div>
 
-                      <Image src={image} alt="post image" fill />
+                      <Image
+                        src={URL.createObjectURL(image)}
+                        alt="post image"
+                        fill
+                      />
                     </div>
                   ))}
                 </div>
@@ -236,7 +254,11 @@ export default function CreatePost({
                         />
                       </div>
 
-                      <Image src={image} alt="post image" fill />
+                      <Image
+                        src={URL.createObjectURL(image)}
+                        alt="post image"
+                        fill
+                      />
                     </div>
                   ))}
                 </div>
@@ -256,7 +278,11 @@ export default function CreatePost({
                         />
                       </div>
 
-                      <Image src={images[2]} alt="post image" fill />
+                      <Image
+                        src={URL.createObjectURL(images[2])}
+                        alt="post image"
+                        fill
+                      />
                     </div>
 
                     <div className={styles.postTwo}>
@@ -277,7 +303,11 @@ export default function CreatePost({
                             />
                           </div>
 
-                          <Image src={image} alt="post image" fill />
+                          <Image
+                            src={URL.createObjectURL(image)}
+                            alt="post image"
+                            fill
+                          />
                         </div>
                       ))}
                     </div>
@@ -305,15 +335,17 @@ export default function CreatePost({
 
               <input
                 type="file"
-                accept="image/*"
+                accept="image/png, image/jpeg, image/jpg"
                 placeholder="enter your image"
                 id="post-image"
+                multiple
                 value=""
                 className={styles.fileInput}
                 onChange={(e: any) => handleSelectImage(e)}
               />
 
               <Button
+                disabled={!text.current}
                 type="submit"
                 isLoading={loading}
                 onClick={handlePost}

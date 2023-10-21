@@ -54,6 +54,7 @@ export type ButtonType = {
   onClick?: any;
   isLoading?: boolean;
   variation?: "normal" | "small";
+  disabled?: boolean;
 };
 
 export type InputType = {
@@ -189,6 +190,8 @@ export type FetchType = {
   method?: "POST" | "GET" | "PATCH" | "DELETE";
   payload?: any;
   credentials?: "include" | "same-origin" | "omit";
+  contentType?: "application/json" | "multipart/form-data";
+  token?: string;
 };
 
 export type ReactorsType = {
@@ -205,7 +208,7 @@ export type PostLikesType = {
 
 export type PostViewType = {
   type: "Public" | "Friends" | "Only me";
-  value: "public" | "friends" | "only-me";
+  value: VisibilityType;
 };
 
 export type PostType = {
@@ -214,11 +217,12 @@ export type PostType = {
   images: string[];
   likes: string[];
   message: string;
+  visibility: VisibilityType;
+  _id: string;
 };
 
 export type CreatePostType = {
   onClose: any;
-  setPostText: any;
   postText: MutableRefObject<string>;
 };
 
@@ -267,6 +271,10 @@ export type UserType = {
   coverPicture: string;
   followers: string[];
   following: string[];
+  blockedUsers: string[];
+  postVisibility: VisibilityType;
+  profileVisibility: VisibilityType;
+  canBefollowed: boolean;
 };
 
 export type DataType = {
@@ -274,3 +282,5 @@ export type DataType = {
   message: string;
   data: any;
 };
+
+export type VisibilityType = "everyone" | "followers" | "me";

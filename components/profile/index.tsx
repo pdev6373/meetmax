@@ -505,7 +505,7 @@ export default function Profile({ isMine = false }: ProfileType) {
           <div className={styles.profilePost}>
             <MakePost />
 
-            <Post
+            {/* <Post
               isMine={isMine}
               lastname="Sepural"
               firstname="Gallery"
@@ -711,7 +711,7 @@ export default function Profile({ isMine = false }: ProfileType) {
               postImages={["/assets/post-image.png"]}
               posterImage="/assets/user.png"
               isFollowing={true}
-            />
+            /> */}
           </div>
         </div>
       </div>

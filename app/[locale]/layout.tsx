@@ -6,6 +6,7 @@ import { locales } from "@/constants";
 import { AuthProvider } from "@/context/authContext";
 import { AppWrapper } from "@/components";
 import "./globals.css";
+import { PostProvider } from "@/context/postContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -29,7 +30,9 @@ export default function LocaleLayout({
     <html lang={locale}>
       <body className={roboto.className}>
         <AuthProvider>
-          <AppWrapper>{children}</AppWrapper>
+          <AppWrapper>
+            <PostProvider>{children}</PostProvider>
+          </AppWrapper>
         </AuthProvider>
       </body>
     </html>

@@ -9,11 +9,13 @@ export default function Button({
   type,
   isLoading = false,
   variation = "normal",
+  disabled,
 }: ButtonType) {
   return type === "social" ? (
     <button
+      disabled={disabled || isLoading}
       type="button"
-      onClick={onClick && onClick}
+      onClick={!disabled && onClick && onClick}
       className={styles.socialButton}
     >
       {icon && <Image src={icon} alt="social icon" width={16} height={16} />}
@@ -32,6 +34,7 @@ export default function Button({
     </button>
   ) : (
     <button
+      disabled={isLoading || isLoading}
       type="submit"
       onClick={
         onClick &&

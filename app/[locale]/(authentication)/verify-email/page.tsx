@@ -17,8 +17,6 @@ export default function ResetPassword({ searchParams }: any) {
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
 
-  console.log(searchParams);
-
   useEffect(() => {
     if (!searchParams.token) {
       router.replace("/login");
@@ -73,8 +71,6 @@ export default function ResetPassword({ searchParams }: any) {
         toggleAlertHandler();
         return;
       }
-
-      console.log(response?.data?.message);
 
       setError(false);
       setAlertMessage(response?.data?.message);

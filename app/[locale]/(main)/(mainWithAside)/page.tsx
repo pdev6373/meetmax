@@ -5,19 +5,22 @@ import { ONLINE_FRIENDS } from "@/constants";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import usePostReq from "@/app/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
   const {
-    actions: {
-      getPosts: { loading, makeRequest },
-    },
+    getPosts: { loading, makeRequest },
+  } = usePostReq();
+  const {
     fields: { posts },
   } = useContext(PostContext);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [fetching, setFetching] = useState(true);
+  const pathname = usePathname();
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
 
@@ -33,6 +36,8 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const response = await makeRequest();
+      console.log(response);
+
       setFetching(false);
 
       if (!response?.success || !response?.data?.success) {
@@ -42,7 +47,9 @@ export default function Home() {
       }
       setAlertMessage("");
     })();
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {}, [posts]);
 
   if (loading || fetching)
     return (
@@ -79,15 +86,19 @@ export default function Home() {
           ))}
         </div>
 
-        <MakePost />
+        <div className={styles.makePostWrapper}>
+          <MakePost />
+        </div>
 
         {posts?.map((post) => (
           <Post
             createdAt={post.createdAt}
             id={post.id}
+            _id={post._id}
             images={post.images}
             likes={post.likes}
             message={post.message}
+            visibility={post.visibility}
           />
         ))}
 

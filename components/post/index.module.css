@@ -333,6 +333,12 @@
   color: #ffffff;
 }
 
+.reactionButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 @media (min-width: 330px) {
   .bottomUserImage {
     display: block;

@@ -21,6 +21,9 @@
   padding: 7px 10px;
   overflow: hidden;
   max-height: 110px;
+  box-sizing: content-box;
+  text-overflow: clip;
+  word-break: break-all;
 }
 
 .input[contenteditable="true"]:empty:before {

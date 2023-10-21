@@ -1,10 +1,9 @@
 "use client";
+import { useState } from "react";
 import { LayoutType, PostType } from "@/types";
-import { useEffect, useState } from "react";
 import { createContext, Dispatch, SetStateAction } from "react";
 import { UserType } from "@/types";
 import { userInitialValues } from "@/constants";
-import { useAxiosPrivate } from "@/hooks";
 
 type FieldsType = {
   posts: PostType[];
@@ -16,19 +15,9 @@ type SetFieldsType = {
   setPoster: Dispatch<SetStateAction<UserType>>;
 };
 
-type ActionType = {
-  makeRequest: any;
-  loading: boolean;
-};
-
-type ActionsType = {
-  getPosts: ActionType;
-};
-
 type AuthContextType = {
   fields: FieldsType;
   setFields: SetFieldsType;
-  actions: ActionsType;
 };
 
 export const PostContext = createContext<AuthContextType>({
@@ -40,29 +29,11 @@ export const PostContext = createContext<AuthContextType>({
     setPosts: () => {},
     setPoster: () => {},
   },
-  actions: {
-    getPosts: {
-      loading: false,
-      makeRequest: () => {},
-    },
-  },
 });
 
 export const PostProvider = ({ children }: LayoutType) => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [poster, setPoster] = useState(userInitialValues);
-  const { fetchData: getAllPosts, loading: gettingAllPosts } =
-    useAxiosPrivate();
-
-  const getPosts = async () => {
-    const response = await getAllPosts({
-      url: "/post",
-      method: "GET",
-    });
-    if (!response?.success || !response?.data?.success) return response;
-    setPosts(response?.data?.data);
-    return response;
-  };
 
   return (
     <PostContext.Provider
@@ -74,12 +45,6 @@ export const PostProvider = ({ children }: LayoutType) => {
         setFields: {
           setPosts,
           setPoster,
-        },
-        actions: {
-          getPosts: {
-            makeRequest: getPosts,
-            loading: gettingAllPosts,
-          },
         },
       }}
     >
