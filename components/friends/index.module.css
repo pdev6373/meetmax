@@ -39,7 +39,8 @@
   position: sticky;
   top: 0;
   overflow-y: auto;
-  height: calc(100vh - 310px);
+  /* height: calc(100vh - 310px); */
+  height: calc(100vh - 198px);
   padding-right: 25px;
   padding-bottom: 20px;
 }

@@ -15,9 +15,9 @@ export default function Aside() {
           value={search}
         />
       </div>
-      <div className={styles.paddingRight}>
+      {/* <div className={styles.paddingRight}>
         <OnlineFriends />
-      </div>
+      </div> */}
       <Friends />
     </aside>
   );

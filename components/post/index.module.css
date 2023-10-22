@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  position: relative;
 }
 
 .main {
@@ -196,22 +197,29 @@
   height: 100%;
   display: grid;
   place-content: center;
+  padding-left: 10px;
 }
 
 .moreOptionsWrapper {
   position: absolute;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
   background: #212833;
-  padding: 18px 20px;
   right: -20px;
   top: 30px;
   width: 100vw;
   border-radius: 4px;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  /* gap: 10px; */
-  gap: 16px;
+}
+
+.moreOption {
+  padding-inline: 20px;
+  padding-block: 8px 18px;
+}
+
+.moreOptionFirst {
+  padding-block: 18px 8px;
 }
 
 .moreOption {
@@ -330,14 +338,26 @@
 }
 
 .unfollowProceed {
-  background: rgba(55, 125, 255, 1);
+  background: #ff5630;
   color: #ffffff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .reactionButton {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.closeOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+  background: transparent;
 }
 
 @media (min-width: 330px) {
@@ -440,11 +460,18 @@
   }
 
   .moreOptionsWrapper {
-    padding: 18px;
     right: -28px;
     width: 325px;
     border-radius: 6px;
-    gap: 16px;
+  }
+
+  .moreOption {
+    padding-inline: 18px;
+    padding-block: 8px 18px;
+  }
+
+  .moreOptionFirst {
+    padding-block: 18px 8px;
   }
 
   .hiddenPostWrapper {

@@ -23,11 +23,19 @@ const postView: PostViewType[] = [
   },
 ];
 
-export default function CreatePost({ onClose, postText }: CreatePostType) {
+export default function CreatePost({
+  onClose,
+  postText,
+  view,
+  postId,
+  type = "new",
+  setPost,
+}: CreatePostType) {
   const text = useRef<any>();
   const editableRef = useRef<any>();
   const {
     createPost: { loading, makeRequest },
+    updatePost: { loading: updatingPost, makeRequest: updatePost },
   } = usePostReq();
   const {
     userDetails: {
@@ -35,7 +43,9 @@ export default function CreatePost({ onClose, postText }: CreatePostType) {
     },
   } = useContext(AuthContext);
   const [currentView, setCurrentView] = useState<PostViewType>(
-    postView.find((view) => view.value === postVisibility)!
+    view
+      ? postView.find((pView) => pView.value === view)!
+      : postView.find((view) => view.value === postVisibility)!
   );
   const [showOptions, setShowOptions] = useState(false);
   const [images, setImages] = useState<File[]>([]);
@@ -88,11 +98,15 @@ export default function CreatePost({ onClose, postText }: CreatePostType) {
 
   const handlePost = async () => {
     if (!text.current && !images.length) return;
-    const response = await makeRequest({
+    const payload: any = {
       message: text,
       images,
       visibility: currentView.value,
-    });
+    };
+    if (postId) payload.postId = postId;
+
+    const response =
+      type === "new" ? await makeRequest(payload) : await updatePost(payload);
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
@@ -100,6 +114,7 @@ export default function CreatePost({ onClose, postText }: CreatePostType) {
     }
 
     setAlertMessage("");
+    setPost && setPost(response?.data?.data);
     handleClose();
   };
 
@@ -347,11 +362,11 @@ export default function CreatePost({ onClose, postText }: CreatePostType) {
               <Button
                 disabled={!text.current}
                 type="submit"
-                isLoading={loading}
+                isLoading={type === "new" ? loading : updatingPost}
                 onClick={handlePost}
                 variation="small"
               >
-                Post
+                {type === "new" ? "Post" : "Edit"}
               </Button>
             </div>
           </div>

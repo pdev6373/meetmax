@@ -45,7 +45,7 @@ export default function Reactors({ post }: ReactorsType) {
         </Fragment>
       ))}
 
-      {post.likes.length > 3 ? (
+      {post?.likes?.length > 3 ? (
         <p className={styles.reactorsNumber}>{`+${
           Number(post.likes.length) - 3
         }`}</p>

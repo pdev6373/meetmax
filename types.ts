@@ -223,6 +223,10 @@ export type PostType = {
 export type CreatePostType = {
   onClose: any;
   postText: MutableRefObject<string>;
+  view?: VisibilityType;
+  type?: "new" | "edit";
+  postId?: string;
+  setPost?: any;
 };
 
 export type SwtichType = {

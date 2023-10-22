@@ -1,13 +1,14 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
 import { Alert, Birthdays, MakePost, Post } from "@/components";
-import { ONLINE_FRIENDS } from "@/constants";
+import { ALL_FRIENDS } from "@/constants";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import usePostReq from "@/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
 import { usePathname } from "next/navigation";
+import { PostType } from "@/types";
 
 export default function Home() {
   const {
@@ -47,8 +48,6 @@ export default function Home() {
     })();
   }, [pathname]);
 
-  useEffect(() => {}, [posts]);
-
   if (loading || fetching)
     return (
       <div className={styles.spinner}>
@@ -63,7 +62,7 @@ export default function Home() {
       </Alert>
       <div className={styles.wrapper}>
         <div className={styles.onlineFriends}>
-          {ONLINE_FRIENDS.map((friend, index) => (
+          {ALL_FRIENDS.map((friend, index) => (
             <Link href="" className={styles.onlineFriend} key={index}>
               <div className={styles.friendImageWrapper}>
                 <Image

@@ -8,8 +8,12 @@ export default function useUserReq() {
     useAxiosPrivate();
   const { fetchData: fetchSomeUsersData, loading: fetchingSomeUsersData } =
     useAxiosPrivate();
+  const { fetchData: followUserAccount, loading: followingUserAccount } =
+    useAxiosPrivate();
+  const { fetchData: unfollowUserAccount, loading: unfollowingUserAccount } =
+    useAxiosPrivate();
   const {
-    userDetails: { userDetails },
+    userDetails: { userDetails, setUserDetails },
   } = useContext(AuthContext);
 
   const fetchAUser = async (id: string) => {
@@ -43,6 +47,36 @@ export default function useUserReq() {
     return response;
   };
 
+  const followAUser = async (followId: any) => {
+    const response = await followUserAccount({
+      url: `/user/follow-user`,
+      method: "PATCH",
+      payload: {
+        id: userDetails._id,
+        followId,
+      },
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    setUserDetails(response?.data?.data);
+    return response;
+  };
+
+  const unfollowAUser = async (unfollowId: any) => {
+    const response = await unfollowUserAccount({
+      url: `/user/unfollow-user`,
+      method: "PATCH",
+      payload: {
+        id: userDetails._id,
+        unfollowId,
+      },
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    setUserDetails(response?.data?.data);
+    return response;
+  };
+
   const getUser = {
     loading: fetchingUser,
     makeRequest: fetchAUser,
@@ -58,5 +92,15 @@ export default function useUserReq() {
     makeRequest: updateAUser,
   };
 
-  return { getUser, updateUser, getSomeUsers };
+  const followUser = {
+    loading: followingUserAccount,
+    makeRequest: followAUser,
+  };
+
+  const unfollowUser = {
+    loading: unfollowingUserAccount,
+    makeRequest: unfollowAUser,
+  };
+
+  return { getUser, updateUser, getSomeUsers, followUser, unfollowUser };
 }

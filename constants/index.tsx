@@ -65,6 +65,10 @@ export const userInitialValues: UserType = {
   coverPicture: "",
   followers: [],
   following: [],
+  blockedUsers: [],
+  canBefollowed: true,
+  postVisibility: "everyone",
+  profileVisibility: "everyone",
 };
 
 export const ALL_FRIENDS = [
@@ -163,57 +167,6 @@ export const ALL_FRIENDS = [
     firstname: "Vjosa",
     lastname: "Albini",
     lastSeen: "8 min",
-  },
-];
-
-export const ONLINE_FRIENDS = [
-  {
-    image: "/assets/user.png",
-    firstname: "Ortega",
-    lastname: "Eduardo",
-    lastSeen: "now",
-  },
-  {
-    image: "/assets/user.png",
-    firstname: "Bysouth",
-    lastname: "Kayleigh",
-    lastSeen: "2 min",
-  },
-  {
-    image: "/assets/user.png",
-    firstname: "Phillips MP",
-    lastname: "Jess",
-    lastSeen: "now",
-  },
-  {
-    image: "/assets/user.png",
-    firstname: "Konjufca",
-    lastname: "Afrim",
-    lastSeen: "now",
-  },
-  {
-    image: "/assets/user.png",
-    firstname: "Ortega",
-    lastname: "Eduardo",
-    lastSeen: "now",
-  },
-  {
-    image: "/assets/user.png",
-    firstname: "Bysouth",
-    lastname: "Kayleigh",
-    lastSeen: "2 min",
-  },
-  {
-    image: "/assets/user.png",
-    firstname: "Phillips MP",
-    lastname: "Jess",
-    lastSeen: "now",
-  },
-  {
-    image: "/assets/user.png",
-    firstname: "Konjufca",
-    lastname: "Afrim",
-    lastSeen: "now",
   },
 ];
 
