@@ -110,7 +110,7 @@
 
 .inputWrapper {
   display: flex;
-  /* align-items: flex-end; */
+  align-items: flex-end;
   flex: 1;
   background: #212833;
   padding-inline: 10px;
@@ -181,10 +181,15 @@
 .posterImageWeb,
 .bottomUserImage,
 .bottomUserImageWeb,
-.commentUserProfile {
+.commentUserProfile,
+.commentUserProfileWeb {
   overflow: hidden;
   border-radius: 50%;
   flex-shrink: 0;
+}
+
+.commentUserProfileWeb {
+  display: none;
 }
 
 .posterImageWeb {
@@ -230,6 +235,7 @@
   align-items: flex-end;
   gap: 10px;
   flex: 1;
+  position: relative;
 }
 
 .moreWrapper {
@@ -408,33 +414,23 @@
   text-decoration: underline;
 }
 
-/*   */
-
-.emojiWrapper {
-  position: absolute;
-  top: calc(100% + 5px);
-  left: -20px;
+.commentReplyWrapper::-webkit-scrollbar {
+  width: 13px;
+  background: #212833;
+  border: 3px solid #212833;
 }
 
-.comments::-webkit-scrollbar {
-  width: 7px;
-}
-
-.comments::-webkit-scrollbar-thumb {
+.commentReplyWrapper::-webkit-scrollbar-thumb {
   background: #212833;
   border-radius: 20px;
-  border: 1px solid #4e5d78;
+  border: 3px solid #212833;
+  outline: 1px solid #4e5d78;
+  outline-offset: -4px;
   box-shadow: 0px 4px 10px 0px #00000005;
-}
-
-.comments::-webkit-scrollbar-track {
-  margin-block: 5px;
 }
 
 .comments {
   margin-inline: -20px;
-  max-height: 340px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -446,41 +442,6 @@
 .comment {
   display: flex;
   gap: 10px;
-}
-
-.commentWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.commentMainWrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.commentMain {
-  background: #191c21;
-  box-shadow: 0px 2.709517002105713px 6.773792266845703px 0px #00000005;
-  padding: 5px 10px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.commentMainTop {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.commentMore {
-  display: grid;
-  place-content: center;
-  padding-left: 10px;
 }
 
 .commentName {
@@ -497,16 +458,18 @@
   color: #959eae;
 }
 
-.commentMessage {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 18px;
-  color: #edeff1;
+.rotateDropdown {
+  transform: rotate(-180deg);
 }
 
-.commentAction {
+.commentMain {
+  background: #191c21;
+  box-shadow: 0px 2.709517002105713px 6.773792266845703px 0px #00000005;
+  padding: 5px 10px;
+  border-radius: 6px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .commentLikeAction,
@@ -515,6 +478,7 @@
   font-weight: 500;
   line-height: 16px;
   color: #959eae;
+  cursor: pointer;
 }
 
 .commentLikeAction {
@@ -525,8 +489,33 @@
   padding: 1px 9px;
 }
 
+.commentMore {
+  display: grid;
+  place-content: center;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.commentAction {
+  display: flex;
+  align-items: center;
+}
+
 .commentReply {
   margin-left: 34px;
+}
+
+.commentMainWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.commentMainTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .commentReplyHeader {
@@ -550,6 +539,27 @@
   font-weight: 400;
   line-height: 18px;
   color: #959eae;
+}
+
+.emojiWrapper {
+  position: absolute;
+  bottom: 45px;
+  left: -20px;
+  right: -20px;
+}
+
+.commentReplyWrapper {
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.commentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 @media (min-width: 330px) {
@@ -719,5 +729,77 @@
 
   .unfollowProceed {
     border-radius: 8px;
+  }
+
+  .comments {
+    margin-inline: 0;
+    margin-bottom: 0;
+    border-radius: 10px;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .comment {
+    gap: 12px;
+  }
+
+  .commentName {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+  }
+
+  .commentTime {
+    font-weight: 500;
+  }
+
+  .commentMessage {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  .commentMain {
+    padding: 12px 18px;
+    border-radius: 10px;
+    gap: 12px;
+  }
+
+  .commentUserProfile {
+    display: none;
+  }
+
+  .commentUserProfileWeb {
+    display: block;
+  }
+
+  .commentLikeAction,
+  .commentReplyAction {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+
+  .commentReply {
+    margin-left: 44px;
+  }
+
+  .commentMainWrapper {
+    gap: 6px;
+  }
+
+  .commentReplyHeader {
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .commentReplyHeadingText {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .commentWrapper,
+  .commentReplyWrapper {
+    gap: 18px;
   }
 }

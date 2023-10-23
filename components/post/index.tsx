@@ -1,9 +1,9 @@
 "use client";
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext, useRef, lazy, Suspense } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { Alert, CreatePost, Reactors } from "..";
-import { PostType, UserType } from "@/types";
+import { PostCommentType, PostReplyType, PostType, UserType } from "@/types";
 import { userInitialValues } from "@/constants";
 import { format } from "timeago.js";
 import { AuthContext } from "@/context/authContext";
@@ -11,7 +11,14 @@ import useUserReq from "@/helpers/useUserReq";
 import usePostReq from "@/helpers/usePostReq";
 import ContentEditable from "react-contenteditable";
 import data from "@emoji-mart/data";
-import Picker from "@emoji-mart/react";
+const EmojiPicker = lazy(() => import("@emoji-mart/react"));
+
+type ReplyToBeRepliedType = {
+  data: PostReplyType;
+  message: string;
+  firstname: string;
+  lastname: string;
+};
 
 export default function Post({
   createdAt,
@@ -26,6 +33,8 @@ export default function Post({
   const text = useRef("");
   const commentText = useRef("");
   const editableRef = useRef<any>();
+  const replyText = useRef("");
+  const replyEditableRef = useRef<any>();
   const {
     getUser: { makeRequest },
     getSomeUsers: { loading: gettingSomeUsers, makeRequest: getSomeUsers },
@@ -34,9 +43,15 @@ export default function Post({
   } = useUserReq();
   const {
     reactToPost: { loading: reactingToPost, makeRequest: reactToPost },
+    reactToComment: { loading: reactingToComment, makeRequest: reactToComment },
+    reactToReply: { loading: reactingToReply, makeRequest: reactToReply },
     deletePost: { loading: deletingPost, makeRequest: deletePost },
     hidePost: { loading: hidingPost, makeRequest: hidePost },
     commentOnPost: { loading: commentingOnPost, makeRequest: commentOnPost },
+    replyCommentOnPost: {
+      loading: replyingCommentOnPost,
+      makeRequest: replyCommentOnPost,
+    },
   } = usePostReq();
   const {
     userDetails: { userDetails },
@@ -52,8 +67,21 @@ export default function Post({
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [showEmojis, setShowEmojis] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
   const [commenters, setCommenters] = useState<UserType[]>([]);
+  const [repliers, setRepliers] = useState<UserType[]>([]);
+  const [openComments, setOpenComments] = useState(false);
+  const [replyToBeShown, setReplyToBeShown] = useState<string | null>(null);
+  const [commentToBeReplied, setCommentToBeReplied] =
+    useState<PostCommentType | null>(null);
+  const [replyToBeReplied, setReplyToBeReplied] =
+    useState<ReplyToBeRepliedType | null>(null);
+  const [currentReactedComment, setCurrentReactedComment] = useState<
+    string | null
+  >(null);
+  const [currentReactedReply, setCurrentReactedReply] = useState<string | null>(
+    null
+  );
 
   const [post, setPost] = useState<PostType>({
     _id,
@@ -109,13 +137,35 @@ export default function Post({
 
     setCommenters(response?.data?.data);
     setAlertMessage("");
+  };
 
-    console.log("comm", response);
+  const getRepliers = async () => {
+    const repliers: string[] = [];
+
+    comments.forEach((comment) =>
+      comment.replies.forEach((reply) => repliers.push(reply.id))
+    );
+
+    if (!repliers?.length) return;
+
+    const response = await getSomeUsers(repliers);
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setRepliers(response?.data?.data);
+    setAlertMessage("");
   };
 
   useEffect(() => {
     getSomeUsersHandler();
+    getRepliers();
   }, []);
+
+  console.log(repliers);
 
   useEffect(() => {
     if (!alertMessage) return;
@@ -201,6 +251,28 @@ export default function Post({
     setPost(response?.data?.data);
     setAlertMessage("");
   };
+  const commentReactionHandler = async (commentId: string) => {
+    const response = await reactToComment(post._id, commentId);
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setPost(response?.data?.data);
+    setAlertMessage("");
+  };
+  const replyReactionHandler = async (commentId: string, replyId: string) => {
+    const response = await reactToReply(post._id, commentId, replyId);
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setPost(response?.data?.data);
+    setAlertMessage("");
+  };
   const handleCommentOnPost = async () => {
     if (!commentText.current) return;
     const response = await commentOnPost(post._id, commentText);
@@ -213,8 +285,34 @@ export default function Post({
 
     setAlertMessage("");
   };
-  const postTextHandler = (e: any) =>
+  const handleReplyCommentOnPost = async (
+    commentId: string,
+    reply: {
+      firstname: string;
+      lastname: string;
+      message: string;
+    }
+  ) => {
+    if (!replyText.current) return;
+    const response = await replyCommentOnPost(
+      post._id,
+      commentId,
+      reply,
+      replyText
+    );
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlertMessage("");
+  };
+  const postTextHandler = () =>
     (commentText.current = editableRef.current.textContent);
+  const replyTextHandler = () =>
+    (replyText.current = replyEditableRef.current.textContent);
 
   const moreOptions = [
     {
@@ -571,6 +669,7 @@ export default function Post({
                     styles.reactionButton,
                     styles.reactionButtonComment,
                   ].join(" ")}
+                  onClick={() => setOpenComments((prev) => !prev)}
                 >
                   <Image
                     src={reaction.icon}
@@ -578,7 +677,9 @@ export default function Post({
                     width={16}
                     height={16}
                   />
-                  <p className={styles.reactionName}>{reaction.name}</p>
+                  <p className={styles.reactionName}>{`${
+                    !openComments ? "Show" : "Hide"
+                  } ${reaction.name}`}</p>
                 </button>
               ) : (
                 <></>
@@ -616,7 +717,7 @@ export default function Post({
               <div className={styles.inputIconsWrapper}>
                 <div
                   className={styles.inputIcons}
-                  onClick={() => setShowEmojis((prev) => !prev)}
+                  onClick={() => setShowEmoji((prev) => !prev)}
                 >
                   <Image
                     src="/assets/emoji.svg"
@@ -640,22 +741,31 @@ export default function Post({
             </div>
           </div>
 
-          {showEmojis ? (
+          {showEmoji ? (
             <div className={styles.emojiWrapper}>
-              <Picker
-                onEmojiSelect={console.log("Hekko")}
-                theme="dark"
-                previewPosition="none"
-                data={data}
-                onClickOutside={() => setShowEmojis(false)}
-              />
+              <Suspense fallback={<></>}>
+                <EmojiPicker
+                  showSkinTones={false}
+                  onEmojiSelect={(emoji: any) => {
+                    if (!emoji?.native) return;
+
+                    commentText.current = commentText?.current + emoji?.native;
+                    editableRef.current.textContent =
+                      editableRef?.current?.textContent + emoji?.native;
+                  }}
+                  theme="dark"
+                  previewPosition="none"
+                  data={data}
+                  onClickOutside={() => setShowEmoji(false)}
+                />
+              </Suspense>
             </div>
           ) : (
             <></>
           )}
         </div>
 
-        {comments?.length ? (
+        {comments?.length && openComments ? (
           <div className={styles.comments}>
             {comments
               ?.map((comment) => {
@@ -668,13 +778,22 @@ export default function Post({
                 return (
                   <div className={styles.commentWrapper}>
                     <div className={styles.comment}>
-                      <Image
-                        src={"/assets/no-profile.svg"}
-                        alt="profile"
-                        width={24}
-                        height={24}
-                        className={styles.commentUserProfile}
-                      />
+                      <>
+                        <Image
+                          src={"/assets/no-profile.svg"}
+                          alt="profile"
+                          width={24}
+                          height={24}
+                          className={styles.commentUserProfile}
+                        />
+                        <Image
+                          src={"/assets/no-profile.svg"}
+                          alt="profile"
+                          width={32}
+                          height={32}
+                          className={styles.commentUserProfileWeb}
+                        />
+                      </>
 
                       <div className={styles.commentMainWrapper}>
                         <div className={styles.commentMain}>
@@ -688,14 +807,29 @@ export default function Post({
                               </p>
                             </div>
 
-                            <div className={styles.commentMore}>
-                              <Image
-                                src="/assets/more.svg"
-                                alt="more"
-                                width={16}
-                                height={16}
-                              />
-                            </div>
+                            {comment.replies.length ? (
+                              <div
+                                className={[
+                                  styles.commentMore,
+                                  replyToBeShown === comment._id &&
+                                    styles.rotateDropdown,
+                                ].join(" ")}
+                                onClick={() =>
+                                  setReplyToBeShown((prev) =>
+                                    prev === comment._id ? null : comment._id
+                                  )
+                                }
+                              >
+                                <Image
+                                  src="/assets/dropdown.svg"
+                                  alt="dropdown"
+                                  width={14}
+                                  height={14}
+                                />
+                              </div>
+                            ) : (
+                              <></>
+                            )}
                           </div>
 
                           <p className={styles.commentMessage}>
@@ -704,123 +838,354 @@ export default function Post({
                         </div>
 
                         <div className={styles.commentAction}>
-                          <p className={styles.commentLikeAction}>Like</p>
-                          <p className={styles.commentReplyAction}>Reply</p>
+                          <p
+                            className={styles.commentLikeAction}
+                            onClick={() => {
+                              commentReactionHandler(comment._id);
+                              setCurrentReactedComment(comment._id);
+                            }}
+                          >
+                            {reactingToComment &&
+                            currentReactedComment === comment._id ? (
+                              <Image
+                                src={"/assets/spinner.svg"}
+                                alt="spinner"
+                                width={20}
+                                height={20}
+                              />
+                            ) : (
+                              "Like"
+                            )}
+                          </p>
+                          <p
+                            className={styles.commentReplyAction}
+                            onClick={() => {
+                              setCommentToBeReplied(comment);
+                              setReplyToBeReplied(null);
+                            }}
+                          >
+                            Reply
+                          </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className={styles.commentReply}>
-                      <div className={styles.comment}>
-                        <Image
-                          src={"/assets/no-profile.svg"}
-                          alt="profile"
-                          width={24}
-                          height={24}
-                          className={styles.commentUserProfile}
-                        />
+                    {commentToBeReplied?._id === comment._id ? (
+                      <div className={styles.commentReply}>
+                        <div className={styles.comment}>
+                          <>
+                            <Image
+                              src={"/assets/no-profile.svg"}
+                              alt="profile"
+                              width={24}
+                              height={24}
+                              className={styles.commentUserProfile}
+                            />
+                            <Image
+                              src={"/assets/no-profile.svg"}
+                              alt="profile"
+                              width={32}
+                              height={32}
+                              className={styles.commentUserProfileWeb}
+                            />
+                          </>
 
-                        <div className={styles.commentMainWrapper}>
-                          <div className={styles.commentMain}>
-                            <div className={styles.commentMainTop}>
-                              <div>
-                                <p
-                                  className={styles.commentName}
-                                >{`${commenter.lastname} ${commenter.firstname}`}</p>
-                                <p className={styles.commentTime}>
-                                  {format(comment.createdAt)}
+                          <div className={styles.commentMainWrapper}>
+                            <div className={styles.commentMain}>
+                              <div className={styles.commentMainTop}>
+                                <p className={styles.commentName}>You</p>
+
+                                <div className={styles.commentMore}>
+                                  <Image
+                                    src="/assets/close.svg"
+                                    alt="more"
+                                    width={16}
+                                    height={16}
+                                    onClick={() => setCommentToBeReplied(null)}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className={styles.commentReplyHeader}>
+                                <h3 className={styles.commentReplyHeading}>
+                                  {` Replying to ${commenter.lastname} ${commenter.firstname}`}
+                                </h3>
+                                <p className={styles.commentReplyHeadingText}>
+                                  {comment.message}
                                 </p>
                               </div>
 
-                              <div className={styles.commentMore}>
-                                <Image
-                                  src="/assets/more.svg"
-                                  alt="more"
-                                  width={16}
-                                  height={16}
-                                />
+                              <div className={styles.inputWrapperOuter}>
+                                <div className={styles.inputWrapper}>
+                                  <ContentEditable
+                                    innerRef={replyEditableRef}
+                                    html={replyText.current}
+                                    onChange={replyTextHandler}
+                                    placeholder="Write a comment..."
+                                    className={styles.commentInput}
+                                  />
+                                </div>
+
+                                <div
+                                  className={styles.send}
+                                  onClick={() =>
+                                    handleReplyCommentOnPost(comment._id, {
+                                      lastname: commenter?.lastname,
+                                      firstname: commenter?.firstname,
+                                      message: comment.message,
+                                    })
+                                  }
+                                >
+                                  <Image
+                                    src={
+                                      replyingCommentOnPost
+                                        ? "/assets/spinner.svg"
+                                        : "/assets/send.svg"
+                                    }
+                                    alt="reaction"
+                                    width={16}
+                                    height={16}
+                                  />
+                                </div>
                               </div>
                             </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
-                            {/* <p className={styles.commentMessage}>
-                              {comment.message}
-                            </p> */}
-                            <div className={styles.commentReplyHeader}>
-                              <h3 className={styles.commentReplyHeading}>
-                                Replying to Swapan Bala
-                              </h3>
-                              <p className={styles.commentReplyHeadingText}>
-                                Looks amazing and breathtaking. Been there,
-                                beautiful!
-                              </p>
-                            </div>
+                    {comment?.replies?.length &&
+                    replyToBeShown === comment._id ? (
+                      <div className={styles.commentReplyWrapper}>
+                        {comment?.replies?.map((reply) => {
+                          const replier = repliers?.find(
+                            (replier) => replier._id === reply.id
+                          );
 
-                            <div className={styles.inputWrapperOuter}>
-                              <div className={styles.inputWrapper}>
-                                <ContentEditable
-                                  innerRef={editableRef}
-                                  html={commentText.current}
-                                  onChange={postTextHandler}
-                                  placeholder="Write a comment..."
-                                  className={styles.commentInput}
-                                />
+                          if (!replier?._id) return <></>;
 
-                                <div className={styles.inputIconsWrapper}>
-                                  <div
-                                    className={styles.inputIcons}
-                                    onClick={() =>
-                                      setShowEmojis((prev) => !prev)
-                                    }
-                                  >
-                                    <Image
-                                      src="/assets/emoji.svg"
-                                      alt="user"
-                                      width={16}
-                                      height={16}
-                                    />
+                          return (
+                            <div className={styles.commentReply}>
+                              <div className={styles.comment}>
+                                <>
+                                  <Image
+                                    src={"/assets/no-profile.svg"}
+                                    alt="profile"
+                                    width={24}
+                                    height={24}
+                                    className={styles.commentUserProfile}
+                                  />
+                                  <Image
+                                    src={"/assets/no-profile.svg"}
+                                    alt="profile"
+                                    width={32}
+                                    height={32}
+                                    className={styles.commentUserProfileWeb}
+                                  />
+                                </>
+
+                                <div className={styles.commentMainWrapper}>
+                                  <div className={styles.commentMain}>
+                                    <div className={styles.commentMainTop}>
+                                      <div>
+                                        <p
+                                          className={styles.commentName}
+                                        >{`${replier.lastname} ${replier.firstname}`}</p>
+                                        <p className={styles.commentTime}>
+                                          {format(reply.createdAt)}
+                                        </p>
+                                      </div>
+
+                                      {/* <div className={styles.commentMore}>
+                                      <Image
+                                        src="/assets/more.svg"
+                                        alt="more"
+                                        width={16}
+                                        height={16}
+                                      />
+                                    </div> */}
+                                    </div>
+
+                                    <div className={styles.commentReplyHeader}>
+                                      <h3
+                                        className={styles.commentReplyHeading}
+                                      >
+                                        {` Replying to ${reply.repliedComment.lastname} ${reply.repliedComment.firstname}`}
+                                      </h3>
+                                      <p
+                                        className={
+                                          styles.commentReplyHeadingText
+                                        }
+                                      >
+                                        {reply.repliedComment.message}
+                                      </p>
+                                    </div>
+
+                                    <p className={styles.commentMessage}>
+                                      {reply.message}
+                                    </p>
+                                  </div>
+
+                                  <div className={styles.commentAction}>
+                                    <p
+                                      className={styles.commentLikeAction}
+                                      onClick={() => {
+                                        setCurrentReactedReply(reply._id);
+                                        replyReactionHandler(
+                                          comment._id,
+                                          reply._id
+                                        );
+                                      }}
+                                    >
+                                      {reactingToReply &&
+                                      currentReactedReply === reply._id ? (
+                                        <Image
+                                          src={"/assets/spinner.svg"}
+                                          alt="spinner"
+                                          width={20}
+                                          height={20}
+                                        />
+                                      ) : (
+                                        "Like"
+                                      )}
+                                    </p>
+                                    <p
+                                      className={styles.commentReplyAction}
+                                      onClick={() => {
+                                        setReplyToBeReplied({
+                                          data: reply,
+                                          lastname: replier.lastname,
+                                          firstname: replier.firstname,
+                                          message: reply.message,
+                                        });
+                                        setCommentToBeReplied(null);
+                                      }}
+                                    >
+                                      Reply
+                                    </p>
                                   </div>
                                 </div>
                               </div>
 
-                              <div
-                                className={styles.send}
-                                onClick={handleCommentOnPost}
-                              >
-                                <Image
-                                  src={
-                                    commentingOnPost
-                                      ? "/assets/spinner.svg"
-                                      : "/assets/send.svg"
-                                  }
-                                  alt="reaction"
-                                  width={16}
-                                  height={16}
-                                />
-                              </div>
+                              {replyToBeReplied?.data?._id === reply._id ? (
+                                <div className={styles.comment}>
+                                  <>
+                                    <Image
+                                      src={"/assets/no-profile.svg"}
+                                      alt="profile"
+                                      width={24}
+                                      height={24}
+                                      className={styles.commentUserProfile}
+                                    />
+                                    <Image
+                                      src={"/assets/no-profile.svg"}
+                                      alt="profile"
+                                      width={32}
+                                      height={32}
+                                      className={styles.commentUserProfileWeb}
+                                    />
+                                  </>
 
-                              {showEmojis ? (
-                                <div className={styles.emojiWrapper}>
-                                  <Picker
-                                    onEmojiSelect={console.log("Hekko")}
-                                    theme="dark"
-                                    previewPosition="none"
-                                    data={data}
-                                    onClickOutside={() => setShowEmojis(false)}
-                                  />
+                                  <div className={styles.commentMainWrapper}>
+                                    <div className={styles.commentMain}>
+                                      <div className={styles.commentMainTop}>
+                                        <p className={styles.commentName}>
+                                          You
+                                        </p>
+
+                                        <div className={styles.commentMore}>
+                                          <Image
+                                            src="/assets/close.svg"
+                                            alt="more"
+                                            width={16}
+                                            height={16}
+                                            onClick={() =>
+                                              setReplyToBeReplied(null)
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+
+                                      <div
+                                        className={styles.commentReplyHeader}
+                                      >
+                                        <h3
+                                          className={styles.commentReplyHeading}
+                                        >
+                                          {`Replying to ${replyToBeReplied.lastname} ${replyToBeReplied.firstname}`}
+                                        </h3>
+                                        <p
+                                          className={
+                                            styles.commentReplyHeadingText
+                                          }
+                                        >
+                                          {replyToBeReplied.message}
+                                        </p>
+                                      </div>
+
+                                      <div className={styles.inputWrapperOuter}>
+                                        <div className={styles.inputWrapper}>
+                                          <ContentEditable
+                                            innerRef={replyEditableRef}
+                                            html={replyText.current}
+                                            onChange={replyTextHandler}
+                                            placeholder="Write a comment..."
+                                            className={styles.commentInput}
+                                          />
+                                        </div>
+
+                                        <div
+                                          className={styles.send}
+                                          onClick={() =>
+                                            handleReplyCommentOnPost(
+                                              comment._id,
+                                              {
+                                                firstname:
+                                                  replyToBeReplied.firstname,
+                                                lastname:
+                                                  replyToBeReplied.lastname,
+                                                message:
+                                                  replyToBeReplied.message,
+                                              }
+                                            )
+                                          }
+                                        >
+                                          <Image
+                                            src={
+                                              replyingCommentOnPost
+                                                ? "/assets/spinner.svg"
+                                                : "/assets/send.svg"
+                                            }
+                                            alt="reaction"
+                                            width={16}
+                                            height={16}
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className={styles.commentAction}>
+                                      <p className={styles.commentLikeAction}>
+                                        Like
+                                      </p>
+                                      <p className={styles.commentReplyAction}>
+                                        Reply
+                                      </p>
+                                    </div>
+                                  </div>
                                 </div>
                               ) : (
                                 <></>
                               )}
                             </div>
-                          </div>
-
-                          <div className={styles.commentAction}>
-                            <p className={styles.commentLikeAction}>Like</p>
-                            <p className={styles.commentReplyAction}>Reply</p>
-                          </div>
-                        </div>
+                          );
+                        })}
                       </div>
-                    </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 );
               })

@@ -210,6 +210,28 @@ export type PostViewType = {
   value: VisibilityType;
 };
 
+export type PostCommentType = {
+  _id: string;
+  id: string;
+  message: string;
+  likes: string[];
+  createdAt: string;
+  replies: PostReplyType[];
+};
+
+export type PostReplyType = {
+  _id: string;
+  id: string;
+  repliedComment: {
+    firstname: string;
+    lastname: string;
+    message: string;
+  };
+  message: string;
+  likes: string[];
+  createdAt: string;
+};
+
 export type PostType = {
   createdAt: string;
   id: string;
@@ -218,19 +240,7 @@ export type PostType = {
   message: string;
   visibility: VisibilityType;
   _id: string;
-
-  comments: {
-    id: string;
-    message: string;
-    likes: string[];
-    createdAt: string;
-    replies: {
-      id: string;
-      message: string;
-      likes: string[];
-      createdAt: string;
-    }[];
-  }[];
+  comments: PostCommentType[];
 };
 
 export type CreatePostType = {

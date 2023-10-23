@@ -50,14 +50,21 @@ em-emoji-picker {
   justify-content: flex-end;
 }
 
+.post_emojiWrapper__Uhuub {
+  width: 100%;
+}
+
 @media (min-width: 330px) {
   em-emoji-picker {
     width: 100%;
   }
 }
 
-.post_emojiWrapper__Uhuub {
-  width: 100%;
+@media (min-width: 410px) {
+  em-emoji-picker {
+    margin-left: auto;
+    width: max-content;
+  }
 }
 
 .hidden {

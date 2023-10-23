@@ -33,11 +33,11 @@ const navs = [
     icon: "/assets/security.svg",
     route: "/password-and-security",
   },
-  {
-    name: "Activity Log",
-    icon: "/assets/clock.svg",
-    route: "/activity-log",
-  },
+  // {
+  //   name: "Activity Log",
+  //   icon: "/assets/clock.svg",
+  //   route: "/activity-log",
+  // },
   {
     name: "Viewing & Sharing",
     icon: "/assets/eye.svg",

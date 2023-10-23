@@ -31,6 +31,14 @@ export default function usePostReq() {
     useAxiosPrivate();
   const { fetchData: commentOnUserPost, loading: commentingOnUserPost } =
     useAxiosPrivate();
+  const { fetchData: reactToOneComment, loading: reactingToComment } =
+    useAxiosPrivate();
+  const { fetchData: reactToOneReply, loading: reactingToReply } =
+    useAxiosPrivate();
+  const {
+    fetchData: replyCommentOnUserPost,
+    loading: replyingCommentOnUserPost,
+  } = useAxiosPrivate();
   const {
     setFields: { setPosts },
   } = useContext(PostContext);
@@ -118,6 +126,41 @@ export default function usePostReq() {
     return response;
   };
 
+  const reactToAComment = async (postId: string, commentId: string) => {
+    const response = await reactToOneComment({
+      url: `post/comment`,
+      method: "PATCH",
+      payload: {
+        id: userDetails._id,
+        postId,
+        commentId,
+      },
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    return response;
+  };
+
+  const reactToAReply = async (
+    postId: string,
+    commentId: string,
+    replyId: string
+  ) => {
+    const response = await reactToOneReply({
+      url: `post/react-to-reply`,
+      method: "PATCH",
+      payload: {
+        id: userDetails._id,
+        postId,
+        commentId,
+        replyId,
+      },
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    return response;
+  };
+
   const hideAPost = async (postId: string) => {
     const response = await hidePostToUser({
       url: "post/hide-post",
@@ -143,6 +186,33 @@ export default function usePostReq() {
         id: userDetails._id,
         postId,
         message: message.current,
+      },
+    });
+
+    message.current = "";
+    if (!response?.success || !response?.data?.success) return response;
+    return response;
+  };
+
+  const replyCommentOnAPost = async (
+    postId: string,
+    commentId: string,
+    repliedComment: {
+      firstname: string;
+      lastname: string;
+      message: string;
+    },
+    message: MutableRefObject<string>
+  ) => {
+    const response = await replyCommentOnUserPost({
+      url: "post/reply-comment",
+      method: "PATCH",
+      payload: {
+        id: userDetails._id,
+        postId,
+        commentId,
+        message: message.current,
+        repliedComment,
       },
     });
 
@@ -202,6 +272,21 @@ export default function usePostReq() {
     makeRequest: commentOnAPost,
   };
 
+  const replyCommentOnPost = {
+    loading: replyingCommentOnUserPost,
+    makeRequest: replyCommentOnAPost,
+  };
+
+  const reactToComment = {
+    loading: reactingToComment,
+    makeRequest: reactToAComment,
+  };
+
+  const reactToReply = {
+    loading: reactingToReply,
+    makeRequest: reactToAReply,
+  };
+
   return {
     getPosts,
     createPost,
@@ -210,5 +295,8 @@ export default function usePostReq() {
     updatePost,
     hidePost,
     commentOnPost,
+    replyCommentOnPost,
+    reactToComment,
+    reactToReply,
   };
 }
