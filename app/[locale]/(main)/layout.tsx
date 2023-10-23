@@ -35,7 +35,7 @@ export default function MainLayout({ children }: LayoutType) {
       <div className={styles.body}>
         <header className={styles.header}>
           <Image
-            src="/assets/profile-male.png"
+            src="/assets/no-profile.svg"
             alt="profile picture"
             width={32}
             height={32}
@@ -80,7 +80,7 @@ export default function MainLayout({ children }: LayoutType) {
               className={styles.profileName}
             >{`${userDetails.lastname} ${userDetails.firstname}`}</p>
             <Image
-              src="/assets/profile-male.png"
+              src="/assets/no-profile.svg"
               className={styles.profilePics}
               alt="profile picture"
               width={42}

@@ -67,14 +67,14 @@ export default function MakePost() {
         )}
         <div className={styles.header}>
           <Image
-            src={userDetails?.profilePicture || "/assets/profile-male.png"}
+            src={userDetails?.profilePicture || "/assets/no-profile.svg"}
             alt="user"
             width={32}
             height={32}
             className={styles.userMobile}
           />
           <Image
-            src={userDetails?.profilePicture || "/assets/profile-male.png"}
+            src={userDetails?.profilePicture || "/assets/no-profile.svg"}
             alt="user"
             width={42}
             height={42}

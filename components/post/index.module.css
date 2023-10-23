@@ -97,6 +97,7 @@
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .send {
@@ -104,10 +105,12 @@
   border-radius: 4px;
   padding: 9px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .inputWrapper {
   display: flex;
+  /* align-items: flex-end; */
   flex: 1;
   background: #212833;
   padding-inline: 10px;
@@ -116,8 +119,15 @@
 
 .inputIcons {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
+  padding-block: 9px;
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+.inputIconsWrapper {
+  position: relative;
 }
 
 .commentInput {
@@ -125,6 +135,28 @@
   width: calc(100% - 90px);
   padding-block: 8px;
   margin-right: 8px;
+  overflow: hidden;
+  box-sizing: content-box;
+  text-overflow: clip;
+  word-break: break-all;
+}
+
+.commentInput,
+.commentInput:focus,
+.commentInput:active,
+.commentInput:hover {
+  outline: none;
+  border: none;
+}
+
+.commentInput[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
 }
 
 .commentInput,
@@ -133,6 +165,8 @@
   font-weight: 400;
   line-height: 18px;
   color: #edeff1;
+  background: #212833;
+  flex: 1;
 }
 
 .commentInput::placeholder {
@@ -141,6 +175,16 @@
 
 .reactionNameReacted {
   color: #377dff;
+}
+
+.posterImageMobile,
+.posterImageWeb,
+.bottomUserImage,
+.bottomUserImageWeb,
+.commentUserProfile {
+  overflow: hidden;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .posterImageWeb {
@@ -183,7 +227,7 @@
 
 .inputWrapperOuter {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 10px;
   flex: 1;
 }
@@ -360,9 +404,162 @@
   background: transparent;
 }
 
+.reactionButtonComment:hover {
+  text-decoration: underline;
+}
+
+/*   */
+
+.emojiWrapper {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: -20px;
+}
+
+.comments::-webkit-scrollbar {
+  width: 7px;
+}
+
+.comments::-webkit-scrollbar-thumb {
+  background: #212833;
+  border-radius: 20px;
+  border: 1px solid #4e5d78;
+  box-shadow: 0px 4px 10px 0px #00000005;
+}
+
+.comments::-webkit-scrollbar-track {
+  margin-block: 5px;
+}
+
+.comments {
+  margin-inline: -20px;
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #212833;
+  padding: 8px 20px;
+  margin-bottom: -20px;
+}
+
+.comment {
+  display: flex;
+  gap: 10px;
+}
+
+.commentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.commentMainWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.commentMain {
+  background: #191c21;
+  box-shadow: 0px 2.709517002105713px 6.773792266845703px 0px #00000005;
+  padding: 5px 10px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.commentMainTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.commentMore {
+  display: grid;
+  place-content: center;
+  padding-left: 10px;
+}
+
+.commentName {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+}
+
+.commentTime {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
+}
+
+.commentMessage {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #edeff1;
+}
+
+.commentAction {
+  display: flex;
+  align-items: center;
+}
+
+.commentLikeAction,
+.commentReplyAction {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #959eae;
+}
+
+.commentLikeAction {
+  padding: 1px 7px;
+}
+
+.commentReplyAction {
+  padding: 1px 9px;
+}
+
+.commentReply {
+  margin-left: 34px;
+}
+
+.commentReplyHeader {
+  background: #212833;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.commentReplyHeading {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #959eae;
+}
+
+.commentReplyHeadingText {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #959eae;
+}
+
 @media (min-width: 330px) {
   .bottomUserImage {
     display: block;
+  }
+
+  .emojiWrapper {
+    left: unset;
+    right: 0;
   }
 }
 
@@ -442,10 +639,15 @@
 
   .inputIcons {
     gap: 14px;
+    padding-block: 11px;
   }
 
-  .commentInput,
-  .commentInput::placeholder {
+  .commentInput {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .commentInput[contenteditable="true"]:empty:before {
     font-size: 14px;
     line-height: 22px;
   }

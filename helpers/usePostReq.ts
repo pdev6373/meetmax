@@ -29,6 +29,8 @@ export default function usePostReq() {
     useAxiosPrivate();
   const { fetchData: hidePostToUser, loading: hidingPostToUser } =
     useAxiosPrivate();
+  const { fetchData: commentOnUserPost, loading: commentingOnUserPost } =
+    useAxiosPrivate();
   const {
     setFields: { setPosts },
   } = useContext(PostContext);
@@ -130,6 +132,25 @@ export default function usePostReq() {
     return response;
   };
 
+  const commentOnAPost = async (
+    postId: string,
+    message: MutableRefObject<string>
+  ) => {
+    const response = await commentOnUserPost({
+      url: "post/comment",
+      method: "POST",
+      payload: {
+        id: userDetails._id,
+        postId,
+        message: message.current,
+      },
+    });
+
+    message.current = "";
+    if (!response?.success || !response?.data?.success) return response;
+    return response;
+  };
+
   const deleteAPost = async (postId: string) => {
     const response = await deletePostData({
       url: "post",
@@ -176,6 +197,11 @@ export default function usePostReq() {
     makeRequest: hideAPost,
   };
 
+  const commentOnPost = {
+    loading: commentingOnUserPost,
+    makeRequest: commentOnAPost,
+  };
+
   return {
     getPosts,
     createPost,
@@ -183,5 +209,6 @@ export default function usePostReq() {
     deletePost,
     updatePost,
     hidePost,
+    commentOnPost,
   };
 }

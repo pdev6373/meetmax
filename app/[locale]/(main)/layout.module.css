@@ -62,6 +62,7 @@
 .profilePics {
   background: #fff;
   overflow: hidden;
+  border-radius: 50%;
 }
 
 .profileMobile {

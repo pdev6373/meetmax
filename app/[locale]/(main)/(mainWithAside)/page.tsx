@@ -96,6 +96,7 @@ export default function Home() {
             likes={post.likes}
             message={post.message}
             visibility={post.visibility}
+            comments={post.comments}
           />
         ))}
 

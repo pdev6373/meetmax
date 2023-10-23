@@ -218,6 +218,19 @@ export type PostType = {
   message: string;
   visibility: VisibilityType;
   _id: string;
+
+  comments: {
+    id: string;
+    message: string;
+    likes: string[];
+    createdAt: string;
+    replies: {
+      id: string;
+      message: string;
+      likes: string[];
+      createdAt: string;
+    }[];
+  }[];
 };
 
 export type CreatePostType = {

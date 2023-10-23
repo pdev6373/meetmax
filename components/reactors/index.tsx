@@ -28,19 +28,19 @@ export default function Reactors({ post }: ReactorsType) {
       {images?.map((image, index) => (
         <Fragment key={index}>
           <Image
-            src={image || "/assets/profile-male.png"}
+            src={image || "/assets/no-profile.svg"}
             alt="image"
             width={18}
             height={18}
-            className={styles.imageMobile}
+            className={[styles.imageMobile, !index && styles.first].join(" ")}
           />
           <Image
-            src={image || "/assets/profile-male.png"}
+            src={image || "/assets/no-profile.svg"}
             alt="image"
             width={22}
             height={22}
             key={index}
-            className={styles.imageWeb}
+            className={[styles.imageWeb, !index && styles.first].join(" ")}
           />
         </Fragment>
       ))}

@@ -43,6 +43,23 @@ button {
   cursor: pointer;
 }
 
+em-emoji-picker {
+  height: 200px;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (min-width: 330px) {
+  em-emoji-picker {
+    width: 100%;
+  }
+}
+
+.post_emojiWrapper__Uhuub {
+  width: 100%;
+}
+
 .hidden {
   position: absolute;
   left: -9999px;

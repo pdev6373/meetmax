@@ -146,7 +146,7 @@ export default function Community() {
                     src={
                       user.profilePicture
                         ? user.profilePicture
-                        : "/assets/profile-male.png"
+                        : "/assets/no-profile.svg"
                     }
                     alt="user"
                     width={70}
@@ -157,7 +157,7 @@ export default function Community() {
                     src={
                       user.profilePicture
                         ? user.profilePicture
-                        : "/assets/profile-male.png"
+                        : "/assets/no-profile.svg"
                     }
                     alt="user"
                     width={50}

@@ -91,6 +91,12 @@
   display: none;
 }
 
+.userImageMobile,
+.userImageWeb {
+  overflow: hidden;
+  border-radius: 50%;
+}
+
 .userImageWeb {
   display: none;
 }

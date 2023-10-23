@@ -9,6 +9,9 @@ import { format } from "timeago.js";
 import { AuthContext } from "@/context/authContext";
 import useUserReq from "@/helpers/useUserReq";
 import usePostReq from "@/helpers/usePostReq";
+import ContentEditable from "react-contenteditable";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 export default function Post({
   createdAt,
@@ -18,10 +21,14 @@ export default function Post({
   message,
   visibility,
   _id,
+  comments,
 }: PostType) {
   const text = useRef("");
+  const commentText = useRef("");
+  const editableRef = useRef<any>();
   const {
     getUser: { makeRequest },
+    getSomeUsers: { loading: gettingSomeUsers, makeRequest: getSomeUsers },
     followUser: { loading: followingUser, makeRequest: followUser },
     unfollowUser: { loading: unfollowingUser, makeRequest: unfollowUser },
   } = useUserReq();
@@ -29,6 +36,7 @@ export default function Post({
     reactToPost: { loading: reactingToPost, makeRequest: reactToPost },
     deletePost: { loading: deletingPost, makeRequest: deletePost },
     hidePost: { loading: hidingPost, makeRequest: hidePost },
+    commentOnPost: { loading: commentingOnPost, makeRequest: commentOnPost },
   } = usePostReq();
   const {
     userDetails: { userDetails },
@@ -44,6 +52,8 @@ export default function Post({
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [showEmojis, setShowEmojis] = useState(false);
+  const [commenters, setCommenters] = useState<UserType[]>([]);
 
   const [post, setPost] = useState<PostType>({
     _id,
@@ -53,6 +63,7 @@ export default function Post({
     likes,
     message,
     visibility,
+    comments,
   });
   const isFollowing = userDetails?.following?.includes(id);
 
@@ -65,6 +76,7 @@ export default function Post({
       likes,
       message,
       visibility,
+      comments,
     });
 
     (async () => {
@@ -80,7 +92,30 @@ export default function Post({
     })();
 
     text.current = post.message;
-  }, [_id, createdAt, id, images, likes, message, visibility]);
+  }, [_id, createdAt, id, images, likes, message, visibility, comments]);
+
+  const getSomeUsersHandler = async () => {
+    if (!post?.comments?.length) return;
+
+    const response = await getSomeUsers(
+      post?.comments?.map((comment) => comment.id)
+    );
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setCommenters(response?.data?.data);
+    setAlertMessage("");
+
+    console.log("comm", response);
+  };
+
+  useEffect(() => {
+    getSomeUsersHandler();
+  }, []);
 
   useEffect(() => {
     if (!alertMessage) return;
@@ -166,6 +201,20 @@ export default function Post({
     setPost(response?.data?.data);
     setAlertMessage("");
   };
+  const handleCommentOnPost = async () => {
+    if (!commentText.current) return;
+    const response = await commentOnPost(post._id, commentText);
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlertMessage("");
+  };
+  const postTextHandler = (e: any) =>
+    (commentText.current = editableRef.current.textContent);
 
   const moreOptions = [
     {
@@ -320,14 +369,14 @@ export default function Post({
           <div className={styles.mainHeader}>
             <div className={styles.mainHeaderDetails}>
               <Image
-                src={user?.profilePicture || "/assets/profile-male.png"}
+                src={user?.profilePicture || "/assets/no-profile.svg"}
                 alt="user"
                 width={32}
                 height={32}
                 className={styles.posterImageMobile}
               />
               <Image
-                src={user?.profilePicture || "/assets/profile-male.png"}
+                src={user?.profilePicture || "/assets/no-profile.svg"}
                 alt="user"
                 width={50}
                 height={50}
@@ -449,8 +498,9 @@ export default function Post({
           <div className={styles.mainBottom}>
             {post?.likes?.length ? <Reactors post={post} /> : <></>}
             <div className={styles.bottomTexts}>
-              {/* <p className={styles.bottomText}>{`${noOfComments} Comments`}</p> */}
-              <p className={styles.bottomText}>10 Comments</p>
+              <p className={styles.bottomText}>{`${
+                post?.comments?.length || "No"
+              } ${post?.comments?.length === 1 ? "Comment" : "Comments"}`}</p>
             </div>
           </div>
         </div>
@@ -515,8 +565,13 @@ export default function Post({
                     </button>
                   )}
                 </>
-              ) : (
-                <>
+              ) : post?.comments?.length ? (
+                <button
+                  className={[
+                    styles.reactionButton,
+                    styles.reactionButtonComment,
+                  ].join(" ")}
+                >
                   <Image
                     src={reaction.icon}
                     alt="reaction"
@@ -524,7 +579,9 @@ export default function Post({
                     height={16}
                   />
                   <p className={styles.reactionName}>{reaction.name}</p>
-                </>
+                </button>
+              ) : (
+                <></>
               )}
             </div>
           ))}
@@ -532,14 +589,14 @@ export default function Post({
 
         <div className={styles.bottom}>
           <Image
-            src={userDetails?.profilePicture || "/assets/profile-male.png"}
+            src={userDetails?.profilePicture || "/assets/no-profile.svg"}
             alt="user"
             width={32}
             height={32}
             className={styles.bottomUserImage}
           />
           <Image
-            src={userDetails?.profilePicture || "/assets/profile-male.png"}
+            src={userDetails?.profilePicture || "/assets/no-profile.svg"}
             alt="user"
             width={38}
             height={38}
@@ -548,31 +605,230 @@ export default function Post({
 
           <div className={styles.inputWrapperOuter}>
             <div className={styles.inputWrapper}>
-              <input
+              <ContentEditable
+                innerRef={editableRef}
+                html={commentText.current}
+                onChange={postTextHandler}
                 placeholder="Write a comment..."
                 className={styles.commentInput}
               />
 
-              <div className={styles.inputIcons}>
-                <Image
-                  src="/assets/emoji.svg"
-                  alt="user"
-                  width={16}
-                  height={16}
-                />
+              <div className={styles.inputIconsWrapper}>
+                <div
+                  className={styles.inputIcons}
+                  onClick={() => setShowEmojis((prev) => !prev)}
+                >
+                  <Image
+                    src="/assets/emoji.svg"
+                    alt="user"
+                    width={16}
+                    height={16}
+                  />
+                </div>
               </div>
             </div>
 
-            <div className={styles.send}>
+            <div className={styles.send} onClick={handleCommentOnPost}>
               <Image
-                src="/assets/send.svg"
+                src={
+                  commentingOnPost ? "/assets/spinner.svg" : "/assets/send.svg"
+                }
                 alt="reaction"
                 width={16}
                 height={16}
               />
             </div>
           </div>
+
+          {showEmojis ? (
+            <div className={styles.emojiWrapper}>
+              <Picker
+                onEmojiSelect={console.log("Hekko")}
+                theme="dark"
+                previewPosition="none"
+                data={data}
+                onClickOutside={() => setShowEmojis(false)}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
+
+        {comments?.length ? (
+          <div className={styles.comments}>
+            {comments
+              ?.map((comment) => {
+                const commenter = commenters?.find(
+                  (commenter) => commenter._id === comment.id
+                );
+
+                if (!commenter?._id) return <></>;
+
+                return (
+                  <div className={styles.commentWrapper}>
+                    <div className={styles.comment}>
+                      <Image
+                        src={"/assets/no-profile.svg"}
+                        alt="profile"
+                        width={24}
+                        height={24}
+                        className={styles.commentUserProfile}
+                      />
+
+                      <div className={styles.commentMainWrapper}>
+                        <div className={styles.commentMain}>
+                          <div className={styles.commentMainTop}>
+                            <div>
+                              <p
+                                className={styles.commentName}
+                              >{`${commenter.lastname} ${commenter.firstname}`}</p>
+                              <p className={styles.commentTime}>
+                                {format(comment.createdAt)}
+                              </p>
+                            </div>
+
+                            <div className={styles.commentMore}>
+                              <Image
+                                src="/assets/more.svg"
+                                alt="more"
+                                width={16}
+                                height={16}
+                              />
+                            </div>
+                          </div>
+
+                          <p className={styles.commentMessage}>
+                            {comment.message}
+                          </p>
+                        </div>
+
+                        <div className={styles.commentAction}>
+                          <p className={styles.commentLikeAction}>Like</p>
+                          <p className={styles.commentReplyAction}>Reply</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={styles.commentReply}>
+                      <div className={styles.comment}>
+                        <Image
+                          src={"/assets/no-profile.svg"}
+                          alt="profile"
+                          width={24}
+                          height={24}
+                          className={styles.commentUserProfile}
+                        />
+
+                        <div className={styles.commentMainWrapper}>
+                          <div className={styles.commentMain}>
+                            <div className={styles.commentMainTop}>
+                              <div>
+                                <p
+                                  className={styles.commentName}
+                                >{`${commenter.lastname} ${commenter.firstname}`}</p>
+                                <p className={styles.commentTime}>
+                                  {format(comment.createdAt)}
+                                </p>
+                              </div>
+
+                              <div className={styles.commentMore}>
+                                <Image
+                                  src="/assets/more.svg"
+                                  alt="more"
+                                  width={16}
+                                  height={16}
+                                />
+                              </div>
+                            </div>
+
+                            {/* <p className={styles.commentMessage}>
+                              {comment.message}
+                            </p> */}
+                            <div className={styles.commentReplyHeader}>
+                              <h3 className={styles.commentReplyHeading}>
+                                Replying to Swapan Bala
+                              </h3>
+                              <p className={styles.commentReplyHeadingText}>
+                                Looks amazing and breathtaking. Been there,
+                                beautiful!
+                              </p>
+                            </div>
+
+                            <div className={styles.inputWrapperOuter}>
+                              <div className={styles.inputWrapper}>
+                                <ContentEditable
+                                  innerRef={editableRef}
+                                  html={commentText.current}
+                                  onChange={postTextHandler}
+                                  placeholder="Write a comment..."
+                                  className={styles.commentInput}
+                                />
+
+                                <div className={styles.inputIconsWrapper}>
+                                  <div
+                                    className={styles.inputIcons}
+                                    onClick={() =>
+                                      setShowEmojis((prev) => !prev)
+                                    }
+                                  >
+                                    <Image
+                                      src="/assets/emoji.svg"
+                                      alt="user"
+                                      width={16}
+                                      height={16}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div
+                                className={styles.send}
+                                onClick={handleCommentOnPost}
+                              >
+                                <Image
+                                  src={
+                                    commentingOnPost
+                                      ? "/assets/spinner.svg"
+                                      : "/assets/send.svg"
+                                  }
+                                  alt="reaction"
+                                  width={16}
+                                  height={16}
+                                />
+                              </div>
+
+                              {showEmojis ? (
+                                <div className={styles.emojiWrapper}>
+                                  <Picker
+                                    onEmojiSelect={console.log("Hekko")}
+                                    theme="dark"
+                                    previewPosition="none"
+                                    data={data}
+                                    onClickOutside={() => setShowEmojis(false)}
+                                  />
+                                </div>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className={styles.commentAction}>
+                            <p className={styles.commentLikeAction}>Like</p>
+                            <p className={styles.commentReplyAction}>Reply</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+              .reverse()}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
