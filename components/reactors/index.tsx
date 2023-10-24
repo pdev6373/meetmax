@@ -16,7 +16,6 @@ export default function Reactors({ post }: ReactorsType) {
   useEffect(() => {
     (async () => {
       const response = await makeRequest(post.likes.slice(0, 3));
-      console.log(response);
       setImages(
         response?.data?.data.map((data: UserType) => data.profilePicture)
       );

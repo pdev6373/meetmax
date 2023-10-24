@@ -29,6 +29,7 @@ export default function CreatePost({
   view,
   postId,
   type = "new",
+  setPost,
 }: CreatePostType) {
   const text = useRef<any>();
   const editableRef = useRef<any>();
@@ -50,6 +51,7 @@ export default function CreatePost({
   const [images, setImages] = useState<File[]>([]);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
+  const [danger, setDanger] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
@@ -106,20 +108,23 @@ export default function CreatePost({
 
     const response =
       type === "new" ? await makeRequest(payload) : await updatePost(payload);
+
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
+
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
-      toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
-    setAlertMessage("");
+    setDanger(false);
+    setPost && setPost(response?.data?.data);
     handleClose();
-    window?.location.reload();
   };
 
   return (
     <>
-      <Alert open={showAlert} setOpen={setShowAlert}>
+      <Alert open={showAlert} setOpen={setShowAlert} isDanger={danger}>
         {alertMessage}
       </Alert>
       <div className={styles.overlay}></div>

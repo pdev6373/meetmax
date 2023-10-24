@@ -249,6 +249,7 @@ export type CreatePostType = {
   view?: VisibilityType;
   type?: "new" | "edit";
   postId?: string;
+  setPost?: any;
 };
 
 export type SwtichType = {
@@ -271,7 +272,7 @@ export type SettingsTextType = {
 };
 
 export type ProfileType = {
-  isMine?: boolean;
+  id?: string;
 };
 
 export type UserType = {

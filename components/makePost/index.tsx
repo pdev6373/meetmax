@@ -15,6 +15,7 @@ export default function MakePost() {
   const [showPostOptions, setShowPostOptions] = useState(false);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
+  const [danger, setDanger] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const {
     userDetails: { userDetails },
@@ -47,19 +48,20 @@ export default function MakePost() {
   const handlePost = async () => {
     if (!text.current) return;
     const response = await makeRequest({ message: text });
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
+
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
-      toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
-    window?.location.reload();
-    setAlertMessage("");
+    setDanger(false);
   };
 
   return (
     <>
-      <Alert open={showAlert} setOpen={setShowAlert}>
+      <Alert open={showAlert} setOpen={setShowAlert} isDanger={danger}>
         {alertMessage}
       </Alert>
       <div className={styles.wrapper}>

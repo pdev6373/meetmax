@@ -19,6 +19,8 @@ type PostUpdateType = {
 
 export default function usePostReq() {
   const { fetchData: fetchPosts, loading: fetchingPosts } = useAxiosPrivate();
+  const { fetchData: fetchProfilePosts, loading: fetchingProfilePosts } =
+    useAxiosPrivate();
   const { fetchData: createUserPost, loading: creatingPost } =
     useAxiosPrivate();
   const { fetchData: reactToOnePost, loading: reactingToPost } =
@@ -57,6 +59,17 @@ export default function usePostReq() {
     return response;
   };
 
+  const fetchAllProfilePosts = async (id: string) => {
+    const response = await fetchProfilePosts({
+      url: `/post/profile-posts/${id}`,
+      method: "GET",
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    setPosts(response?.data?.data);
+    return response;
+  };
+
   const createAPost = async ({
     message = { current: "" },
     images = [],
@@ -78,6 +91,9 @@ export default function usePostReq() {
     });
 
     message.current = "";
+
+    if (!response?.success || !response?.data?.success) return response;
+    setPosts(response?.data?.data);
     return response;
   };
 
@@ -104,6 +120,8 @@ export default function usePostReq() {
     });
 
     message.current = "";
+
+    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -132,6 +150,7 @@ export default function usePostReq() {
       },
     });
 
+    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -151,6 +170,7 @@ export default function usePostReq() {
       },
     });
 
+    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -164,6 +184,7 @@ export default function usePostReq() {
       },
     });
 
+    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -182,6 +203,7 @@ export default function usePostReq() {
     });
 
     message.current = "";
+    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -208,6 +230,7 @@ export default function usePostReq() {
     });
 
     message.current = "";
+    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -220,6 +243,9 @@ export default function usePostReq() {
         postId,
       },
     });
+
+    if (!response?.success || !response?.data?.success) return response;
+    setPosts(response?.data?.data);
 
     return response;
   };
@@ -274,6 +300,11 @@ export default function usePostReq() {
     makeRequest: reactToAReply,
   };
 
+  const getProfilePosts = {
+    loading: fetchingProfilePosts,
+    makeRequest: fetchAllProfilePosts,
+  };
+
   return {
     getPosts,
     createPost,
@@ -285,5 +316,6 @@ export default function usePostReq() {
     replyCommentOnPost,
     reactToComment,
     reactToReply,
+    getProfilePosts,
   };
 }

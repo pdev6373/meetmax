@@ -12,6 +12,10 @@ export default function useUserReq() {
     useAxiosPrivate();
   const { fetchData: unfollowUserAccount, loading: unfollowingUserAccount } =
     useAxiosPrivate();
+  const { fetchData: uploadProfilePics, loading: uploadingProfilePics } =
+    useAxiosPrivate();
+  const { fetchData: uploadCoverPics, loading: uploadingCoverPics } =
+    useAxiosPrivate();
   const {
     userDetails: { userDetails, setUserDetails },
   } = useContext(AuthContext);
@@ -77,6 +81,40 @@ export default function useUserReq() {
     return response;
   };
 
+  const uploadUserProfilePicture = async (image: File) => {
+    const formData = new FormData();
+    formData.append("id", userDetails._id);
+    formData.append("image", image);
+
+    const response = await uploadProfilePics({
+      url: "/user/profile-picture",
+      method: "PATCH",
+      contentType: "multipart/form-data",
+      payload: formData,
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    setUserDetails(response?.data?.data);
+    return response;
+  };
+
+  const uploadUserCoverPicture = async (image: File) => {
+    const formData = new FormData();
+    formData.append("id", userDetails._id);
+    formData.append("image", image);
+
+    const response = await uploadCoverPics({
+      url: "/user/cover-picture",
+      method: "PATCH",
+      contentType: "multipart/form-data",
+      payload: formData,
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    setUserDetails(response?.data?.data);
+    return response;
+  };
+
   const getUser = {
     loading: fetchingUser,
     makeRequest: fetchAUser,
@@ -102,5 +140,23 @@ export default function useUserReq() {
     makeRequest: unfollowAUser,
   };
 
-  return { getUser, updateUser, getSomeUsers, followUser, unfollowUser };
+  const uploadProfilePicture = {
+    loading: uploadingProfilePics,
+    makeRequest: uploadUserProfilePicture,
+  };
+
+  const uploadCoverPicture = {
+    loading: uploadingCoverPics,
+    makeRequest: uploadUserCoverPicture,
+  };
+
+  return {
+    getUser,
+    updateUser,
+    getSomeUsers,
+    followUser,
+    unfollowUser,
+    uploadProfilePicture,
+    uploadCoverPicture,
+  };
 }

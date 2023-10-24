@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect, useRef, useContext } from "react";
-import { MakePost, Post } from "@/components";
+import { useState, useEffect, useRef, useContext, ChangeEvent } from "react";
+import { Alert, Button, MakePost, Post } from "@/components";
 import Image from "next/image";
 import AvatarEditor from "react-avatar-editor";
 import Link from "next/link";
@@ -8,20 +8,62 @@ import Avatar from "react-avatar-edit";
 import styles from "./index.module.css";
 import { ProfileType } from "@/types";
 import { AuthContext } from "@/context/authContext";
+import useUserReq from "@/helpers/useUserReq";
+import usePostReq from "@/helpers/usePostReq";
+import { PostContext } from "@/context/postContext";
+import { userInitialValues } from "@/constants";
 
-export default function Profile({ isMine = false }: ProfileType) {
+const convertToFile = async (
+  dataUrl: string,
+  pictureName: string,
+  pictureType: string
+) => {
+  const res = await fetch(dataUrl);
+  const blob = await res.blob();
+  let newFile = new File([blob], pictureName, { type: pictureType });
+  return newFile;
+};
+
+export default function Profile({ id }: ProfileType) {
   const {
     userDetails: { userDetails },
   } = useContext(AuthContext);
+  const {
+    fields: { posts },
+  } = useContext(PostContext);
+  const {
+    uploadProfilePicture: { loading, makeRequest },
+    uploadCoverPicture: {
+      loading: uploadingCoverPicture,
+      makeRequest: uploadCoverPicture,
+    },
+    getUser: { loading: gettingUser, makeRequest: getUser },
+  } = useUserReq();
+  const {
+    getProfilePosts: {
+      loading: gettingProfilePosts,
+      makeRequest: getProfilePosts,
+    },
+  } = usePostReq();
   const [croppedProfileImage, setCroppedProfileImage] = useState("");
-  const [profileImage, setProfileImage] = useState("/assets/user.png");
-  const [newProfileImage, setNewProfileImage] = useState(undefined);
-  const [coverImage, setCoverImage] = useState("/assets/cover-photo.png");
+  const [selectedProfileDetails, setSelectedProfileDetails] = useState({
+    name: "",
+    type: "",
+  });
+  const [selectedCoverDetails, setSelectedCoverDetails] = useState({
+    name: "",
+    type: "",
+  });
+
   const [newCoverImage, setNewCoverImage] = useState("");
   const [showProfileImage, setShowProfileImage] = useState(false);
   const [showProfileImageEditor, setShowProfileImageEditor] = useState(false);
   const [showCoverImageEditor, setShowCoverImageEditor] = useState(false);
+  const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
+  const [alertToggle, setAlertToggle] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
   const [progress, setProgress] = useState(100);
+  const [user, setUser] = useState(userInitialValues);
 
   const [imageDimension, setImageDimension] = useState({
     width: 0,
@@ -30,6 +72,15 @@ export default function Profile({ isMine = false }: ProfileType) {
 
   const editorRef = useRef<any>(null);
   const coverImageEditorRef = useRef<any>(null);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getUser(id || userDetails?._id);
+      console.log(response);
+
+      setUser(response?.data?.data);
+    })();
+  }, []);
 
   useEffect(() => {
     window.addEventListener(
@@ -50,8 +101,25 @@ export default function Profile({ isMine = false }: ProfileType) {
     });
   }, [showProfileImageEditor, showCoverImageEditor, editorRef]);
 
+  useEffect(() => {
+    if (!alertMessage) return;
+
+    setAlertMessage(alertMessage);
+    setShowAlert("yes");
+    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+
+    return () => {
+      clearTimeout(alertTimer);
+    };
+  }, [alertMessage, alertToggle]);
+
   const selectCoverImageHandler = (e: any) => {
     let fReader = new FileReader();
+
+    setSelectedCoverDetails({
+      name: e.target.files[0].name,
+      type: e.target.files[0].type,
+    });
 
     fReader.readAsDataURL(e.target.files[0]);
     fReader.onloadend = (event) =>
@@ -72,7 +140,10 @@ export default function Profile({ isMine = false }: ProfileType) {
     if (editor === "profile-image") {
       setShowProfileImageEditor(false);
       setCroppedProfileImage("");
-      setNewProfileImage(undefined);
+      setSelectedProfileDetails({
+        name: "",
+        type: "",
+      });
       return;
     }
 
@@ -81,153 +152,183 @@ export default function Profile({ isMine = false }: ProfileType) {
 
   const showProfileImageHandler = () => setShowProfileImage(true);
   const showProfileImageEditorHandler = () => setShowProfileImageEditor(true);
-  const cropProfileImageHandler = (preview: any) =>
-    setCroppedProfileImage(preview);
 
-  const saveProfileImageHandler = () => {
-    if (!croppedProfileImage) {
-      closeImageEditor("profile-image");
+  const uploadCoverImageHandler = async () => {
+    const image = await convertToFile(
+      coverImageEditorRef.current.getImageScaledToCanvas().toDataURL(),
+      selectedCoverDetails.name,
+      selectedCoverDetails.type
+    );
+
+    const response = await uploadCoverPicture(image);
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
       return;
     }
 
-    setProfileImage(croppedProfileImage);
-    setCroppedProfileImage("");
-    setNewProfileImage(undefined);
-    closeImageEditor("profile-image");
-  };
+    setAlertMessage("");
+    setSelectedProfileDetails({
+      name: "",
+      type: "",
+    });
+    closeImageEditor("cover-image");
 
-  const saveCoverImageHandler = () => {
-    setCoverImage(
-      coverImageEditorRef.current.getImageScaledToCanvas().toDataURL()
-    );
     setNewCoverImage("");
     closeImageEditor("cover-image");
   };
 
-  const userData = isMine
-    ? {
-        fullname: `${userDetails.lastname} ${userDetails.firstname}`,
-        bio: userDetails.bio,
-        intro: [
-          {
-            name: "website",
-            icon: "/assets/explore.svg",
-            value: userDetails.website,
-          },
-          {
-            name: "gender",
-            icon: "/assets/person.svg",
-            value: userDetails.gender,
-          },
-          {
-            name: "birthday",
-            icon: "/assets/birthday.svg",
-            value: userDetails.dateOfBirth,
-          },
-          {
-            name: "location",
-            icon: "/assets/location.svg",
-            value: userDetails.location,
-          },
-          {
-            name: "facebook",
-            icon: "/assets/facebook.svg",
-            value: userDetails.socialLinks.facebook.match(
-              /^https:\/\/(?:www\.)?facebook\.com\/(?:profile\.php\?id=)?([a-zA-Z0-9.]+)/
-            )![1],
-          },
-          {
-            name: "twitter",
-            icon: "/assets/twitter.svg",
-            value: userDetails.socialLinks.twitter.match(
-              /^https:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/
-            )![1],
-          },
-          {
-            name: "instagram",
-            icon: "/assets/instagram.svg",
-            value: userDetails.socialLinks.instagram.match(
-              /^https:\/\/(?:www\.)?instagram\.com\/[a-zA-Z0-9_]+\/?/
-            )![1],
-          },
-          {
-            name: "linkedin",
-            icon: "/assets/linkedin.svg",
-            value: userDetails.socialLinks.linkedin.match(
-              /^https:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/
-            )![1],
-          },
-          {
-            name: "followers",
-            icon: null,
-            value: `${0} Followers`,
-          },
-          {
-            name: "following",
-            icon: null,
-            value: `${0} Following`,
-          },
-        ],
-      }
-    : {
-        fullname: "Saleh Ahmed",
-        bio: "UI Designer",
-        intro: [
-          {
-            name: "website",
-            icon: "/assets/explore.svg",
-            value: userDetails.website,
-          },
-          {
-            name: "gender",
-            icon: "/assets/person.svg",
-            value: userDetails.gender,
-          },
-          {
-            name: "birthday",
-            icon: "/assets/birthday.svg",
-            value: userDetails.dateOfBirth,
-          },
-          {
-            name: "location",
-            icon: "/assets/location.svg",
-            value: userDetails.location,
-          },
-          {
-            name: "facebook",
-            icon: "/assets/facebook.svg",
-            value: userDetails.socialLinks.facebook,
-          },
-          {
-            name: "twitter",
-            icon: "/assets/twitter.svg",
-            value: userDetails.socialLinks.twitter,
-          },
-          {
-            name: "instagram",
-            icon: "/assets/instagram.svg",
-            value: userDetails.socialLinks.instagram,
-          },
-          {
-            name: "linkedin",
-            icon: "/assets/linkedin.svg",
-            value: userDetails.socialLinks.linkedin,
-          },
-          {
-            name: "followers",
-            icon: null,
-            value: `${0} Followers`,
-          },
-          {
-            name: "following",
-            icon: null,
-            value: `${0} Following`,
-          },
-        ],
-      };
+  const getProfilePostsHandler = async (id: string) => {
+    const response = await getProfilePosts(id);
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlertMessage("");
+  };
+
+  useEffect(() => {
+    getProfilePostsHandler(id || userDetails?._id);
+  }, []);
+
+  const cropProfileImageHandler = (preview: any) =>
+    setCroppedProfileImage(preview);
+
+  const profilePhotoUploadHandler = async () => {
+    const image = await convertToFile(
+      croppedProfileImage,
+      selectedProfileDetails.name,
+      selectedProfileDetails.type
+    );
+
+    const response = await makeRequest(image);
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlertMessage("");
+    setCroppedProfileImage("");
+    setSelectedProfileDetails({
+      name: "",
+      type: "",
+    });
+    closeImageEditor("profile-image");
+  };
+
+  const profilePhotoSetHandler = async (
+    elem: File | ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!elem) return;
+    const selectedImage = elem as File;
+
+    setSelectedProfileDetails({
+      name: selectedImage.name,
+      type: selectedImage.type,
+    });
+  };
+
+  const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
+  const [userData, setUserData] = useState<{
+    fullname: string;
+    bio: string;
+    intro: {
+      name: string;
+      icon: string | null;
+      value: string | any;
+    }[];
+  }>({
+    fullname: "",
+    bio: "",
+    intro: [
+      {
+        icon: "",
+        name: "",
+        value: "",
+      },
+    ],
+  });
+
+  useEffect(() => {
+    setUserData({
+      fullname: `${user?.lastname} ${user?.firstname}`,
+      bio: user?.bio,
+      intro: [
+        {
+          name: "website",
+          icon: "/assets/explore.svg",
+          value: user?.website,
+        },
+        {
+          name: "gender",
+          icon: "/assets/person.svg",
+          value: user?.gender,
+        },
+        {
+          name: "birthday",
+          icon: "/assets/birthday.svg",
+          value: user?.dateOfBirth,
+        },
+        {
+          name: "location",
+          icon: "/assets/location.svg",
+          value: user?.location,
+        },
+        {
+          name: "facebook",
+          icon: "/assets/facebook.svg",
+          // value: userDetails.socialLinks.facebook.match(
+          //   /^https:\/\/(?:www\.)?facebook\.com\/(?:profile\.php\?id=)?([a-zA-Z0-9.]+)/
+          // )![1],
+          value: null,
+        },
+        {
+          name: "twitter",
+          icon: "/assets/twitter.svg",
+          // value: userDetails.socialLinks.twitter.match(
+          //   /^https:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/
+          // )![1],
+          value: null,
+        },
+        {
+          name: "instagram",
+          icon: "/assets/instagram.svg",
+          // value: userDetails.socialLinks.instagram.match(
+          //   /^https:\/\/(?:www\.)?instagram\.com\/[a-zA-Z0-9_]+\/?/
+          // )![1],
+          value: null,
+        },
+        {
+          name: "linkedin",
+          icon: "/assets/linkedin.svg",
+          // value: userDetails.socialLinks.linkedin.match(
+          //   /^https:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/
+          // )![1],
+          value: null,
+        },
+        {
+          name: "followers",
+          icon: null,
+          value: `${user?.followers?.length} Followers`,
+        },
+        {
+          name: "following",
+          icon: null,
+          value: `${user?.following?.length} Following`,
+        },
+      ],
+    });
+  }, [user]);
 
   return (
     <>
+      <Alert open={showAlert} setOpen={setShowAlert}>
+        {alertMessage}
+      </Alert>
+
       {showProfileImageEditor || showCoverImageEditor || showProfileImage ? (
         <div className={styles.overlay}>
           <div
@@ -266,14 +367,14 @@ export default function Profile({ isMine = false }: ProfileType) {
             {showProfileImage ? (
               <div className={styles.profileImageDisplay}>
                 <Image
-                  src={profileImage}
+                  src={user?.profilePicture || "/assets/user.png"}
                   alt="profile Image"
                   width={180}
                   height={180}
                   className={styles.profileDisplayWeb}
                 />
                 <Image
-                  src={profileImage}
+                  src={user?.profilePicture || "/assets/user.png"}
                   alt="profile Image"
                   width={120}
                   height={120}
@@ -298,7 +399,8 @@ export default function Profile({ isMine = false }: ProfileType) {
                     }}
                     closeIconColor="transparent"
                     onCrop={cropProfileImageHandler}
-                    src={newProfileImage}
+                    onFileLoad={profilePhotoSetHandler}
+                    exportAsSquare
                   />
                 ) : (
                   <AvatarEditor
@@ -339,16 +441,19 @@ export default function Profile({ isMine = false }: ProfileType) {
                     </div>
                   )}
 
-                  <button
-                    className={styles.saveButton}
+                  <Button
                     onClick={
                       showProfileImageEditor
-                        ? saveProfileImageHandler
-                        : saveCoverImageHandler
+                        ? profilePhotoUploadHandler
+                        : uploadCoverImageHandler
                     }
+                    type="submit"
+                    disabled={loading || uploadingCoverPicture}
+                    isLoading={loading || uploadingCoverPicture}
+                    variation="small"
                   >
                     Save
-                  </button>
+                  </Button>
                 </div>
               </div>
             )}
@@ -360,9 +465,13 @@ export default function Profile({ isMine = false }: ProfileType) {
 
       <div className={styles.wrapper}>
         <div className={styles.coverPhotoWrapper}>
-          <Image src={coverImage} alt="cover photo" fill />
+          <Image
+            src={user?.coverPicture || "/assets/cover-photo.png"}
+            alt="cover photo"
+            fill
+          />
 
-          {isMine ? (
+          {!id ? (
             <>
               <label
                 htmlFor="cover-photo"
@@ -405,7 +514,7 @@ export default function Profile({ isMine = false }: ProfileType) {
           <div className={styles.userInfoMain}>
             <div className={styles.userImageWrapper}>
               <Image
-                src="/assets/user.png"
+                src={user?.profilePicture || "/assets/no-profile.svg"}
                 alt="user image"
                 width={84}
                 height={84}
@@ -413,7 +522,7 @@ export default function Profile({ isMine = false }: ProfileType) {
                 onClick={showProfileImageHandler}
               />
               <Image
-                src={profileImage}
+                src={user?.profilePicture || "/assets/no-profile.svg"}
                 alt="user image"
                 width={150}
                 height={150}
@@ -421,7 +530,7 @@ export default function Profile({ isMine = false }: ProfileType) {
                 onClick={showProfileImageHandler}
               />
 
-              {isMine ? (
+              {!id ? (
                 <div
                   className={styles.profileImageUploadIcon}
                   onClick={showProfileImageEditorHandler}
@@ -439,12 +548,12 @@ export default function Profile({ isMine = false }: ProfileType) {
             </div>
 
             <div>
-              <p className={styles.userInfoName}>{userData.fullname}</p>
-              <p className={styles.userInfoJob}>{userData.bio}</p>
+              <p className={styles.userInfoName}>{userData?.fullname}</p>
+              <p className={styles.userInfoJob}>{userData?.bio}</p>
             </div>
           </div>
 
-          {isMine ? (
+          {!id ? (
             <Link href="/settings/edit-profile" className={styles.editInfo}>
               Edit basic info
             </Link>
@@ -493,7 +602,7 @@ export default function Profile({ isMine = false }: ProfileType) {
                   </div>
                 ))}
             </div>
-            {isMine ? (
+            {!id ? (
               <Link href="/settings/edit-profile" className={styles.editInfo}>
                 Edit Details
               </Link>
@@ -502,217 +611,39 @@ export default function Profile({ isMine = false }: ProfileType) {
             )}
           </div>
 
-          <div className={styles.profilePost}>
-            <MakePost />
+          {gettingProfilePosts ? (
+            <div className={styles.profileLoader}>
+              <Image
+                src="/assets/spinner.svg"
+                alt="spinner"
+                width={48}
+                height={48}
+              />
+            </div>
+          ) : (
+            <div className={styles.profilePost}>
+              <MakePost />
 
-            {/* <Post
-              isMine={isMine}
-              lastname="Sepural"
-              firstname="Gallery"
-              date="15h"
-              type="Public"
-              likes={[
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-              ]}
-              noOfComments="10"
-              // noOfShare="29"
-              postImages={["/assets/post-image.png"]}
-              posterImage="/assets/user.png"
-              isFollowing={true}
-            />
-
-            <Post
-              isMine={isMine}
-              lastname="Sepural"
-              firstname="Gallery"
-              date="15h"
-              type="Public"
-              likes={[
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-              ]}
-              noOfComments="10"
-              // noOfShare="29"
-              postImages={[
-                "/assets/post-image.png",
-                "/assets/post-image.png",
-                "/assets/post-image.png",
-              ]}
-              posterImage="/assets/user.png"
-              isFollowing={true}
-            />
-
-            <Post
-              isMine={isMine}
-              lastname="Sepural"
-              firstname="James"
-              date="15h"
-              type="Public"
-              likes={[
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-              ]}
-              noOfComments="10"
-              // noOfShare="29"
-              postImages={["/assets/post-image.png", "/assets/post-image.png"]}
-              posterImage="/assets/user.png"
-              isFollowing={true}
-            />
-
-            <Post
-              lastname="Peter"
-              firstname="Gallery"
-              date="15h"
-              type="Public"
-              postText="If you think adventure is dangerous, try routine, it’s lethal Paulo Coelho! Good morning all friends."
-              likes={[
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "adebayoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "Peter",
-                  image: "/assets/user.png",
-                },
-                {
-                  email: "taiwoluborode@gmail.com",
-                  lastname: "Oluborode",
-                  firstname: "James",
-                  image: "/assets/user.png",
-                },
-              ]}
-              noOfComments="10"
-              // noOfShare="29"
-              postImages={["/assets/post-image.png"]}
-              posterImage="/assets/user.png"
-              isFollowing={true}
-            /> */}
-          </div>
+              {posts?.length ? (
+                posts?.map((post) => (
+                  <Post
+                    createdAt={post.createdAt}
+                    id={post.id}
+                    _id={post._id}
+                    images={post.images}
+                    likes={post.likes}
+                    message={post.message}
+                    visibility={post.visibility}
+                    comments={post.comments}
+                  />
+                ))
+              ) : (
+                <p className={styles.noPost}>
+                  • You havent posted anything yet •
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>

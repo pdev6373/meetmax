@@ -82,6 +82,7 @@ export default function Post({
   const [currentReactedReply, setCurrentReactedReply] = useState<string | null>(
     null
   );
+  const [danger, setDanger] = useState(false);
 
   const [post, setPost] = useState<PostType>({
     _id,
@@ -96,6 +97,7 @@ export default function Post({
   const isFollowing = userDetails?.following?.includes(id);
 
   useEffect(() => {
+    setUser(userInitialValues);
     setPost({
       _id,
       createdAt,
@@ -106,18 +108,6 @@ export default function Post({
       visibility,
       comments,
     });
-
-    (async () => {
-      const response = await makeRequest(post.id);
-      if (!response?.success || !response?.data?.success) {
-        setAlertMessage(response?.data?.message);
-        toggleAlertHandler();
-        return;
-      }
-
-      setUser(response?.data?.data);
-      setAlertMessage("");
-    })();
 
     text.current = post.message;
   }, [_id, createdAt, id, images, likes, message, visibility, comments]);
@@ -130,11 +120,13 @@ export default function Post({
     );
 
     if (!response?.success || !response?.data?.success) {
+      setDanger(true);
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
       return;
     }
 
+    setDanger(false);
     setCommenters(response?.data?.data);
     setAlertMessage("");
   };
@@ -142,38 +134,55 @@ export default function Post({
   const getRepliers = async () => {
     const repliers: string[] = [];
 
-    comments.forEach((comment) =>
+    post?.comments.forEach((comment) =>
       comment.replies.forEach((reply) => repliers.push(reply.id))
     );
 
     if (!repliers?.length) return;
-
     const response = await getSomeUsers(repliers);
 
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
+      setDanger(true);
       toggleAlertHandler();
       return;
     }
 
+    setDanger(false);
     setRepliers(response?.data?.data);
     setAlertMessage("");
   };
 
   useEffect(() => {
+    (async () => {
+      const response = await makeRequest(post.id);
+
+      if (!response?.success || !response?.data?.success) {
+        setDanger(true);
+        setAlertMessage(response?.data?.message);
+        toggleAlertHandler();
+        return;
+      }
+
+      setDanger(false);
+      setUser(response?.data?.data);
+      setAlertMessage("");
+    })();
     getSomeUsersHandler();
     getRepliers();
   }, [post]);
 
-  console.log(comments);
-
   useEffect(() => {
     if (!alertMessage) return;
-    setShowAlert("yes");
-    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
-    return () => {
-      clearTimeout(alertTimer);
-    };
+
+    setTimeout(() => {
+      setAlertMessage(alertMessage);
+      setShowAlert("yes");
+      const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+      return () => {
+        clearTimeout(alertTimer);
+      };
+    }, 700);
   }, [alertMessage, alertToggle]);
 
   const reactions = [
@@ -192,38 +201,44 @@ export default function Post({
   const toggleShowMoreOptions = () => setShowMoreOptions((prev) => !prev);
   const handleDeletePost = async () => {
     const response = await deletePost(post._id);
+
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
+
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
-      toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
-    setAlertMessage("");
+    setDanger(false);
     setShowMoreOptions(false);
     setPopupType(null);
-    window?.location.reload();
   };
   const handleFollowUser = async () => {
     const response = await followUser(user._id);
     setShowMoreOptions(false);
 
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
+
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
-      toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
-    setAlertMessage("");
+    setDanger(false);
   };
   const handleUnfollowUser = async () => {
     const response = await unfollowUser(user._id);
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
+
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
-      toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
-    setAlertMessage("");
+    setDanger(false);
     setShowMoreOptions(false);
     setPopupType(null);
   };
@@ -231,60 +246,75 @@ export default function Post({
   const handleHidePost = async () => {
     const response = await hidePost(post._id);
     setShowMoreOptions(false);
+
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
+
+      setDanger(true);
       return;
     }
 
     setAlertMessage("");
+    setDanger(false);
     setIsPostHidden(true);
   };
   const postReactionHandler = async () => {
     const response = await reactToPost(post._id);
+
     if (!response?.success || !response?.data?.success) {
+      setDanger(true);
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
       return;
     }
 
-    setPost(response?.data?.data);
+    setDanger(false);
     setAlertMessage("");
+    setPost(response?.data?.data);
   };
   const commentReactionHandler = async (commentId: string) => {
     const response = await reactToComment(post._id, commentId);
+
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
-    setPost(response?.data?.data);
     setAlertMessage("");
+    setDanger(false);
+    setPost(response?.data?.data);
   };
   const replyReactionHandler = async (commentId: string, replyId: string) => {
     const response = await reactToReply(post._id, commentId, replyId);
+
     if (!response?.success || !response?.data?.success) {
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
-    setPost(response?.data?.data);
     setAlertMessage("");
+    setDanger(false);
+    setPost(response?.data?.data);
   };
   const handleCommentOnPost = async () => {
     if (!commentText.current) return;
     const response = await commentOnPost(post._id, commentText);
 
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
+
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
-      toggleAlertHandler();
+      setDanger(true);
       return;
     }
 
+    setDanger(false);
     setPost(response?.data?.data);
-    setAlertMessage("");
   };
   const handleReplyCommentOnPost = async (
     commentId: string,
@@ -303,15 +333,18 @@ export default function Post({
     );
 
     if (!response?.success || !response?.data?.success) {
+      setDanger(true);
       setAlertMessage(response?.data?.message);
       toggleAlertHandler();
       return;
     }
 
+    setDanger(false);
+    setAlertMessage("");
     setPost(response?.data?.data);
     setCommentToBeReplied(null);
     setReplyToBeReplied(null);
-    setAlertMessage("");
+    setReplyToBeShown(commentId);
   };
   const postTextHandler = () =>
     (commentText.current = editableRef.current.textContent);
@@ -383,7 +416,7 @@ export default function Post({
 
   return (
     <>
-      <Alert open={showAlert} setOpen={setShowAlert}>
+      <Alert open={showAlert} setOpen={setShowAlert} isDanger={danger}>
         {alertMessage}
       </Alert>
 
@@ -464,6 +497,7 @@ export default function Post({
             view={post.visibility}
             type="edit"
             postId={post._id}
+            setPost={setPost}
           />
         )}
 
@@ -561,29 +595,29 @@ export default function Post({
             <></>
           )}
 
-          {post.images?.length ? (
-            post.images.length === 1 ? (
+          {post?.images?.length ? (
+            post?.images?.length === 1 ? (
               <div className={styles.postImageWrapper}>
-                {post.images?.map((image, index) => (
+                {post?.images?.map((image, index) => (
                   <Image src={image} alt="post image" fill key={index} />
                 ))}
               </div>
-            ) : post.images.length === 2 ? (
+            ) : post?.images?.length === 2 ? (
               <div className={styles.postImageContainerPlus}>
-                {post.images?.map((image, index) => (
+                {post?.images?.map((image, index) => (
                   <div className={styles.postImageWrapper} key={index}>
                     <Image src={image} alt="post image" fill />
                   </div>
                 ))}
               </div>
-            ) : post.images.length === 3 ? (
+            ) : post?.images?.length === 3 ? (
               <div className={styles.postImageContainerPlus}>
                 <div className={styles.postImageWrapper}>
-                  <Image src={post.images[2]} alt="post image" fill />
+                  <Image src={post?.images[2]} alt="post image" fill />
                 </div>
 
                 <div className={styles.postTwo}>
-                  {post.images.slice(0, 2)?.map((image, index) => (
+                  {post?.images?.slice(0, 2)?.map((image, index) => (
                     <div className={styles.postImageWrapper} key={index}>
                       <Image src={image} alt="post image" fill />
                     </div>
