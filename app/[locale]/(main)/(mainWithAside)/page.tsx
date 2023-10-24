@@ -8,7 +8,6 @@ import Image from "next/image";
 import usePostReq from "@/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
 import { usePathname } from "next/navigation";
-import { PostType } from "@/types";
 
 export default function Home() {
   const {

@@ -249,7 +249,6 @@ export type CreatePostType = {
   view?: VisibilityType;
   type?: "new" | "edit";
   postId?: string;
-  setPost?: any;
 };
 
 export type SwtichType = {

@@ -163,9 +163,9 @@ export default function Post({
   useEffect(() => {
     getSomeUsersHandler();
     getRepliers();
-  }, []);
+  }, [post]);
 
-  console.log(repliers);
+  console.log(comments);
 
   useEffect(() => {
     if (!alertMessage) return;
@@ -198,10 +198,10 @@ export default function Post({
       return;
     }
 
-    setPost(response?.data?.data);
     setAlertMessage("");
     setShowMoreOptions(false);
     setPopupType(null);
+    window?.location.reload();
   };
   const handleFollowUser = async () => {
     const response = await followUser(user._id);
@@ -283,6 +283,7 @@ export default function Post({
       return;
     }
 
+    setPost(response?.data?.data);
     setAlertMessage("");
   };
   const handleReplyCommentOnPost = async (
@@ -307,6 +308,9 @@ export default function Post({
       return;
     }
 
+    setPost(response?.data?.data);
+    setCommentToBeReplied(null);
+    setReplyToBeReplied(null);
     setAlertMessage("");
   };
   const postTextHandler = () =>
@@ -354,7 +358,8 @@ export default function Post({
     },
   ];
 
-  const toBeMapped = userDetails?._id === post.id ? moreOptionsMe : moreOptions;
+  const toBeMapped =
+    userDetails?._id === post?.id ? moreOptionsMe : moreOptions;
 
   if (isPostRemoved) return <></>;
   if (isPostHidden)
@@ -459,7 +464,6 @@ export default function Post({
             view={post.visibility}
             type="edit"
             postId={post._id}
-            setPost={setPost}
           />
         )}
 
@@ -765,9 +769,9 @@ export default function Post({
           )}
         </div>
 
-        {comments?.length && openComments ? (
+        {post?.comments?.length && openComments ? (
           <div className={styles.comments}>
-            {comments
+            {post?.comments
               ?.map((comment) => {
                 const commenter = commenters?.find(
                   (commenter) => commenter._id === comment.id
@@ -839,7 +843,11 @@ export default function Post({
 
                         <div className={styles.commentAction}>
                           <p
-                            className={styles.commentLikeAction}
+                            className={[
+                              styles.commentLikeAction,
+                              comment.likes.includes(userDetails._id) &&
+                                styles.commentLikeActionLiked,
+                            ].join(" ")}
                             onClick={() => {
                               commentReactionHandler(comment._id);
                               setCurrentReactedComment(comment._id);
@@ -853,6 +861,8 @@ export default function Post({
                                 width={20}
                                 height={20}
                               />
+                            ) : comment.likes.includes(userDetails._id) ? (
+                              "Liked"
                             ) : (
                               "Like"
                             )}
@@ -1030,7 +1040,11 @@ export default function Post({
 
                                   <div className={styles.commentAction}>
                                     <p
-                                      className={styles.commentLikeAction}
+                                      className={[
+                                        styles.commentLikeAction,
+                                        reply.likes.includes(userDetails._id) &&
+                                          styles.commentLikeActionLiked,
+                                      ].join(" ")}
                                       onClick={() => {
                                         setCurrentReactedReply(reply._id);
                                         replyReactionHandler(
@@ -1047,6 +1061,10 @@ export default function Post({
                                           width={20}
                                           height={20}
                                         />
+                                      ) : reply.likes.includes(
+                                          userDetails._id
+                                        ) ? (
+                                        "Liked"
                                       ) : (
                                         "Like"
                                       )}
@@ -1164,15 +1182,6 @@ export default function Post({
                                           />
                                         </div>
                                       </div>
-                                    </div>
-
-                                    <div className={styles.commentAction}>
-                                      <p className={styles.commentLikeAction}>
-                                        Like
-                                      </p>
-                                      <p className={styles.commentReplyAction}>
-                                        Reply
-                                      </p>
                                     </div>
                                   </div>
                                 </div>

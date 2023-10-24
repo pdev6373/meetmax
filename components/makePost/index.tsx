@@ -53,6 +53,7 @@ export default function MakePost() {
       return;
     }
 
+    window?.location.reload();
     setAlertMessage("");
   };
 

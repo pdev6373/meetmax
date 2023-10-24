@@ -78,9 +78,6 @@ export default function usePostReq() {
     });
 
     message.current = "";
-
-    if (!response?.success || !response?.data?.success) return response;
-    setPosts(response?.data?.data);
     return response;
   };
 
@@ -107,8 +104,6 @@ export default function usePostReq() {
     });
 
     message.current = "";
-
-    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -137,7 +132,6 @@ export default function usePostReq() {
       },
     });
 
-    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -157,7 +151,6 @@ export default function usePostReq() {
       },
     });
 
-    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -171,7 +164,6 @@ export default function usePostReq() {
       },
     });
 
-    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -190,7 +182,6 @@ export default function usePostReq() {
     });
 
     message.current = "";
-    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -217,7 +208,6 @@ export default function usePostReq() {
     });
 
     message.current = "";
-    if (!response?.success || !response?.data?.success) return response;
     return response;
   };
 
@@ -230,9 +220,6 @@ export default function usePostReq() {
         postId,
       },
     });
-
-    if (!response?.success || !response?.data?.success) return response;
-    setPosts(response?.data?.data);
 
     return response;
   };

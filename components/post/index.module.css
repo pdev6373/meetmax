@@ -485,6 +485,10 @@
   padding: 1px 7px;
 }
 
+.commentLikeActionLiked {
+  color: #377dff;
+}
+
 .commentReplyAction {
   padding: 1px 9px;
 }
@@ -503,6 +507,9 @@
 
 .commentReply {
   margin-left: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .commentMainWrapper {
@@ -782,6 +789,7 @@
 
   .commentReply {
     margin-left: 44px;
+    gap: 18px;
   }
 
   .commentMainWrapper {

@@ -29,7 +29,6 @@ export default function CreatePost({
   view,
   postId,
   type = "new",
-  setPost,
 }: CreatePostType) {
   const text = useRef<any>();
   const editableRef = useRef<any>();
@@ -114,8 +113,8 @@ export default function CreatePost({
     }
 
     setAlertMessage("");
-    setPost && setPost(response?.data?.data);
     handleClose();
+    window?.location.reload();
   };
 
   return (
@@ -366,7 +365,7 @@ export default function CreatePost({
                 onClick={handlePost}
                 variation="small"
               >
-                {type === "new" ? "Post" : "Edit"}
+                {type === "new" ? "Post" : "Update"}
               </Button>
             </div>
           </div>
