@@ -18,16 +18,16 @@ const navs = [
     icon: "/assets/language.svg",
     route: "/language",
   },
-  {
-    name: "Blocking",
-    icon: "/assets/block.svg",
-    route: "/blocking",
-  },
-  {
-    name: "Notification",
-    icon: "/assets/notification.svg",
-    route: "/notification",
-  },
+  // {
+  //   name: "Blocking",
+  //   icon: "/assets/block.svg",
+  //   route: "/blocking",
+  // },
+  // {
+  //   name: "Notification",
+  //   icon: "/assets/notification.svg",
+  //   route: "/notification",
+  // },
   {
     name: "Password & Security",
     icon: "/assets/security.svg",

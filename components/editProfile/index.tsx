@@ -9,11 +9,12 @@ import {
   SettingsRouteText,
   SettingsHeading,
   Button,
+  Alert,
 } from "..";
 import { CalendarValueType, EditProfileType, GenderType } from "@/types";
 import format from "date-fns/format";
 import { AuthContext } from "@/context/authContext";
-import { useAxiosPrivate } from "@/hooks";
+import useUserReq from "@/helpers/useUserReq";
 
 export default function EditProfile({
   defaultError,
@@ -24,7 +25,6 @@ export default function EditProfile({
   male,
   female,
 }: EditProfileType) {
-  const { fetchData, loading } = useAxiosPrivate();
   const [showCalendar, setShowCalendar] = useState(false);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
     | "email"
@@ -34,12 +34,16 @@ export default function EditProfile({
     | "instagram"
     | "twitter"
     | "facebook"
+    | "website"
     | null
   >(null);
   const [errorMessage, setErrorMessage] = useState("");
   const {
     userDetails: { userDetails },
   } = useContext(AuthContext);
+  const {
+    updateUser: { loading, makeRequest },
+  } = useUserReq();
   const [fullname, setFullname] = useState(
     `${userDetails.lastname} ${userDetails.firstname}`
   );
@@ -57,6 +61,24 @@ export default function EditProfile({
   const [linkedin, setLinkedin] = useState(userDetails.socialLinks.linkedin);
   const [twitter, setTwitter] = useState(userDetails.socialLinks.twitter);
   const genders: GenderType[] = [male as "Male", female as "Female"];
+  const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
+  const [alertToggle, setAlertToggle] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [danger, setDanger] = useState(false);
+
+  const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
+
+  useEffect(() => {
+    if (!alertMessage) return;
+
+    setAlertMessage(alertMessage);
+    setShowAlert("yes");
+    const alertTimer = setTimeout(() => setShowAlert("no"), 5000);
+
+    return () => {
+      clearTimeout(alertTimer);
+    };
+  }, [alertMessage, alertToggle]);
 
   useEffect(() => {
     setErrorComponentToShow(null);
@@ -114,6 +136,12 @@ export default function EditProfile({
       return;
     }
 
+    if (website && !/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(website)) {
+      setErrorComponentToShow("website");
+      setErrorMessage(emailError);
+      return;
+    }
+
     if (
       facebook &&
       !/^https:\/\/(?:www\.)?facebook\.com\/(?:profile\.php\?id=)?([a-zA-Z0-9.]+)/i.test(
@@ -152,28 +180,34 @@ export default function EditProfile({
       return;
     }
 
-    const response = await fetchData({
-      url: "/user",
-      method: "PATCH",
-      payload: {
-        email,
-        lastname: fullname.split(" ")[0],
-        firstname: fullname.split(" ").slice(1).join(" "),
-        dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
-        gender: gender,
-        id: userDetails._id,
-        bio,
-        phoneNumber,
-        website,
-        location,
-        socialLinks: {
-          facebook,
-          linkedin,
-          twitter,
-          instagram,
-        },
+    const response = await makeRequest({
+      email,
+      lastname: fullname.split(" ")[0],
+      firstname: fullname.split(" ").slice(1).join(" "),
+      dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
+      gender: gender,
+      id: userDetails._id,
+      bio,
+      phoneNumber,
+      website,
+      location,
+      socialLinks: {
+        facebook,
+        linkedin,
+        twitter,
+        instagram,
       },
     });
+
+    setAlertMessage(response?.data?.message);
+    toggleAlertHandler();
+
+    if (!response?.success || !response?.data?.success) {
+      setDanger(true);
+      return;
+    }
+
+    setDanger(false);
   };
 
   const cancelButtonHandler = () => {
@@ -199,6 +233,9 @@ export default function EditProfile({
 
   return (
     <>
+      <Alert open={showAlert} setOpen={setShowAlert} isDanger={danger}>
+        {alertMessage}
+      </Alert>
       <SettingsRouteText>Edit Profile</SettingsRouteText>
       <SettingsHeading>Edit Profile</SettingsHeading>
 
@@ -334,6 +371,11 @@ export default function EditProfile({
                 type="text"
                 value={website}
                 icon=""
+                errorComponent={
+                  errorComponentToShow === "website" ? (
+                    <Text type="error">{errorMessage}</Text>
+                  ) : null
+                }
               />
             </div>
 

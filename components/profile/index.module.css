@@ -89,6 +89,9 @@
   color: #edeff1;
   text-align: center;
   min-width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttonWrapper {
@@ -370,15 +373,29 @@
   align-self: stretch;
 }
 
-.noPost {
+.noPostWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-block: 18px;
+}
+
+.noPost {
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
   color: #edeff1;
-  padding-block: 18px;
+}
+
+.loadingData {
+  height: 100%;
+  display: grid;
+  place-content: center;
+}
+
+.noPostWeb {
+  display: none;
 }
 
 @media (min-width: 330px) {
@@ -388,6 +405,18 @@
 }
 
 @media (min-width: 500px) {
+  .noPostMobile {
+    display: none;
+  }
+
+  .noPostWeb {
+    display: block;
+  }
+
+  .noPostWrapper {
+    padding-block: 0;
+  }
+
   .noPost {
     font-size: 16px;
     font-weight: 24px;

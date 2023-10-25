@@ -48,6 +48,7 @@ export default function useUserReq() {
     });
 
     if (!response?.success || !response?.data?.success) return response;
+    setUserDetails(response?.data?.data);
     return response;
   };
 

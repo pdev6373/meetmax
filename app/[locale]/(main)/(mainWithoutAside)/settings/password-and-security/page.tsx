@@ -44,10 +44,10 @@ export default function PasswordAndSecurity() {
   return (
     <>
       <SettingsRouteText>Password & Security</SettingsRouteText>
-      <SettingsHeading>{`Where You're Logged In`}</SettingsHeading>
+      {/* <SettingsHeading>{`Where You're Logged In`}</SettingsHeading> */}
 
       <div className={styles.main}>
-        <section className={styles.top}>
+        {/* <section className={styles.top}>
           <div className={styles.devices}>
             {devices.map((device, index) => (
               <div className={styles.device} key={index}>
@@ -73,7 +73,7 @@ export default function PasswordAndSecurity() {
           </div>
 
           <p className={styles.seeAll}>See All</p>
-        </section>
+        </section> */}
 
         <section className={styles.bottom}>
           <SettingsHeading>Change Password</SettingsHeading>

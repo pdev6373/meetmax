@@ -12,6 +12,8 @@ import useUserReq from "@/helpers/useUserReq";
 import usePostReq from "@/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
 import { userInitialValues } from "@/constants";
+import { usePathname } from "next/navigation";
+import format from "date-fns/format";
 
 const convertToFile = async (
   dataUrl: string,
@@ -38,6 +40,8 @@ export default function Profile({ id }: ProfileType) {
       makeRequest: uploadCoverPicture,
     },
     getUser: { loading: gettingUser, makeRequest: getUser },
+    unfollowUser: { loading: unfollowingUser, makeRequest: unfollowUser },
+    followUser: { loading: followingUser, makeRequest: followUser },
   } = useUserReq();
   const {
     getProfilePosts: {
@@ -63,7 +67,9 @@ export default function Profile({ id }: ProfileType) {
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [progress, setProgress] = useState(100);
-  const [user, setUser] = useState(userInitialValues);
+  const [user, setUser] = useState(id ? userInitialValues : userDetails);
+  const [alternate, setAlternate] = useState(false);
+  const pathname = usePathname();
 
   const [imageDimension, setImageDimension] = useState({
     width: 0,
@@ -75,12 +81,15 @@ export default function Profile({ id }: ProfileType) {
 
   useEffect(() => {
     (async () => {
-      const response = await getUser(id || userDetails?._id);
-      console.log(response);
+      if (!id) {
+        setUser(userDetails);
+        return;
+      }
+      const response = await getUser(id);
 
       setUser(response?.data?.data);
     })();
-  }, []);
+  }, [alternate, pathname]);
 
   useEffect(() => {
     window.addEventListener(
@@ -134,6 +143,10 @@ export default function Profile({ id }: ProfileType) {
       setShowCoverImageEditor(false);
       setNewCoverImage("");
       setProgress(100);
+      setSelectedCoverDetails({
+        name: "",
+        type: "",
+      });
       return;
     }
 
@@ -173,9 +186,9 @@ export default function Profile({ id }: ProfileType) {
       type: "",
     });
     closeImageEditor("cover-image");
-
     setNewCoverImage("");
     closeImageEditor("cover-image");
+    setAlternate((prev) => !prev);
   };
 
   const getProfilePostsHandler = async (id: string) => {
@@ -217,6 +230,7 @@ export default function Profile({ id }: ProfileType) {
       type: "",
     });
     closeImageEditor("profile-image");
+    setAlternate((prev) => !prev);
   };
 
   const profilePhotoSetHandler = async (
@@ -252,6 +266,34 @@ export default function Profile({ id }: ProfileType) {
     ],
   });
 
+  const unfollowUserHandler = async () => {
+    if (!id) return;
+    const response = await unfollowUser(id);
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlternate((prev) => !prev);
+    setAlertMessage("");
+  };
+
+  const followUserHandler = async () => {
+    if (!id) return;
+    const response = await followUser(id);
+
+    if (!response?.success || !response?.data?.success) {
+      setAlertMessage(response?.data?.message);
+      toggleAlertHandler();
+      return;
+    }
+
+    setAlternate((prev) => !prev);
+    setAlertMessage("");
+  };
+
   useEffect(() => {
     setUserData({
       fullname: `${user?.lastname} ${user?.firstname}`,
@@ -260,7 +302,7 @@ export default function Profile({ id }: ProfileType) {
         {
           name: "website",
           icon: "/assets/explore.svg",
-          value: user?.website,
+          value: user?.website ? new URL(user?.website).hostname : null,
         },
         {
           name: "gender",
@@ -270,7 +312,9 @@ export default function Profile({ id }: ProfileType) {
         {
           name: "birthday",
           icon: "/assets/birthday.svg",
-          value: user?.dateOfBirth,
+          value: user?.dateOfBirth
+            ? `Born ${format(new Date(user.dateOfBirth), "MMMM dd,yyyy")}`
+            : null,
         },
         {
           name: "location",
@@ -280,39 +324,53 @@ export default function Profile({ id }: ProfileType) {
         {
           name: "facebook",
           icon: "/assets/facebook.svg",
-          // value: userDetails.socialLinks.facebook.match(
-          //   /^https:\/\/(?:www\.)?facebook\.com\/(?:profile\.php\?id=)?([a-zA-Z0-9.]+)/
-          // )![1],
-          value: null,
+          value: user.socialLinks.facebook
+            ? `Facebook ${
+                user.socialLinks.facebook.match(
+                  /^https:\/\/(?:www\.)?facebook\.com\/(?:profile\.php\?id=)?([a-zA-Z0-9.]+)/
+                )![1]
+              }`
+            : null,
         },
         {
           name: "twitter",
           icon: "/assets/twitter.svg",
-          // value: userDetails.socialLinks.twitter.match(
-          //   /^https:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/
-          // )![1],
-          value: null,
+          value: user.socialLinks.twitter
+            ? `Twitter ${
+                user.socialLinks.twitter.match(
+                  /^https:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/
+                )![1]
+              }`
+            : null,
         },
         {
           name: "instagram",
           icon: "/assets/instagram.svg",
-          // value: userDetails.socialLinks.instagram.match(
-          //   /^https:\/\/(?:www\.)?instagram\.com\/[a-zA-Z0-9_]+\/?/
-          // )![1],
-          value: null,
+          value: user.socialLinks.instagram
+            ? `Instagram ${
+                user.socialLinks.instagram.match(
+                  /^https:\/\/(?:www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?/
+                )![1]
+              }`
+            : null,
         },
         {
           name: "linkedin",
           icon: "/assets/linkedin.svg",
-          // value: userDetails.socialLinks.linkedin.match(
-          //   /^https:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/
-          // )![1],
-          value: null,
+          value: user.socialLinks.linkedin
+            ? `Linkedin ${
+                user.socialLinks.linkedin.match(
+                  /^https:\/\/(?:www\.)?linkedin\.com\/in\/([A-Za-z0-9_-]+)\/?$/
+                )![1]
+              }`
+            : null,
         },
         {
           name: "followers",
           icon: null,
-          value: `${user?.followers?.length} Followers`,
+          value: `${user?.followers?.length} ${
+            user?.followers?.length === 1 ? "Follower" : "Followers"
+          }`,
         },
         {
           name: "following",
@@ -322,6 +380,13 @@ export default function Profile({ id }: ProfileType) {
       ],
     });
   }, [user]);
+
+  if (gettingUser)
+    return (
+      <div className={styles.loadingData}>
+        <Image src="/assets/spinner.svg" alt="spinner" width={48} height={48} />
+      </div>
+    );
 
   return (
     <>
@@ -557,26 +622,46 @@ export default function Profile({ id }: ProfileType) {
             <Link href="/settings/edit-profile" className={styles.editInfo}>
               Edit basic info
             </Link>
-          ) : (
-            // <button
-            //   className={[styles.editInfo, styles.followButton].join(" ")}
-            // >
-            //   Follow
-            // </button>
-
+          ) : userDetails?.following.includes(id) ? (
             <div className={styles.buttonWrapper}>
-              <Link
+              {/* <Link
                 href="/message/id"
                 className={[styles.editInfo, styles.messageButton].join(" ")}
               >
                 Message
-              </Link>
+              </Link> */}
               <button
+                onClick={unfollowUserHandler}
                 className={[styles.editInfo, styles.unfollowButton].join(" ")}
               >
-                Unfollow
+                {unfollowingUser ? (
+                  <Image
+                    src="/assets/spinner.svg"
+                    alt="spinner"
+                    width={22}
+                    height={22}
+                  />
+                ) : (
+                  "Unfollow"
+                )}
               </button>
             </div>
+          ) : (
+            <button
+              onClick={followUserHandler}
+              className={[styles.editInfo, styles.followButton].join(" ")}
+            >
+              {followingUser ? (
+                <Image
+                  src="/assets/spinner.svg"
+                  alt="spinner"
+                  width={22}
+                  height={22}
+                />
+              ) : (
+                "Follow"
+              )}
+            </button>
           )}
         </div>
 
@@ -589,12 +674,21 @@ export default function Profile({ id }: ProfileType) {
                 ?.map((details) => (
                   <div key={details.name} className={styles.introItem}>
                     {details.icon ? (
-                      <Image
-                        src={details.icon}
-                        alt="datails icon"
-                        width={16}
-                        height={16}
-                      />
+                      details.icon === "/assets/linkedin.svg" ? (
+                        <Image
+                          src={details.icon}
+                          alt="datails icon"
+                          width={20}
+                          height={20}
+                        />
+                      ) : (
+                        <Image
+                          src={details.icon}
+                          alt="datails icon"
+                          width={16}
+                          height={16}
+                        />
+                      )
                     ) : (
                       <></>
                     )}
@@ -638,9 +732,27 @@ export default function Profile({ id }: ProfileType) {
                   />
                 ))
               ) : (
-                <p className={styles.noPost}>
-                  • You havent posted anything yet •
-                </p>
+                <div className={styles.noPostWrapper}>
+                  <Image
+                    src="/assets/no-post.png"
+                    alt="no post"
+                    width={384}
+                    height={288}
+                    className={styles.noPostWeb}
+                  />
+                  <Image
+                    src="/assets/no-post.png"
+                    alt="no post"
+                    width={256}
+                    height={192}
+                    className={styles.noPostMobile}
+                  />
+                  <p className={styles.noPost}>{`${
+                    id
+                      ? "• No post available •"
+                      : "• You haven't any post yet •"
+                  }`}</p>
+                </div>
               )}
             </div>
           )}

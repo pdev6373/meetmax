@@ -11,11 +11,11 @@ export const SIDEBAR = [
     route: "/my-community",
     icon: "/assets/community.svg",
   },
-  {
-    name: "Messages",
-    route: "/messages",
-    icon: "/assets/message.svg",
-  },
+  // {
+  //   name: "Messages",
+  //   route: "/messages",
+  //   icon: "/assets/message.svg",
+  // },
   {
     name: "Notification",
     route: "/notification",
