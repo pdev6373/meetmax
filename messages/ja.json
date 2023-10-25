@@ -40,6 +40,17 @@
     "resetPasswordHeading": "パスワードを再設定する",
     "resetPasswordSubHeading": "以下に新しいパスワードを入力してパスワードをリセットしてください",
     "cancel": "キャンセル",
-    "save": "保存"
+    "save": "保存",
+    "confirmLogout": "ログアウトしてもよろしいですか?",
+    "editProfile": "プロファイル編集",
+    "feed": "餌",
+    "language": "言語",
+    "logout": "ログアウト",
+    "myCommunity": "私のコミュニティ",
+    "notification": "通知",
+    "passwordAndSecurity": "パスワードとセキュリティ",
+    "profile": "プロフィール",
+    "settings": "設定",
+    "viewingAndSharing": "閲覧と共有"
   }
 }

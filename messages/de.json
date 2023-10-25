@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Passwort zurücksetzen",
     "resetPasswordSubHeading": "Setzen Sie Ihr Passwort zurück, indem Sie unten ein neues Passwort eingeben",
     "cancel": "stornieren",
-    "save": "speichern"
+    "save": "speichern",
+    "confirmLogout": "Sind Sie sicher, dass Sie sich abmelden möchten?",
+    "editProfile": "Profil bearbeiten",
+    "feed": "Füttern",
+    "language": "Sprache",
+    "logout": "Ausloggen",
+    "myCommunity": "Meine Gemeinschaft",
+    "notification": "Benachrichtigung",
+    "passwordAndSecurity": "Passwort und Sicherheit",
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "viewingAndSharing": "Anzeigen und Teilen"
   }
 }

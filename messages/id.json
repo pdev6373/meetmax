@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Atur Ulang Kata Sandi",
     "resetPasswordSubHeading": "Reset kata sandi Anda dengan memasukkan kata sandi baru di bawah ini",
     "cancel": "membatalkan",
-    "save": "menyimpan"
+    "save": "menyimpan",
+    "confirmLogout": "Apakah Anda yakin ingin logout?",
+    "editProfile": "Sunting profil",
+    "feed": "Memberi makan",
+    "language": "Bahasa",
+    "logout": "Keluar",
+    "myCommunity": "Komunitas saya",
+    "notification": "Pemberitahuan",
+    "passwordAndSecurity": "Kata Sandi & Keamanan",
+    "profile": "Profil",
+    "settings": "Pengaturan",
+    "viewingAndSharing": "Melihat & Berbagi"
   }
 }

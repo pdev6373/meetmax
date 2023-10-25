@@ -40,6 +40,17 @@
     "resetPasswordHeading": "I-reset ang Password",
     "resetPasswordSubHeading": "I-reset ang iyong password sa pamamagitan ng paglalagay ng bagong password sa ibaba",
     "cancel": "kanselahin",
-    "save": "iligtas"
+    "save": "iligtas",
+    "confirmLogout": "Sigurado ka bang gusto mong mag-logout?",
+    "editProfile": "Ibahin ang profile",
+    "feed": "Magpakain",
+    "language": "Wika",
+    "logout": "Mag-logout",
+    "myCommunity": "Aking komunidad",
+    "notification": "Abiso",
+    "passwordAndSecurity": "Password at Seguridad",
+    "profile": "Profile",
+    "settings": "Mga setting",
+    "viewingAndSharing": "Pagtingin at Pagbabahagi"
   }
 }

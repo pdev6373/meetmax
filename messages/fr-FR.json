@@ -40,6 +40,17 @@
     "resetPasswordHeading": "réinitialiser le mot de passe",
     "resetPasswordSubHeading": "Réinitialisez votre mot de passe en entrant un nouveau mot de passe ci-dessous",
     "cancel": "Annuler",
-    "save": "sauvegarder"
+    "save": "sauvegarder",
+    "confirmLogout": "Êtes-vous sûr de vouloir vous déconnecter?",
+    "editProfile": "Editer le profil",
+    "feed": "Alimentation",
+    "language": "Langue",
+    "logout": "Se déconnecter",
+    "myCommunity": "Ma communauté",
+    "notification": "Notification",
+    "passwordAndSecurity": "Mot de passe et sécurité",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "viewingAndSharing": "Visualisation et partage"
   }
 }

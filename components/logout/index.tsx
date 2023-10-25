@@ -5,7 +5,12 @@ import styles from "./index.module.css";
 import { AuthContext } from "@/context/authContext";
 import { useAxios } from "@/hooks";
 
-export default function Logout({ onCancelLogout }: LogoutType) {
+export default function Logout({
+  onCancelLogout,
+  logoutText,
+  cancelText,
+  confirmLogoutText,
+}: LogoutType) {
   const { resetFields } = useContext(AuthContext);
   const { fetchData } = useAxios();
 
@@ -24,15 +29,15 @@ export default function Logout({ onCancelLogout }: LogoutType) {
   return (
     <div className={styles.overlay}>
       <div className={styles.logoutWrapper}>
-        <h3 className={styles.logoutHeading}>Logout</h3>
-        <p className={styles.logoutText}>Are you sure you want to logout?</p>
+        <h3 className={styles.logoutHeading}>{logoutText}</h3>
+        <p className={styles.logoutText}>{confirmLogoutText}</p>
 
         <div className={styles.logoutActions}>
           <button className={styles.logoutCancel} onClick={onCancelLogout}>
-            Cancel
+            {cancelText}
           </button>
           <button className={styles.logoutProceed} onClick={logout}>
-            Logout
+            {logoutText}
           </button>
         </div>
       </div>

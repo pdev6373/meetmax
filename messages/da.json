@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Nulstille kodeord",
     "resetPasswordSubHeading": "Nulstil din adgangskode ved at indtaste en ny adgangskode nedenfor",
     "cancel": "afbestille",
-    "save": "Gemme"
+    "save": "Gemme",
+    "confirmLogout": "Er du sikker på, at du vil logge ud?",
+    "editProfile": "Rediger profil",
+    "feed": "Foder",
+    "language": "Sprog",
+    "logout": "Log ud",
+    "myCommunity": "Mit samfund",
+    "notification": "Notifikation",
+    "passwordAndSecurity": "Adgangskode og sikkerhed",
+    "profile": "Profil",
+    "settings": "Indstillinger",
+    "viewingAndSharing": "Visning og deling"
   }
 }

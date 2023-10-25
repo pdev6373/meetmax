@@ -27,7 +27,7 @@ export default function EditProfile({
 }: EditProfileType) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
-    | "email"
+    // | "email"
     | "phoneNumber"
     | "fullname"
     | "linkedin"
@@ -50,7 +50,7 @@ export default function EditProfile({
   const [dateOfBirth, setDateOfBirth] = useState<CalendarValueType>(
     new Date(userDetails.dateOfBirth!)
   );
-  const [email, setEmail] = useState(userDetails.email);
+  // const [email, setEmail] = useState(userDetails.email);
   const [bio, setBio] = useState(userDetails.bio);
   const [phoneNumber, setPhoneNumber] = useState(userDetails.phoneNumber);
   const [website, setWebsite] = useState(userDetails.website);
@@ -84,7 +84,7 @@ export default function EditProfile({
     setErrorComponentToShow(null);
     setErrorMessage("");
   }, [
-    email,
+    // email,
     fullname,
     bio,
     dateOfBirth,
@@ -113,17 +113,17 @@ export default function EditProfile({
       return;
     }
 
-    if (!email) {
-      setErrorComponentToShow("email");
-      setErrorMessage(defaultError);
-      return;
-    }
+    // if (!email) {
+    //   setErrorComponentToShow("email");
+    //   setErrorMessage(defaultError);
+    //   return;
+    // }
 
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      setErrorComponentToShow("email");
-      setErrorMessage(emailError);
-      return;
-    }
+    // if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    //   setErrorComponentToShow("email");
+    //   setErrorMessage(emailError);
+    //   return;
+    // }
 
     if (
       phoneNumber &&
@@ -181,7 +181,7 @@ export default function EditProfile({
     }
 
     const response = await makeRequest({
-      email,
+      email: userDetails?.email,
       lastname: fullname.split(" ")[0],
       firstname: fullname.split(" ").slice(1).join(" "),
       dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
@@ -211,7 +211,7 @@ export default function EditProfile({
   };
 
   const cancelButtonHandler = () => {
-    setEmail(userDetails.email);
+    // setEmail(userDetails.email);
     setFullname(`${userDetails.lastname} ${userDetails.firstname}`);
     setBio(userDetails.bio);
     setDateOfBirth(new Date(userDetails.dateOfBirth!));
@@ -239,7 +239,7 @@ export default function EditProfile({
       <SettingsRouteText>Edit Profile</SettingsRouteText>
       <SettingsHeading>Edit Profile</SettingsHeading>
 
-      <div className={styles.imageWrapper}>
+      {/* <div className={styles.imageWrapper}>
         <Image
           src="/assets/user.png"
           alt="user"
@@ -257,7 +257,7 @@ export default function EditProfile({
         <div className={styles.uploadImage}>
           <Image src="/assets/upload.svg" alt="user" width={16} height={16} />
         </div>
-      </div>
+      </div> */}
 
       <form className={styles.form} onSubmit={userUpdateHandler} noValidate>
         <div className={styles.inputs}>
@@ -318,7 +318,7 @@ export default function EditProfile({
               </div>
             </div>
 
-            <div>
+            {/* <div>
               <p className={styles.inputHeader}>Email</p>
               <Input
                 placeholder={userDetails.email}
@@ -332,7 +332,7 @@ export default function EditProfile({
                   ) : null
                 }
               />
-            </div>
+            </div> */}
 
             <div>
               <p className={styles.inputHeader}>Bio</p>

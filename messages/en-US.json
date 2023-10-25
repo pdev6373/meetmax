@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Reset Password",
     "resetPasswordSubHeading": "Reset your password by entering a new password below",
     "cancel": "cancel",
-    "save": "save"
+    "save": "save",
+    "confirmLogout": "Are you sure you want to logout?",
+    "editProfile": "Edit Profile",
+    "feed": "Feed",
+    "language": "Language",
+    "logout": "Logout",
+    "myCommunity": "My community",
+    "notification": "Notification",
+    "passwordAndSecurity": "Password & Security",
+    "profile": "Profile",
+    "settings": "Settings",
+    "viewingAndSharing": "Viewing & Sharing"
   }
 }

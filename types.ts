@@ -265,6 +265,9 @@ export type FriendsOptionsType = {
 
 export type LogoutType = {
   onCancelLogout: any;
+  logoutText: string;
+  cancelText: string;
+  confirmLogoutText: string;
 };
 
 export type SettingsTextType = {
@@ -310,3 +313,14 @@ export type DataType = {
 };
 
 export type VisibilityType = "everyone" | "followers" | "me";
+
+export type SidebarTextsType = {
+  feedText: string;
+  communityText: string;
+  notificationText: string;
+  profileText: string;
+  settingsText: string;
+  logoutText: string;
+  cancelText: string;
+  logoutConfirmationText: string;
+};

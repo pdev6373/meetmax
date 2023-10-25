@@ -15,10 +15,6 @@ export default function Language({ params: { locale } }: SettingsLanguageType) {
       <div className={styles.languages}>
         <LanguageComponent locale={locale} short />
       </div>
-      <div className={styles.actions}>
-        <button className={styles.cancel}>Cancel</button>
-        <button className={styles.save}>Save</button>
-      </div>
     </>
   );
 }

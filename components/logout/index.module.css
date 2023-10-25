@@ -21,7 +21,7 @@
   align-items: center;
   gap: 18px;
   text-align: center;
-  width: min(100%, 256px);
+  min-width: min(100%, 256px);
 }
 
 .logoutHeading {
@@ -44,17 +44,17 @@
   gap: 18px;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 198px;
 }
 
 .logoutActions > * {
   padding: 7px;
-  flex: 1;
+  flex-grow: 1;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   line-height: 22px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .logoutCancel {

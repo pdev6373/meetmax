@@ -40,6 +40,17 @@
     "resetPasswordHeading": "రహస్యపదాన్ని మార్చుకోండి",
     "resetPasswordSubHeading": "దిగువన కొత్త పాస్‌వర్డ్‌ని నమోదు చేయడం ద్వారా మీ పాస్‌వర్డ్‌ని రీసెట్ చేయండి",
     "cancel": "రద్దు చేయండి",
-    "save": "సేవ్"
+    "save": "సేవ్",
+    "confirmLogout": "మీరు ఖచ్చితంగా లాగ్ అవుట్ చేయాలనుకుంటున్నారా?",
+    "editProfile": "ప్రొఫైల్‌ని సవరించండి",
+    "feed": "ఫీడ్",
+    "language": "భాష",
+    "logout": "లాగ్అవుట్",
+    "myCommunity": "నా సంఘం",
+    "notification": "నోటిఫికేషన్",
+    "passwordAndSecurity": "పాస్‌వర్డ్ & భద్రత",
+    "profile": "ప్రొఫైల్",
+    "settings": "సెట్టింగ్‌లు",
+    "viewingAndSharing": "వీక్షణ & భాగస్వామ్యం"
   }
 }

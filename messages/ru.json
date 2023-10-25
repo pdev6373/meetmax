@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Сброс пароля",
     "resetPasswordSubHeading": "Сбросьте свой пароль, введя новый пароль ниже",
     "cancel": "отмена",
-    "save": "сохранять"
+    "save": "сохранять",
+    "confirmLogout": "Вы действительно хотите выйти?",
+    "editProfile": "Редактировать профиль",
+    "feed": "Кормить",
+    "language": "Язык",
+    "logout": "Выйти",
+    "myCommunity": "Мое сообщество",
+    "notification": "Уведомление",
+    "passwordAndSecurity": "Пароль и безопасность",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "viewingAndSharing": "Просмотр и обмен"
   }
 }

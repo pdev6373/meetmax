@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Restablecer la contraseña",
     "resetPasswordSubHeading": "Restablezca su contraseña ingresando una nueva contraseña a continuación",
     "cancel": "Cancelar",
-    "save": "ahorrar"
+    "save": "ahorrar",
+    "confirmLogout": "¿Está seguro de que desea cerrar sesión?",
+    "editProfile": "Editar perfil",
+    "feed": "Alimentar",
+    "language": "Idioma",
+    "logout": "Cerrar sesión",
+    "myCommunity": "Mi comunidad",
+    "notification": "Notificación",
+    "passwordAndSecurity": "Contraseña y seguridad",
+    "profile": "Perfil",
+    "settings": "Ajustes",
+    "viewingAndSharing": "Ver y compartir"
   }
 }

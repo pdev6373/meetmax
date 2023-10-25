@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Dib u deji erayga sirta ah",
     "resetPasswordSubHeading": "Dib u deji eraygaaga sirta ah adiga oo geliya furaha sirta ah ee cusub xagga hoose",
     "cancel": "burin",
-    "save": "badbaadi"
+    "save": "badbaadi",
+    "confirmLogout": "Ma hubtaa inaad doonayso inaad ka baxdo?",
+    "editProfile": "Wax ka beddel xogta",
+    "feed": "Quudinta",
+    "language": "Luuqad",
+    "logout": "Ka bax",
+    "myCommunity": "Beeshayda",
+    "notification": "Ogeysiinta",
+    "passwordAndSecurity": "Furaha & Amniga",
+    "profile": "Profile",
+    "settings": "Dejinta",
+    "viewingAndSharing": "Daawashada & Wadaagista"
   }
 }

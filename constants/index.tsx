@@ -1,48 +1,5 @@
 import { UserType } from "@/types";
 
-export const SIDEBAR = [
-  {
-    name: "Feed",
-    route: "/",
-    icon: "/assets/dashboard.svg",
-  },
-  {
-    name: "My community",
-    route: "/my-community",
-    icon: "/assets/community.svg",
-  },
-  // {
-  //   name: "Messages",
-  //   route: "/messages",
-  //   icon: "/assets/message.svg",
-  // },
-  {
-    name: "Notification",
-    route: "/notification",
-    icon: "/assets/notification.svg",
-  },
-  // {
-  //   name: "Explore",
-  //   route: "/explore",
-  //   icon: "/assets/explore.svg",
-  // },
-  {
-    name: "Profile",
-    route: "/profile",
-    icon: "/assets/profile.svg",
-  },
-  {
-    name: "Settings",
-    route: "/settings",
-    icon: "/assets/settings.svg",
-  },
-  {
-    name: "Logout",
-    route: null,
-    icon: "/assets/logout.svg",
-  },
-];
-
 export const userInitialValues: UserType = {
   _id: "",
   firstname: "",

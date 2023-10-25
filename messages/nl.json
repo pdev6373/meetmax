@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Wachtwoord opnieuw instellen",
     "resetPasswordSubHeading": "Reset uw wachtwoord door hieronder een nieuw wachtwoord in te voeren",
     "cancel": "annuleren",
-    "save": "redden"
+    "save": "redden",
+    "confirmLogout": "Weet u zeker dat u wilt uitloggen?",
+    "editProfile": "Bewerk profiel",
+    "feed": "Voer",
+    "language": "Taal",
+    "logout": "Uitloggen",
+    "myCommunity": "Mijn gemeenschap",
+    "notification": "Kennisgeving",
+    "passwordAndSecurity": "Wachtwoord en beveiliging",
+    "profile": "Profiel",
+    "settings": "Instellingen",
+    "viewingAndSharing": "Bekijken en delen"
   }
 }

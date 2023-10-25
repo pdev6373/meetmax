@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Herstel wagwoord",
     "resetPasswordSubHeading": "Stel jou wagwoord terug deur 'n nuwe wagwoord hieronder in te voer",
     "cancel": "kanselleer",
-    "save": "red"
+    "save": "red",
+    "confirmLogout": "Is jy seker jy wil afmeld?",
+    "editProfile": "Wysig profiel",
+    "feed": "Voer",
+    "myCommunity": "My gemeenskap",
+    "notification": "Kennisgewing",
+    "profile": "Profiel",
+    "settings": "Instellings",
+    "logout": "Teken uit",
+    "language": "Taal",
+    "passwordAndSecurity": "Wagwoord en sekuriteit",
+    "viewingAndSharing": "Bekyk en deel"
   }
 }

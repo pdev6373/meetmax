@@ -16,6 +16,8 @@ export default function useUserReq() {
     useAxiosPrivate();
   const { fetchData: uploadCoverPics, loading: uploadingCoverPics } =
     useAxiosPrivate();
+  const { fetchData: changeOldPassword, loading: changingPassword } =
+    useAxiosPrivate();
   const {
     userDetails: { userDetails, setUserDetails },
   } = useContext(AuthContext);
@@ -74,6 +76,25 @@ export default function useUserReq() {
       payload: {
         id: userDetails._id,
         unfollowId,
+      },
+    });
+
+    if (!response?.success || !response?.data?.success) return response;
+    setUserDetails(response?.data?.data);
+    return response;
+  };
+
+  const changeUserPassword = async (
+    oldPassword: string,
+    newPassword: string
+  ) => {
+    const response = await changeOldPassword({
+      url: `/user/change-password`,
+      method: "PATCH",
+      payload: {
+        id: userDetails._id,
+        oldPassword,
+        newPassword,
       },
     });
 
@@ -151,6 +172,11 @@ export default function useUserReq() {
     makeRequest: uploadUserCoverPicture,
   };
 
+  const changePassword = {
+    loading: changingPassword,
+    makeRequest: changeUserPassword,
+  };
+
   return {
     getUser,
     updateUser,
@@ -159,5 +185,6 @@ export default function useUserReq() {
     unfollowUser,
     uploadProfilePicture,
     uploadCoverPicture,
+    changePassword,
   };
 }

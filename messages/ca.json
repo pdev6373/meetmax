@@ -40,6 +40,17 @@
     "resetPasswordHeading": "Restablir la contrasenya",
     "resetPasswordSubHeading": "Restableix la teva contrasenya introduint una nova contrasenya a continuació",
     "cancel": "cancel · lar",
-    "save": "guardar"
+    "save": "guardar",
+    "confirmLogout": "Esteu segur que voleu tancar la sessió?",
+    "editProfile": "Edita el perfil",
+    "feed": "Alimentació",
+    "language": "Llenguatge",
+    "logout": "Tancar sessió",
+    "myCommunity": "La meva comunitat",
+    "notification": "Notificació",
+    "passwordAndSecurity": "Contrasenya i seguretat",
+    "profile": "Perfil",
+    "settings": "Configuració",
+    "viewingAndSharing": "Visualització i compartició"
   }
 }

@@ -40,6 +40,17 @@
     "resetPasswordHeading": "পাসওয়ার্ড রিসেট করুন",
     "resetPasswordSubHeading": "নিচে একটি নতুন পাসওয়ার্ড দিয়ে আপনার পাসওয়ার্ড রিসেট করুন",
     "cancel": "বাতিল",
-    "save": "সংরক্ষণ"
+    "save": "সংরক্ষণ",
+    "confirmLogout": "আপনি লগ আউট করতে চান?",
+    "editProfile": "জীবন বৃত্তান্ত সম্পাদনা",
+    "feed": "খাওয়ান",
+    "language": "ভাষা",
+    "logout": "প্রস্থান",
+    "myCommunity": "আমার সম্প্রদায়",
+    "notification": "বিজ্ঞপ্তি",
+    "passwordAndSecurity": "পাসওয়ার্ড এবং নিরাপত্তা",
+    "profile": "প্রোফাইল",
+    "settings": "সেটিংস",
+    "viewingAndSharing": "দেখা এবং ভাগ করা"
   }
 }
