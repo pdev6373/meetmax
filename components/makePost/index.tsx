@@ -7,7 +7,7 @@ import { Alert, Button, CreatePost } from "..";
 import { AuthContext } from "@/context/authContext";
 import usePostReq from "@/helpers/usePostReq";
 
-export default function MakePost() {
+export default function MakePost({ profileId }: { profileId?: string }) {
   const {
     createPost: { loading, makeRequest },
   } = usePostReq();
@@ -47,7 +47,7 @@ export default function MakePost() {
   };
   const handlePost = async () => {
     if (!text.current) return;
-    const response = await makeRequest({ message: text });
+    const response = await makeRequest({ message: text, profileId });
     setAlertMessage(response?.data?.message);
     toggleAlertHandler();
 
@@ -66,7 +66,11 @@ export default function MakePost() {
       </Alert>
       <div className={styles.wrapper}>
         {showPostOptions && (
-          <CreatePost onClose={setShowPostOptions} postText={text} />
+          <CreatePost
+            onClose={setShowPostOptions}
+            postText={text}
+            profileId={profileId}
+          />
         )}
         <div className={styles.header}>
           <Image

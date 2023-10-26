@@ -54,6 +54,11 @@
 }
 
 @media (min-width: 500px) {
+  .noPost {
+    font-size: 16px;
+    font-weight: 24px;
+  }
+
   .wrapper {
     gap: 18px;
   }

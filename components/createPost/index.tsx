@@ -30,6 +30,7 @@ export default function CreatePost({
   postId,
   type = "new",
   setPost,
+  profileId,
 }: CreatePostType) {
   const text = useRef<any>();
   const editableRef = useRef<any>();
@@ -103,6 +104,7 @@ export default function CreatePost({
       message: text,
       images,
       visibility: currentView.value,
+      profileId,
     };
     if (postId) payload.postId = postId;
 

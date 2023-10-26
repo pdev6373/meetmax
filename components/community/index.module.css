@@ -89,6 +89,7 @@
 
 .social {
   display: none;
+  flex-shrink: 0;
 }
 
 .userImageMobile,
@@ -105,6 +106,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1;
 }
 
 .loader {
@@ -117,6 +119,47 @@
 
 .userOne {
   max-width: 320px;
+}
+
+.noFollower {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.noFollowerWeb {
+  display: none;
+}
+
+.viewRecommended {
+  margin-top: 14px;
+}
+
+.noPost {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileImage {
+  position: relative;
+}
+
+.profileLock {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #212833;
+  box-shadow: 3px -5px 35px 0px #333e521a;
+  padding: 4px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 @media (min-width: 280px) {
@@ -140,6 +183,18 @@
 }
 
 @media (min-width: 500px) {
+  .viewRecommended {
+    margin-top: 18px;
+  }
+
+  .noFollowerWeb {
+    display: block;
+  }
+
+  .noFollowerMobile {
+    display: none;
+  }
+
   .wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* check */

@@ -12,7 +12,7 @@ import useUserReq from "@/helpers/useUserReq";
 import usePostReq from "@/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
 import { userInitialValues } from "@/constants";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import format from "date-fns/format";
 
 const convertToFile = async (
@@ -47,6 +47,9 @@ export default function Profile({
   save,
   twitter,
   unfollow,
+  noPostYet,
+  noPostYetFollower,
+  createPost,
 }: ProfileType) {
   const {
     userDetails: { userDetails },
@@ -91,6 +94,7 @@ export default function Profile({
   const [user, setUser] = useState(id ? userInitialValues : userDetails);
   const [alternate, setAlternate] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const [imageDimension, setImageDimension] = useState({
     width: 0,
@@ -186,7 +190,6 @@ export default function Profile({
 
   const showProfileImageHandler = () => setShowProfileImage(true);
   const showProfileImageEditorHandler = () => setShowProfileImageEditor(true);
-
   const uploadCoverImageHandler = async () => {
     const image = await convertToFile(
       coverImageEditorRef.current.getImageScaledToCanvas().toDataURL(),
@@ -766,7 +769,7 @@ export default function Profile({
             </div>
           ) : (
             <div className={styles.profilePost}>
-              <MakePost />
+              {/* <MakePost profileId={id} /> */}
 
               {posts?.length ? (
                 posts?.map((post) => (
@@ -798,10 +801,21 @@ export default function Profile({
                     className={styles.noPostMobile}
                   />
                   <p className={styles.noPost}>{`${
-                    id
-                      ? "• No post available •"
-                      : "• You haven't any post yet •"
+                    id ? `• ${noPostYetFollower} •` : `• ${noPostYet} •`
                   }`}</p>
+                  {!id ? (
+                    <div className={styles.createPostWrapper}>
+                      <Button
+                        type="submit"
+                        onClick={() => router.push("/")}
+                        variation="small"
+                      >
+                        {createPost}
+                      </Button>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               )}
             </div>

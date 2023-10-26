@@ -290,6 +290,7 @@ export type CreatePostType = {
   type?: "new" | "edit";
   postId?: string;
   setPost?: any;
+  profileId?: string;
 };
 
 export type SwtichType = {
@@ -337,6 +338,7 @@ export type ProfileType = {
   unfollow: string;
   noPostYet: string;
   noPostYetFollower: string;
+  createPost: string;
 };
 
 export type UserType = {

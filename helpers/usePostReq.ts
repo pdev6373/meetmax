@@ -8,6 +8,7 @@ type PostReqType = {
   message?: MutableRefObject<string>;
   images?: File[];
   visibility?: VisibilityType;
+  profileId?: string;
 };
 
 type PostUpdateType = {
@@ -59,9 +60,9 @@ export default function usePostReq() {
     return response;
   };
 
-  const fetchAllProfilePosts = async (id: string) => {
+  const fetchAllProfilePosts = async (profileId: string) => {
     const response = await fetchProfilePosts({
-      url: `/post/profile-posts/${id}`,
+      url: `/post/profile-posts/${userDetails._id}/${profileId}`,
       method: "GET",
     });
 
@@ -74,10 +75,12 @@ export default function usePostReq() {
     message = { current: "" },
     images = [],
     visibility,
+    profileId,
   }: PostReqType) => {
     const formData = new FormData();
     formData.append("id", userDetails._id);
     if (message.current) formData.append("message", message.current);
+    if (profileId) formData.append("profileId", profileId);
     if (visibility) formData.append("visibility", visibility);
     if (images.length) {
       images.forEach((image) => formData.append("image", image));

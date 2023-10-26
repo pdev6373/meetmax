@@ -40,3 +40,4 @@ export { default as MainLayout } from "@/components/mainLayout";
 export { default as SettingsLayout } from "@/components/settingsLayout";
 export { default as PasswordAndSecurity } from "@/components/passwordAndSecurity";
 export { default as ViewingAndSharing } from "@/components/viewingAndSharing";
+export { default as CommunityLayout } from "@/components/communityLayout";

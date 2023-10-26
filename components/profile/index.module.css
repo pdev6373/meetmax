@@ -192,6 +192,7 @@
   gap: 8px;
   padding-bottom: 8px;
   position: relative;
+  align-self: stretch;
 }
 
 .introHeading {
@@ -385,6 +386,11 @@
   justify-content: center;
   align-items: center;
   padding-block: 18px;
+  height: 100%;
+}
+
+.createPostWrapper {
+  margin-top: 14px;
 }
 
 .noPost {
@@ -422,6 +428,10 @@
 }
 
 @media (min-width: 500px) {
+  .createPostWrapper {
+    margin-top: 18px;
+  }
+
   .noPostMobile {
     display: none;
   }

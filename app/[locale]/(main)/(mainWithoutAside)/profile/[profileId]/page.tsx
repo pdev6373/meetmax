@@ -26,6 +26,8 @@ export default function Profile(param: any) {
       save={t("save")}
       unfollow={t("unfollow")}
       noPostYet={t("noPostYet")}
+      noPostYetFollower={t("noPostAvailable")}
+      createPost={t("createAPost")}
     />
   );
 }
