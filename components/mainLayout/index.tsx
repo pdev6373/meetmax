@@ -13,6 +13,7 @@ type MainLayoutType = {
   locale: string;
   sidenavTexts: SidebarTextsType;
   placeHolderText: string;
+  placeHolderTextShort: string;
 };
 
 export default function MainLayout({
@@ -20,6 +21,7 @@ export default function MainLayout({
   locale,
   sidenavTexts,
   placeHolderText,
+  placeHolderTextShort,
 }: MainLayoutType) {
   const router = useRouter();
   const [showComponent, setShowComponent] = useState(false);
@@ -64,7 +66,7 @@ export default function MainLayout({
           <div className={styles.searchMobile}>
             <Search
               onChange={setSearch}
-              placeholder="Search here..."
+              placeholder={placeHolderTextShort}
               value={search}
             />
           </div>

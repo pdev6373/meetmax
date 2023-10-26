@@ -26,7 +26,28 @@ const convertToFile = async (
   return newFile;
 };
 
-export default function Profile({ id }: ProfileType) {
+export default function Profile({
+  id,
+  born,
+  chooseAnImage,
+  editBasicInfo,
+  editCoverPhoto,
+  editDetails,
+  editPhoto,
+  facebook,
+  female,
+  follow,
+  follower,
+  followers,
+  following,
+  instagram,
+  intro,
+  linkedin,
+  male,
+  save,
+  twitter,
+  unfollow,
+}: ProfileType) {
   const {
     userDetails: { userDetails },
   } = useContext(AuthContext);
@@ -307,13 +328,13 @@ export default function Profile({ id }: ProfileType) {
         {
           name: "gender",
           icon: "/assets/person.svg",
-          value: user?.gender,
+          value: user?.gender === "Female" ? female : male,
         },
         {
           name: "birthday",
           icon: "/assets/birthday.svg",
           value: user?.dateOfBirth
-            ? `Born ${format(new Date(user.dateOfBirth), "MMMM dd,yyyy")}`
+            ? `${born} ${format(new Date(user.dateOfBirth), "MMMM dd,yyyy")}`
             : null,
         },
         {
@@ -325,7 +346,7 @@ export default function Profile({ id }: ProfileType) {
           name: "facebook",
           icon: "/assets/facebook.svg",
           value: user.socialLinks.facebook
-            ? `Facebook ${
+            ? `${facebook} ${
                 user.socialLinks.facebook.match(
                   /^https:\/\/(?:www\.)?facebook\.com\/(?:profile\.php\?id=)?([a-zA-Z0-9.]+)/
                 )![1]
@@ -336,7 +357,7 @@ export default function Profile({ id }: ProfileType) {
           name: "twitter",
           icon: "/assets/twitter.svg",
           value: user.socialLinks.twitter
-            ? `Twitter ${
+            ? `${twitter} ${
                 user.socialLinks.twitter.match(
                   /^https:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/
                 )![1]
@@ -347,7 +368,7 @@ export default function Profile({ id }: ProfileType) {
           name: "instagram",
           icon: "/assets/instagram.svg",
           value: user.socialLinks.instagram
-            ? `Instagram ${
+            ? `${instagram} ${
                 user.socialLinks.instagram.match(
                   /^https:\/\/(?:www\.)?instagram\.com\/([a-zA-Z0-9_.]+)\/?/
                 )![1]
@@ -358,7 +379,7 @@ export default function Profile({ id }: ProfileType) {
           name: "linkedin",
           icon: "/assets/linkedin.svg",
           value: user.socialLinks.linkedin
-            ? `Linkedin ${
+            ? `${linkedin} ${
                 user.socialLinks.linkedin.match(
                   /^https:\/\/(?:www\.)?linkedin\.com\/in\/([A-Za-z0-9_-]+)\/?$/
                 )![1]
@@ -369,13 +390,13 @@ export default function Profile({ id }: ProfileType) {
           name: "followers",
           icon: null,
           value: `${user?.followers?.length} ${
-            user?.followers?.length === 1 ? "Follower" : "Followers"
+            user?.followers?.length === 1 ? follower : followers
           }`,
         },
         {
           name: "following",
           icon: null,
-          value: `${user?.following?.length} Following`,
+          value: `${user?.following?.length} ${following}`,
         },
       ],
     });
@@ -433,7 +454,7 @@ export default function Profile({ id }: ProfileType) {
           >
             <div className={styles.editorHeader}>
               {!showProfileImage ? (
-                <p className={styles.avatarHeading}>Edit Photo</p>
+                <p className={styles.avatarHeading}>{editPhoto}</p>
               ) : (
                 <div></div>
               )}
@@ -485,7 +506,7 @@ export default function Profile({ id }: ProfileType) {
                     backgroundColor="#949cab"
                     shadingOpacity={0.4}
                     exportSize={600}
-                    label="Choose an image"
+                    label={chooseAnImage}
                     labelStyle={{
                       color: "#edeff1",
                       cursor: "pointer",
@@ -546,7 +567,7 @@ export default function Profile({ id }: ProfileType) {
                     isLoading={loading || uploadingCoverPicture}
                     variation="small"
                   >
-                    Save
+                    {save}
                   </Button>
                 </div>
               </div>
@@ -586,11 +607,11 @@ export default function Profile({ id }: ProfileType) {
                   width={16}
                   height={16}
                 />
-                <p className={styles.uploadCoverPhotoText}>Edit Cover Photo</p>
+                <p className={styles.uploadCoverPhotoText}>{editCoverPhoto}</p>
               </label>
 
               <input
-                title="edit cover photo"
+                title={editCoverPhoto}
                 type="file"
                 accept="image/*"
                 id="cover-photo"
@@ -649,7 +670,7 @@ export default function Profile({ id }: ProfileType) {
 
           {!id ? (
             <Link href="/settings/edit-profile" className={styles.editInfo}>
-              Edit basic info
+              {editBasicInfo}
             </Link>
           ) : userDetails?.following.includes(id) ? (
             <div className={styles.buttonWrapper}>
@@ -671,7 +692,7 @@ export default function Profile({ id }: ProfileType) {
                     height={22}
                   />
                 ) : (
-                  "Unfollow"
+                  unfollow
                 )}
               </button>
             </div>
@@ -688,7 +709,7 @@ export default function Profile({ id }: ProfileType) {
                   height={22}
                 />
               ) : (
-                "Follow"
+                follow
               )}
             </button>
           )}
@@ -696,7 +717,7 @@ export default function Profile({ id }: ProfileType) {
 
         <div className={styles.profileBody}>
           <div className={styles.intro}>
-            <h3 className={styles.introHeading}>INTRO</h3>
+            <h3 className={styles.introHeading}>{intro}</h3>
             <div className={styles.introMain}>
               {userData?.intro
                 ?.filter((data) => data.value)
@@ -727,7 +748,7 @@ export default function Profile({ id }: ProfileType) {
             </div>
             {!id ? (
               <Link href="/settings/edit-profile" className={styles.editInfo}>
-                Edit Details
+                {editDetails}
               </Link>
             ) : (
               <></>

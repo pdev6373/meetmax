@@ -316,6 +316,27 @@ export type SettingsTextType = {
 
 export type ProfileType = {
   id?: string;
+  editCoverPhoto: string;
+  editPhoto: string;
+  chooseAnImage: string;
+  save: string;
+  editBasicInfo: string;
+  intro: string;
+  male: string;
+  female: string;
+  born: string;
+  followers: string;
+  follower: string;
+  following: string;
+  editDetails: string;
+  facebook: string;
+  twitter: string;
+  instagram: string;
+  linkedin: string;
+  follow: string;
+  unfollow: string;
+  noPostYet: string;
+  noPostYetFollower: string;
 };
 
 export type UserType = {

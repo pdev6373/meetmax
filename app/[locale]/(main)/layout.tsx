@@ -23,6 +23,7 @@ export default function MainLayout({
         logoutConfirmationText: t("confirmLogout"),
       }}
       placeHolderText={t("searchHere")}
+      placeHolderTextShort={t("searchHereHalf")}
     />
   );
 }
