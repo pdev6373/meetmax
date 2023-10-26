@@ -67,6 +67,22 @@
     "phoneNumberError": "Voer alstublieft een geldig telefoonnummer in.",
     "profileUpdateSuccess": "profiel succesvol bijgewerkt",
     "website": "Website",
-    "websiteError": "Voer een geldige website in."
+    "websiteError": "Voer een geldige website in.",
+    "birthday": "Verjaardag",
+    "changePassword": "Verander wachtwoord",
+    "enterYourLocation": "Vul je locatie in",
+    "everyone": "Iedereen",
+    "facebook": "Facebook",
+    "followers": "Volgers",
+    "invalidOldPassword": "Ongeldig oud wachtwoord",
+    "meetmaxLanguage": "Toon Meetmax in deze taal.",
+    "newPassword": "nieuw paswoord",
+    "onlyMe": "Alleen ik",
+    "passwordChangedSuccess": "wachtwoord succesvol veranderd",
+    "retypePassword": "Typ het nieuwe wachtwoord opnieuw",
+    "socialLink": "Sociale band",
+    "twitter": "Twitteren",
+    "viewingAndSharingFull": "Bekijken en delen",
+    "yourUsername": "je gebruikersnaam"
   }
 }

@@ -67,6 +67,22 @@
     "phoneNumberError": "একটি বৈধ ফোন নম্বর লিখুন দয়া করে।",
     "profileUpdateSuccess": "প্রোফাইল সফলভাবে আপডেট করা হয়েছে",
     "website": "ওয়েবসাইট",
-    "websiteError": "একটি বৈধ ওয়েবসাইট লিখুন."
+    "websiteError": "একটি বৈধ ওয়েবসাইট লিখুন.",
+    "birthday": "জন্মদিন",
+    "changePassword": "পাসওয়ার্ড পরিবর্তন করুন",
+    "enterYourLocation": "আপনার অবস্থান লিখুন",
+    "everyone": "সবাই",
+    "facebook": "ফেসবুক",
+    "followers": "অনুসারী",
+    "invalidOldPassword": "অবৈধ পুরানো পাসওয়ার্ড",
+    "meetmaxLanguage": "এই ভাষায় Meetmax দেখান।",
+    "newPassword": "নতুন পাসওয়ার্ড",
+    "onlyMe": "শুধু আমি",
+    "passwordChangedSuccess": "পাসওয়ার্ড সফলভাবে পরিবর্তন",
+    "retypePassword": "নতুন পাসওয়ার্ড পুনরায় টাইপ করুন",
+    "socialLink": "সামাজিক লিংক",
+    "twitter": "টুইটার",
+    "viewingAndSharingFull": "দেখা এবং ভাগ করা",
+    "yourUsername": "আপনার ব্যবহারকৃত নাম"
   }
 }

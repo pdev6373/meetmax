@@ -67,6 +67,22 @@
     "phoneNumberError": "Mangyaring magpasok ng wastong numero ng telepono.",
     "profileUpdateSuccess": "Matagumpay na na-update ang profile",
     "website": "Website",
-    "websiteError": "Mangyaring magpasok ng wastong website."
+    "websiteError": "Mangyaring magpasok ng wastong website.",
+    "birthday": "Birthday",
+    "changePassword": "Palitan ANG password",
+    "enterYourLocation": "Ilagay ang iyong lokasyon",
+    "everyone": "lahat",
+    "facebook": "Facebook",
+    "followers": "Mga tagasunod",
+    "invalidOldPassword": "Di-wastong lumang password",
+    "meetmaxLanguage": "Ipakita ang Meetmax sa wikang ito.",
+    "newPassword": "Bagong Password",
+    "onlyMe": "Ako lang",
+    "passwordChangedSuccess": "Matagumpay na nabago ang Password",
+    "retypePassword": "I-type muli ang bagong Password",
+    "socialLink": "Social link",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Pagtingin at Pagbabahagi",
+    "yourUsername": "ang iyong username"
   }
 }

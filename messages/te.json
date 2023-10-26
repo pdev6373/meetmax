@@ -67,6 +67,22 @@
     "phoneNumberError": "దయచేసి చెల్లుబాటు అయ్యే ఫోన్ నంబర్‌ను నమోదు చేయండి.",
     "profileUpdateSuccess": "ప్రొఫైల్ విజయవంతంగా నవీకరించబడింది",
     "website": "వెబ్సైట్",
-    "websiteError": "దయచేసి చెల్లుబాటు అయ్యే వెబ్‌సైట్‌ను నమోదు చేయండి."
+    "websiteError": "దయచేసి చెల్లుబాటు అయ్యే వెబ్‌సైట్‌ను నమోదు చేయండి.",
+    "birthday": "పుట్టినరోజు",
+    "changePassword": "పాస్‌వర్డ్ మార్చండి",
+    "enterYourLocation": "మీ స్థానాన్ని నమోదు చేయండి",
+    "everyone": "ప్రతి ఒక్కరూ",
+    "facebook": "ఫేస్బుక్",
+    "followers": "అనుచరులు",
+    "invalidOldPassword": "చెల్లని పాత పాస్‌వర్డ్",
+    "meetmaxLanguage": "ఈ భాషలో Meetmaxని చూపండి.",
+    "newPassword": "కొత్త పాస్వర్డ్",
+    "onlyMe": "నేనొక్కడినే",
+    "passwordChangedSuccess": "పాస్‌వర్డ్ విజయవంతంగా మార్చబడింది",
+    "retypePassword": "కొత్త పాస్‌వర్డ్‌ని మళ్లీ టైప్ చేయండి",
+    "socialLink": "సామాజిక లింక్",
+    "twitter": "ట్విట్టర్",
+    "viewingAndSharingFull": "వీక్షణ మరియు భాగస్వామ్యం",
+    "yourUsername": "మీ-యూజర్ పేరు"
   }
 }

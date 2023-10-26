@@ -67,6 +67,22 @@
     "phoneNumberError": "Fadlan geli lambar taleefan oo sax ah.",
     "profileUpdateSuccess": "Xogta si guul leh ayaa loo cusboonaysiiyay",
     "website": "Mareegta",
-    "websiteError": "Fadlan geli shabakad sax ah"
+    "websiteError": "Fadlan geli shabakad sax ah",
+    "birthday": "Maalinta dhalashada",
+    "changePassword": "Badalida Lambarka sirta ah",
+    "enterYourLocation": "Geli goobtaada",
+    "everyone": "Qof walba",
+    "facebook": "Facebook-ga",
+    "followers": "raacayaal",
+    "invalidOldPassword": "Furaha hore ee aan ansax ahayn",
+    "meetmaxLanguage": "Ku muuji Meetmax luqaddan",
+    "newPassword": "Furaha cusub",
+    "onlyMe": "Aniga kaliya",
+    "passwordChangedSuccess": "Si guul leh ayaa erayga sirta ah loo beddelay",
+    "retypePassword": "Dib u qor furaha cusub",
+    "socialLink": "Xiriirinta bulshada",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Daawashada iyo Wadaagista",
+    "yourUsername": "magacaaga isticmaale"
   }
 }

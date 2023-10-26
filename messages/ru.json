@@ -67,6 +67,22 @@
     "phoneNumberError": "Пожалуйста, введите действующий телефонный номер.",
     "profileUpdateSuccess": "Профиль успешно обновлен",
     "website": "Веб-сайт",
-    "websiteError": "Пожалуйста, укажите действительный веб-сайт."
+    "websiteError": "Пожалуйста, укажите действительный веб-сайт.",
+    "birthday": "День рождения",
+    "changePassword": "Изменить пароль",
+    "enterYourLocation": "Введите свое местоположение",
+    "everyone": "Каждый",
+    "facebook": "Фейсбук",
+    "followers": "Последователи",
+    "invalidOldPassword": "Неверный старый пароль",
+    "meetmaxLanguage": "Показать Meetmax на этом языке.",
+    "newPassword": "Новый пароль",
+    "onlyMe": "Только я",
+    "passwordChangedSuccess": "Пароль успешно изменен",
+    "retypePassword": "Введите повторно новый пароль",
+    "socialLink": "Социальная связь",
+    "twitter": "Твиттер",
+    "viewingAndSharingFull": "Просмотр и обмен",
+    "yourUsername": "ваш логин"
   }
 }

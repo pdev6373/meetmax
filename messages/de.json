@@ -67,6 +67,22 @@
     "phoneNumberError": "Bitte geben Sie eine gültige Telefonnummer ein.",
     "profileUpdateSuccess": "Profil erfolgreich aktualisiert",
     "website": "Webseite",
-    "websiteError": "Bitte geben Sie eine gültige Website ein."
+    "websiteError": "Bitte geben Sie eine gültige Website ein.",
+    "birthday": "Geburtstag",
+    "changePassword": "Kennwort ändern",
+    "enterYourLocation": "Gib deinen Standort an",
+    "everyone": "Alle",
+    "facebook": "Facebook",
+    "followers": "Anhänger",
+    "invalidOldPassword": "Ungültiges altes Passwort",
+    "meetmaxLanguage": "Meetmax in dieser Sprache anzeigen.",
+    "newPassword": "Neues Kennwort",
+    "onlyMe": "Nur ich",
+    "passwordChangedSuccess": "das Passwort wurde erfolgreich geändert",
+    "retypePassword": "Geben Sie das neue Passwort erneut ein",
+    "socialLink": "Soziale Verbindung",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Ansehen und Teilen",
+    "yourUsername": "dein Benutzername"
   }
 }

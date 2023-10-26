@@ -67,6 +67,22 @@
     "phoneNumberError": "Siusplau introdueixi un número de telèfon vàlid.",
     "profileUpdateSuccess": "El perfil s'ha actualitzat correctament",
     "website": "Lloc web",
-    "websiteError": "Introduïu un lloc web vàlid."
+    "websiteError": "Introduïu un lloc web vàlid.",
+    "birthday": "Aniversari",
+    "changePassword": "Canvia la contrasenya",
+    "enterYourLocation": "Introduïu la vostra ubicació",
+    "everyone": "Tothom",
+    "facebook": "Facebook",
+    "followers": "Seguidors",
+    "invalidOldPassword": "Contrasenya antiga no vàlida",
+    "meetmaxLanguage": "Mostra Meetmax en aquest idioma.",
+    "newPassword": "nova contrasenya",
+    "onlyMe": "Només jo",
+    "passwordChangedSuccess": "La contrasenya s'ha canviat correctament",
+    "retypePassword": "Reescriu la nova contrasenya",
+    "socialLink": "Enllaç social",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Visualització i compartició",
+    "yourUsername": "el teu nom d'usuari"
   }
 }

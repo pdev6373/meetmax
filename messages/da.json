@@ -67,6 +67,22 @@
     "phoneNumberError": "Indtast venligst et gyldigt telefonnummer.",
     "profileUpdateSuccess": "Profilen blev opdateret",
     "website": "Internet side",
-    "websiteError": "Indtast venligst et gyldigt websted."
+    "websiteError": "Indtast venligst et gyldigt websted.",
+    "birthday": "Fødselsdag",
+    "changePassword": "Skift kodeord",
+    "enterYourLocation": "Indtast din placering",
+    "everyone": "Alle sammen",
+    "facebook": "Facebook",
+    "followers": "Tilhængere",
+    "invalidOldPassword": "Ugyldig gammel adgangskode",
+    "meetmaxLanguage": "Vis Meetmax på dette sprog.",
+    "newPassword": "nyt kodeord",
+    "onlyMe": "Kun mig",
+    "passwordChangedSuccess": "Adgangskoden blev ændret",
+    "retypePassword": "Gentag den nye adgangskode",
+    "socialLink": "Socialt link",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Visning og deling",
+    "yourUsername": "dit brugernavn"
   }
 }

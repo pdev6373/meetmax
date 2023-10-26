@@ -67,6 +67,22 @@
     "phoneNumberError": "有効な電話番号を入力して下さい。",
     "profileUpdateSuccess": "プロファイルが正常に更新されました",
     "website": "Webサイト",
-    "websiteError": "有効な Web サイトを入力してください。"
+    "websiteError": "有効な Web サイトを入力してください。",
+    "birthday": "誕生日",
+    "changePassword": "パスワードを変更する",
+    "enterYourLocation": "現在地を入力してください",
+    "everyone": "みんな",
+    "facebook": "フェイスブック",
+    "followers": "フォロワー",
+    "invalidOldPassword": "無効な古いパスワード",
+    "meetmaxLanguage": "Meetmax をこの言語で表示します。",
+    "newPassword": "新しいパスワード",
+    "onlyMe": "私だけ",
+    "passwordChangedSuccess": "パスワードは正常に変更されました",
+    "retypePassword": "新しいパスワード再入力",
+    "socialLink": "ソーシャルリンク",
+    "twitter": "ツイッター",
+    "viewingAndSharingFull": "閲覧と共有",
+    "yourUsername": "あなたのユーザーネーム"
   }
 }

@@ -67,6 +67,22 @@
     "phoneNumberError": "Please enter a valid phone number.",
     "profileUpdateSuccess": "Profile updated successfully",
     "website": "Website",
-    "websiteError": "Please enter a valid website."
+    "websiteError": "Please enter a valid website.",
+    "birthday": "Birthday",
+    "changePassword": "Change Password",
+    "enterYourLocation": "Enter your location",
+    "everyone": "Everyone",
+    "facebook": "Facebook",
+    "followers": "Followers",
+    "invalidOldPassword": "Invalid old password",
+    "meetmaxLanguage": "Show Meetmax in this language.",
+    "newPassword": "New Password",
+    "onlyMe": "Only me",
+    "passwordChangedSuccess": "Password changed successfully",
+    "retypePassword": "Re-type new Password",
+    "socialLink": "Social link",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Viewing and Sharing",
+    "yourUsername": "your-username"
   }
 }

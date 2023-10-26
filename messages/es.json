@@ -67,6 +67,22 @@
     "phoneNumberError": "Por favor ingrese un número de teléfono válido.",
     "profileUpdateSuccess": "perfil actualizado con éxito",
     "website": "Sitio web",
-    "websiteError": "Por favor ingrese un sitio web válido."
+    "websiteError": "Por favor ingrese un sitio web válido.",
+    "birthday": "Cumpleaños",
+    "changePassword": "Cambiar la contraseña",
+    "enterYourLocation": "Ingresa tu ubicación",
+    "everyone": "Todos",
+    "facebook": "Facebook",
+    "followers": "Seguidores",
+    "invalidOldPassword": "Contraseña antigua no válida",
+    "meetmaxLanguage": "Mostrar Meetmax en este idioma.",
+    "newPassword": "Nueva contraseña",
+    "onlyMe": "Solo yo",
+    "passwordChangedSuccess": "Contraseña cambiada con éxito",
+    "retypePassword": "Reescriba nueva contraseña",
+    "socialLink": "Vínculo social",
+    "twitter": "Gorjeo",
+    "viewingAndSharingFull": "Ver y compartir",
+    "yourUsername": "su nombre de usuario"
   }
 }

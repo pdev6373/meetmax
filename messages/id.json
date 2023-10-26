@@ -67,6 +67,22 @@
     "phoneNumberError": "Silahkan masukkan nomor telepon yang benar.",
     "profileUpdateSuccess": "Profil berhasil diperbarui",
     "website": "Situs web",
-    "websiteError": "Silakan masukkan situs web yang valid."
+    "websiteError": "Silakan masukkan situs web yang valid.",
+    "birthday": "Hari ulang tahun",
+    "changePassword": "Ganti kata sandi",
+    "enterYourLocation": "Masukkan lokasi Anda",
+    "everyone": "Setiap orang",
+    "facebook": "Facebook",
+    "followers": "Pengikut",
+    "invalidOldPassword": "Kata sandi lama tidak valid",
+    "meetmaxLanguage": "Tampilkan Meetmax dalam bahasa ini.",
+    "newPassword": "kata sandi baru",
+    "onlyMe": "Hanya saya",
+    "passwordChangedSuccess": "Kata sandi berhasil diubah",
+    "retypePassword": "Ketik ulang Kata Sandi baru",
+    "socialLink": "Jaringan sosial",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Melihat dan Berbagi",
+    "yourUsername": "nama pengguna Anda"
   }
 }

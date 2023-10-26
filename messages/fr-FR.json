@@ -67,6 +67,22 @@
     "phoneNumberError": "S'il vous plaît entrer un numéro de téléphone valide.",
     "profileUpdateSuccess": "Mise à jour du profil réussie",
     "website": "Site web",
-    "websiteError": "Veuillez entrer un site Web valide."
+    "websiteError": "Veuillez entrer un site Web valide.",
+    "birthday": "Anniversaire",
+    "changePassword": "Changer le mot de passe",
+    "enterYourLocation": "Entrez votre emplacement",
+    "everyone": "Tout le monde",
+    "facebook": "Facebook",
+    "followers": "Suiveurs",
+    "invalidOldPassword": "Ancien mot de passe invalide",
+    "meetmaxLanguage": "Afficher Meetmax dans cette langue.",
+    "newPassword": "nouveau mot de passe",
+    "onlyMe": "Seulement moi",
+    "passwordChangedSuccess": "Le mot de passe a été changé avec succès",
+    "retypePassword": "Re-taper le nouveau mot de passe",
+    "socialLink": "Lien social",
+    "twitter": "Twitter",
+    "viewingAndSharingFull": "Visualisation et partage",
+    "yourUsername": "ton nom d'utilisateur"
   }
 }
