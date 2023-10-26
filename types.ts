@@ -21,6 +21,9 @@ export type RootLayoutType = {
 
 export type LayoutType = {
   children: ReactNode;
+  params?: {
+    locale: string;
+  };
 };
 
 export type AlertType = {
@@ -115,13 +118,36 @@ export type LoginFormType = {
 };
 
 export type EditProfileType = {
-  defaultError: string;
-  emailError: string;
-  namesError: string;
-  save: string;
-  cancel: string;
+  editProfile: string;
+  fullName: string;
+  birthday: string;
+  bio: string;
+  enterYourBio: string;
+  phoneNumber: string;
+  enterYourPhoneNumber: string;
+  website: string;
+  enterYourWebsite: string;
+  gender: string;
   male: string;
   female: string;
+  location: string;
+  enterYourLocation: string;
+  socialLink: string;
+  yourUsername: string;
+  facebook: string;
+  twitter: string;
+  instagram: string;
+  linkedin: string;
+  save: string;
+  cancel: string;
+  namesError: string;
+  bioError: string;
+  phoneNumberError: string;
+  websiteError: string;
+  linkError: string;
+  anErrorOccurred: string;
+  successError: string;
+  defaultError: string;
 };
 
 export type LocaleType = {
@@ -323,4 +349,21 @@ export type SidebarTextsType = {
   logoutText: string;
   cancelText: string;
   logoutConfirmationText: string;
+};
+
+export type SettingsTextsType = {
+  editProfile: string;
+  language: string;
+  passwordAndSecurity: string;
+  viewingAndSharing: string;
+  logoutText: string;
+  cancelText: string;
+  logoutConfirmationText: string;
+};
+
+export type MainLayoutType = {
+  children: JSX.Element;
+  params: {
+    locale: string;
+  };
 };

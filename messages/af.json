@@ -51,6 +51,22 @@
     "logout": "Teken uit",
     "language": "Taal",
     "passwordAndSecurity": "Wagwoord en sekuriteit",
-    "viewingAndSharing": "Bekyk en deel"
+    "viewingAndSharing": "Bekyk en deel",
+    "anErrorOccurred": "'n Fout het voorgekom",
+    "bio": "Bio",
+    "enterYourBio": "Voer jou bio in",
+    "enterYourPhoneNumber": "Voer jou foonnommer in",
+    "enterYourWebsite": "Voer jou webwerf in",
+    "fullName": "Volle naam",
+    "gender": "Geslag",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Voer asseblief 'n geldige skakel in.",
+    "location": "Ligging",
+    "phoneNumber": "Telefoon nommer",
+    "phoneNumberError": "Gee 'n geldige telefoonnommer.",
+    "profileUpdateSuccess": "Profiel suksesvol opgedateer",
+    "website": "Webwerf",
+    "websiteError": "Voer asseblief 'n geldige webwerf in."
   }
 }

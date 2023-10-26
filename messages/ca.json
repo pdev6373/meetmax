@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Contrasenya i seguretat",
     "profile": "Perfil",
     "settings": "Configuració",
-    "viewingAndSharing": "Visualització i compartició"
+    "viewingAndSharing": "Visualització i compartició",
+    "anErrorOccurred": "Hi ha hagut un error",
+    "bio": "bio",
+    "enterYourBio": "Introdueix la teva biografia",
+    "enterYourPhoneNumber": "Introduïu el vostre número de telèfon",
+    "enterYourWebsite": "Entra al teu lloc web",
+    "fullName": "Nom complet",
+    "gender": "Gènere",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Introduïu un enllaç vàlid.",
+    "location": "Ubicació",
+    "phoneNumber": "Número de telèfon",
+    "phoneNumberError": "Siusplau introdueixi un número de telèfon vàlid.",
+    "profileUpdateSuccess": "El perfil s'ha actualitzat correctament",
+    "website": "Lloc web",
+    "websiteError": "Introduïu un lloc web vàlid."
   }
 }

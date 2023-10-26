@@ -1,12 +1,6 @@
 import { MainLayout as MainLayoutComponent } from "@/components";
+import { MainLayoutType } from "@/types";
 import { useTranslations } from "next-intl";
-
-type MainLayoutType = {
-  children: JSX.Element;
-  params: {
-    locale: string;
-  };
-};
 
 export default function MainLayout({
   children,

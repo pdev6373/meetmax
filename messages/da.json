@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Adgangskode og sikkerhed",
     "profile": "Profil",
     "settings": "Indstillinger",
-    "viewingAndSharing": "Visning og deling"
+    "viewingAndSharing": "Visning og deling",
+    "anErrorOccurred": "En fejl opstod",
+    "bio": "Bio",
+    "enterYourBio": "Indtast din bio",
+    "enterYourPhoneNumber": "Indtast dit telefonnummer",
+    "enterYourWebsite": "Indtast din hjemmeside",
+    "fullName": "Fulde navn",
+    "gender": "Køn",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Indtast venligst et gyldigt link.",
+    "location": "Beliggenhed",
+    "phoneNumber": "Telefonnummer",
+    "phoneNumberError": "Indtast venligst et gyldigt telefonnummer.",
+    "profileUpdateSuccess": "Profilen blev opdateret",
+    "website": "Internet side",
+    "websiteError": "Indtast venligst et gyldigt websted."
   }
 }

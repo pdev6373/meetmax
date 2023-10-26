@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Пароль и безопасность",
     "profile": "Профиль",
     "settings": "Настройки",
-    "viewingAndSharing": "Просмотр и обмен"
+    "viewingAndSharing": "Просмотр и обмен",
+    "anErrorOccurred": "Произошла ошибка",
+    "bio": "Био",
+    "enterYourBio": "Введите свою биографию",
+    "enterYourPhoneNumber": "Введите свой номер телефона",
+    "enterYourWebsite": "Введите свой сайт",
+    "fullName": "Полное имя",
+    "gender": "Пол",
+    "instagram": "Инстаграм",
+    "linkedin": "LinkedIn",
+    "linkError": "Пожалуйста, введите действительную ссылку.",
+    "location": "Расположение",
+    "phoneNumber": "Номер телефона",
+    "phoneNumberError": "Пожалуйста, введите действующий телефонный номер.",
+    "profileUpdateSuccess": "Профиль успешно обновлен",
+    "website": "Веб-сайт",
+    "websiteError": "Пожалуйста, укажите действительный веб-сайт."
   }
 }

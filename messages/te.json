@@ -51,6 +51,22 @@
     "passwordAndSecurity": "పాస్‌వర్డ్ & భద్రత",
     "profile": "ప్రొఫైల్",
     "settings": "సెట్టింగ్‌లు",
-    "viewingAndSharing": "వీక్షణ & భాగస్వామ్యం"
+    "viewingAndSharing": "వీక్షణ & భాగస్వామ్యం",
+    "anErrorOccurred": "లోపం సంభవించింది",
+    "bio": "బయో",
+    "enterYourBio": "మీ బయోని నమోదు చేయండి",
+    "enterYourPhoneNumber": "మీ ఫోన్ నెంబర్ ను ఎంటర్ చేయండి",
+    "enterYourWebsite": "మీ వెబ్‌సైట్‌ను నమోదు చేయండి",
+    "fullName": "పూర్తి పేరు",
+    "gender": "లింగం",
+    "instagram": "ఇన్స్టాగ్రామ్",
+    "linkedin": "లింక్డ్ఇన్",
+    "linkError": "దయచేసి చెల్లుబాటు అయ్యే లింక్‌ను నమోదు చేయండి.",
+    "location": "స్థానం",
+    "phoneNumber": "ఫోను నంబరు",
+    "phoneNumberError": "దయచేసి చెల్లుబాటు అయ్యే ఫోన్ నంబర్‌ను నమోదు చేయండి.",
+    "profileUpdateSuccess": "ప్రొఫైల్ విజయవంతంగా నవీకరించబడింది",
+    "website": "వెబ్సైట్",
+    "websiteError": "దయచేసి చెల్లుబాటు అయ్యే వెబ్‌సైట్‌ను నమోదు చేయండి."
   }
 }

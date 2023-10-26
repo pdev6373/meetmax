@@ -51,6 +51,22 @@
     "passwordAndSecurity": "パスワードとセキュリティ",
     "profile": "プロフィール",
     "settings": "設定",
-    "viewingAndSharing": "閲覧と共有"
+    "viewingAndSharing": "閲覧と共有",
+    "anErrorOccurred": "エラーが発生しました",
+    "bio": "バイオ",
+    "enterYourBio": "あなたの略歴を入力してください",
+    "enterYourPhoneNumber": "電話番号を入力してください",
+    "enterYourWebsite": "ウェブサイトを入力してください",
+    "fullName": "フルネーム",
+    "gender": "性別",
+    "instagram": "インスタグラム",
+    "linkedin": "リンクトイン",
+    "linkError": "有効なリンクを入力してください。",
+    "location": "位置",
+    "phoneNumber": "電話番号",
+    "phoneNumberError": "有効な電話番号を入力して下さい。",
+    "profileUpdateSuccess": "プロファイルが正常に更新されました",
+    "website": "Webサイト",
+    "websiteError": "有効な Web サイトを入力してください。"
   }
 }

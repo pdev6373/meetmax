@@ -165,6 +165,10 @@ export default function ViewingAndSharing() {
     value: VisibilityType | boolean,
     type: CurrentLoadingType
   ) => {
+    if (type === "post" && value === userPostVisibility) return;
+    if (type === "profile" && value === userProfileVisibility) return;
+    if (type === "follow" && value === canBefollowed) return;
+
     setCurrentLoading(type);
     const payload: any = {
       email,

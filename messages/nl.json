@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Wachtwoord en beveiliging",
     "profile": "Profiel",
     "settings": "Instellingen",
-    "viewingAndSharing": "Bekijken en delen"
+    "viewingAndSharing": "Bekijken en delen",
+    "anErrorOccurred": "Er is een fout opgetreden",
+    "bio": "Bio",
+    "enterYourBio": "Voer uw biografie in",
+    "enterYourPhoneNumber": "Vul je telefoonnummer in",
+    "enterYourWebsite": "Voer uw website in",
+    "fullName": "Voor-en achternaam",
+    "gender": "Geslacht",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Voer een geldige link in.",
+    "location": "Plaats",
+    "phoneNumber": "Telefoonnummer",
+    "phoneNumberError": "Voer alstublieft een geldig telefoonnummer in.",
+    "profileUpdateSuccess": "profiel succesvol bijgewerkt",
+    "website": "Website",
+    "websiteError": "Voer een geldige website in."
   }
 }

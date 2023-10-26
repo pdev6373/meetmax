@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Passwort und Sicherheit",
     "profile": "Profil",
     "settings": "Einstellungen",
-    "viewingAndSharing": "Anzeigen und Teilen"
+    "viewingAndSharing": "Anzeigen und Teilen",
+    "anErrorOccurred": "Ein Fehler ist aufgetreten",
+    "bio": "Bio",
+    "enterYourBio": "Geben Sie Ihre Biografie ein",
+    "enterYourPhoneNumber": "Gib deine Telefonnummer ein",
+    "enterYourWebsite": "Geben Sie Ihre Website ein",
+    "fullName": "Vollständiger Name",
+    "gender": "Geschlecht",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Bitte geben Sie einen gültigen Link ein.",
+    "location": "Standort",
+    "phoneNumber": "Telefonnummer",
+    "phoneNumberError": "Bitte geben Sie eine gültige Telefonnummer ein.",
+    "profileUpdateSuccess": "Profil erfolgreich aktualisiert",
+    "website": "Webseite",
+    "websiteError": "Bitte geben Sie eine gültige Website ein."
   }
 }

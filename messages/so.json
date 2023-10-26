@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Furaha & Amniga",
     "profile": "Profile",
     "settings": "Dejinta",
-    "viewingAndSharing": "Daawashada & Wadaagista"
+    "viewingAndSharing": "Daawashada & Wadaagista",
+    "anErrorOccurred": "Khalad ayaa dhacay",
+    "bio": "Biyo",
+    "enterYourBio": "Gali bio-gaaga",
+    "enterYourPhoneNumber": "Geli lambarka taleefankaaga",
+    "enterYourWebsite": "Geli degelkaaga",
+    "fullName": "Magaca oo buuxa",
+    "gender": "Jinsiga",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Fadlan geli xiriir sax ah",
+    "location": "Goobta",
+    "phoneNumber": "Lambarka taleefanka",
+    "phoneNumberError": "Fadlan geli lambar taleefan oo sax ah.",
+    "profileUpdateSuccess": "Xogta si guul leh ayaa loo cusboonaysiiyay",
+    "website": "Mareegta",
+    "websiteError": "Fadlan geli shabakad sax ah"
   }
 }

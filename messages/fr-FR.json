@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Mot de passe et sécurité",
     "profile": "Profil",
     "settings": "Paramètres",
-    "viewingAndSharing": "Visualisation et partage"
+    "viewingAndSharing": "Visualisation et partage",
+    "anErrorOccurred": "Une erreur s'est produite",
+    "bio": "Biographie",
+    "enterYourBio": "Entrez votre biographie",
+    "enterYourPhoneNumber": "Entrez votre numéro de téléphone",
+    "enterYourWebsite": "Entrez votre site Web",
+    "fullName": "Nom et prénom",
+    "gender": "Genre",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Veuillez entrer un lien valide.",
+    "location": "Emplacement",
+    "phoneNumber": "Numéro de téléphone",
+    "phoneNumberError": "S'il vous plaît entrer un numéro de téléphone valide.",
+    "profileUpdateSuccess": "Mise à jour du profil réussie",
+    "website": "Site web",
+    "websiteError": "Veuillez entrer un site Web valide."
   }
 }

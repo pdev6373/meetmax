@@ -51,6 +51,22 @@
     "passwordAndSecurity": "পাসওয়ার্ড এবং নিরাপত্তা",
     "profile": "প্রোফাইল",
     "settings": "সেটিংস",
-    "viewingAndSharing": "দেখা এবং ভাগ করা"
+    "viewingAndSharing": "দেখা এবং ভাগ করা",
+    "anErrorOccurred": "একটি ত্রুটি ঘটেছে",
+    "bio": "বায়ো",
+    "enterYourBio": "আপনার জীবনী লিখুন",
+    "enterYourPhoneNumber": "আপনার ফোন নম্বর লিখুন",
+    "enterYourWebsite": "আপনার ওয়েবসাইট লিখুন",
+    "fullName": "পুরো নাম",
+    "gender": "লিঙ্গ",
+    "instagram": "ইনস্টাগ্রাম",
+    "linkedin": "লিঙ্কডইন",
+    "linkError": "একটি বৈধ লিঙ্ক লিখুন.",
+    "location": "অবস্থান",
+    "phoneNumber": "ফোন নম্বর",
+    "phoneNumberError": "একটি বৈধ ফোন নম্বর লিখুন দয়া করে।",
+    "profileUpdateSuccess": "প্রোফাইল সফলভাবে আপডেট করা হয়েছে",
+    "website": "ওয়েবসাইট",
+    "websiteError": "একটি বৈধ ওয়েবসাইট লিখুন."
   }
 }

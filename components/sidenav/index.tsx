@@ -67,14 +67,17 @@ export default function Sidenav({ locale, texts }: SidenavType) {
 
   return (
     <>
-      {showLogout && (
+      {showLogout ? (
         <Logout
           onCancelLogout={cancelLogoutHandler}
           logoutText={texts.logoutText}
           cancelText={texts.cancelText}
           confirmLogoutText={texts.logoutConfirmationText}
         />
+      ) : (
+        <></>
       )}
+
       <div className={styles.wrapper}>
         <Link href="/" className={styles.logo}>
           <Logo />

@@ -37,3 +37,4 @@ export { default as Message } from "@/components/message";
 export { default as AppWrapper } from "@/components/appWrapper";
 export { default as Alert } from "@/components/alert";
 export { default as MainLayout } from "@/components/mainLayout";
+export { default as SettingsLayout } from "@/components/settingsLayout";

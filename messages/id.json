@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Kata Sandi & Keamanan",
     "profile": "Profil",
     "settings": "Pengaturan",
-    "viewingAndSharing": "Melihat & Berbagi"
+    "viewingAndSharing": "Melihat & Berbagi",
+    "anErrorOccurred": "Terjadi kesalahan",
+    "bio": "Biografi",
+    "enterYourBio": "Masukkan biografi Anda",
+    "enterYourPhoneNumber": "Masukkan nomor telepon Anda",
+    "enterYourWebsite": "Masukkan situs web Anda",
+    "fullName": "Nama lengkap",
+    "gender": "Jenis kelamin",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Silakan masukkan tautan yang valid.",
+    "location": "Lokasi",
+    "phoneNumber": "Nomor telepon",
+    "phoneNumberError": "Silahkan masukkan nomor telepon yang benar.",
+    "profileUpdateSuccess": "Profil berhasil diperbarui",
+    "website": "Situs web",
+    "websiteError": "Silakan masukkan situs web yang valid."
   }
 }

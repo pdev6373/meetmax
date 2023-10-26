@@ -51,6 +51,22 @@
     "passwordAndSecurity": "Password at Seguridad",
     "profile": "Profile",
     "settings": "Mga setting",
-    "viewingAndSharing": "Pagtingin at Pagbabahagi"
+    "viewingAndSharing": "Pagtingin at Pagbabahagi",
+    "anErrorOccurred": "May pagkakamaling naganap",
+    "bio": "Bio",
+    "enterYourBio": "Ilagay ang iyong bio",
+    "enterYourPhoneNumber": "Ilagay ang iyong numero ng telepono",
+    "enterYourWebsite": "Ipasok ang iyong website",
+    "fullName": "Buong pangalan",
+    "gender": "Kasarian",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "linkError": "Mangyaring magpasok ng wastong link.",
+    "location": "Lokasyon",
+    "phoneNumber": "Numero ng telepono",
+    "phoneNumberError": "Mangyaring magpasok ng wastong numero ng telepono.",
+    "profileUpdateSuccess": "Matagumpay na na-update ang profile",
+    "website": "Website",
+    "websiteError": "Mangyaring magpasok ng wastong website."
   }
 }
