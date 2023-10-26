@@ -83,6 +83,13 @@
     "socialLink": "Социальная связь",
     "twitter": "Твиттер",
     "viewingAndSharingFull": "Просмотр и обмен",
-    "yourUsername": "ваш логин"
+    "yourUsername": "ваш логин",
+    "friends": "Друзья",
+    "off": "Выключенный",
+    "postVisibility": "Кто может видеть ваше сообщение?",
+    "profileVisibility": "Кто может видеть ваш профиль?",
+    "searchFriends": "Ищите друзей!",
+    "searchHere": "Поищите здесь что-нибудь...",
+    "whoCanFollow": "Кто может следовать за вами?"
   }
 }

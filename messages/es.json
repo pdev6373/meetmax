@@ -83,6 +83,13 @@
     "socialLink": "Vínculo social",
     "twitter": "Gorjeo",
     "viewingAndSharingFull": "Ver y compartir",
-    "yourUsername": "su nombre de usuario"
+    "yourUsername": "su nombre de usuario",
+    "friends": "Amigos",
+    "off": "Apagado",
+    "postVisibility": "¿Quién puede ver tu publicación?",
+    "profileVisibility": "¿Quién puede ver tu perfil?",
+    "searchFriends": "¡Buscar amigos!",
+    "searchHere": "Busca algo aquí...",
+    "whoCanFollow": "¿Quién puede seguirte?"
   }
 }

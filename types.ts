@@ -123,31 +123,45 @@ export type EditProfileType = {
   birthday: string;
   bio: string;
   enterYourBio: string;
-  phoneNumber: string;
+  phoneNumberText: string;
   enterYourPhoneNumber: string;
-  website: string;
+  websiteText: string;
   enterYourWebsite: string;
-  gender: string;
+  genderText: string;
   male: string;
   female: string;
-  location: string;
+  locationText: string;
   enterYourLocation: string;
   socialLink: string;
   yourUsername: string;
-  facebook: string;
-  twitter: string;
-  instagram: string;
-  linkedin: string;
+  facebookText: string;
+  twitterText: string;
+  instagramText: string;
+  linkedinText: string;
   save: string;
   cancel: string;
   namesError: string;
-  bioError: string;
   phoneNumberError: string;
   websiteError: string;
   linkError: string;
   anErrorOccurred: string;
-  successError: string;
+  successText: string;
   defaultError: string;
+};
+
+export type PasswordAndSecurity = {
+  changePasswordText: string;
+  currentPasswordText: string;
+  newPasswordText: string;
+  retypePasswordText: string;
+  successText: string;
+  errorText: string;
+  save: string;
+  forgotPasswordText: string;
+  defaultError: string;
+  passwordError: string;
+  invalidOldPassword: string;
+  confirmPasswordError: string;
 };
 
 export type LocaleType = {

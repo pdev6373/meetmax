@@ -83,6 +83,13 @@
     "socialLink": "Sociale band",
     "twitter": "Twitteren",
     "viewingAndSharingFull": "Bekijken en delen",
-    "yourUsername": "je gebruikersnaam"
+    "yourUsername": "je gebruikersnaam",
+    "friends": "Vrienden",
+    "off": "Uit",
+    "postVisibility": "Wie kan je bericht zien?",
+    "profileVisibility": "Wie kan uw profiel zien?",
+    "searchFriends": "Zoek vrienden!",
+    "searchHere": "Zoek hier iets...",
+    "whoCanFollow": "Wie kan jou volgen?"
   }
 }

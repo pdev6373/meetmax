@@ -83,6 +83,13 @@
     "socialLink": "Enllaç social",
     "twitter": "Twitter",
     "viewingAndSharingFull": "Visualització i compartició",
-    "yourUsername": "el teu nom d'usuari"
+    "yourUsername": "el teu nom d'usuari",
+    "friends": "Amics",
+    "off": "Apagat",
+    "postVisibility": "Qui pot veure la teva publicació?",
+    "profileVisibility": "Qui pot veure el teu perfil?",
+    "searchFriends": "Cerca amics!",
+    "searchHere": "Busca alguna cosa aquí...",
+    "whoCanFollow": "Qui et pot seguir?"
   }
 }

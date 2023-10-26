@@ -83,6 +83,13 @@
     "socialLink": "Socialt link",
     "twitter": "Twitter",
     "viewingAndSharingFull": "Visning og deling",
-    "yourUsername": "dit brugernavn"
+    "yourUsername": "dit brugernavn",
+    "friends": "Venner",
+    "off": "Af",
+    "postVisibility": "Hvem kan se dit indlæg?",
+    "profileVisibility": "Hvem kan se din profil?",
+    "searchFriends": "Søg efter venner!",
+    "searchHere": "Søg efter noget her...",
+    "whoCanFollow": "Hvem kan følge dig?"
   }
 }

@@ -18,12 +18,34 @@ import useUserReq from "@/helpers/useUserReq";
 
 export default function EditProfile({
   defaultError,
-  emailError,
   namesError,
   save,
   cancel,
   male,
   female,
+  anErrorOccurred,
+  bio,
+  birthday,
+  editProfile,
+  enterYourBio,
+  enterYourLocation,
+  enterYourPhoneNumber,
+  enterYourWebsite,
+  facebookText,
+  fullName,
+  genderText,
+  instagramText,
+  linkError,
+  locationText,
+  phoneNumberText,
+  phoneNumberError,
+  websiteError,
+  yourUsername,
+  socialLink,
+  successText,
+  linkedinText,
+  twitterText,
+  websiteText,
 }: EditProfileType) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [errorComponentToShow, setErrorComponentToShow] = useState<
@@ -51,10 +73,12 @@ export default function EditProfile({
     new Date(userDetails.dateOfBirth!)
   );
   // const [email, setEmail] = useState(userDetails.email);
-  const [bio, setBio] = useState(userDetails.bio);
+  const [userBio, setUserBio] = useState(userDetails.bio);
   const [phoneNumber, setPhoneNumber] = useState(userDetails.phoneNumber);
   const [website, setWebsite] = useState(userDetails.website);
-  const [gender, setGender] = useState(userDetails.gender);
+  const [gender, setGender] = useState<"Male" | "Female" | null>(
+    userDetails.gender === "Male" ? (male as "Male") : (female as "Female")
+  );
   const [location, setLocation] = useState(userDetails.location);
   const [facebook, setFacebook] = useState(userDetails.socialLinks.facebook);
   const [instagram, setInstagram] = useState(userDetails.socialLinks.instagram);
@@ -86,7 +110,7 @@ export default function EditProfile({
   }, [
     // email,
     fullname,
-    bio,
+    userBio,
     dateOfBirth,
     phoneNumber,
     website,
@@ -132,13 +156,13 @@ export default function EditProfile({
       )
     ) {
       setErrorComponentToShow("phoneNumber");
-      setErrorMessage(emailError);
+      setErrorMessage(phoneNumberError);
       return;
     }
 
     if (website && !/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(website)) {
       setErrorComponentToShow("website");
-      setErrorMessage(emailError);
+      setErrorMessage(websiteError);
       return;
     }
 
@@ -149,7 +173,7 @@ export default function EditProfile({
       )
     ) {
       setErrorComponentToShow("facebook");
-      setErrorMessage(emailError);
+      setErrorMessage(linkError);
       return;
     }
 
@@ -158,7 +182,7 @@ export default function EditProfile({
       !/^https:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/i.test(twitter)
     ) {
       setErrorComponentToShow("twitter");
-      setErrorMessage(emailError);
+      setErrorMessage(linkError);
       return;
     }
 
@@ -167,7 +191,7 @@ export default function EditProfile({
       !/^https:\/\/(?:www\.)?instagram\.com\/[a-zA-Z0-9_]+\/?/i.test(instagram)
     ) {
       setErrorComponentToShow("instagram");
-      setErrorMessage(emailError);
+      setErrorMessage(linkError);
       return;
     }
 
@@ -176,7 +200,7 @@ export default function EditProfile({
       !/^https:\/\/(?:www\.)?linkedin\.com\/in\/[A-z0-9_-]+\/?$/i.test(linkedin)
     ) {
       setErrorComponentToShow("linkedin");
-      setErrorMessage(emailError);
+      setErrorMessage(linkError);
       return;
     }
 
@@ -185,9 +209,9 @@ export default function EditProfile({
       lastname: fullname.split(" ")[0],
       firstname: fullname.split(" ").slice(1).join(" "),
       dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
-      gender: gender,
+      gender: gender === male ? "Male" : "Female",
       id: userDetails._id,
-      bio,
+      bio: userBio,
       phoneNumber,
       website,
       location,
@@ -199,21 +223,22 @@ export default function EditProfile({
       },
     });
 
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
-
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(anErrorOccurred);
+      toggleAlertHandler();
       return;
     }
 
     setDanger(false);
+    setAlertMessage(successText);
+    toggleAlertHandler();
   };
 
   const cancelButtonHandler = () => {
     // setEmail(userDetails.email);
     setFullname(`${userDetails.lastname} ${userDetails.firstname}`);
-    setBio(userDetails.bio);
+    setUserBio(userDetails.bio);
     setDateOfBirth(new Date(userDetails.dateOfBirth!));
     setPhoneNumber(userDetails.phoneNumber);
     setWebsite(userDetails.website);
@@ -236,8 +261,8 @@ export default function EditProfile({
       <Alert open={showAlert} setOpen={setShowAlert} isDanger={danger}>
         {alertMessage}
       </Alert>
-      <SettingsRouteText>Edit Profile</SettingsRouteText>
-      <SettingsHeading>Edit Profile</SettingsHeading>
+      <SettingsRouteText>{editProfile}</SettingsRouteText>
+      <SettingsHeading>{editProfile}</SettingsHeading>
 
       {/* <div className={styles.imageWrapper}>
         <Image
@@ -263,7 +288,7 @@ export default function EditProfile({
         <div className={styles.inputs}>
           <div className={styles.generalInputs}>
             <div>
-              <p className={styles.inputHeader}>Full Name</p>
+              <p className={styles.inputHeader}>{fullName}</p>
               <Input
                 placeholder={`${userDetails.lastname} ${userDetails.firstname}`}
                 onChange={setFullname}
@@ -279,7 +304,7 @@ export default function EditProfile({
             </div>
 
             <div>
-              <p className={styles.inputHeader}>Birthday</p>
+              <p className={styles.inputHeader}>{birthday}</p>
               <div className={styles.calendarWrapper}>
                 <div
                   onClick={calendarInputClickHandler}
@@ -311,7 +336,7 @@ export default function EditProfile({
                     onClose={calendarClosehandler}
                     onSave={calendarSavehandler}
                     setValue={setDateOfBirth}
-                    save={save} //from parent, intl
+                    save={save}
                     cancel={cancel}
                   />
                 </div>
@@ -335,22 +360,20 @@ export default function EditProfile({
             </div> */}
 
             <div>
-              <p className={styles.inputHeader}>Bio</p>
+              <p className={styles.inputHeader}>{bio}</p>
               <Input
-                placeholder={userDetails.bio || "Enter your bio"}
-                onChange={setBio}
+                placeholder={userDetails.bio || enterYourBio}
+                onChange={setUserBio}
                 type="text"
-                value={bio}
+                value={userBio}
                 icon=""
               />
             </div>
 
             <div>
-              <p className={styles.inputHeader}>Phone Number</p>
+              <p className={styles.inputHeader}>{phoneNumberText}</p>
               <Input
-                placeholder={
-                  userDetails.phoneNumber || "Enter your phone number"
-                }
+                placeholder={userDetails.phoneNumber || enterYourPhoneNumber}
                 onChange={setPhoneNumber}
                 type="tel"
                 value={phoneNumber}
@@ -364,9 +387,9 @@ export default function EditProfile({
             </div>
 
             <div>
-              <p className={styles.inputHeader}>Website</p>
+              <p className={styles.inputHeader}>{websiteText}</p>
               <Input
-                placeholder={userDetails.website || "Enter your website"}
+                placeholder={userDetails.website || enterYourWebsite}
                 onChange={setWebsite}
                 type="text"
                 value={website}
@@ -380,7 +403,7 @@ export default function EditProfile({
             </div>
 
             <div>
-              <p className={styles.inputHeader}>Gender</p>
+              <p className={styles.inputHeader}>{genderText}</p>
               <div className={styles.genderWrapper}>
                 <Image
                   src={
@@ -427,9 +450,9 @@ export default function EditProfile({
             </div>
 
             <div>
-              <p className={styles.inputHeader}>Location</p>
+              <p className={styles.inputHeader}>{locationText}</p>
               <Input
-                placeholder={userDetails.location || "Enter your location"}
+                placeholder={userDetails.location || enterYourLocation}
                 onChange={setLocation}
                 type="text"
                 value={location}
@@ -439,13 +462,15 @@ export default function EditProfile({
           </div>
 
           <div className={styles.socialInputsWrapper}>
-            <h3 className={styles.socialHeading}>Social link</h3>
+            <h3 className={styles.socialHeading}>{socialLink}</h3>
 
             <div className={styles.socialInputs}>
               <div>
-                <p className={styles.inputHeader}>Facebook</p>
+                <p className={styles.inputHeader}>{facebookText}</p>
                 <Input
-                  placeholder={facebook || "https://facebook.com/your-username"}
+                  placeholder={
+                    facebook || `https://facebook.com/${yourUsername}`
+                  }
                   onChange={setFacebook}
                   type="text"
                   value={facebook}
@@ -459,9 +484,9 @@ export default function EditProfile({
               </div>
 
               <div>
-                <p className={styles.inputHeader}>Twitter</p>
+                <p className={styles.inputHeader}>{twitterText}</p>
                 <Input
-                  placeholder={twitter || "https://twitter.com/your-username"}
+                  placeholder={twitter || `https://twitter.com/${yourUsername}`}
                   onChange={setTwitter}
                   type="text"
                   value={twitter}
@@ -477,10 +502,10 @@ export default function EditProfile({
               </div>
 
               <div>
-                <p className={styles.inputHeader}>Instagram</p>
+                <p className={styles.inputHeader}>{instagramText}</p>
                 <Input
                   placeholder={
-                    instagram || "https://instagram.com/your-username"
+                    instagram || `https://instagram.com/${yourUsername}`
                   }
                   onChange={setInstagram}
                   type="text"
@@ -497,10 +522,10 @@ export default function EditProfile({
               </div>
 
               <div>
-                <p className={styles.inputHeader}>LinkedIn</p>
+                <p className={styles.inputHeader}>{linkedinText}</p>
                 <Input
                   placeholder={
-                    linkedin || "https://linkedin.com/in/your-username"
+                    linkedin || `https://linkedin.com/in/${yourUsername}`
                   }
                   onChange={setLinkedin}
                   type="text"

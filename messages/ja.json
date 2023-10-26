@@ -83,6 +83,13 @@
     "socialLink": "ソーシャルリンク",
     "twitter": "ツイッター",
     "viewingAndSharingFull": "閲覧と共有",
-    "yourUsername": "あなたのユーザーネーム"
+    "yourUsername": "あなたのユーザーネーム",
+    "friends": "友達",
+    "off": "オフ",
+    "postVisibility": "誰があなたの投稿を見ることができますか?",
+    "profileVisibility": "誰があなたのプロフィールを見ることができますか?",
+    "searchFriends": "友達を検索！",
+    "searchHere": "ここで何かを検索してください...",
+    "whoCanFollow": "誰があなたをフォローできますか?"
   }
 }

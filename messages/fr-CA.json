@@ -83,6 +83,13 @@
     "socialLink": "Lien social",
     "twitter": "Twitter",
     "viewingAndSharingFull": "Visualisation et partage",
-    "yourUsername": "ton nom d'utilisateur"
+    "yourUsername": "ton nom d'utilisateur",
+    "friends": "Amis",
+    "off": "Désactivé",
+    "postVisibility": "Qui peut voir votre message ?",
+    "profileVisibility": "Qui peut voir votre profil ?",
+    "searchFriends": "Recherchez des amis !",
+    "searchHere": "Cherchez quelque chose ici...",
+    "whoCanFollow": "Qui peut vous suivre ?"
   }
 }

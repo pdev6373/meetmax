@@ -83,6 +83,13 @@
     "socialLink": "Jaringan sosial",
     "twitter": "Twitter",
     "viewingAndSharingFull": "Melihat dan Berbagi",
-    "yourUsername": "nama pengguna Anda"
+    "yourUsername": "nama pengguna Anda",
+    "friends": "Teman-teman",
+    "off": "Mati",
+    "postVisibility": "Siapa yang dapat melihat postingan Anda?",
+    "profileVisibility": "Siapa yang dapat melihat profil Anda?",
+    "searchFriends": "Cari Teman!",
+    "searchHere": "Cari sesuatu di sini...",
+    "whoCanFollow": "Siapa yang dapat Mengikuti Anda?"
   }
 }

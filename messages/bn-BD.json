@@ -83,6 +83,13 @@
     "socialLink": "সামাজিক লিংক",
     "twitter": "টুইটার",
     "viewingAndSharingFull": "দেখা এবং ভাগ করা",
-    "yourUsername": "আপনার ব্যবহারকৃত নাম"
+    "yourUsername": "আপনার ব্যবহারকৃত নাম",
+    "friends": "বন্ধুরা",
+    "off": "বন্ধ",
+    "postVisibility": "কে আপনার পোস্ট দেখতে পারেন?",
+    "profileVisibility": "কে আপনার প্রোফাইল দেখতে পারেন?",
+    "searchFriends": "বন্ধুদের অনুসন্ধান করুন!",
+    "searchHere": "এখানে কিছু অনুসন্ধান করুন...",
+    "whoCanFollow": "কে আপনাকে অনুসরণ করতে পারে?"
   }
 }

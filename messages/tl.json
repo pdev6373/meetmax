@@ -83,6 +83,13 @@
     "socialLink": "Social link",
     "twitter": "Twitter",
     "viewingAndSharingFull": "Pagtingin at Pagbabahagi",
-    "yourUsername": "ang iyong username"
+    "yourUsername": "ang iyong username",
+    "friends": "Mga kaibigan",
+    "off": "Naka-off",
+    "postVisibility": "Sino ang makakakita sa iyong post?",
+    "profileVisibility": "Sino ang makakakita sa iyong profile?",
+    "searchFriends": "Maghanap ng mga Kaibigan!",
+    "searchHere": "Maghanap ng isang bagay dito...",
+    "whoCanFollow": "Sino ang makakasunod sa iyo?"
   }
 }
