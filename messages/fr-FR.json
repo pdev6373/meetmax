@@ -90,6 +90,7 @@
     "profileVisibility": "Qui peut voir votre profil ?",
     "searchFriends": "Recherchez des amis !",
     "searchHere": "Cherchez quelque chose ici...",
-    "whoCanFollow": "Qui peut vous suivre ?"
+    "whoCanFollow": "Qui peut vous suivre ?",
+    "currentPassword": "Mot de passe actuel"
   }
 }

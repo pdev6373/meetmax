@@ -373,7 +373,7 @@ export default function Post({
 
   const moreOptionsMe = [
     {
-      icon: "assets/delete.svg",
+      icon: "/assets/delete.svg",
       text: "Delete post",
       action: () => {
         setShowMoreOptions(false);
@@ -381,7 +381,7 @@ export default function Post({
       },
     },
     {
-      icon: "assets/edit.svg",
+      icon: "/assets/edit.svg",
       text: "Edit post",
       action: () => {
         setShowMoreOptions(false);

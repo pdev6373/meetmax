@@ -12,12 +12,14 @@ type MainLayoutType = {
   children: JSX.Element;
   locale: string;
   sidenavTexts: SidebarTextsType;
+  placeHolderText: string;
 };
 
 export default function MainLayout({
   children,
   locale,
   sidenavTexts,
+  placeHolderText,
 }: MainLayoutType) {
   const router = useRouter();
   const [showComponent, setShowComponent] = useState(false);
@@ -55,7 +57,7 @@ export default function MainLayout({
           <div className={styles.search}>
             <Search
               onChange={setSearch}
-              placeholder="Search for something here..."
+              placeholder={placeHolderText}
               value={search}
             />
           </div>

@@ -10,12 +10,14 @@ export default function PasswordAndSecurity() {
       forgotPasswordText={t("forgotPassword")}
       save={t("save")}
       retypePasswordText={t("retypePassword")}
-      errorText={t("anErrorOccurred")}
+      errorText={t("invalidOldPassword")}
       defaultError={t("required")}
       newPasswordText={t("newPassword")}
       confirmPasswordError={t("confirmPasswordError")}
       invalidOldPassword={t("invalidOldPassword")}
       passwordError={t("passwordError")}
+      currentPasswordText={t("currentPassword")}
+      successText={t("passwordChangedSuccess")}
     />
   );
 }

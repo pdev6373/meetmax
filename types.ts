@@ -381,3 +381,14 @@ export type MainLayoutType = {
     locale: string;
   };
 };
+
+export type ViewingAndSharingType = {
+  viewingAndSharing: string;
+  postVisibilityText: string;
+  profileVisibilityText: string;
+  whoCanFollow: string;
+  everyone: string;
+  followers: string;
+  onlyMe: string;
+  off: string;
+};

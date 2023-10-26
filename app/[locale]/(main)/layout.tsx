@@ -22,6 +22,7 @@ export default function MainLayout({
         cancelText: t("cancel"),
         logoutConfirmationText: t("confirmLogout"),
       }}
+      placeHolderText={t("searchHere")}
     />
   );
 }

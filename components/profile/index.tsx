@@ -388,6 +388,35 @@ export default function Profile({ id }: ProfileType) {
       </div>
     );
 
+  if (
+    (user?.profileVisibility === "me" && user?._id !== userDetails?._id) ||
+    (user?.profileVisibility === "followers" &&
+      !user?.followers?.some((follower) => follower === userDetails?._id))
+  )
+    return (
+      <div className={styles.profileNotVisible}>
+        <Image
+          src="/assets/no-profile.png"
+          alt="no post"
+          width={370}
+          height={246.5}
+          className={styles.noPostWeb}
+        />
+        <Image
+          src="/assets/no-profile.png"
+          alt="no post"
+          width={246.67}
+          height={164.3}
+          className={styles.noPostMobile}
+        />
+        {user.profileVisibility === "me" ? (
+          <p className={styles.noPost}>• Profile locked to everyone •</p>
+        ) : (
+          <p className={styles.noPost}>• Profile locked to non-followers •</p>
+        )}
+      </div>
+    );
+
   return (
     <>
       <Alert open={showAlert} setOpen={setShowAlert}>
@@ -432,14 +461,14 @@ export default function Profile({ id }: ProfileType) {
             {showProfileImage ? (
               <div className={styles.profileImageDisplay}>
                 <Image
-                  src={user?.profilePicture || "/assets/user.png"}
+                  src={user?.profilePicture || "/assets/no-profile.svg"}
                   alt="profile Image"
                   width={180}
                   height={180}
                   className={styles.profileDisplayWeb}
                 />
                 <Image
-                  src={user?.profilePicture || "/assets/user.png"}
+                  src={user?.profilePicture || "/assets/no-profile.svg"}
                   alt="profile Image"
                   width={120}
                   height={120}

@@ -6,13 +6,10 @@ import {
   Input,
   SettingsHeading,
   SettingsRouteText,
+  Text,
 } from "@/components";
-import Image from "next/image";
 import styles from "./index.module.css";
-import Link from "next/link";
-import { AuthContext } from "@/context/authContext";
 import { useAxios } from "@/hooks";
-import { useRouter } from "next/navigation";
 import useUserReq from "@/helpers/useUserReq";
 import { PasswordAndSecurity } from "@/types";
 
@@ -50,11 +47,11 @@ const devices = [
 export default function PasswordAndSecurity({
   changePasswordText,
   currentPasswordText,
-  errorText,
   forgotPasswordText,
   newPasswordText,
   retypePasswordText,
   save,
+  errorText,
   successText,
   confirmPasswordError,
   defaultError,
@@ -72,6 +69,10 @@ export default function PasswordAndSecurity({
   const [alertToggle, setAlertToggle] = useState(false);
   const [danger, setDanger] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [errorComponentToShow, setErrorComponentToShow] = useState<
+    "old-password" | "new-password" | "confirm-new-password" | null
+  >(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (!alertMessage) return;
@@ -81,6 +82,11 @@ export default function PasswordAndSecurity({
       clearTimeout(alertTimer);
     };
   }, [alertMessage, alertToggle]);
+
+  useEffect(() => {
+    setErrorComponentToShow(null);
+    setErrorMessage("");
+  }, [oldPassword, newPassword, confirmNewPassword]);
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
 
@@ -99,29 +105,66 @@ export default function PasswordAndSecurity({
   const changePasswordHandler = async (e: any) => {
     e?.preventDefault();
 
-    if (oldPassword.length < 8 || newPassword.length < 8) {
-      setAlertMessage("Password should be at least 8 characters");
-      toggleAlertHandler();
+    if (!oldPassword) {
+      setErrorComponentToShow("old-password");
+      setErrorMessage(defaultError);
+      return;
+    }
+
+    if (oldPassword.length < 8) {
+      setErrorComponentToShow("old-password");
+      setErrorMessage(passwordError);
+      return;
+    }
+
+    if (!newPassword) {
+      setErrorComponentToShow("new-password");
+      setErrorMessage(defaultError);
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      setErrorComponentToShow("new-password");
+      setErrorMessage(passwordError);
+      return;
+    }
+
+    if (!confirmNewPassword) {
+      setErrorComponentToShow("confirm-new-password");
+      setErrorMessage(defaultError);
+      return;
+    }
+
+    if (confirmNewPassword.length < 8) {
+      setErrorComponentToShow("confirm-new-password");
+      setErrorMessage(passwordError);
+      return;
+    }
+
+    if (confirmNewPassword.length < 8) {
+      setErrorComponentToShow("confirm-new-password");
+      setErrorMessage(passwordError);
       return;
     }
 
     if (newPassword !== confirmNewPassword) {
-      setAlertMessage("Password does not match");
-      toggleAlertHandler();
+      setErrorComponentToShow("confirm-new-password");
+      setErrorMessage(confirmPasswordError);
       return;
     }
 
     const response = await makeRequest(oldPassword, newPassword);
 
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
-
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(errorText);
+      toggleAlertHandler();
       return;
     }
 
     setDanger(false);
+    setAlertMessage(successText);
+    toggleAlertHandler();
   };
 
   return (
@@ -163,46 +206,61 @@ export default function PasswordAndSecurity({
         </section> */}
 
         <section className={styles.bottom}>
-          <SettingsHeading>Change Password</SettingsHeading>
+          <SettingsHeading>{changePasswordText}</SettingsHeading>
 
           <form className={styles.form} onSubmit={changePasswordHandler}>
             <div className={styles.formInputs}>
               <div className={styles.inputWrapper}>
-                <p className={styles.inputHeading}>Current Password</p>
+                <p className={styles.inputHeading}>{currentPasswordText}</p>
                 <Input
                   icon=""
                   onChange={setOldPassword}
                   placeholder=""
                   type="password"
                   value={oldPassword}
+                  errorComponent={
+                    errorComponentToShow === "old-password" ? (
+                      <Text type="error">{errorMessage}</Text>
+                    ) : null
+                  }
                 />
               </div>
 
               <div className={styles.inputWrapper}>
-                <p className={styles.inputHeading}>New Password</p>
+                <p className={styles.inputHeading}>{newPasswordText}</p>
                 <Input
                   icon=""
                   onChange={setNewPassword}
                   placeholder=""
                   type="password"
                   value={newPassword}
+                  errorComponent={
+                    errorComponentToShow === "new-password" ? (
+                      <Text type="error">{errorMessage}</Text>
+                    ) : null
+                  }
                 />
               </div>
 
               <div className={styles.inputWrapper}>
-                <p className={styles.inputHeading}>Re-type new Password</p>
+                <p className={styles.inputHeading}>{retypePasswordText}</p>
                 <Input
                   icon=""
                   onChange={setConfirmNewPassword}
                   placeholder=""
                   type="password"
                   value={confirmNewPassword}
+                  errorComponent={
+                    errorComponentToShow === "confirm-new-password" ? (
+                      <Text type="error">{errorMessage}</Text>
+                    ) : null
+                  }
                 />
               </div>
             </div>
 
             <p className={styles.forgotPassword} onClick={handleForgotPassword}>
-              Forgot Password?
+              {forgotPasswordText}
             </p>
 
             <div className={styles.buttonWrapper}>
@@ -213,7 +271,7 @@ export default function PasswordAndSecurity({
                 isLoading={loading}
                 variation="small"
               >
-                Save
+                {save}
               </Button>
             </div>
           </form>
