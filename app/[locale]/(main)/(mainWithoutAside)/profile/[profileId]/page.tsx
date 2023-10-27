@@ -28,6 +28,17 @@ export default function Profile(param: any) {
       noPostYet={t("noPostYet")}
       noPostYetFollower={t("noPostAvailable")}
       createPost={t("createAPost")}
+      makePostTexts={{
+        addPhoto: t("addPhoto"),
+        createAPost: t("createAPost"),
+        friends: t("friends"),
+        onlyMe: t("onlyMe"),
+        postText: t("post"),
+        public: t("public"),
+        visibleText: t("visibleFor"),
+        whatsHappening: t("whatsHappening"),
+        update: t("update"),
+      }}
     />
   );
 }

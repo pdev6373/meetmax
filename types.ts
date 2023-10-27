@@ -235,7 +235,7 @@ export type FetchType = {
 };
 
 export type ReactorsType = {
-  post: PostType;
+  post: PostDetailsType;
 };
 
 export type PostLikesType = {
@@ -281,6 +281,19 @@ export type PostType = {
   visibility: VisibilityType;
   _id: string;
   comments: PostCommentType[];
+  postTexts: PostTextsType;
+  makePostText: MakePostTextsType;
+};
+
+export type PostDetailsType = {
+  createdAt: string;
+  id: string;
+  images: string[];
+  likes: string[];
+  message: string;
+  visibility: VisibilityType;
+  _id: string;
+  comments: PostCommentType[];
 };
 
 export type CreatePostType = {
@@ -291,6 +304,7 @@ export type CreatePostType = {
   postId?: string;
   setPost?: any;
   profileId?: string;
+  texts: MakePostTextsType;
 };
 
 export type SwtichType = {
@@ -339,6 +353,8 @@ export type ProfileType = {
   noPostYet: string;
   noPostYetFollower: string;
   createPost: string;
+  postTexts: PostTextsType;
+  makePostTexts: MakePostTextsType;
 };
 
 export type UserType = {
@@ -414,4 +430,50 @@ export type ViewingAndSharingType = {
   followers: string;
   onlyMe: string;
   off: string;
+};
+
+export type MakePostTextsType = {
+  whatsHappening: string;
+  addPhoto: string;
+  postText: string;
+  createAPost: string;
+  visibleText: string;
+  friends: string;
+  public: string;
+  onlyMe: string;
+  update: string;
+};
+
+export type PostTextsType = {
+  friends: string;
+  public: string;
+  onlyMe: string;
+  deletePostText: string;
+  deletePostQuestion: string;
+  confirmDeletePost: string;
+  cancel: string;
+  deleteText: string;
+  editPost: string;
+  hidePost: string;
+  postHidden: string;
+  postHiddenDetails: string;
+  follow: string;
+  unfollow: string;
+  confirmUnfollow: string;
+  followSuccess: string;
+  unfollowSuccess: string;
+  error: string;
+  noComments: string;
+  comment: string;
+  comments: string;
+  like: string;
+  liked: string;
+  showComments: string;
+  showComment: string;
+  hideComment: string;
+  hideComments: string;
+  writeAComment: string;
+  reply: string;
+  you: string;
+  replyingTo: string;
 };

@@ -6,8 +6,15 @@ import styles from "./index.module.css";
 import { Alert, Button, CreatePost } from "..";
 import { AuthContext } from "@/context/authContext";
 import usePostReq from "@/helpers/usePostReq";
+import { MakePostTextsType } from "@/types";
 
-export default function MakePost({ profileId }: { profileId?: string }) {
+export default function MakePost({
+  profileId,
+  texts,
+}: {
+  profileId?: string;
+  texts: MakePostTextsType;
+}) {
   const {
     createPost: { loading, makeRequest },
   } = usePostReq();
@@ -26,7 +33,7 @@ export default function MakePost({ profileId }: { profileId?: string }) {
   const actions = [
     {
       icon: "/assets/picture.svg",
-      text: "Add Photo",
+      text: texts.addPhoto,
       action: () => {},
     },
   ];
@@ -70,6 +77,7 @@ export default function MakePost({ profileId }: { profileId?: string }) {
             onClose={setShowPostOptions}
             postText={text}
             profileId={profileId}
+            texts={texts}
           />
         )}
         <div className={styles.header}>
@@ -92,7 +100,7 @@ export default function MakePost({ profileId }: { profileId?: string }) {
             innerRef={editableRef}
             html={text.current}
             onChange={postTextHandler}
-            placeholder="What’s happening?"
+            placeholder={texts.whatsHappening}
             className={styles.input}
           />
         </div>
@@ -123,7 +131,7 @@ export default function MakePost({ profileId }: { profileId?: string }) {
             isLoading={loading}
             variation="small"
           >
-            Post
+            {texts.postText}
           </Button>
         </div>
       </div>

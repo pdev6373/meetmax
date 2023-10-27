@@ -3,7 +3,13 @@ import { useState, useEffect, useContext, useRef, lazy, Suspense } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import { Alert, CreatePost, Reactors } from "..";
-import { PostCommentType, PostReplyType, PostType, UserType } from "@/types";
+import {
+  PostCommentType,
+  PostDetailsType,
+  PostReplyType,
+  PostType,
+  UserType,
+} from "@/types";
 import { userInitialValues } from "@/constants";
 import { format } from "timeago.js";
 import { AuthContext } from "@/context/authContext";
@@ -29,6 +35,8 @@ export default function Post({
   visibility,
   _id,
   comments,
+  postTexts,
+  makePostText,
 }: PostType) {
   const text = useRef("");
   const commentText = useRef("");
@@ -84,7 +92,7 @@ export default function Post({
   );
   const [danger, setDanger] = useState(false);
 
-  const [post, setPost] = useState<PostType>({
+  const [post, setPost] = useState<PostDetailsType>({
     _id,
     createdAt,
     id,
@@ -187,11 +195,11 @@ export default function Post({
 
   const reactions = [
     {
-      name: "Like",
+      name: postTexts.like,
       icon: "/assets/like.svg",
     },
     {
-      name: "Comments",
+      name: postTexts.comments,
       icon: "/assets/comment.svg",
     },
   ];
@@ -354,12 +362,12 @@ export default function Post({
   const moreOptions = [
     {
       icon: "/assets/eyeoff.svg",
-      text: "Hide Post",
+      text: postTexts.hidePost,
       action: handleHidePost,
     },
     {
       icon: isFollowing ? "/assets/unfollow.svg" : "/assets/profile.svg",
-      text: isFollowing ? "Unfollow" : "Follow",
+      text: isFollowing ? postTexts.unfollow : postTexts.follow,
       action: () => {
         if (isFollowing) {
           setShowMoreOptions(false);
@@ -374,7 +382,7 @@ export default function Post({
   const moreOptionsMe = [
     {
       icon: "/assets/delete.svg",
-      text: "Delete post",
+      text: postTexts.deletePostText,
       action: () => {
         setShowMoreOptions(false);
         setPopupType("delete");
@@ -401,9 +409,9 @@ export default function Post({
         <div className={styles.hiddenPostMain}>
           <Image src="/assets/eyeoff.svg" alt="close" width={16} height={16} />
           <div>
-            <h3 className={styles.hiddenPostHeading}>Post Hidden</h3>
+            <h3 className={styles.hiddenPostHeading}>{postTexts.postHidden}</h3>
             <p className={styles.hiddenPostText}>
-              You won’t see this post in your Timeline.
+              {postTexts.postHiddenDetails}
             </p>
           </div>
         </div>
@@ -434,22 +442,22 @@ export default function Post({
             <div className={styles.unfollowWrapper}>
               <h2 className={styles.unfollowHeading}>
                 {popupType === "unfollow"
-                  ? `Unfollow ${user.lastname} ${user.firstname}`
-                  : "Delete Post?"}
+                  ? `${postTexts.unfollow} ${user.lastname} ${user.firstname}`
+                  : postTexts.deletePostQuestion}
               </h2>
               <p className={styles.unfollowText}>
                 {popupType === "unfollow"
-                  ? `You wont be able to see some of ${
-                      user.gender === "Male" ? "his" : "her"
-                    } posts once unfollowed.`
-                  : "Are you sure you want to delete this post?, This action cannot be reversed"}
+                  ? user.gender === "Male"
+                    ? postTexts.confirmUnfollow
+                    : postTexts.confirmUnfollow
+                  : postTexts.confirmDeletePost}
               </p>
               <div className={styles.unfollowActions}>
                 <button
                   className={styles.unfollowCancel}
                   onClick={handleClosePopup}
                 >
-                  Cancel
+                  {postTexts.cancel}
                 </button>
                 <button
                   className={styles.unfollowProceed}
@@ -468,7 +476,7 @@ export default function Post({
                         height={20}
                       />
                     ) : (
-                      "Unfollow"
+                      postTexts.unfollow
                     )
                   ) : deletingPost ? (
                     <Image
@@ -478,7 +486,7 @@ export default function Post({
                       height={20}
                     />
                   ) : (
-                    "Delete"
+                    postTexts.deleteText
                   )}
                 </button>
               </div>
@@ -498,6 +506,7 @@ export default function Post({
             type="edit"
             postId={post._id}
             setPost={setPost}
+            texts={makePostText}
           />
         )}
 
@@ -524,10 +533,10 @@ export default function Post({
                 >{`${user.lastname} ${user.firstname}`}</h3>
                 <p className={styles.time}>{`${format(post.createdAt)}. ${
                   post.visibility === "everyone"
-                    ? "Public"
+                    ? postTexts.public
                     : post.visibility === "followers"
-                    ? "Friends"
-                    : "Only me"
+                    ? postTexts.friends
+                    : postTexts.onlyMe
                 }`}</p>
               </div>
             </div>
@@ -563,14 +572,14 @@ export default function Post({
                         height={16}
                       />
                       <p className={styles.moreOptionText}>{option.text}</p>
-                      {option.text !== "Hide Post" && followingUser ? (
+                      {option.text !== postTexts.hidePost && followingUser ? (
                         <Image
                           src="/assets/spinner.svg"
                           alt="spinner"
                           width={20}
                           height={20}
                         />
-                      ) : option.text === "Hide Post" && hidingPost ? (
+                      ) : option.text === postTexts.hidePost && hidingPost ? (
                         <Image
                           src="/assets/spinner.svg"
                           alt="spinner"
@@ -634,9 +643,13 @@ export default function Post({
           <div className={styles.mainBottom}>
             {post?.likes?.length ? <Reactors post={post} /> : <></>}
             <div className={styles.bottomTexts}>
-              <p className={styles.bottomText}>{`${
-                post?.comments?.length || "No"
-              } ${post?.comments?.length === 1 ? "Comment" : "Comments"}`}</p>
+              <p className={styles.bottomText}>
+                {post?.comments?.length
+                  ? post?.comments?.length === 1
+                    ? `${post?.comments?.length} ${postTexts.comment}`
+                    : `${post?.comments?.length} ${postTexts.comments}`
+                  : postTexts.noComments}
+              </p>
             </div>
           </div>
         </div>
@@ -644,7 +657,7 @@ export default function Post({
         <div className={styles.reactions}>
           {reactions.map((reaction, index) => (
             <div className={styles.reaction} key={index}>
-              {reaction.name === "Like" ? (
+              {reaction.name === postTexts.like ? (
                 <>
                   {post?.likes?.includes(userDetails._id) ? (
                     <button
@@ -663,7 +676,7 @@ export default function Post({
                           styles.reactionNameReacted,
                         ].join(" ")}
                       >
-                        Liked
+                        {postTexts.liked}
                       </p>
                       {reactingToPost ? (
                         <Image
@@ -716,8 +729,18 @@ export default function Post({
                     height={16}
                   />
                   <p className={styles.reactionName}>{`${
-                    !openComments ? "Show" : "Hide"
-                  } ${reaction.name}`}</p>
+                    !openComments
+                      ? `${
+                          post?.comments?.length === 1
+                            ? postTexts.showComment
+                            : postTexts.showComments
+                        }`
+                      : `${
+                          post?.comments?.length === 1
+                            ? postTexts.hideComment
+                            : postTexts.hideComments
+                        }`
+                  }`}</p>
                 </button>
               ) : (
                 <></>
@@ -748,7 +771,7 @@ export default function Post({
                 innerRef={editableRef}
                 html={commentText.current}
                 onChange={postTextHandler}
-                placeholder="Write a comment..."
+                placeholder={postTexts.writeAComment}
                 className={styles.commentInput}
               />
 
@@ -896,9 +919,9 @@ export default function Post({
                                 height={20}
                               />
                             ) : comment.likes.includes(userDetails._id) ? (
-                              "Liked"
+                              postTexts.liked
                             ) : (
-                              "Like"
+                              postTexts.like
                             )}
                           </p>
                           <p
@@ -908,7 +931,7 @@ export default function Post({
                               setReplyToBeReplied(null);
                             }}
                           >
-                            Reply
+                            {postTexts.reply}
                           </p>
                         </div>
                       </div>
@@ -937,7 +960,9 @@ export default function Post({
                           <div className={styles.commentMainWrapper}>
                             <div className={styles.commentMain}>
                               <div className={styles.commentMainTop}>
-                                <p className={styles.commentName}>You</p>
+                                <p className={styles.commentName}>
+                                  {postTexts.you}
+                                </p>
 
                                 <div className={styles.commentMore}>
                                   <Image
@@ -952,7 +977,7 @@ export default function Post({
 
                               <div className={styles.commentReplyHeader}>
                                 <h3 className={styles.commentReplyHeading}>
-                                  {` Replying to ${commenter.lastname} ${commenter.firstname}`}
+                                  {`${postTexts.replyingTo} ${commenter.lastname} ${commenter.firstname}`}
                                 </h3>
                                 <p className={styles.commentReplyHeadingText}>
                                   {comment.message}
@@ -965,7 +990,7 @@ export default function Post({
                                     innerRef={replyEditableRef}
                                     html={replyText.current}
                                     onChange={replyTextHandler}
-                                    placeholder="Write a comment..."
+                                    placeholder={postTexts.writeAComment}
                                     className={styles.commentInput}
                                   />
                                 </div>
@@ -1056,7 +1081,7 @@ export default function Post({
                                       <h3
                                         className={styles.commentReplyHeading}
                                       >
-                                        {` Replying to ${reply.repliedComment.lastname} ${reply.repliedComment.firstname}`}
+                                        {`${postTexts.replyingTo} ${reply.repliedComment.lastname} ${reply.repliedComment.firstname}`}
                                       </h3>
                                       <p
                                         className={
@@ -1098,9 +1123,9 @@ export default function Post({
                                       ) : reply.likes.includes(
                                           userDetails._id
                                         ) ? (
-                                        "Liked"
+                                        postTexts.liked
                                       ) : (
-                                        "Like"
+                                        postTexts.like
                                       )}
                                     </p>
                                     <p
@@ -1115,7 +1140,7 @@ export default function Post({
                                         setCommentToBeReplied(null);
                                       }}
                                     >
-                                      Reply
+                                      {postTexts.reply}
                                     </p>
                                   </div>
                                 </div>
@@ -1144,7 +1169,7 @@ export default function Post({
                                     <div className={styles.commentMain}>
                                       <div className={styles.commentMainTop}>
                                         <p className={styles.commentName}>
-                                          You
+                                          {postTexts.you}
                                         </p>
 
                                         <div className={styles.commentMore}>
@@ -1166,7 +1191,7 @@ export default function Post({
                                         <h3
                                           className={styles.commentReplyHeading}
                                         >
-                                          {`Replying to ${replyToBeReplied.lastname} ${replyToBeReplied.firstname}`}
+                                          {`${postTexts.replyingTo} ${replyToBeReplied.lastname} ${replyToBeReplied.firstname}`}
                                         </h3>
                                         <p
                                           className={
@@ -1183,7 +1208,9 @@ export default function Post({
                                             innerRef={replyEditableRef}
                                             html={replyText.current}
                                             onChange={replyTextHandler}
-                                            placeholder="Write a comment..."
+                                            placeholder={
+                                              postTexts.writeAComment
+                                            }
                                             className={styles.commentInput}
                                           />
                                         </div>

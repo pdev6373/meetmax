@@ -50,6 +50,8 @@ export default function Profile({
   noPostYet,
   noPostYetFollower,
   createPost,
+  makePostTexts,
+  postTexts,
 }: ProfileType) {
   const {
     userDetails: { userDetails },
@@ -782,6 +784,8 @@ export default function Profile({
                     message={post.message}
                     visibility={post.visibility}
                     comments={post.comments}
+                    makePostText={makePostTexts}
+                    postTexts={postTexts}
                   />
                 ))
               ) : (

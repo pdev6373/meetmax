@@ -8,21 +8,6 @@ import usePostReq from "@/helpers/usePostReq";
 import styles from "./index.module.css";
 import { AuthContext } from "@/context/authContext";
 
-const postView: PostViewType[] = [
-  {
-    type: "Friends",
-    value: "followers",
-  },
-  {
-    type: "Public",
-    value: "everyone",
-  },
-  {
-    type: "Only me",
-    value: "me",
-  },
-];
-
 export default function CreatePost({
   onClose,
   postText,
@@ -31,6 +16,7 @@ export default function CreatePost({
   type = "new",
   setPost,
   profileId,
+  texts,
 }: CreatePostType) {
   const text = useRef<any>();
   const editableRef = useRef<any>();
@@ -43,6 +29,21 @@ export default function CreatePost({
       userDetails: { postVisibility },
     },
   } = useContext(AuthContext);
+
+  const postView: PostViewType[] = [
+    {
+      type: texts.friends as "Friends",
+      value: "followers",
+    },
+    {
+      type: texts.public as "Public",
+      value: "everyone",
+    },
+    {
+      type: texts.onlyMe as "Only me",
+      value: "me",
+    },
+  ];
   const [currentView, setCurrentView] = useState<PostViewType>(
     view
       ? postView.find((pView) => pView.value === view)!
@@ -143,11 +144,11 @@ export default function CreatePost({
                   height={16}
                 />
               </div>
-              <h3 className={styles.headingText}>Create a post</h3>
+              <h3 className={styles.headingText}>{texts.createAPost}</h3>
             </div>
 
             <div className={styles.headerMain}>
-              <p className={styles.visibleText}>Visible for</p>
+              <p className={styles.visibleText}>{texts.visibleText}</p>
 
               <div className={styles.currenShowOptionWrapper}>
                 <div
@@ -229,7 +230,7 @@ export default function CreatePost({
                 innerRef={editableRef}
                 html={text.current}
                 onChange={postTextHandler}
-                placeholder="What’s happening?"
+                placeholder={texts.whatsHappening}
                 className={styles.mainInput}
               />
             </div>
@@ -348,7 +349,7 @@ export default function CreatePost({
                     width={16}
                     height={16}
                   />
-                  <p className={styles.imageUploadText}>Add Photo</p>
+                  <p className={styles.imageUploadText}>{texts.addPhoto}</p>
                 </label>
               ) : (
                 <div></div>
@@ -372,7 +373,7 @@ export default function CreatePost({
                 onClick={handlePost}
                 variation="small"
               >
-                {type === "new" ? "Post" : "Update"}
+                {type === "new" ? texts.postText : texts.update}
               </Button>
             </div>
           </div>

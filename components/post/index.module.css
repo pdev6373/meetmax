@@ -345,7 +345,7 @@
   align-items: center;
   gap: 18px;
   text-align: center;
-  width: min(100%, 256px);
+  min-width: min(100%, 256px);
 }
 
 .unfollowHeading {
@@ -368,7 +368,7 @@
   gap: 18px;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 198px;
+  /* max-width: 198px; */
 }
 
 .unfollowActions > * {
