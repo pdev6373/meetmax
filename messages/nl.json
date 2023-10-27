@@ -145,6 +145,20 @@
     "unfollowedYou": "Heb je ontvolgd",
     "update": "Update",
     "writeAComment": "Schrijf een reactie...",
-    "you": "Jij"
+    "you": "Jij",
+    "commentSuccess": "Reactie succesvol toegevoegd",
+    "confirmUnfollowMale": "Je zult sommige van zijn berichten niet meer kunnen zien als je ze niet meer volgt.",
+    "connectWithOthers": "Maak contact met anderen",
+    "editPost": "Bericht bewerken",
+    "facebookLink": "Facebook-link",
+    "followSuccess": "Gebruiker succesvol gevolgd",
+    "imageSize": "Afbeeldingsgrootte",
+    "instagramLink": "Instagram-link",
+    "linkedinLink": "LinkedIn-link",
+    "postDeleteSuccess": "Bericht succesvol verwijderd",
+    "sendMessage": "Bericht versturen",
+    "twitterLink": "Twitter-link",
+    "unfollowSuccess": "Gebruiker is succesvol ontvolgd",
+    "websiteLink": "Website link"
   }
 }

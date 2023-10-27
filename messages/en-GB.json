@@ -145,6 +145,20 @@
     "unfollowedYou": "Unfollowed you",
     "update": "Update",
     "writeAComment": "Write a comment...",
-    "you": "You"
+    "you": "You",
+    "commentSuccess": "Comment added successfully",
+    "confirmUnfollowMale": "You wont be able to see some of his posts once unfollowed.",
+    "connectWithOthers": "Connect with others",
+    "editPost": "Edit post",
+    "facebookLink": "Facebook link",
+    "followSuccess": "User followed successfully",
+    "imageSize": "Image size",
+    "instagramLink": "Instagram link",
+    "linkedinLink": "LinkedIn link",
+    "postDeleteSuccess": "Post deleted successfully",
+    "sendMessage": "Send message",
+    "twitterLink": "Twitter link",
+    "unfollowSuccess": "User unfollowed successfully",
+    "websiteLink": "Website link"
   }
 }

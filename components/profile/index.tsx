@@ -50,8 +50,12 @@ export default function Profile({
   noPostYet,
   noPostYetFollower,
   createPost,
+  imageSize,
   makePostTexts,
   postTexts,
+  error,
+  postFailed,
+  postSuccess,
 }: ProfileType) {
   const {
     userDetails: { userDetails },
@@ -201,7 +205,7 @@ export default function Profile({
 
     const response = await uploadCoverPicture(image);
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(error);
       toggleAlertHandler();
       return;
     }
@@ -220,7 +224,7 @@ export default function Profile({
   const getProfilePostsHandler = async (id: string) => {
     const response = await getProfilePosts(id);
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(error);
       toggleAlertHandler();
       return;
     }
@@ -297,7 +301,7 @@ export default function Profile({
     const response = await unfollowUser(id);
 
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(error);
       toggleAlertHandler();
       return;
     }
@@ -311,7 +315,7 @@ export default function Profile({
     const response = await followUser(id);
 
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(error);
       toggleAlertHandler();
       return;
     }
@@ -415,9 +419,10 @@ export default function Profile({
     );
 
   if (
-    (user?.profileVisibility === "me" && user?._id !== userDetails?._id) ||
-    (user?.profileVisibility === "followers" &&
-      !user?.followers?.some((follower) => follower === userDetails?._id))
+    !(userDetails?._id === user?._id && !id) &&
+    ((user?.profileVisibility === "me" && user?._id !== userDetails?._id) ||
+      (user?.profileVisibility === "followers" &&
+        !user?.followers?.some((follower) => follower === userDetails?._id)))
   )
     return (
       <div className={styles.profileNotVisible}>
@@ -541,7 +546,7 @@ export default function Profile({
                   ) : (
                     <div className={styles.rangeWrapper}>
                       <input
-                        title="image size"
+                        title={imageSize}
                         min={0}
                         max={150}
                         type="range"
@@ -786,6 +791,8 @@ export default function Profile({
                     comments={post.comments}
                     makePostText={makePostTexts}
                     postTexts={postTexts}
+                    postFailed={postFailed}
+                    postSuccess={postSuccess}
                   />
                 ))
               ) : (

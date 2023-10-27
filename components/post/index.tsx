@@ -17,6 +17,7 @@ import useUserReq from "@/helpers/useUserReq";
 import usePostReq from "@/helpers/usePostReq";
 import ContentEditable from "react-contenteditable";
 import data from "@emoji-mart/data";
+import Link from "next/link";
 const EmojiPicker = lazy(() => import("@emoji-mart/react"));
 
 type ReplyToBeRepliedType = {
@@ -37,6 +38,8 @@ export default function Post({
   comments,
   postTexts,
   makePostText,
+  postFailed,
+  postSuccess,
 }: PostType) {
   const text = useRef("");
   const commentText = useRef("");
@@ -129,7 +132,7 @@ export default function Post({
 
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(postTexts.error);
       toggleAlertHandler();
       return;
     }
@@ -150,8 +153,8 @@ export default function Post({
     const response = await getSomeUsers(repliers);
 
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
       setDanger(true);
+      setAlertMessage(postTexts.error);
       toggleAlertHandler();
       return;
     }
@@ -167,7 +170,7 @@ export default function Post({
 
       if (!response?.success || !response?.data?.success) {
         setDanger(true);
-        setAlertMessage(response?.data?.message);
+        setAlertMessage(postTexts.error);
         toggleAlertHandler();
         return;
       }
@@ -210,15 +213,16 @@ export default function Post({
   const handleDeletePost = async () => {
     const response = await deletePost(post._id);
 
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
-
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(postTexts.error);
+      toggleAlertHandler();
       return;
     }
 
     setDanger(false);
+    setAlertMessage(postTexts.postDeleteSuccess);
+    toggleAlertHandler();
     setShowMoreOptions(false);
     setPopupType(null);
   };
@@ -226,27 +230,30 @@ export default function Post({
     const response = await followUser(user._id);
     setShowMoreOptions(false);
 
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
-
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(postTexts.error);
+      toggleAlertHandler();
       return;
     }
 
     setDanger(false);
+    setAlertMessage(postTexts.followSuccess);
+    toggleAlertHandler();
   };
   const handleUnfollowUser = async () => {
     const response = await unfollowUser(user._id);
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
 
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(postTexts.error);
+      toggleAlertHandler();
       return;
     }
 
     setDanger(false);
+    setAlertMessage(postTexts.unfollowSuccess);
+    toggleAlertHandler();
     setShowMoreOptions(false);
     setPopupType(null);
   };
@@ -256,7 +263,7 @@ export default function Post({
     setShowMoreOptions(false);
 
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(postTexts.error);
       toggleAlertHandler();
 
       setDanger(true);
@@ -272,7 +279,7 @@ export default function Post({
 
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(postTexts.error);
       toggleAlertHandler();
       return;
     }
@@ -285,7 +292,7 @@ export default function Post({
     const response = await reactToComment(post._id, commentId);
 
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(postTexts.error);
       toggleAlertHandler();
       setDanger(true);
       return;
@@ -299,7 +306,7 @@ export default function Post({
     const response = await reactToReply(post._id, commentId, replyId);
 
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(postTexts.error);
       toggleAlertHandler();
       setDanger(true);
       return;
@@ -313,15 +320,16 @@ export default function Post({
     if (!commentText.current) return;
     const response = await commentOnPost(post._id, commentText);
 
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
-
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(postTexts.error);
+      toggleAlertHandler();
       return;
     }
 
     setDanger(false);
+    setAlertMessage(postTexts.commentSuccess);
+    toggleAlertHandler();
     setPost(response?.data?.data);
   };
   const handleReplyCommentOnPost = async (
@@ -342,7 +350,7 @@ export default function Post({
 
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(postTexts.error);
       toggleAlertHandler();
       return;
     }
@@ -390,7 +398,7 @@ export default function Post({
     },
     {
       icon: "/assets/edit.svg",
-      text: "Edit post",
+      text: postTexts.editPost,
       action: () => {
         setShowMoreOptions(false);
         text.current = message;
@@ -448,7 +456,7 @@ export default function Post({
               <p className={styles.unfollowText}>
                 {popupType === "unfollow"
                   ? user.gender === "Male"
-                    ? postTexts.confirmUnfollow
+                    ? postTexts.confirmUnfollowMale
                     : postTexts.confirmUnfollow
                   : postTexts.confirmDeletePost}
               </p>
@@ -507,6 +515,8 @@ export default function Post({
             postId={post._id}
             setPost={setPost}
             texts={makePostText}
+            postFailed={postFailed}
+            postSuccess={postSuccess}
           />
         )}
 
@@ -527,6 +537,7 @@ export default function Post({
                 height={50}
                 className={styles.posterImageWeb}
               />
+
               <div>
                 <h3
                   className={styles.name}
@@ -556,41 +567,48 @@ export default function Post({
 
               {showMoreOptions ? (
                 <div className={styles.moreOptionsWrapper}>
-                  {toBeMapped.map((option, index) => (
-                    <div
-                      className={[
-                        styles.moreOption,
-                        !index && styles.moreOptionFirst,
-                      ].join(" ")}
-                      onClick={option.action}
-                      key={index}
-                    >
-                      <Image
-                        src={option.icon}
-                        alt="action"
-                        width={16}
-                        height={16}
-                      />
-                      <p className={styles.moreOptionText}>{option.text}</p>
-                      {option.text !== postTexts.hidePost && followingUser ? (
+                  {toBeMapped
+                    .filter(
+                      (item) =>
+                        item.icon !== "/assets/profile.svg" ||
+                        user?.canBefollowed
+                    )
+                    .map((option, index, array) => (
+                      <div
+                        className={[
+                          styles.moreOption,
+                          !index && styles.moreOptionFirst,
+                          array.length === 1 && styles.moreOptionOne,
+                        ].join(" ")}
+                        onClick={option.action}
+                        key={index}
+                      >
                         <Image
-                          src="/assets/spinner.svg"
-                          alt="spinner"
-                          width={20}
-                          height={20}
+                          src={option.icon}
+                          alt="action"
+                          width={16}
+                          height={16}
                         />
-                      ) : option.text === postTexts.hidePost && hidingPost ? (
-                        <Image
-                          src="/assets/spinner.svg"
-                          alt="spinner"
-                          width={20}
-                          height={20}
-                        />
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  ))}
+                        <p className={styles.moreOptionText}>{option.text}</p>
+                        {option.text !== postTexts.hidePost && followingUser ? (
+                          <Image
+                            src="/assets/spinner.svg"
+                            alt="spinner"
+                            width={20}
+                            height={20}
+                          />
+                        ) : option.text === postTexts.hidePost && hidingPost ? (
+                          <Image
+                            src="/assets/spinner.svg"
+                            alt="spinner"
+                            width={20}
+                            height={20}
+                          />
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    ))}
                 </div>
               ) : (
                 <></>

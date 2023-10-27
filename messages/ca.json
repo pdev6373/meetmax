@@ -145,6 +145,20 @@
     "unfollowedYou": "T'ha deixat de seguir",
     "update": "Actualització",
     "writeAComment": "Escriu un comentari...",
-    "you": "Vostè"
+    "you": "Vostè",
+    "commentSuccess": "Comentari afegit correctament",
+    "confirmUnfollowMale": "No podreu veure algunes de les seves publicacions un cop no seguiu.",
+    "connectWithOthers": "Connecta amb els altres",
+    "editPost": "Edita la publicació",
+    "facebookLink": "Enllaç de Facebook",
+    "followSuccess": "L'usuari ha seguit correctament",
+    "imageSize": "Mida de la imatge",
+    "instagramLink": "Enllaç d'Instagram",
+    "linkedinLink": "Enllaç a LinkedIn",
+    "postDeleteSuccess": "La publicació s'ha suprimit correctament",
+    "sendMessage": "Enviar missatge",
+    "twitterLink": "Enllaç a Twitter",
+    "unfollowSuccess": "L'usuari ha deixat de seguir correctament",
+    "websiteLink": "Enllaç al lloc web"
   }
 }

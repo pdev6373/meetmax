@@ -136,17 +136,30 @@
     "showComments": "Show Comments",
     "showComment": "Show Comment",
     "writeAComment": "Write a comment...",
+    "editPost": "Edit post",
+    "confirmUnfollowMale": "You wont be able to see some of his posts once unfollowed.",
+    "commentAdded": "Comment added successfully",
+    "commentSuccess": "Comment added successfully",
+    "save": "Save",
+    "postDeleteSuccess": "Post deleted successfully",
+    "followSuccess": "User followed successfully",
+    "unfollowSuccess": "User unfollowed successfully",
+    "connectWithOthers": "Connect with others",
+    "facebookLink": "Facebook link",
+    "instagramLink": "Instagram link",
+    "linkedinLink": "LinkedIn link",
+    "sendMessage": "Send message",
+    "twitterLink": "Twitter link",
+    "websiteLink": "Website link",
+    "imageSize": "Image size",
 
     "markAsRead": "Mark as read",
     "nobodyFollowing": "No Following",
-
-    "commentAdded": "Comment added successfully",
     "commented": "Commented on your photo.",
     "followBack": "Follow Back",
     "followed": "Followed",
     "followedYou": "Followed you",
     "repliedYou": "Replied you",
-    "save": "Save",
     "unfollowedYou": "Unfollowed you"
   }
 }

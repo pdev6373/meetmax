@@ -13,9 +13,18 @@ import { MakePostTextsType, PostTextsType } from "@/types";
 type PostsType = {
   makePostText: MakePostTextsType;
   postTexts: PostTextsType;
+  postError: string;
+  postFailed: string;
+  postSuccess: string;
 };
 
-export default function Posts({ makePostText, postTexts }: PostsType) {
+export default function Posts({
+  makePostText,
+  postTexts,
+  postError,
+  postFailed,
+  postSuccess,
+}: PostsType) {
   const {
     getPosts: { loading, makeRequest },
   } = usePostReq();
@@ -45,7 +54,7 @@ export default function Posts({ makePostText, postTexts }: PostsType) {
       setFetching(false);
 
       if (!response?.success || !response?.data?.success) {
-        setAlertMessage(response?.data?.message);
+        setAlertMessage(postError);
         toggleAlertHandler();
         return;
       }
@@ -89,7 +98,11 @@ export default function Posts({ makePostText, postTexts }: PostsType) {
         </div>
 
         <div className={styles.makePostWrapper}>
-          <MakePost texts={makePostText} />
+          <MakePost
+            texts={makePostText}
+            postFailed={postFailed}
+            postSuccess={postSuccess}
+          />
         </div>
 
         {posts?.map((post) => (
@@ -104,6 +117,8 @@ export default function Posts({ makePostText, postTexts }: PostsType) {
             comments={post.comments}
             postTexts={postTexts}
             makePostText={makePostText}
+            postFailed={postFailed}
+            postSuccess={postSuccess}
           />
         ))}
 

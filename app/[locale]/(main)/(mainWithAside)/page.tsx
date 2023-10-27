@@ -44,16 +44,13 @@ export default function Home() {
         noComments: t("noComments"),
         like: t("like"),
         follow: t("follow"),
-
         error: t("anErrorOccurred"),
-
-        editPost: "",
-        followSuccess: "",
-        unfollowSuccess: "",
-        // deleteSuccess: t(""),
-        // commentSuccess: t("showComments"),
-
-        // confirmUnfollowMale: t("confirmUnfollow"),
+        editPost: t("editPost"),
+        unfollowSuccess: t("unfollowSuccess"),
+        followSuccess: t("followSuccess"),
+        postDeleteSuccess: t("postDeleteSuccess"),
+        commentSuccess: t("commentSuccess"),
+        confirmUnfollowMale: t("confirmUnfollowMale"),
       }}
     />
   );

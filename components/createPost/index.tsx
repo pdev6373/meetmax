@@ -7,6 +7,7 @@ import { Alert, Button } from "..";
 import usePostReq from "@/helpers/usePostReq";
 import styles from "./index.module.css";
 import { AuthContext } from "@/context/authContext";
+import Link from "next/link";
 
 export default function CreatePost({
   onClose,
@@ -17,6 +18,8 @@ export default function CreatePost({
   setPost,
   profileId,
   texts,
+  postSuccess,
+  postFailed,
 }: CreatePostType) {
   const text = useRef<any>();
   const editableRef = useRef<any>();
@@ -26,7 +29,7 @@ export default function CreatePost({
   } = usePostReq();
   const {
     userDetails: {
-      userDetails: { postVisibility },
+      userDetails: { postVisibility, profilePicture },
     },
   } = useContext(AuthContext);
 
@@ -112,15 +115,16 @@ export default function CreatePost({
     const response =
       type === "new" ? await makeRequest(payload) : await updatePost(payload);
 
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
-
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(postFailed);
+      toggleAlertHandler();
       return;
     }
 
     setDanger(false);
+    setAlertMessage(postSuccess);
+    toggleAlertHandler();
     setPost && setPost(response?.data?.data);
     handleClose();
   };
@@ -212,20 +216,23 @@ export default function CreatePost({
 
           <div className={styles.mainContainer}>
             <div className={styles.mainContent}>
-              <Image
-                src="/assets/user.png"
-                alt="user"
-                width={32}
-                height={32}
-                className={styles.postUser}
-              />
-              <Image
-                src="/assets/user.png"
-                alt="user"
-                width={42}
-                height={42}
-                className={styles.postUserWeb}
-              />
+              <Link href="/profile">
+                <Image
+                  src={profilePicture || "/assets/no-profile.svg"}
+                  alt="user"
+                  width={32}
+                  height={32}
+                  className={styles.postUser}
+                />
+                <Image
+                  src={profilePicture || "/assets/no-profile.svg"}
+                  alt="user"
+                  width={42}
+                  height={42}
+                  className={styles.postUserWeb}
+                />
+              </Link>
+
               <ContentEditable
                 innerRef={editableRef}
                 html={text.current}

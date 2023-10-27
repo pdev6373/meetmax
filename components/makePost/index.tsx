@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useContext, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import ContentEditable from "react-contenteditable";
 import styles from "./index.module.css";
 import { Alert, Button, CreatePost } from "..";
@@ -11,9 +12,13 @@ import { MakePostTextsType } from "@/types";
 export default function MakePost({
   profileId,
   texts,
+  postFailed,
+  postSuccess,
 }: {
   profileId?: string;
   texts: MakePostTextsType;
+  postFailed: string;
+  postSuccess: string;
 }) {
   const {
     createPost: { loading, makeRequest },
@@ -55,15 +60,18 @@ export default function MakePost({
   const handlePost = async () => {
     if (!text.current) return;
     const response = await makeRequest({ message: text, profileId });
-    setAlertMessage(response?.data?.message);
-    toggleAlertHandler();
 
     if (!response?.success || !response?.data?.success) {
       setDanger(true);
+      setAlertMessage(postFailed);
+      toggleAlertHandler();
+
       return;
     }
 
     setDanger(false);
+    setAlertMessage(postSuccess);
+    toggleAlertHandler();
   };
 
   return (
@@ -78,23 +86,27 @@ export default function MakePost({
             postText={text}
             profileId={profileId}
             texts={texts}
+            postFailed={postFailed}
+            postSuccess={postSuccess}
           />
         )}
         <div className={styles.header}>
-          <Image
-            src={userDetails?.profilePicture || "/assets/no-profile.svg"}
-            alt="user"
-            width={32}
-            height={32}
-            className={styles.userMobile}
-          />
-          <Image
-            src={userDetails?.profilePicture || "/assets/no-profile.svg"}
-            alt="user"
-            width={42}
-            height={42}
-            className={styles.userDesktop}
-          />
+          <Link href="/profile">
+            <Image
+              src={userDetails?.profilePicture || "/assets/no-profile.svg"}
+              alt="user"
+              width={32}
+              height={32}
+              className={styles.userMobile}
+            />
+            <Image
+              src={userDetails?.profilePicture || "/assets/no-profile.svg"}
+              alt="user"
+              width={42}
+              height={42}
+              className={styles.userDesktop}
+            />
+          </Link>
 
           <ContentEditable
             innerRef={editableRef}

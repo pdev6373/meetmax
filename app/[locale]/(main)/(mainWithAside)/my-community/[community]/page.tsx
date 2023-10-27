@@ -13,6 +13,12 @@ export default function Community({
       follow={t("follow")}
       noFollower={t("noFollower")}
       noFollowing={t("noFollowing")}
+      connectWithOthers={t("connectWithOthers")}
+      facebookLink={t("facebookLink")}
+      instagramLink={t("instagramLink")}
+      linkedinLink={t("linkedinLink")}
+      twitterLink={t("twitterLink")}
+      websiteLink={t("websiteLink")}
       locale={locale}
     />
   );

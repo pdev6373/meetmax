@@ -145,6 +145,20 @@
     "unfollowedYou": "Har ikke fulgt dig",
     "update": "Opdatering",
     "writeAComment": "Skriv en kommentar...",
-    "you": "Du"
+    "you": "Du",
+    "commentSuccess": "Kommentar tilføjet",
+    "confirmUnfollowMale": "Du vil ikke være i stand til at se nogle af hans indlæg, når de ikke er fulgt.",
+    "connectWithOthers": "Forbind med andre",
+    "editPost": "Rediger indlæg",
+    "facebookLink": "Facebook link",
+    "followSuccess": "Bruger fulgte med succes",
+    "imageSize": "Billedestørrelse",
+    "instagramLink": "Instagram link",
+    "linkedinLink": "LinkedIn link",
+    "postDeleteSuccess": "Indlægget blev slettet",
+    "sendMessage": "Send besked",
+    "twitterLink": "Twitter link",
+    "unfollowSuccess": "Brugeren blev afsluttet",
+    "websiteLink": "Website link"
   }
 }

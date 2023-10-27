@@ -14,6 +14,8 @@ export default function ViewingAndSharing() {
       whoCanFollow={t("whoCanFollow")}
       postVisibilityText={t("postVisibility")}
       profileVisibilityText={t("profileVisibility")}
+
+      // updateEror=""
     />
   );
 }

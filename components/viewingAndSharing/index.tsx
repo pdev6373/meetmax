@@ -41,6 +41,7 @@ export default function ViewingAndSharing({
   profileVisibilityText,
   viewingAndSharing,
   whoCanFollow,
+  updateEror,
 }: ViewingAndSharingType) {
   const [currentLoading, setCurrentLoading] =
     useState<CurrentLoadingType>("post");
@@ -194,7 +195,7 @@ export default function ViewingAndSharing({
 
     const response = await makeRequest(payload);
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(updateEror);
       toggleAlertHandler();
       return;
     }

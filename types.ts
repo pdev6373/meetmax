@@ -283,6 +283,8 @@ export type PostType = {
   comments: PostCommentType[];
   postTexts: PostTextsType;
   makePostText: MakePostTextsType;
+  postFailed: string;
+  postSuccess: string;
 };
 
 export type PostDetailsType = {
@@ -305,6 +307,8 @@ export type CreatePostType = {
   setPost?: any;
   profileId?: string;
   texts: MakePostTextsType;
+  postSuccess: string;
+  postFailed: string;
 };
 
 export type SwtichType = {
@@ -334,9 +338,12 @@ export type ProfileType = {
   editCoverPhoto: string;
   editPhoto: string;
   chooseAnImage: string;
+  error: string;
   save: string;
   editBasicInfo: string;
   intro: string;
+  postFailed: string;
+  postSuccess: string;
   male: string;
   female: string;
   born: string;
@@ -347,6 +354,7 @@ export type ProfileType = {
   facebook: string;
   twitter: string;
   instagram: string;
+  imageSize: string;
   linkedin: string;
   follow: string;
   unfollow: string;
@@ -430,6 +438,7 @@ export type ViewingAndSharingType = {
   followers: string;
   onlyMe: string;
   off: string;
+  updateEror: string;
 };
 
 export type MakePostTextsType = {
@@ -476,4 +485,7 @@ export type PostTextsType = {
   reply: string;
   you: string;
   replyingTo: string;
+  postDeleteSuccess: string;
+  commentSuccess: string;
+  confirmUnfollowMale: string;
 };

@@ -145,6 +145,20 @@
     "unfollowedYou": "Отписался от тебя",
     "update": "Обновлять",
     "writeAComment": "Написать комментарий...",
-    "you": "Ты"
+    "you": "Ты",
+    "commentSuccess": "Комментарий успешно добавлен",
+    "confirmUnfollowMale": "Вы не сможете увидеть некоторые из его публикаций, если от них откажетесь.",
+    "connectWithOthers": "Общайтесь с другими",
+    "editPost": "Редактировать пост",
+    "facebookLink": "ссылка на фейсбук",
+    "followSuccess": "Пользователь успешно подписан",
+    "imageSize": "Размер изображения",
+    "instagramLink": "ссылка на инстаграм",
+    "linkedinLink": "ссылка на линкедин",
+    "postDeleteSuccess": "Сообщение успешно удалено",
+    "sendMessage": "Отправить сообщение",
+    "twitterLink": "ссылка на Твиттер",
+    "unfollowSuccess": "Пользователь успешно отписался",
+    "websiteLink": "Ссылка на сайт"
   }
 }

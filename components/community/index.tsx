@@ -17,6 +17,13 @@ type CommunityType = {
   locale: string;
   noFollower: string;
   noFollowing: string;
+  connectWithOthers: string;
+  websiteLink: string;
+  twitterLink: string;
+  instagramLink: string;
+  linkedinLink: string;
+  facebookLink: string;
+  error: string;
 };
 
 export default function Community({
@@ -25,6 +32,13 @@ export default function Community({
   locale,
   noFollower,
   noFollowing,
+  connectWithOthers,
+  facebookLink,
+  instagramLink,
+  linkedinLink,
+  twitterLink,
+  websiteLink,
+  error,
 }: CommunityType) {
   const pathname = usePathname();
   const {
@@ -38,6 +52,7 @@ export default function Community({
   const [fetchingCommunity, setFetchingCommunity] = useState(true);
   const [toBeHidden, setToBeHidden] = useState("");
   const [hidden, setHidden] = useState<string[]>([]);
+  const [fetching, setFetching] = useState(false);
   const router = useRouter();
 
   const fetchCommunity = async (
@@ -45,12 +60,15 @@ export default function Community({
     showGlobalLoading: boolean
   ) => {
     setFetchingCommunity(showGlobalLoading);
+    setFetching(true);
     const response = await fetchData({
       url: `/user/${type}/${userDetails._id}`,
       method: "GET",
     });
+
+    setFetching(false);
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(error);
       toggleAlertHandler();
       return;
     }
@@ -66,7 +84,7 @@ export default function Community({
     });
 
     if (!response?.success || !response?.data?.success) {
-      setAlertMessage(response?.data?.message);
+      setAlertMessage(error);
       toggleAlertHandler();
       return;
     }
@@ -119,7 +137,7 @@ export default function Community({
       });
 
       if (!response?.success || !response?.data?.success) {
-        setAlertMessage(response?.data?.message);
+        setAlertMessage(error);
         toggleAlertHandler();
         return;
       }
@@ -131,7 +149,7 @@ export default function Community({
     })();
   };
 
-  if (loading && fetchingCommunity)
+  if ((loading && fetchingCommunity) || fetching)
     return (
       <div className={styles.loader}>
         <Image src="/assets/spinner.svg" alt="loading" width={40} height={40} />
@@ -223,7 +241,7 @@ export default function Community({
                             target="_blank"
                             href={user.website}
                             className={styles.socialLink}
-                            title="website link"
+                            title={websiteLink}
                           >
                             <Image
                               src="/assets/explore.svg"
@@ -240,7 +258,7 @@ export default function Community({
                             target="_blank"
                             href={user.socialLinks.facebook}
                             className={styles.socialLink}
-                            title="facebook link"
+                            title={facebookLink}
                           >
                             <Image
                               src="/assets/facebook.svg"
@@ -257,7 +275,7 @@ export default function Community({
                             target="_blank"
                             href={user.socialLinks.twitter}
                             className={styles.socialLink}
-                            title="twitter link"
+                            title={twitterLink}
                           >
                             <Image
                               src="/assets/twitter.svg"
@@ -274,7 +292,7 @@ export default function Community({
                             target="_blank"
                             href={user.socialLinks.instagram}
                             className={styles.socialLink}
-                            title="instagram link"
+                            title={instagramLink}
                           >
                             <Image
                               src="/assets/instagram.svg"
@@ -291,7 +309,7 @@ export default function Community({
                             target="_blank"
                             href={user.socialLinks.linkedin}
                             className={styles.socialLink}
-                            title="linkedin link"
+                            title={linkedinLink}
                           >
                             <Image
                               src="/assets/linkedin.svg"
@@ -375,7 +393,7 @@ export default function Community({
                 onClick={() => router.push("/my-community/recommended")}
                 variation="small"
               >
-                Connect with others
+                {connectWithOthers}
               </Button>
             </div>
           ) : (

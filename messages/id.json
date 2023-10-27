@@ -145,6 +145,20 @@
     "unfollowedYou": "Berhenti mengikuti Anda",
     "update": "Memperbarui",
     "writeAComment": "Tulis komen...",
-    "you": "Anda"
+    "you": "Anda",
+    "commentSuccess": "Komentar berhasil ditambahkan",
+    "confirmUnfollowMale": "Anda tidak akan dapat melihat beberapa postingannya setelah berhenti diikuti.",
+    "connectWithOthers": "Terhubung dengan orang lain",
+    "editPost": "Sunting postingan",
+    "facebookLink": "Tautan Facebook",
+    "followSuccess": "Pengguna berhasil mengikuti",
+    "imageSize": "Ukuran gambar",
+    "instagramLink": "Tautan Instagram",
+    "linkedinLink": "Tautan LinkedIn",
+    "postDeleteSuccess": "Postingan berhasil dihapus",
+    "sendMessage": "Mengirim pesan",
+    "twitterLink": "Tautan Twitter",
+    "unfollowSuccess": "Pengguna berhasil berhenti mengikuti",
+    "websiteLink": "Tautan situs web"
   }
 }

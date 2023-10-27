@@ -145,6 +145,20 @@
     "unfollowedYou": "Het jou ontvolg",
     "update": "Opdateer",
     "writeAComment": "Skryf 'n opmerking...",
-    "you": "Jy"
+    "you": "Jy",
+    "commentSuccess": "Opmerking suksesvol bygevoeg",
+    "confirmUnfollowMale": "Jy sal nie sommige van sy plasings kan sien sodra dit nie gevolg is nie.",
+    "connectWithOthers": "Verbind met ander",
+    "editPost": "Wysig plasing",
+    "facebookLink": "Facebook skakel",
+    "followSuccess": "Gebruiker is suksesvol gevolg",
+    "imageSize": "Beeld grootte",
+    "instagramLink": "Instagram skakel",
+    "linkedinLink": "LinkedIn skakel",
+    "postDeleteSuccess": "Plasing is suksesvol uitgevee",
+    "sendMessage": "Stuur boodskap",
+    "twitterLink": "Twitter skakel",
+    "unfollowSuccess": "Gebruiker is suksesvol ontvolg",
+    "websiteLink": "Webwerf skakel"
   }
 }

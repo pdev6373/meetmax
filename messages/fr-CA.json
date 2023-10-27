@@ -145,6 +145,20 @@
     "unfollowedYou": "Ne vous suit plus",
     "update": "Mise à jour",
     "writeAComment": "Écrire un commentaire...",
-    "you": "Toi"
+    "you": "Toi",
+    "commentSuccess": "Commentaire ajouté avec succès",
+    "confirmUnfollowMale": "Vous ne pourrez plus voir certains de ses messages une fois que vous ne serez plus suivi.",
+    "connectWithOthers": "Connectez-vous avec les autres",
+    "editPost": "Modifier le message",
+    "facebookLink": "Lien Facebook",
+    "followSuccess": "Utilisateur suivi avec succès",
+    "imageSize": "Taille de l'image",
+    "instagramLink": "Lien Instagram",
+    "linkedinLink": "Lien LinkedIn",
+    "postDeleteSuccess": "Message supprimé avec succès",
+    "sendMessage": "Envoyer le message",
+    "twitterLink": "Lien Twitter",
+    "unfollowSuccess": "L'utilisateur n'a plus été suivi avec succès",
+    "websiteLink": "Lien de site Web"
   }
 }

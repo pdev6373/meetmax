@@ -145,6 +145,20 @@
     "unfollowedYou": "Hat dir entfolgt",
     "update": "Aktualisieren",
     "writeAComment": "Schreibe einen Kommentar...",
-    "you": "Du"
+    "you": "Du",
+    "commentSuccess": "Kommentar erfolgreich hinzugefügt",
+    "confirmUnfollowMale": "Einige seiner Beiträge werden Ihnen nicht mehr angezeigt, wenn Sie ihnen nicht mehr folgen.",
+    "connectWithOthers": "Verbinde dich mit anderen",
+    "editPost": "Beitrag bearbeiten",
+    "facebookLink": "Facebook-Link",
+    "followSuccess": "Der Benutzer folgte erfolgreich",
+    "imageSize": "Bildgröße",
+    "instagramLink": "Instagram-Link",
+    "linkedinLink": "LinkedIn-Link",
+    "postDeleteSuccess": "Beitrag erfolgreich gelöscht",
+    "sendMessage": "Nachricht senden",
+    "twitterLink": "Twitter-Link",
+    "unfollowSuccess": "Dem Benutzer wurde die Verfolgung erfolgreich entzogen",
+    "websiteLink": "Website-Link"
   }
 }

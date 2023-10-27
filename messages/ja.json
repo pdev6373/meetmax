@@ -145,6 +145,20 @@
     "unfollowedYou": "あなたをフォロー解除しました",
     "update": "アップデート",
     "writeAComment": "コメントを書く...",
-    "you": "あなた"
+    "you": "あなた",
+    "commentSuccess": "コメントが正常に追加されました",
+    "confirmUnfollowMale": "フォローを解除すると、彼の投稿の一部は表示されなくなります。",
+    "connectWithOthers": "他の人とつながる",
+    "editPost": "投稿を編集する",
+    "facebookLink": "フェイスブックリンク",
+    "followSuccess": "ユーザーは正常にフォローされました",
+    "imageSize": "画像サイズ",
+    "instagramLink": "インスタグラムへのリンク",
+    "linkedinLink": "LinkedIn リンク",
+    "postDeleteSuccess": "投稿は正常に削除されました",
+    "sendMessage": "メッセージを送る",
+    "twitterLink": "ツイッターリンク",
+    "unfollowSuccess": "ユーザーのフォローが正常に解除されました",
+    "websiteLink": "ウェブサイトへのリンク"
   }
 }

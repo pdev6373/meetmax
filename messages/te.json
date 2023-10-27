@@ -145,6 +145,20 @@
     "unfollowedYou": "మిమ్మల్ని అనుసరించలేదు",
     "update": "నవీకరించు",
     "writeAComment": "వ్యాఖ్య రాయండి...",
-    "you": "మీరు"
+    "you": "మీరు",
+    "commentSuccess": "వ్యాఖ్య విజయవంతంగా జోడించబడింది",
+    "confirmUnfollowMale": "మీరు అతని కొన్ని పోస్ట్‌లను ఒకసారి అనుసరించకుండా చూడలేరు.",
+    "connectWithOthers": "ఇతరులతో కనెక్ట్ అవ్వండి",
+    "editPost": "పోస్ట్‌ని సవరించండి",
+    "facebookLink": "Facebook లింక్",
+    "followSuccess": "వినియోగదారు విజయవంతంగా అనుసరించారు",
+    "imageSize": "చిత్ర పరిమాణం",
+    "instagramLink": "Instagram లింక్",
+    "linkedinLink": "లింక్డ్ఇన్ లింక్",
+    "postDeleteSuccess": "పోస్ట్ విజయవంతంగా తొలగించబడింది",
+    "sendMessage": "సందేశము పంపుము",
+    "twitterLink": "ట్విట్టర్ లింక్",
+    "unfollowSuccess": "వినియోగదారు విజయవంతంగా అనుసరించడం తీసివేయబడ్డారు",
+    "websiteLink": "వెబ్‌సైట్ లింక్"
   }
 }

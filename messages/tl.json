@@ -145,6 +145,20 @@
     "unfollowedYou": "Na-unfollow ka",
     "update": "Update",
     "writeAComment": "Magsulat ng komento...",
-    "you": "Ikaw"
+    "you": "Ikaw",
+    "commentSuccess": "Matagumpay na naidagdag ang komento",
+    "confirmUnfollowMale": "Hindi mo makikita ang ilan sa kanyang mga post kapag na-unfollow mo na.",
+    "connectWithOthers": "Kumonekta sa iba",
+    "editPost": "I-edit ang post",
+    "facebookLink": "Link sa Facebook",
+    "followSuccess": "Matagumpay na nasundan ng user",
+    "imageSize": "Laki ng larawan",
+    "instagramLink": "Link sa Instagram",
+    "linkedinLink": "Link sa LinkedIn",
+    "postDeleteSuccess": "Matagumpay na natanggal ang post",
+    "sendMessage": "Magpadala ng Mensahe",
+    "twitterLink": "Link sa Twitter",
+    "unfollowSuccess": "Matagumpay na na-unfollow ang user",
+    "websiteLink": "Link ng website"
   }
 }

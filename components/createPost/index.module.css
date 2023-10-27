@@ -166,6 +166,8 @@
 .postUser,
 .postUserWeb {
   display: none;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .viewDropdownWeb {

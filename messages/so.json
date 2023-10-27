@@ -145,6 +145,20 @@
     "unfollowedYou": "Kuma raacin",
     "update": "Cusbooneysii",
     "writeAComment": "Faallo qor...",
-    "you": "Adiga"
+    "you": "Adiga",
+    "commentSuccess": "Faallo ayaa lagu daray si guul leh",
+    "confirmUnfollowMale": "Ma awoodi doontid inaad aragto qaar ka mid ah qoraalladiisa mar aan la raacin.",
+    "connectWithOthers": "Ku xidhnow kuwa kale",
+    "editPost": "Wax ka beddel boostada",
+    "facebookLink": "Xiriirinta Facebook",
+    "followSuccess": "Isticmaaluhu wuxuu raacay si guul leh",
+    "imageSize": "Cabbirka sawirka",
+    "instagramLink": "Isku xirka Instagram",
+    "linkedinLink": "Isku xirka LinkedIn",
+    "postDeleteSuccess": "Boostada waa la tirtiray si guul leh",
+    "sendMessage": "Fariin dir",
+    "twitterLink": "Xiriirinta Twitter",
+    "unfollowSuccess": "Isticmaalaha si guul leh ayaa loo raaci waayay",
+    "websiteLink": "Isku xirka shabakada"
   }
 }
