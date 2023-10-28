@@ -32,11 +32,11 @@ export default function Sidenav({ locale, texts }: SidenavType) {
     //   route: "/messages",
     //   icon: "/assets/message.svg",
     // },
-    {
-      name: texts.notificationText,
-      route: "/notification",
-      icon: "/assets/notification.svg",
-    },
+    // {
+    //   name: texts.notificationText,
+    //   route: "/notification",
+    //   icon: "/assets/notification.svg",
+    // },
     // {
     //   name: "Explore",
     //   route: "/explore",

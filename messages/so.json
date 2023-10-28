@@ -159,6 +159,12 @@
     "sendMessage": "Fariin dir",
     "twitterLink": "Xiriirinta Twitter",
     "unfollowSuccess": "Isticmaalaha si guul leh ayaa loo raaci waayay",
-    "websiteLink": "Isku xirka shabakada"
+    "websiteLink": "Isku xirka shabakada",
+    "lockedToEveryone": "Profile qof walba wuu quful",
+    "lockedToNonFollowers": "Xogta lagu quful kuwa aan raacsanayn",
+    "postError": "Khalad ayaa dhacay markii la helayay qoraallada",
+    "postFailed": "Ku guuldareystay in lagu daro boostada",
+    "postSuccess": "Boostada ayaa lagu daray si guul leh",
+    "updateEror": "Cusboonaysiinta bogga waa guul daraystay"
   }
 }

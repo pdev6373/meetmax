@@ -7,6 +7,7 @@ import styles from "./index.module.css";
 import Link from "next/link";
 import { AuthContext } from "@/context/authContext";
 import { SidebarTextsType } from "@/types";
+import { GeneralContext } from "@/context/generalContext";
 
 type MainLayoutType = {
   children: JSX.Element;
@@ -25,11 +26,14 @@ export default function MainLayout({
 }: MainLayoutType) {
   const router = useRouter();
   const [showComponent, setShowComponent] = useState(false);
-  const [search, setSearch] = useState("");
   const {
     accessToken: { accessToken },
     userDetails: { userDetails },
   } = useContext(AuthContext);
+  const {
+    fields: { search },
+    setFields: { setSearch },
+  } = useContext(GeneralContext);
 
   useEffect(() => {
     if (!accessToken) {
@@ -48,13 +52,15 @@ export default function MainLayout({
 
       <div className={styles.body}>
         <header className={styles.header}>
-          <Image
-            src={userDetails?.profilePicture || "/assets/no-profile.svg"}
-            alt="profile picture"
-            width={32}
-            height={32}
-            className={styles.profileMobile}
-          />
+          <Link href="/profile" className={styles.profileImageWrapper}>
+            <Image
+              src={userDetails?.profilePicture || "/assets/no-profile.svg"}
+              alt="profile picture"
+              width={32}
+              height={32}
+              className={styles.profileMobile}
+            />
+          </Link>
 
           <div className={styles.search}>
             <Search
@@ -71,7 +77,7 @@ export default function MainLayout({
             />
           </div>
 
-          <Link href="/messages" className={styles.messageIconWrapper}>
+          {/* <Link href="/messages" className={styles.messageIconWrapper}>
             <Image
               src="/assets/message.svg"
               alt="message"
@@ -87,9 +93,9 @@ export default function MainLayout({
               height={24}
               className={styles.messageDesktop}
             />
-          </Link>
+          </Link> */}
 
-          <div className={styles.profile}>
+          <Link href="/profile" className={styles.profile}>
             <p
               className={styles.profileName}
             >{`${userDetails.lastname} ${userDetails.firstname}`}</p>
@@ -100,7 +106,7 @@ export default function MainLayout({
               width={42}
               height={42}
             />
-          </div>
+          </Link>
         </header>
 
         <main className={styles.main}>{children}</main>

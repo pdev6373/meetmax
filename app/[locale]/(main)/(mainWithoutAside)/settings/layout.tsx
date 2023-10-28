@@ -1,6 +1,12 @@
 import { SettingsLayout as SettingsLayoutComponent } from "@/components";
 import { MainLayoutType } from "@/types";
 import { useTranslations } from "next-intl";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Meetmax - Settings",
+  description: "Manage your preferences and account settings here.",
+};
 
 export default function SettingsLayout({
   children,

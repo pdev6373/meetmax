@@ -159,6 +159,12 @@
     "sendMessage": "Enviar mensaje",
     "twitterLink": "enlace de Twitter",
     "unfollowSuccess": "El usuario dejó de seguir con éxito",
-    "websiteLink": "Enlace de página web"
+    "websiteLink": "Enlace de página web",
+    "lockedToEveryone": "Perfil bloqueado para todos",
+    "lockedToNonFollowers": "Perfil bloqueado para no seguidores",
+    "postError": "Se produjo un error al obtener publicaciones.",
+    "postFailed": "No se pudo agregar la publicación",
+    "postSuccess": "Publicación agregada exitosamente",
+    "updateEror": "Error al actualizar el perfil"
   }
 }

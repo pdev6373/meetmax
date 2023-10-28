@@ -16,7 +16,12 @@
   justify-content: space-between;
 }
 
-.sideNavList:nth-child(3),
+/* .sideNavList:nth-child(3),
+.sideNavList:last-child {
+  display: none;
+} */
+
+/* .sideNavList:nth-child(3), */
 .sideNavList:last-child {
   display: none;
 }

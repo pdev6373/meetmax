@@ -159,6 +159,12 @@
     "sendMessage": "Nachricht senden",
     "twitterLink": "Twitter-Link",
     "unfollowSuccess": "Dem Benutzer wurde die Verfolgung erfolgreich entzogen",
-    "websiteLink": "Website-Link"
+    "websiteLink": "Website-Link",
+    "lockedToEveryone": "Profil für alle gesperrt",
+    "lockedToNonFollowers": "Profil für Nicht-Follower gesperrt",
+    "postError": "Beim Abrufen der Beiträge ist ein Fehler aufgetreten",
+    "postFailed": "Beitrag konnte nicht hinzugefügt werden",
+    "postSuccess": "Beitrag erfolgreich hinzugefügt",
+    "updateEror": "Profilaktualisierung fehlgeschlagen"
   }
 }

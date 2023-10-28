@@ -363,6 +363,8 @@ export type ProfileType = {
   createPost: string;
   postTexts: PostTextsType;
   makePostTexts: MakePostTextsType;
+  lockedToEveryone: string;
+  lockedToNonfollowers: string;
 };
 
 export type UserType = {

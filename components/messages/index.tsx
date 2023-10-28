@@ -3,7 +3,7 @@ import { Search } from "..";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./index.module.css";
-import { ALL_FRIENDS as MESSAGES } from "@/constants";
+// import { ALL_FRIENDS as MESSAGES } from "@/constants";
 
 export default function Messages() {
   return (
@@ -13,7 +13,7 @@ export default function Messages() {
       </div>
 
       <div>
-        {MESSAGES.map((message, index) => (
+        {/* {MESSAGES.map((message, index) => (
           <Link href="/messages/id" className={styles.message} key={index}>
             <div className={styles.messageMain}>
               <Image src={message.image} alt="friend" width={40} height={40} />
@@ -33,7 +33,7 @@ export default function Messages() {
               <p className={styles.messageNo}>1</p>
             </div>
           </Link>
-        ))}
+        ))} */}
       </div>
     </section>
   );

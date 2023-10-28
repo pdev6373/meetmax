@@ -10,6 +10,7 @@ import { useAxiosPrivate } from "@/hooks";
 import { Alert, Button } from "..";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { GeneralContext } from "@/context/generalContext";
 
 type CommunityType = {
   unfollow: string;
@@ -44,6 +45,10 @@ export default function Community({
   const {
     userDetails: { userDetails, setUserDetails },
   } = useContext(AuthContext);
+  const {
+    fields: { search },
+    setFields: { setRefetchToggle },
+  } = useContext(GeneralContext);
   const { fetchData, loading } = useAxiosPrivate();
   const [community, setCommunity] = useState<UserType[]>([]);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
@@ -72,8 +77,10 @@ export default function Community({
       toggleAlertHandler();
       return;
     }
+
     setHidden([]);
     setAlertMessage("");
+    if (type === "followers") setRefetchToggle((prev) => !prev);
     setCommunity(response.data.data);
   };
 
@@ -167,6 +174,21 @@ export default function Community({
             ?.filter(
               (user) =>
                 !hidden.includes(user._id) || pathname === "/my-community"
+            )
+            ?.filter(
+              (user) =>
+                user?.lastname
+                  ?.toLowerCase()
+                  ?.trim()
+                  ?.includes(search?.toLowerCase()?.trim()) ||
+                user?.firstname
+                  ?.toLowerCase()
+                  ?.trim()
+                  ?.includes(search?.toLowerCase()?.trim()) ||
+                user?.bio
+                  ?.toLowerCase()
+                  ?.trim()
+                  ?.includes(search?.toLowerCase()?.trim())
             )
             ?.map((user, index, array) => (
               <div
@@ -384,7 +406,9 @@ export default function Community({
           <p className={styles.noPost}>{`${
             pathname === `/${locale}/my-community`
               ? `• ${noFollower} •`
-              : `• ${noFollowing} •`
+              : pathname === `/${locale}/my-community/following`
+              ? `• ${noFollowing} •`
+              : ""
           }`}</p>
           {pathname === `/${locale}/my-community/following` ? (
             <div className={styles.viewRecommended}>

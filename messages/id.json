@@ -159,6 +159,12 @@
     "sendMessage": "Mengirim pesan",
     "twitterLink": "Tautan Twitter",
     "unfollowSuccess": "Pengguna berhasil berhenti mengikuti",
-    "websiteLink": "Tautan situs web"
+    "websiteLink": "Tautan situs web",
+    "lockedToEveryone": "Profil dikunci untuk semua orang",
+    "lockedToNonFollowers": "Profil dikunci untuk non-pengikut",
+    "postError": "Terjadi kesalahan saat mengambil postingan",
+    "postFailed": "Gagal menambahkan postingan",
+    "postSuccess": "Postingan berhasil ditambahkan",
+    "updateEror": "Pembaruan profil gagal"
   }
 }

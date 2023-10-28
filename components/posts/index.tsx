@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useContext } from "react";
 import { Alert, Birthdays, MakePost, Post } from "@/components";
-import { ALL_FRIENDS } from "@/constants";
 import styles from "./index.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,6 +8,7 @@ import usePostReq from "@/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
 import { usePathname } from "next/navigation";
 import { MakePostTextsType, PostTextsType } from "@/types";
+import { GeneralContext } from "@/context/generalContext";
 
 type PostsType = {
   makePostText: MakePostTextsType;
@@ -31,6 +31,9 @@ export default function Posts({
   const {
     fields: { posts },
   } = useContext(PostContext);
+  const {
+    fields: { search },
+  } = useContext(GeneralContext);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -76,7 +79,7 @@ export default function Posts({
       </Alert>
       <div className={styles.wrapper}>
         <div className={styles.onlineFriends}>
-          {ALL_FRIENDS.map((friend, index) => (
+          {/* {ALL_FRIENDS.map((friend, index) => (
             <Link href="" className={styles.onlineFriend} key={index}>
               <div className={styles.friendImageWrapper}>
                 <Image
@@ -94,7 +97,7 @@ export default function Posts({
                   : friend.firstname.split(" ")[0]}
               </p>
             </Link>
-          ))}
+          ))} */}
         </div>
 
         <div className={styles.makePostWrapper}>
@@ -105,22 +108,29 @@ export default function Posts({
           />
         </div>
 
-        {posts?.map((post) => (
-          <Post
-            createdAt={post.createdAt}
-            id={post.id}
-            _id={post._id}
-            images={post.images}
-            likes={post.likes}
-            message={post.message}
-            visibility={post.visibility}
-            comments={post.comments}
-            postTexts={postTexts}
-            makePostText={makePostText}
-            postFailed={postFailed}
-            postSuccess={postSuccess}
-          />
-        ))}
+        {posts
+          ?.filter((post) =>
+            post?.message
+              ?.toLowerCase()
+              ?.trim()
+              ?.includes(search?.toLowerCase()?.trim())
+          )
+          ?.map((post) => (
+            <Post
+              createdAt={post.createdAt}
+              id={post.id}
+              _id={post._id}
+              images={post.images}
+              likes={post.likes}
+              message={post.message}
+              visibility={post.visibility}
+              comments={post.comments}
+              postTexts={postTexts}
+              makePostText={makePostText}
+              postFailed={postFailed}
+              postSuccess={postSuccess}
+            />
+          ))}
 
         {/* <RecentEvent /> */}
         {/* <Birthdays /> */}

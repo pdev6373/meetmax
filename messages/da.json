@@ -159,6 +159,12 @@
     "sendMessage": "Send besked",
     "twitterLink": "Twitter link",
     "unfollowSuccess": "Brugeren blev afsluttet",
-    "websiteLink": "Website link"
+    "websiteLink": "Website link",
+    "lockedToEveryone": "Profil låst til alle",
+    "lockedToNonFollowers": "Profil låst til ikke-følgere",
+    "postError": "Der opstod en fejl under hentning af indlæg",
+    "postFailed": "Kunne ikke tilføje indlæg",
+    "postSuccess": "Indlægget blev tilføjet",
+    "updateEror": "Profilopdatering mislykkedes"
   }
 }

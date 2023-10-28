@@ -1,5 +1,12 @@
 import { Profile as ProfileComponent } from "@/components";
 import { useTranslations } from "next-intl";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Meetmax - Profile",
+  description: "Your digital identity hub. Customize, share, and connect.",
+};
+
 export default function Profile(param: any) {
   const t = useTranslations("Index");
 
@@ -76,6 +83,11 @@ export default function Profile(param: any) {
         commentSuccess: t("commentSuccess"),
         confirmUnfollowMale: t("confirmUnfollowMale"),
       }}
+      error={t("anErrorOccurred")}
+      postFailed={t("postFailed")}
+      postSuccess={t("postSuccess")}
+      lockedToEveryone={t("lockedToEveryone")}
+      lockedToNonfollowers={t("lockedToNonFollowers")}
     />
   );
 }

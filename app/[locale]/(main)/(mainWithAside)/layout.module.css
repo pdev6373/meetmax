@@ -45,7 +45,7 @@
   }
 }
 
-@media (min-width: 1350px) {
+@media (min-width: 1250px) {
   .aside {
     display: block;
     position: sticky;

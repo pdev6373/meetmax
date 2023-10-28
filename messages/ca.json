@@ -159,6 +159,12 @@
     "sendMessage": "Enviar missatge",
     "twitterLink": "Enllaç a Twitter",
     "unfollowSuccess": "L'usuari ha deixat de seguir correctament",
-    "websiteLink": "Enllaç al lloc web"
+    "websiteLink": "Enllaç al lloc web",
+    "lockedToEveryone": "Perfil bloquejat per a tothom",
+    "lockedToNonFollowers": "Perfil bloquejat per a no seguidors",
+    "postError": "S'ha produït un error en rebre publicacions",
+    "postFailed": "No s'ha pogut afegir la publicació",
+    "postSuccess": "Publicació s'ha afegit correctament",
+    "updateEror": "L'actualització del perfil ha fallat"
   }
 }

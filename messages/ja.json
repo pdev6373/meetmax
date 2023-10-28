@@ -159,6 +159,12 @@
     "sendMessage": "メッセージを送る",
     "twitterLink": "ツイッターリンク",
     "unfollowSuccess": "ユーザーのフォローが正常に解除されました",
-    "websiteLink": "ウェブサイトへのリンク"
+    "websiteLink": "ウェブサイトへのリンク",
+    "lockedToEveryone": "プロフィールは全員にロックされています",
+    "lockedToNonFollowers": "プロフィールはフォロワー以外にロックされています",
+    "postError": "投稿の取得中にエラーが発生しました",
+    "postFailed": "投稿の追加に失敗しました",
+    "postSuccess": "投稿が正常に追加されました",
+    "updateEror": "プロファイルの更新に失敗しました"
   }
 }

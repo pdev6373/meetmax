@@ -50,6 +50,13 @@
   justify-content: space-between;
   align-items: center;
   gap: 30px;
+  padding: 6px 10px;
+  transition: background-color 0.15s ease-in;
+  border-radius: 6px;
+}
+
+.friend:hover {
+  background-color: #4e5d78;
 }
 
 .friendDetails {
@@ -127,4 +134,36 @@
   font-weight: 500;
   line-height: 24px;
   color: #edeff1;
+}
+
+.profileWrapper {
+  position: relative;
+}
+
+.profileLock {
+  position: absolute;
+  bottom: 0;
+  right: -4px;
+  background: #212833;
+  box-shadow: 3px -5px 35px 0px #333e521a;
+  padding: 4px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.friendImage {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 500px) {
+  .friend {
+    border-radius: 10px;
+  }
 }

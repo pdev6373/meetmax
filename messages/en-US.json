@@ -152,6 +152,12 @@
     "twitterLink": "Twitter link",
     "websiteLink": "Website link",
     "imageSize": "Image size",
+    "postError": "An error occurred while getting posts",
+    "postFailed": "Failed to add post",
+    "postSuccess": "Post added successfully",
+    "updateEror": "Profrienfile update failed",
+    "lockedToEveryone": "Profile locked to everyone",
+    "lockedToNonFollowers": "Profile locked to non-followers",
 
     "markAsRead": "Mark as read",
     "nobodyFollowing": "No Following",

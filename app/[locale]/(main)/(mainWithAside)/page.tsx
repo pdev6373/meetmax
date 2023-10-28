@@ -1,5 +1,12 @@
 import { Posts } from "@/components";
 import { useTranslations } from "next-intl";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Meetmax - Feed",
+  description:
+    "Stay in the loop with our dynamic feed. Get the latest updates, posts, and news from your network.",
+};
 
 export default function Home() {
   const t = useTranslations("Index");
@@ -52,6 +59,9 @@ export default function Home() {
         commentSuccess: t("commentSuccess"),
         confirmUnfollowMale: t("confirmUnfollowMale"),
       }}
+      postError={t("postError")}
+      postFailed={t("postFailed")}
+      postSuccess={t("postSuccess")}
     />
   );
 }

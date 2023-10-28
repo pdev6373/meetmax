@@ -1,24 +1,36 @@
 "use client";
-import { useState } from "react";
-import { Friends, OnlineFriends, Search } from "..";
+import { useContext, useState } from "react";
+import { Friends, Search } from "..";
 import styles from "./index.module.css";
+import { GeneralContext } from "@/context/generalContext";
 
-export default function Aside() {
-  const [search, setSearch] = useState("");
+export default function Aside({
+  friendsText,
+  searchFriendsText,
+  error,
+}: {
+  friendsText: string;
+  searchFriendsText: string;
+  error: string;
+}) {
+  const {
+    fields: { friendsSearch },
+    setFields: { setFriendsSearch },
+  } = useContext(GeneralContext);
 
   return (
     <aside className={styles.aside}>
       <div className={styles.paddingRight}>
         <Search
-          placeholder="Search Friends!"
-          onChange={setSearch}
-          value={search}
+          placeholder={searchFriendsText}
+          onChange={setFriendsSearch}
+          value={friendsSearch}
         />
       </div>
       {/* <div className={styles.paddingRight}>
         <OnlineFriends />
       </div> */}
-      <Friends />
+      <Friends error={error} friendsText={friendsText} value={friendsSearch} />
     </aside>
   );
 }

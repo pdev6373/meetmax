@@ -159,6 +159,12 @@
     "sendMessage": "Envoyer le message",
     "twitterLink": "Lien Twitter",
     "unfollowSuccess": "L'utilisateur n'a plus été suivi avec succès",
-    "websiteLink": "Lien de site Web"
+    "websiteLink": "Lien de site Web",
+    "lockedToEveryone": "Profil verrouillé pour tout le monde",
+    "lockedToNonFollowers": "Profil verrouillé aux non-abonnés",
+    "postError": "Une erreur s'est produite lors de la réception des messages",
+    "postFailed": "Échec de l'ajout du message",
+    "postSuccess": "Message ajouté avec succès",
+    "updateEror": "Échec de la mise à jour du profil"
   }
 }

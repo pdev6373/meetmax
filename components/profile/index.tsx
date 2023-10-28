@@ -14,6 +14,7 @@ import { PostContext } from "@/context/postContext";
 import { userInitialValues } from "@/constants";
 import { usePathname, useRouter } from "next/navigation";
 import format from "date-fns/format";
+import { GeneralContext } from "@/context/generalContext";
 
 const convertToFile = async (
   dataUrl: string,
@@ -56,6 +57,8 @@ export default function Profile({
   error,
   postFailed,
   postSuccess,
+  lockedToEveryone,
+  lockedToNonfollowers,
 }: ProfileType) {
   const {
     userDetails: { userDetails },
@@ -63,6 +66,9 @@ export default function Profile({
   const {
     fields: { posts },
   } = useContext(PostContext);
+  const {
+    fields: { search },
+  } = useContext(GeneralContext);
   const {
     uploadProfilePicture: { loading, makeRequest },
     uploadCoverPicture: {
@@ -441,9 +447,9 @@ export default function Profile({
           className={styles.noPostMobile}
         />
         {user.profileVisibility === "me" ? (
-          <p className={styles.noPost}>• Profile locked to everyone •</p>
+          <p className={styles.noPost}>• {lockedToEveryone} •</p>
         ) : (
-          <p className={styles.noPost}>• Profile locked to non-followers •</p>
+          <p className={styles.noPost}>• {lockedToNonfollowers} •</p>
         )}
       </div>
     );
@@ -779,22 +785,29 @@ export default function Profile({
               {/* <MakePost profileId={id} /> */}
 
               {posts?.length ? (
-                posts?.map((post) => (
-                  <Post
-                    createdAt={post.createdAt}
-                    id={post.id}
-                    _id={post._id}
-                    images={post.images}
-                    likes={post.likes}
-                    message={post.message}
-                    visibility={post.visibility}
-                    comments={post.comments}
-                    makePostText={makePostTexts}
-                    postTexts={postTexts}
-                    postFailed={postFailed}
-                    postSuccess={postSuccess}
-                  />
-                ))
+                posts
+                  ?.filter((post) =>
+                    post?.message
+                      ?.toLowerCase()
+                      ?.trim()
+                      ?.includes(search?.toLowerCase()?.trim())
+                  )
+                  ?.map((post) => (
+                    <Post
+                      createdAt={post.createdAt}
+                      id={post.id}
+                      _id={post._id}
+                      images={post.images}
+                      likes={post.likes}
+                      message={post.message}
+                      visibility={post.visibility}
+                      comments={post.comments}
+                      makePostText={makePostTexts}
+                      postTexts={postTexts}
+                      postFailed={postFailed}
+                      postSuccess={postSuccess}
+                    />
+                  ))
               ) : (
                 <div className={styles.noPostWrapper}>
                   <Image

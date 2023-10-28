@@ -159,6 +159,12 @@
     "sendMessage": "Magpadala ng Mensahe",
     "twitterLink": "Link sa Twitter",
     "unfollowSuccess": "Matagumpay na na-unfollow ang user",
-    "websiteLink": "Link ng website"
+    "websiteLink": "Link ng website",
+    "lockedToEveryone": "Naka-lock ang profile sa lahat",
+    "lockedToNonFollowers": "Naka-lock ang profile sa mga hindi tagasubaybay",
+    "postError": "Nagkaroon ng error habang kumukuha ng mga post",
+    "postFailed": "Nabigong magdagdag ng post",
+    "postSuccess": "Matagumpay na naidagdag ang post",
+    "updateEror": "Nabigo ang pag-update ng profile"
   }
 }

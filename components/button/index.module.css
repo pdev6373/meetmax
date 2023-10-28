@@ -28,17 +28,26 @@
   color: #edeff1; /** 10% **/
 }
 
+.submitButton,
+.submitButtonSmall {
+  background-color: #377dff;
+  transition: background-color 0.12s ease-in;
+}
+
 .submitButton {
   padding: 9px;
   border-radius: 5.64px;
-  background: #377dff;
   width: 100%;
 }
 
 .submitButtonSmall {
   border-radius: 6px;
-  background: #377dff;
   padding: 8px 28px;
+}
+
+.submitButton:hover,
+.submitButtonSmall:hover {
+  background-color: rgb(96, 152, 255);
 }
 
 .submitButtonText {

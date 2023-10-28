@@ -19,6 +19,7 @@ export default function Community({
       linkedinLink={t("linkedinLink")}
       twitterLink={t("twitterLink")}
       websiteLink={t("websiteLink")}
+      error={t("anErrorOccurred")}
       locale={locale}
     />
   );
