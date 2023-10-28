@@ -54,7 +54,7 @@ export default function SignupForm({
 
   useEffect(() => {
     resetFields();
-  }, []);
+  }, [resetFields]);
 
   useEffect(() => {
     setErrorComponentToShow(null);

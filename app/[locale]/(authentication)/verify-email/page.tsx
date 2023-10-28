@@ -24,7 +24,7 @@ export default function ResetPassword({ searchParams }: any) {
     }
 
     setMakeRequest(true);
-  }, [searchParams]);
+  }, [searchParams, replace]);
 
   useEffect(() => {
     if (!alertMessage) return;
@@ -38,7 +38,7 @@ export default function ResetPassword({ searchParams }: any) {
     return () => {
       clearTimeout(alertTimer);
     };
-  }, [alertMessage, alertToggle]);
+  }, [alertMessage, alertToggle, push]);
 
   useEffect(() => {
     if (!makeRequest) return;
@@ -77,7 +77,8 @@ export default function ResetPassword({ searchParams }: any) {
     };
 
     verifyEmail();
-  }, [searchParams, makeRequest]);
+  }, [searchParams, makeRequest, fetchData]);
+
   return (
     <>
       <Alert open={showAlert} setOpen={setShowAlert} isDanger={error}>

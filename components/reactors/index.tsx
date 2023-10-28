@@ -20,7 +20,7 @@ export default function Reactors({ post }: ReactorsType) {
         response?.data?.data.map((data: UserType) => data.profilePicture)
       );
     })();
-  }, [post]);
+  }, [post, makeRequest]);
 
   return (
     <div className={styles.reactors}>

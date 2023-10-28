@@ -159,7 +159,7 @@ export default function ViewingAndSharing({
         value: prevOption.value,
       })),
     }));
-  }, []);
+  }, [userPostVisibility, userProfileVisibility, canBefollowed]);
 
   useEffect(() => {
     if (!alertMessage) return;

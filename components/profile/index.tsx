@@ -1,5 +1,12 @@
 "use client";
-import { useState, useEffect, useRef, useContext, ChangeEvent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  ChangeEvent,
+  Fragment,
+} from "react";
 import { Alert, Button, MakePost, Post } from "@/components";
 import Image from "next/image";
 import AvatarEditor from "react-avatar-editor";
@@ -793,20 +800,22 @@ export default function Profile({
                       ?.includes(search?.toLowerCase()?.trim())
                   )
                   ?.map((post) => (
-                    <Post
-                      createdAt={post.createdAt}
-                      id={post.id}
-                      _id={post._id}
-                      images={post.images}
-                      likes={post.likes}
-                      message={post.message}
-                      visibility={post.visibility}
-                      comments={post.comments}
-                      makePostText={makePostTexts}
-                      postTexts={postTexts}
-                      postFailed={postFailed}
-                      postSuccess={postSuccess}
-                    />
+                    <Fragment key={post._id}>
+                      <Post
+                        createdAt={post.createdAt}
+                        id={post.id}
+                        _id={post._id}
+                        images={post.images}
+                        likes={post.likes}
+                        message={post.message}
+                        visibility={post.visibility}
+                        comments={post.comments}
+                        makePostText={makePostTexts}
+                        postTexts={postTexts}
+                        postFailed={postFailed}
+                        postSuccess={postSuccess}
+                      />
+                    </Fragment>
                   ))
               ) : (
                 <div className={styles.noPostWrapper}>

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Fragment } from "react";
 import { Alert, Birthdays, MakePost, Post } from "@/components";
 import styles from "./index.module.css";
 import Link from "next/link";
@@ -116,20 +116,22 @@ export default function Posts({
               ?.includes(search?.toLowerCase()?.trim())
           )
           ?.map((post) => (
-            <Post
-              createdAt={post.createdAt}
-              id={post.id}
-              _id={post._id}
-              images={post.images}
-              likes={post.likes}
-              message={post.message}
-              visibility={post.visibility}
-              comments={post.comments}
-              postTexts={postTexts}
-              makePostText={makePostText}
-              postFailed={postFailed}
-              postSuccess={postSuccess}
-            />
+            <Fragment key={post._id}>
+              <Post
+                createdAt={post.createdAt}
+                id={post.id}
+                _id={post._id}
+                images={post.images}
+                likes={post.likes}
+                message={post.message}
+                visibility={post.visibility}
+                comments={post.comments}
+                postTexts={postTexts}
+                makePostText={makePostText}
+                postFailed={postFailed}
+                postSuccess={postSuccess}
+              />
+            </Fragment>
           ))}
 
         {/* <RecentEvent /> */}
