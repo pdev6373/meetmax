@@ -85,7 +85,7 @@ export default function Friends({
       setAlertMessage("");
       setFriends(response.data.data);
     })();
-  }, [refetchToggle]);
+  }, [refetchToggle, error, fetchData, userDetails._id]);
 
   // const handleShowOptions = () => setShowOptions((prev) => !prev);
 

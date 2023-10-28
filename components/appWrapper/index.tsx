@@ -36,7 +36,7 @@ export default function Appwrapper({ children }: LayoutType) {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [accessToken, refresh, remember, setAccessToken, setUserDetails]);
 
   return remember === "no" ? (
     <>{children}</>

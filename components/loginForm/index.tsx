@@ -42,7 +42,7 @@ export default function LoginForm({
 
   useEffect(() => {
     resetFields();
-  }, []);
+  }, [resetFields]);
 
   useEffect(() => {
     setErrorComponentToShow(null);
@@ -51,7 +51,7 @@ export default function LoginForm({
 
   useEffect(() => {
     accessToken && router.replace("/");
-  }, [accessToken]);
+  }, [accessToken, router]);
 
   useEffect(() => {
     if (!alertMessage) return;

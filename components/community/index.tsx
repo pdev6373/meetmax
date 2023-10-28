@@ -112,7 +112,7 @@ export default function Community({
     setHidden([]);
     fetchCommunityOption();
     fetchUserDetails();
-  }, [pathname]);
+  }, [pathname, fetchCommunityOption, fetchUserDetails]);
 
   useEffect(() => {
     if (!alertMessage) return;

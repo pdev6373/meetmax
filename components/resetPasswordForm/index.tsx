@@ -41,7 +41,7 @@ export default function ResetPasswordForm({
 
   useEffect(() => {
     if (!token) router.replace("/login");
-  }, [token]);
+  }, [token, router]);
 
   useEffect(() => {
     setErrorMessage("");
@@ -54,7 +54,7 @@ export default function ResetPasswordForm({
         router.replace("/login");
       }, 1000);
     }
-  }, [isPasswordChanged]);
+  }, [isPasswordChanged, router]);
 
   useEffect(() => {
     if (!alertMessage) return;
