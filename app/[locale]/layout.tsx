@@ -8,6 +8,7 @@ import { AppWrapper } from "@/components";
 import "./globals.css";
 import { PostProvider } from "@/context/postContext";
 import { GeneralProvider } from "@/context/generalContext";
+import og from "../../public/assets/og.png";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -44,7 +45,11 @@ export const metadata: Metadata = {
       "Meetmax - Your social world, connected. Share, engage, stay updated.",
     description:
       "Connect with friends, share your life, and explore new horizons on our vibrant social media platform. Post updates, photos, and videos, engage in meaningful conversations, and stay in the loop with the latest trends. Join our global community today and make every moment count!",
-    images: "https://meetmax-media.vercel.app/og.png",
+    images: [
+      {
+        url: og.src,
+      },
+    ],
     type: "website",
     url: "https://meetmax-media.vercel.app/",
   },
@@ -53,7 +58,12 @@ export const metadata: Metadata = {
       "Meetmax - Your social world, connected. Share, engage, stay updated.",
     description:
       "Connect with friends, share your life, and explore new horizons on our vibrant social media platform. Post updates, photos, and videos, engage in meaningful conversations, and stay in the loop with the latest trends. Join our global community today and make every moment count!",
-    images: "https://meetmax-media.vercel.app/og.png",
+    // images: "https://meetmax-media.vercel.app/og.png",
+    images: [
+      {
+        url: og.src,
+      },
+    ],
     card: "summary_large_image",
   },
 };
