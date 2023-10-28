@@ -10,7 +10,7 @@ export default function AuthenticationLayout({
   children,
   params: { locale },
 }: RootLayoutType) {
-  const router = useRouter();
+  const { replace } = useRouter();
   const [showComponent, setShowComponent] = useState(false);
   const {
     accessToken: { accessToken },
@@ -18,7 +18,7 @@ export default function AuthenticationLayout({
 
   useEffect(() => {
     if (accessToken) {
-      router.replace("/");
+      replace("/");
       return;
     }
 

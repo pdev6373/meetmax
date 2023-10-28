@@ -13,13 +13,13 @@ export default function ResetPassword({ searchParams }: any) {
   const [alertMessage, setAlertMessage] = useState("");
   const [error, setError] = useState(true);
   const [makeRequest, setMakeRequest] = useState(false);
-  const router = useRouter();
+  const { replace, push } = useRouter();
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
 
   useEffect(() => {
     if (!searchParams.token) {
-      router.replace("/login");
+      replace("/login");
       return;
     }
 
@@ -32,7 +32,7 @@ export default function ResetPassword({ searchParams }: any) {
     setShowAlert("yes");
     const alertTimer = setTimeout(() => {
       setShowAlert("no");
-      router.push("/login");
+      push("/login");
     }, 2000);
 
     return () => {
