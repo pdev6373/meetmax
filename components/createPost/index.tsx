@@ -62,7 +62,7 @@ export default function CreatePost({
   useEffect(() => {
     editableRef.current.textContent = postText.current;
     text.current = postText.current;
-  }, [postText]);
+  }, []);
 
   const postTextHandler = (e: any) => {
     // text.current = e.target.value;

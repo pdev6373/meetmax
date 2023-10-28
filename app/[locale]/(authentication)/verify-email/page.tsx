@@ -24,7 +24,7 @@ export default function ResetPassword({ searchParams }: any) {
     }
 
     setMakeRequest(true);
-  }, [searchParams, replace]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (!alertMessage) return;
@@ -38,7 +38,7 @@ export default function ResetPassword({ searchParams }: any) {
     return () => {
       clearTimeout(alertTimer);
     };
-  }, [alertMessage, alertToggle, push]);
+  }, [alertMessage, alertToggle]);
 
   useEffect(() => {
     if (!makeRequest) return;
@@ -77,7 +77,7 @@ export default function ResetPassword({ searchParams }: any) {
     };
 
     verifyEmail();
-  }, [searchParams, makeRequest, fetchData]);
+  }, [searchParams]);
 
   return (
     <>

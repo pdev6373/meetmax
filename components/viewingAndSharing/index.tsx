@@ -141,7 +141,9 @@ export default function ViewingAndSharing({
         value: prevOption.value,
       })),
     }));
+  }, [userPostVisibility]);
 
+  useEffect(() => {
     setProfileVisibility((prev) => ({
       title: prev.title,
       options: prev.options.map((prevOption) => ({
@@ -150,7 +152,9 @@ export default function ViewingAndSharing({
         value: prevOption.value,
       })),
     }));
+  }, [userProfileVisibility]);
 
+  useEffect(() => {
     setFollowOption((prev) => ({
       title: prev.title,
       options: prev.options.map((prevOption) => ({
@@ -159,7 +163,7 @@ export default function ViewingAndSharing({
         value: prevOption.value,
       })),
     }));
-  }, [userPostVisibility, userProfileVisibility, canBefollowed]);
+  }, [canBefollowed]);
 
   useEffect(() => {
     if (!alertMessage) return;

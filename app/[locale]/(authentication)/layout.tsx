@@ -23,7 +23,7 @@ export default function AuthenticationLayout({
     }
 
     setShowComponent(true);
-  }, [accessToken, replace]);
+  }, [accessToken]);
 
   if (!showComponent) return <></>;
 

@@ -43,7 +43,7 @@ export default function CheckMail({
           email: gottenDetails.email,
           type: gottenDetails.type,
         });
-  }, [name, router]);
+  }, []);
 
   useEffect(() => {
     if (!alertMessage) return;

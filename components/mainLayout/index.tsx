@@ -42,7 +42,7 @@ export default function MainLayout({
     }
 
     setShowComponent(true);
-  }, [accessToken, router]);
+  }, [accessToken]);
 
   if (!showComponent) return <></>;
 

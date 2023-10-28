@@ -15,12 +15,12 @@ export default function Reactors({ post }: ReactorsType) {
 
   useEffect(() => {
     (async () => {
-      const response = await makeRequest(post.likes.slice(0, 3));
+      const response = await makeRequest(post?.likes?.slice(0, 3));
       setImages(
-        response?.data?.data.map((data: UserType) => data.profilePicture)
+        response?.data?.data.map((data: UserType) => data?.profilePicture)
       );
     })();
-  }, [post, makeRequest]);
+  }, [post]);
 
   return (
     <div className={styles.reactors}>

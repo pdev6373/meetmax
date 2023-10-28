@@ -63,7 +63,7 @@ export default function Posts({
       }
       setAlertMessage("");
     })();
-  }, [pathname, makeRequest, postError]);
+  }, [pathname]);
 
   if (loading || fetching)
     return (
