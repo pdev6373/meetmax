@@ -16,7 +16,6 @@ export default function SettingsLayout({
 
   return (
     <SettingsLayoutComponent
-      children={children}
       locale={locale}
       texts={{
         editProfile: t("editProfile"),
@@ -27,6 +26,8 @@ export default function SettingsLayout({
         cancelText: t("cancel"),
         logoutConfirmationText: t("confirmLogout"),
       }}
-    />
+    >
+      {children}
+    </SettingsLayoutComponent>
   );
 }

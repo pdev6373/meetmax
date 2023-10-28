@@ -10,7 +10,6 @@ export default function MainLayout({
 
   return (
     <MainLayoutComponent
-      children={children}
       locale={locale}
       sidenavTexts={{
         feedText: t("feed"),
@@ -24,6 +23,8 @@ export default function MainLayout({
       }}
       placeHolderText={t("searchHere")}
       placeHolderTextShort={t("searchHereHalf")}
-    />
+    >
+      {children}
+    </MainLayoutComponent>
   );
 }

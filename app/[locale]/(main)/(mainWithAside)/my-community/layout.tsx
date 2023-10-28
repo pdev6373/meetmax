@@ -17,12 +17,13 @@ export default function CommunityLayout({
 
   return (
     <CommunityLayoutComponent
-      children={children}
       locale={locale}
       recommendedText={t("recommended")}
       follower={t("follower")}
       followers={t("followers")}
       following={t("following")}
-    />
+    >
+      {children}
+    </CommunityLayoutComponent>
   );
 }
