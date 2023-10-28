@@ -46,7 +46,7 @@ export default function RecentEvent() {
 
             <div className={styles.reactions}>
               <p className={styles.seenNo}>{`${event.seen} seen`}</p>
-              <Reactors
+              {/* <Reactors
                 images={[
                   "/assets/user.png",
                   "/assets/user.png",
@@ -54,7 +54,7 @@ export default function RecentEvent() {
                   "/assets/user.png",
                 ]}
                 noOfReactions="5"
-              />
+              /> */}
             </div>
           </div>
         ))}
