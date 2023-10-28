@@ -161,8 +161,8 @@ export default function Friends({
         </div>
 
         <div className={styles.friends} ref={friendsRef}>
-          {friends
-            ?.filter(
+          {(() => {
+            const filteredFriends = friends?.filter(
               (friend) =>
                 friend?.firstname
                   .toLowerCase()
@@ -176,8 +176,21 @@ export default function Friends({
                   .toLowerCase()
                   ?.trim()
                   ?.includes(value?.toLowerCase()?.trim())
-            )
-            ?.map((friend, index) => (
+            );
+
+            if (!filteredFriends?.length)
+              return (
+                <>
+                  <Image
+                    src="/assets/no-post.png"
+                    alt="no post"
+                    width={256}
+                    height={192}
+                  />
+                </>
+              );
+
+            return filteredFriends?.map((friend, index) => (
               <Link
                 href={`/profile/${friend._id}`}
                 className={styles.friend}
@@ -218,7 +231,8 @@ export default function Friends({
                 <p className={styles.friendLastSeen}>{friend.lastSeen}</p>
               )} */}
               </Link>
-            ))}
+            ));
+          })()}
         </div>
       </div>
     </>

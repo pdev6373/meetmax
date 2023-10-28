@@ -77,7 +77,7 @@ export default function ResetPassword({ searchParams }: any) {
     };
 
     verifyEmail();
-  }, [searchParams]);
+  }, [searchParams, makeRequest]);
 
   return (
     <>

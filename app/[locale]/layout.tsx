@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     "User profiles",
     "Social interactions",
   ],
+  metadataBase: new URL("https://meetmax-media.vercel.app/"),
   openGraph: {
     title:
       "Meetmax - Your social world, connected. Share, engage, stay updated.",
