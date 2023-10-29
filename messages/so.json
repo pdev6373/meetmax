@@ -165,6 +165,8 @@
     "postError": "Khalad ayaa dhacay markii la helayay qoraallada",
     "postFailed": "Ku guuldareystay in lagu daro boostada",
     "postSuccess": "Boostada ayaa lagu daray si guul leh",
-    "updateEror": "Cusboonaysiinta bogga waa guul daraystay"
+    "updateEror": "Cusboonaysiinta bogga waa guul daraystay",
+    "findFriends": "Raadi saaxiibo",
+    "noFriends": "Wax saaxiibo ah ma lihid"
   }
 }

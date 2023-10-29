@@ -165,6 +165,8 @@
     "postError": "An error occurred while getting posts",
     "postFailed": "Failed to add post",
     "postSuccess": "Post added successfully",
-    "updateEror": "Profile update failed"
+    "updateEror": "Profile update failed",
+    "findFriends": "Find friends",
+    "noFriends": "You haven't any friends"
   }
 }

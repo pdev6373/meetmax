@@ -165,6 +165,8 @@
     "postError": "Terjadi kesalahan saat mengambil postingan",
     "postFailed": "Gagal menambahkan postingan",
     "postSuccess": "Postingan berhasil ditambahkan",
-    "updateEror": "Pembaruan profil gagal"
+    "updateEror": "Pembaruan profil gagal",
+    "findFriends": "Mencari teman",
+    "noFriends": "Kamu tidak punya teman"
   }
 }

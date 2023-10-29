@@ -165,6 +165,8 @@
     "postError": "Der opstod en fejl under hentning af indlæg",
     "postFailed": "Kunne ikke tilføje indlæg",
     "postSuccess": "Indlægget blev tilføjet",
-    "updateEror": "Profilopdatering mislykkedes"
+    "updateEror": "Profilopdatering mislykkedes",
+    "findFriends": "Find venner",
+    "noFriends": "Du har ingen venner"
   }
 }

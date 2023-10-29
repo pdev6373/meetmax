@@ -165,6 +165,8 @@
     "postError": "S'ha produït un error en rebre publicacions",
     "postFailed": "No s'ha pogut afegir la publicació",
     "postSuccess": "Publicació s'ha afegit correctament",
-    "updateEror": "L'actualització del perfil ha fallat"
+    "updateEror": "L'actualització del perfil ha fallat",
+    "findFriends": "Trobar amics",
+    "noFriends": "No tens cap amic"
   }
 }

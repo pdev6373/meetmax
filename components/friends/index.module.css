@@ -162,8 +162,32 @@
   align-items: center;
 }
 
+.noFriends {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.viewRecommended {
+  margin-top: 14px;
+}
+
+.noPost {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #edeff1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (min-width: 500px) {
   .friend {
     border-radius: 10px;
+  }
+
+  .viewRecommended {
+    margin-top: 18px;
   }
 }

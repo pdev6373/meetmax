@@ -3,20 +3,25 @@ import { useState, useEffect, useRef, useContext } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import Link from "next/link";
-import { Alert, Switch } from "..";
+import { Alert, Button, Switch } from "..";
 import { FriendsOptionsType, UserType } from "@/types";
 import { AuthContext } from "@/context/authContext";
 import { useAxiosPrivate } from "@/hooks";
 import { GeneralContext } from "@/context/generalContext";
+import { useRouter } from "next/navigation";
 
 export default function Friends({
   error,
   friendsText,
   value,
+  noFriends,
+  connectWithOthers,
 }: {
   error: string;
   friendsText: string;
   value: string;
+  noFriends: string;
+  connectWithOthers: string;
 }) {
   const friendsRef = useRef<any>(null);
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
@@ -25,6 +30,7 @@ export default function Friends({
   const [friends, setFriends] = useState<UserType[]>();
   const { fetchData, loading } = useAxiosPrivate();
   const [showOptions, setShowOptions] = useState(false);
+  const router = useRouter();
   const [hasScrollbar, setHasScrollbar] = useState<boolean | undefined>(
     undefined
   );
@@ -165,29 +171,39 @@ export default function Friends({
             const filteredFriends = friends?.filter(
               (friend) =>
                 friend?.firstname
-                  .toLowerCase()
+                  ?.toLowerCase()
                   ?.trim()
                   ?.includes(value?.toLowerCase()?.trim()) ||
                 friend?.lastname
-                  .toLowerCase()
+                  ?.toLowerCase()
                   ?.trim()
                   ?.includes(value?.toLowerCase()?.trim()) ||
                 `${friend?.lastname} ${friend?.firstname}`
-                  .toLowerCase()
+                  ?.toLowerCase()
                   ?.trim()
                   ?.includes(value?.toLowerCase()?.trim())
             );
 
             if (!filteredFriends?.length)
               return (
-                <>
+                <div className={styles.noFriends}>
                   <Image
                     src="/assets/no-post.png"
                     alt="no post"
                     width={256}
                     height={192}
                   />
-                </>
+                  <p className={styles.noPost}>• {noFriends} •</p>
+                  <div className={styles.viewRecommended}>
+                    <Button
+                      type="submit"
+                      onClick={() => router.push("/my-community/recommended")}
+                      variation="small"
+                    >
+                      {connectWithOthers}
+                    </Button>
+                  </div>
+                </div>
               );
 
             return filteredFriends?.map((friend, index) => (

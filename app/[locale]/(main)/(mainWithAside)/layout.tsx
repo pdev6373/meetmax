@@ -14,6 +14,8 @@ export default function MainLayout({ children }: LayoutType) {
           friendsText={t("friends")}
           searchFriendsText={t("searchFriends")}
           error={t("anErrorOccurred")}
+          connectWithOthers={t("connectWithOthers")}
+          noFriends={t("noFriends")}
         />
       </div>
     </div>

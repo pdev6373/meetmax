@@ -165,6 +165,8 @@
     "postError": "Kon nie plasings kry nie",
     "postFailed": "Kon nie plasing byvoeg nie",
     "postSuccess": "Plasing is suksesvol bygevoeg",
-    "updateEror": "Profielopdatering het misluk"
+    "updateEror": "Profielopdatering het misluk",
+    "findFriends": "Vind vriende",
+    "noFriends": "Jy het geen vriende nie"
   }
 }

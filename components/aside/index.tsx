@@ -8,10 +8,14 @@ export default function Aside({
   friendsText,
   searchFriendsText,
   error,
+  connectWithOthers,
+  noFriends,
 }: {
   friendsText: string;
   searchFriendsText: string;
   error: string;
+  connectWithOthers: string;
+  noFriends: string;
 }) {
   const {
     fields: { friendsSearch },
@@ -30,7 +34,13 @@ export default function Aside({
       {/* <div className={styles.paddingRight}>
         <OnlineFriends />
       </div> */}
-      <Friends error={error} friendsText={friendsText} value={friendsSearch} />
+      <Friends
+        error={error}
+        friendsText={friendsText}
+        value={friendsSearch}
+        connectWithOthers={connectWithOthers}
+        noFriends={noFriends}
+      />
     </aside>
   );
 }

@@ -259,6 +259,16 @@ export type PostCommentType = {
   replies: PostReplyType[];
 };
 
+export type PostCommentExtendType = {
+  _id: string;
+  id: string;
+  message: string;
+  likes: string[];
+  createdAt: string;
+  replies: PostReplyType[];
+  image: string;
+};
+
 export type PostReplyType = {
   _id: string;
   id: string;

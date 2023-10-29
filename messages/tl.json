@@ -165,6 +165,8 @@
     "postError": "Nagkaroon ng error habang kumukuha ng mga post",
     "postFailed": "Nabigong magdagdag ng post",
     "postSuccess": "Matagumpay na naidagdag ang post",
-    "updateEror": "Nabigo ang pag-update ng profile"
+    "updateEror": "Nabigo ang pag-update ng profile",
+    "findFriends": "Maghanap ng mga Kaibigan",
+    "noFriends": "Wala kang kaibigan"
   }
 }

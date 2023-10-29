@@ -165,6 +165,8 @@
     "postError": "Er is een fout opgetreden bij het ophalen van berichten",
     "postFailed": "Kan bericht niet toevoegen",
     "postSuccess": "Bericht succesvol toegevoegd",
-    "updateEror": "Profielupdate mislukt"
+    "updateEror": "Profielupdate mislukt",
+    "findFriends": "Zoek vrienden",
+    "noFriends": "Je hebt geen vrienden"
   }
 }

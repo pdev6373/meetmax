@@ -62,6 +62,7 @@ export default function Home() {
       postError={t("postError")}
       postFailed={t("postFailed")}
       postSuccess={t("postSuccess")}
+      error={t("anErrorOccurred")}
     />
   );
 }

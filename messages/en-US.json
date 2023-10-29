@@ -166,6 +166,8 @@
     "followed": "Followed",
     "followedYou": "Followed you",
     "repliedYou": "Replied you",
-    "unfollowedYou": "Unfollowed you"
+    "unfollowedYou": "Unfollowed you",
+    "findFriends": "Find friends",
+    "noFriends": "You haven't any friends"
   }
 }

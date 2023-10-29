@@ -165,6 +165,8 @@
     "postError": "投稿の取得中にエラーが発生しました",
     "postFailed": "投稿の追加に失敗しました",
     "postSuccess": "投稿が正常に追加されました",
-    "updateEror": "プロファイルの更新に失敗しました"
+    "updateEror": "プロファイルの更新に失敗しました",
+    "findFriends": "友達を見つける",
+    "noFriends": "あなたには友達がいません。"
   }
 }

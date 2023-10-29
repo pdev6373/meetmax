@@ -165,6 +165,8 @@
     "postError": "Beim Abrufen der Beiträge ist ein Fehler aufgetreten",
     "postFailed": "Beitrag konnte nicht hinzugefügt werden",
     "postSuccess": "Beitrag erfolgreich hinzugefügt",
-    "updateEror": "Profilaktualisierung fehlgeschlagen"
+    "updateEror": "Profilaktualisierung fehlgeschlagen",
+    "findFriends": "Freunde finden",
+    "noFriends": "Du hast keine Freunde"
   }
 }

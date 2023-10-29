@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./index.module.css";
 import { Alert, CreatePost, Reactors } from "..";
 import {
-  PostCommentType,
+  PostCommentExtendType,
   PostDetailsType,
   PostReplyType,
   PostType,
@@ -25,6 +25,7 @@ type ReplyToBeRepliedType = {
   message: string;
   firstname: string;
   lastname: string;
+  image: string;
 };
 
 export default function Post({
@@ -84,7 +85,7 @@ export default function Post({
   const [openComments, setOpenComments] = useState(false);
   const [replyToBeShown, setReplyToBeShown] = useState<string | null>(null);
   const [commentToBeReplied, setCommentToBeReplied] =
-    useState<PostCommentType | null>(null);
+    useState<PostCommentExtendType | null>(null);
   const [replyToBeReplied, setReplyToBeReplied] =
     useState<ReplyToBeRepliedType | null>(null);
   const [currentReactedComment, setCurrentReactedComment] = useState<
@@ -859,14 +860,20 @@ export default function Post({
                     <div className={styles.comment}>
                       <>
                         <Image
-                          src={"/assets/no-profile.svg"}
+                          src={
+                            commenter?.profilePicture ||
+                            "/assets/no-profile.svg"
+                          }
                           alt="profile"
                           width={24}
                           height={24}
                           className={styles.commentUserProfile}
                         />
                         <Image
-                          src={"/assets/no-profile.svg"}
+                          src={
+                            commenter?.profilePicture ||
+                            "/assets/no-profile.svg"
+                          }
                           alt="profile"
                           width={32}
                           height={32}
@@ -945,7 +952,10 @@ export default function Post({
                           <p
                             className={styles.commentReplyAction}
                             onClick={() => {
-                              setCommentToBeReplied(comment);
+                              setCommentToBeReplied({
+                                ...comment,
+                                image: commenter?.profilePicture,
+                              });
                               setReplyToBeReplied(null);
                             }}
                           >
@@ -960,14 +970,20 @@ export default function Post({
                         <div className={styles.comment}>
                           <>
                             <Image
-                              src={"/assets/no-profile.svg"}
+                              src={
+                                userDetails?.profilePicture ||
+                                "/assets/no-profile.svg"
+                              }
                               alt="profile"
                               width={24}
                               height={24}
                               className={styles.commentUserProfile}
                             />
                             <Image
-                              src={"/assets/no-profile.svg"}
+                              src={
+                                userDetails?.profilePicture ||
+                                "/assets/no-profile.svg"
+                              }
                               alt="profile"
                               width={32}
                               height={32}
@@ -1058,14 +1074,20 @@ export default function Post({
                               <div className={styles.comment}>
                                 <>
                                   <Image
-                                    src={"/assets/no-profile.svg"}
+                                    src={
+                                      replier?.profilePicture ||
+                                      "/assets/no-profile.svg"
+                                    }
                                     alt="profile"
                                     width={24}
                                     height={24}
                                     className={styles.commentUserProfile}
                                   />
                                   <Image
-                                    src={"/assets/no-profile.svg"}
+                                    src={
+                                      replier?.profilePicture ||
+                                      "/assets/no-profile.svg"
+                                    }
                                     alt="profile"
                                     width={32}
                                     height={32}
@@ -1154,6 +1176,7 @@ export default function Post({
                                           lastname: replier.lastname,
                                           firstname: replier.firstname,
                                           message: reply.message,
+                                          image: replier?.profilePicture,
                                         });
                                         setCommentToBeReplied(null);
                                       }}
@@ -1168,14 +1191,20 @@ export default function Post({
                                 <div className={styles.comment}>
                                   <>
                                     <Image
-                                      src={"/assets/no-profile.svg"}
+                                      src={
+                                        userDetails?.profilePicture ||
+                                        "/assets/no-profile.svg"
+                                      }
                                       alt="profile"
                                       width={24}
                                       height={24}
                                       className={styles.commentUserProfile}
                                     />
                                     <Image
-                                      src={"/assets/no-profile.svg"}
+                                      src={
+                                        userDetails?.profilePicture ||
+                                        "/assets/no-profile.svg"
+                                      }
                                       alt="profile"
                                       width={32}
                                       height={32}

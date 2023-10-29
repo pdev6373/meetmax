@@ -7,8 +7,10 @@ import Image from "next/image";
 import usePostReq from "@/helpers/usePostReq";
 import { PostContext } from "@/context/postContext";
 import { usePathname } from "next/navigation";
-import { MakePostTextsType, PostTextsType } from "@/types";
+import { MakePostTextsType, PostTextsType, UserType } from "@/types";
 import { GeneralContext } from "@/context/generalContext";
+import { useAxiosPrivate } from "@/hooks";
+import { AuthContext } from "@/context/authContext";
 
 type PostsType = {
   makePostText: MakePostTextsType;
@@ -16,6 +18,7 @@ type PostsType = {
   postError: string;
   postFailed: string;
   postSuccess: string;
+  error: string;
 };
 
 export default function Posts({
@@ -24,6 +27,7 @@ export default function Posts({
   postError,
   postFailed,
   postSuccess,
+  error,
 }: PostsType) {
   const {
     getPosts: { loading, makeRequest },
@@ -32,13 +36,20 @@ export default function Posts({
     fields: { posts },
   } = useContext(PostContext);
   const {
-    fields: { search },
+    fields: { search, refetchToggle },
   } = useContext(GeneralContext);
+
+  const {
+    userDetails: { userDetails },
+  } = useContext(AuthContext);
+
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [fetching, setFetching] = useState(true);
   const pathname = usePathname();
+  const [friends, setFriends] = useState<UserType[]>();
+  const { fetchData, loading: fetchingFriends } = useAxiosPrivate();
 
   const toggleAlertHandler = () => setAlertToggle((prev) => !prev);
 
@@ -50,6 +61,24 @@ export default function Posts({
       clearTimeout(alertTimer);
     };
   }, [alertMessage, alertToggle]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetchData({
+        url: `/user/followers/${userDetails._id}`,
+        method: "GET",
+      });
+
+      if (!response?.success || !response?.data?.success) {
+        setAlertMessage(error);
+        toggleAlertHandler();
+        return;
+      }
+
+      setAlertMessage("");
+      setFriends(response.data.data);
+    })();
+  }, [refetchToggle, userDetails?._id]);
 
   useEffect(() => {
     (async () => {
@@ -65,7 +94,7 @@ export default function Posts({
     })();
   }, [pathname]);
 
-  if (loading || fetching)
+  if (loading || fetching || fetchingFriends)
     return (
       <div className={styles.spinner}>
         <Image src="/assets/spinner.svg" alt="spinner" width={40} height={40} />
@@ -78,27 +107,35 @@ export default function Posts({
         {alertMessage}
       </Alert>
       <div className={styles.wrapper}>
-        <div className={styles.onlineFriends}>
-          {/* {ALL_FRIENDS.map((friend, index) => (
-            <Link href="" className={styles.onlineFriend} key={index}>
-              <div className={styles.friendImageWrapper}>
-                <Image
-                  src={friend.image}
-                  alt="user image"
-                  className={styles.friendImage}
-                  width={50}
-                  height={50}
-                />
-              </div>
+        {friends?.length ? (
+          <div className={styles.onlineFriends}>
+            {friends?.map((friend, index) => (
+              <Link
+                href={`/profile/${friend?._id}`}
+                className={styles.onlineFriend}
+                key={index}
+              >
+                <div className={styles.friendImageWrapper}>
+                  <Image
+                    src={friend?.profilePicture || "/assets/no-profile.svg"}
+                    alt="user image"
+                    className={styles.friendImage}
+                    width={50}
+                    height={50}
+                  />
+                </div>
 
-              <p className={styles.friendName}>
-                {friend.firstname.split(" ")[0].length > 7
-                  ? `${friend.firstname.split(" ")[0].slice(0, 5)}..`
-                  : friend.firstname.split(" ")[0]}
-              </p>
-            </Link>
-          ))} */}
-        </div>
+                <p className={styles.friendName}>
+                  {friend.firstname.split(" ")[0].length > 7
+                    ? `${friend.firstname.split(" ")[0].slice(0, 5)}..`
+                    : friend.firstname.split(" ")[0]}
+                </p>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
 
         <div className={styles.makePostWrapper}>
           <MakePost

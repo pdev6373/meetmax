@@ -80,7 +80,8 @@ export default function Community({
 
     setHidden([]);
     setAlertMessage("");
-    if (type === "followers") setRefetchToggle((prev) => !prev);
+    if (type === "followers" || type === "recommended")
+      setRefetchToggle((prev) => !prev);
     setCommunity(response.data.data);
   };
 

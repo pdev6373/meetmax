@@ -165,6 +165,8 @@
     "postError": "Se produjo un error al obtener publicaciones.",
     "postFailed": "No se pudo agregar la publicación",
     "postSuccess": "Publicación agregada exitosamente",
-    "updateEror": "Error al actualizar el perfil"
+    "updateEror": "Error al actualizar el perfil",
+    "findFriends": "Encontrar amigos",
+    "noFriends": "No tienes amigos"
   }
 }
