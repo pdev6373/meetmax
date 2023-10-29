@@ -9,6 +9,7 @@ import "./globals.css";
 import { PostProvider } from "@/context/postContext";
 import { GeneralProvider } from "@/context/generalContext";
 import og from "../../public/assets/og.png";
+import { Analytics } from "@vercel/analytics/react";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -83,7 +84,10 @@ export default function LocaleLayout({
         <AuthProvider>
           <AppWrapper>
             <GeneralProvider>
-              <PostProvider>{children}</PostProvider>
+              <PostProvider>
+                {children}
+                <Analytics />
+              </PostProvider>
             </GeneralProvider>
           </AppWrapper>
         </AuthProvider>
