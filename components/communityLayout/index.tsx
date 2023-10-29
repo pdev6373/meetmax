@@ -70,6 +70,7 @@ export default function CommunityLayout({
                 <span className={styles.amount}>
                   {community.amount > 0 ? community.amount : community.amount}
                 </span>
+
                 <span>
                   {community.amount === 1
                     ? community.title === followers
