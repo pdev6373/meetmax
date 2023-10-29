@@ -14,6 +14,7 @@ export default function FormBottomText({
   return (
     <div className={[styles.wrapper, mainform && styles.mainform].join(" ")}>
       <p className={styles.wrapperText}>{text}</p>
+
       {actionType === "link" ? (
         <Link className={styles.wrapperActionText} href={onActionTextClick()}>
           {actionText}
