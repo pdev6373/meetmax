@@ -196,6 +196,7 @@ export default function SignupForm({
               ) : null
             }
           />
+
           <Input
             type={hidePassword ? "password" : "text"}
             icon="/assets/lock.svg"
