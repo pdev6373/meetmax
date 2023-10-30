@@ -31,7 +31,6 @@ export default function Logout({
       <div className={styles.logoutWrapper}>
         <h3 className={styles.logoutHeading}>{logoutText}</h3>
         <p className={styles.logoutText}>{confirmLogoutText}</p>
-
         <div className={styles.logoutActions}>
           <button className={styles.logoutCancel} onClick={onCancelLogout}>
             {cancelText}
