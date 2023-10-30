@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./index.module.css";
 import Link from "next/link";
 import { Alert, Button, Switch } from "..";
-import { FriendsOptionsType, UserType } from "@/types";
+import { FriendsOptionsType } from "@/types";
 import { AuthContext } from "@/context/authContext";
 import { useAxiosPrivate } from "@/hooks";
 import { GeneralContext } from "@/context/generalContext";
@@ -27,7 +27,6 @@ export default function Friends({
   const [showAlert, setShowAlert] = useState<"yes" | "no" | "wait">("wait");
   const [alertToggle, setAlertToggle] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-  const [friends, setFriends] = useState<UserType[]>();
   const { fetchData, loading } = useAxiosPrivate();
   const [showOptions, setShowOptions] = useState(false);
   const router = useRouter();
@@ -38,7 +37,8 @@ export default function Friends({
     userDetails: { userDetails },
   } = useContext(AuthContext);
   const {
-    fields: { refetchToggle },
+    fields: { followers },
+    setFields: { setFollowers },
   } = useContext(GeneralContext);
   const [options, setOptions] = useState<FriendsOptionsType[]>([
     {
@@ -89,9 +89,9 @@ export default function Friends({
       }
 
       setAlertMessage("");
-      setFriends(response.data.data);
+      setFollowers(response.data.data);
     })();
-  }, [refetchToggle]);
+  }, []);
 
   // const handleShowOptions = () => setShowOptions((prev) => !prev);
 
@@ -168,7 +168,7 @@ export default function Friends({
 
         <div className={styles.friends} ref={friendsRef}>
           {(() => {
-            const filteredFriends = friends?.filter(
+            const filteredFriends = followers?.filter(
               (friend) =>
                 friend?.firstname
                   ?.toLowerCase()

@@ -198,6 +198,7 @@ export type CheckMailType = {
   skipNowText: string;
   noEmailText: string;
   resendText: string;
+  checkSpam: string;
 };
 
 export type GenderType = "Male" | "Female";

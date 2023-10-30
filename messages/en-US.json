@@ -168,6 +168,7 @@
     "repliedYou": "Replied you",
     "unfollowedYou": "Unfollowed you",
     "findFriends": "Find friends",
-    "noFriends": "You haven't any friends"
+    "noFriends": "You haven't any friends",
+    "checkSpam": "Please check your spam incase it doesn't end up in your inbox."
   }
 }

@@ -66,6 +66,10 @@
   border-radius: 50%;
 }
 
+.profileImageWrapper {
+  flex-shrink: 0;
+}
+
 .profileMobile {
   border-radius: 6px;
   flex-shrink: 0;

@@ -167,6 +167,7 @@
     "postSuccess": "Publicación agregada exitosamente",
     "updateEror": "Error al actualizar el perfil",
     "findFriends": "Encontrar amigos",
-    "noFriends": "No tienes amigos"
+    "noFriends": "No tienes amigos",
+    "checkSpam": "Por favor revisa tu spam en caso de que no termine en tu bandeja de entrada."
   }
 }

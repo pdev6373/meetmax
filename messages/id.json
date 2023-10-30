@@ -167,6 +167,7 @@
     "postSuccess": "Postingan berhasil ditambahkan",
     "updateEror": "Pembaruan profil gagal",
     "findFriends": "Mencari teman",
-    "noFriends": "Kamu tidak punya teman"
+    "noFriends": "Kamu tidak punya teman",
+    "checkSpam": "Silakan periksa spam Anda seandainya tidak masuk ke kotak masuk Anda."
   }
 }

@@ -167,6 +167,7 @@
     "postSuccess": "Matagumpay na naidagdag ang post",
     "updateEror": "Nabigo ang pag-update ng profile",
     "findFriends": "Maghanap ng mga Kaibigan",
-    "noFriends": "Wala kang kaibigan"
+    "noFriends": "Wala kang kaibigan",
+    "checkSpam": "Pakisuri ang iyong spam incase kung hindi ito mapupunta sa iyong inbox."
   }
 }

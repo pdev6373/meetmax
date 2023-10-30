@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { LayoutType } from "@/types";
+import { LayoutType, UserType } from "@/types";
 import { createContext, Dispatch, SetStateAction } from "react";
 import { usePathname } from "next/navigation";
 
@@ -8,12 +8,14 @@ type FieldsType = {
   search: string;
   friendsSearch: string;
   refetchToggle: boolean;
+  followers: UserType[];
 };
 
 type SetFieldsType = {
   setSearch: Dispatch<SetStateAction<string>>;
   setFriendsSearch: Dispatch<SetStateAction<string>>;
   setRefetchToggle: Dispatch<SetStateAction<boolean>>;
+  setFollowers: Dispatch<SetStateAction<UserType[]>>;
 };
 
 type GeneralContextType = {
@@ -26,11 +28,13 @@ export const GeneralContext = createContext<GeneralContextType>({
     search: "",
     friendsSearch: "",
     refetchToggle: false,
+    followers: [],
   },
   setFields: {
     setSearch: () => {},
     setFriendsSearch: () => {},
     setRefetchToggle: () => {},
+    setFollowers: () => {},
   },
 });
 
@@ -38,6 +42,7 @@ export const GeneralProvider = ({ children }: LayoutType) => {
   const [search, setSearch] = useState("");
   const [friendsSearch, setFriendsSearch] = useState("");
   const [refetchToggle, setRefetchToggle] = useState(false);
+  const [followers, setFollowers] = useState<UserType[]>([]);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -51,11 +56,13 @@ export const GeneralProvider = ({ children }: LayoutType) => {
           search,
           refetchToggle,
           friendsSearch,
+          followers,
         },
         setFields: {
           setSearch,
           setRefetchToggle,
           setFriendsSearch,
+          setFollowers,
         },
       }}
     >

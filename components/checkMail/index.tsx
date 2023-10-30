@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { Heading, Wrapper, FormBottomText, Button, Alert } from "@/components";
 import styles from "./index.module.css";
 import Link from "next/link";
+import Image from "next/image";
 import { CheckMailType } from "@/types";
 import { AuthContext } from "@/context/authContext";
 import { useRouter } from "next/navigation";
@@ -15,6 +16,7 @@ export default function CheckMail({
   skipNowText,
   noEmailText,
   resendText,
+  checkSpam,
 }: CheckMailType) {
   const router = useRouter();
   const { fetchData, loading } = useAxios();
@@ -136,6 +138,16 @@ export default function CheckMail({
                 ) : (
                   <h3 className={styles.subHeading}>{sendMailText}</h3>
                 )}
+                <div className={styles.subHeadingImportantWrapper}>
+                  <Image
+                    src="/assets/information.svg"
+                    alt="info"
+                    width={16}
+                    height={16}
+                  />
+
+                  <h3 className={styles.subHeadingImportant}>{checkSpam}</h3>
+                </div>
               </div>
 
               <Link href="/login" className={styles.skipButton}>

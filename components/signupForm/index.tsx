@@ -126,7 +126,7 @@ export default function SignupForm({
         firstname: name.split(" ").slice(1).join(" "),
         password,
         dateOfBirth: format(dateOfBirth as Date, "yyyy/MM/dd"),
-        gender: gender,
+        gender: gender === male ? "Male" : "Female",
       },
     });
 
@@ -156,8 +156,11 @@ export default function SignupForm({
   };
 
   const signinHandler = () => "/login";
-  const isSelectedGender = (genderVaue: GenderType) => genderVaue == gender;
-  const setGenderHandler = (genderValue: GenderType) => setGender(genderValue);
+  const isSelectedGender = (genderValue: GenderType) =>
+    (gender === "Male" && genderValue === male) ||
+    (gender === "Female" && genderValue === female);
+  const setGenderHandler = (genderValue: GenderType) =>
+    setGender(genderValue === male ? "Male" : "Female");
   const togglePasswordHandler = () => setHidePassword((prev) => !prev);
   const calendarInputClickHandler = () => setShowCalendar((prev) => !prev);
   const calendarClosehandler = () => setShowCalendar(false);
@@ -256,9 +259,7 @@ export default function SignupForm({
 
           <div className={styles.genderWrapper}>
             <Image
-              src={
-                gender === "Male" ? "/assets/male.svg" : "/assets/female.svg"
-              }
+              src={gender === male ? "/assets/male.svg" : "/assets/female.svg"}
               alt="gender"
               width={16}
               height={16}

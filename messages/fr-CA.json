@@ -167,6 +167,7 @@
     "postSuccess": "Message ajouté avec succès",
     "updateEror": "Échec de la mise à jour du profil",
     "findFriends": "Retrouver des amis",
-    "noFriends": "Tu n'as pas d'amis"
+    "noFriends": "Tu n'as pas d'amis",
+    "checkSpam": "Veuillez vérifier vos spams au cas où ils n'arriveraient pas dans votre boîte de réception."
   }
 }

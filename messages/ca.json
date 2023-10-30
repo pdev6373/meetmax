@@ -167,6 +167,7 @@
     "postSuccess": "Publicació s'ha afegit correctament",
     "updateEror": "L'actualització del perfil ha fallat",
     "findFriends": "Trobar amics",
-    "noFriends": "No tens cap amic"
+    "noFriends": "No tens cap amic",
+    "checkSpam": "Si us plau, comproveu el vostre correu brossa en cas que no acabi a la vostra safata d'entrada."
   }
 }

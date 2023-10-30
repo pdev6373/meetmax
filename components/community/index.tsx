@@ -47,7 +47,7 @@ export default function Community({
   } = useContext(AuthContext);
   const {
     fields: { search },
-    setFields: { setRefetchToggle },
+    setFields: { setRefetchToggle, setFollowers },
   } = useContext(GeneralContext);
   const { fetchData, loading } = useAxiosPrivate();
   const [community, setCommunity] = useState<UserType[]>([]);
@@ -82,7 +82,8 @@ export default function Community({
     setAlertMessage("");
     if (type === "followers" || type === "recommended")
       setRefetchToggle((prev) => !prev);
-    setCommunity(response.data.data);
+    if (type === "followers") setFollowers(response?.data?.data);
+    setCommunity(response?.data?.data);
   };
 
   const fetchUserDetails = async () => {

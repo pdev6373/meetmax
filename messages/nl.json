@@ -167,6 +167,7 @@
     "postSuccess": "Bericht succesvol toegevoegd",
     "updateEror": "Profielupdate mislukt",
     "findFriends": "Zoek vrienden",
-    "noFriends": "Je hebt geen vrienden"
+    "noFriends": "Je hebt geen vrienden",
+    "checkSpam": "Controleer uw spam, zodat deze niet in uw inbox terechtkomt."
   }
 }

@@ -167,6 +167,7 @@
     "postSuccess": "Beitrag erfolgreich hinzugefügt",
     "updateEror": "Profilaktualisierung fehlgeschlagen",
     "findFriends": "Freunde finden",
-    "noFriends": "Du hast keine Freunde"
+    "noFriends": "Du hast keine Freunde",
+    "checkSpam": "Bitte überprüfen Sie Ihren Spam, falls dieser nicht in Ihrem Posteingang landet."
   }
 }

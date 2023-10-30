@@ -167,6 +167,7 @@
     "postSuccess": "Indlægget blev tilføjet",
     "updateEror": "Profilopdatering mislykkedes",
     "findFriends": "Find venner",
-    "noFriends": "Du har ingen venner"
+    "noFriends": "Du har ingen venner",
+    "checkSpam": "Tjek venligst din spam, hvis den ikke ender i din indbakke."
   }
 }
