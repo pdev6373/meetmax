@@ -8,6 +8,7 @@
 
 .calendar {
   background: #212833;
+  color: #edeff1;
 }
 
 .buttons {
@@ -39,6 +40,7 @@
   font-weight: 500;
   line-height: 22px;
   aspect-ratio: 1 / 1;
+  /* color: #edeff1; */
 }
 
 .monthNav,

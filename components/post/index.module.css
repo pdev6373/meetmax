@@ -205,6 +205,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
+  color: #edeff1;
 }
 
 .postImageContainerPlus {
@@ -574,6 +575,13 @@
   gap: 14px;
 }
 
+.commentMessage {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #edeff1;
+}
+
 @media (min-width: 330px) {
   .bottomUserImage {
     display: block;
@@ -771,7 +779,6 @@
 
   .commentMessage {
     font-size: 14px;
-    font-weight: 400;
     line-height: 22px;
   }
 

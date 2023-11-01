@@ -123,6 +123,11 @@ em-emoji-picker {
 .react-calendar__tile {
   transition: background-color 0.15s ease-in;
   border-radius: 50%;
+  color: #edeff1;
+}
+
+.react-calendar__tile:disabled {
+  color: #4e5d78 !important;
 }
 
 .react-calendar__tile:hover {
