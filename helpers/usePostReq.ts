@@ -1,5 +1,5 @@
-import { useContext, MutableRefObject } from "react";
 import { useAxiosPrivate } from "@/hooks";
+import { useContext, MutableRefObject } from "react";
 import { PostContext } from "@/context/postContext";
 import { AuthContext } from "@/context/authContext";
 import { VisibilityType } from "@/types";
